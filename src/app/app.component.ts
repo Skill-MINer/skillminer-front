@@ -4,6 +4,11 @@ import { RouterOutlet, Router, Event, NavigationEnd } from '@angular/router';
 import { IStaticMethods } from 'preline/preline';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FormationCardComponent } from './components/formation-card/formation-card.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { LoginComponent } from './components/login/login.component';
+import { SignupComponent } from './components/signup/signup.component';
+import { RecoverAccountComponent } from './components/recover-account/recover-account.component';
+
 import { CardContainerComponent } from './components/card-container/card-container.component';
 declare global {
   interface Window {
@@ -14,16 +19,22 @@ declare global {
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, NavbarComponent,CardContainerComponent],
+  imports: [
+    RouterOutlet,
+    NavbarComponent,
+    FooterComponent,
+    LoginComponent,
+    SignupComponent,
+    RecoverAccountComponent,
+    CardContainerComponent,
+  ],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.sass'
+  styleUrl: './app.component.sass',
 })
-
 export class AppComponent {
   title: string = 'skillminer-front';
 
-  constructor(private router: Router) {
-  }
+  constructor(private router: Router) {}
 
   ngOnInit() {
     this.router.events.subscribe((event: Event) => {
