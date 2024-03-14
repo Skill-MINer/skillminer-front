@@ -7,6 +7,7 @@ import { FormationCardComponent } from './components/formation-card/formation-ca
 import { FooterComponent } from './components/footer/footer.component';
 import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
+import { RecoverAccountComponent } from './components/recover-account/recover-account.component';
 
 declare global {
   interface Window {
@@ -24,6 +25,7 @@ declare global {
     FooterComponent,
     LoginComponent,
     SignupComponent,
+    RecoverAccountComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.sass',
