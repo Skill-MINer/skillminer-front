@@ -6,6 +6,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { FormationCardComponent } from './components/formation-card/formation-card.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { LoginComponent } from './components/login/login.component';
+import { SignupComponent } from './components/signup/signup.component';
 
 declare global {
   interface Window {
@@ -16,16 +17,21 @@ declare global {
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, NavbarComponent, FormationCardComponent, FooterComponent, LoginComponent],
+  imports: [
+    RouterOutlet,
+    NavbarComponent,
+    FormationCardComponent,
+    FooterComponent,
+    LoginComponent,
+    SignupComponent,
+  ],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.sass'
+  styleUrl: './app.component.sass',
 })
-
 export class AppComponent {
   title: string = 'skillminer-front';
 
-  constructor(private router: Router) {
-  }
+  constructor(private router: Router) {}
 
   ngOnInit() {
     this.router.events.subscribe((event: Event) => {
