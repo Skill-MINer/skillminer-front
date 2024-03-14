@@ -41,8 +41,8 @@ module.exports = {
           DEFAULT: '#FFFBF8'
         },
         'textcolor': {
-          DEFAULT: '#2C1A1D'
-        
+          DEFAULT: '#2C1A1D',
+          light: '#7E7E7E',        
         },
       },
     },
