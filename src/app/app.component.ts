@@ -17,7 +17,7 @@ declare global {
 })
 
 export class AppComponent {
-  title = 'skillminer-front';
+  title: string = 'skillminer-front';
 
   constructor(private router: Router) {
   }
