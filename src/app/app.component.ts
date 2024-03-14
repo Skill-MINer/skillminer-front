@@ -4,6 +4,8 @@ import { RouterOutlet, Router, Event, NavigationEnd } from '@angular/router';
 import { IStaticMethods } from 'preline/preline';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FormationCardComponent } from './components/formation-card/formation-card.component';
+import { FooterComponent } from './components/footer/footer.component';
+
 declare global {
   interface Window {
     HSStaticMethods: IStaticMethods;
@@ -13,7 +15,7 @@ declare global {
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, NavbarComponent, FormationCardComponent],
+  imports: [RouterOutlet, NavbarComponent, FormationCardComponent, FooterComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.sass'
 })
