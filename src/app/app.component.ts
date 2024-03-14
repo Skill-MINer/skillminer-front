@@ -5,6 +5,7 @@ import { IStaticMethods } from 'preline/preline';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FormationCardComponent } from './components/formation-card/formation-card.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { LoginComponent } from './components/login/login.component';
 
 declare global {
   interface Window {
@@ -15,7 +16,7 @@ declare global {
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, NavbarComponent, FormationCardComponent, FooterComponent],
+  imports: [RouterOutlet, NavbarComponent, FormationCardComponent, FooterComponent, LoginComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.sass'
 })
