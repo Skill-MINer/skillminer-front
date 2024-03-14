@@ -6,6 +6,10 @@ module.exports = {
     './node_modules/preline/preline.js',
   ],
   theme: {
+    fontFamily: {
+      sans: ['Poppins', 'Graphik', 'sans-serif'],
+      serif: ['Merriweather', 'serif'],
+    },
     extend: {
       colors: {
         'primary': {
