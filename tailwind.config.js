@@ -42,7 +42,9 @@ module.exports = {
           9: '#86153d',
         },
         'background': {
-          DEFAULT: '#FFFBF8'
+          DEFAULT: '#FFFBF8',
+          0: '#F7F3F0',
+          1:'#fcf8f5',
         },
         'textcolor': {
           DEFAULT: '#2C1A1D',
