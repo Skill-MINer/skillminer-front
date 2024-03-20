@@ -3,7 +3,6 @@ import { RouterOutlet, Router, Event, NavigationEnd } from '@angular/router';
 
 import { IStaticMethods } from 'preline/preline';
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { FormationCardComponent } from './components/formation-card/formation-card.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
