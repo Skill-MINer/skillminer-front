@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormGroup, AbstractControl, Validators, ReactiveFormsModule, FormControl } from "@angular/forms";
+import { LoginService } from "../../services/login.service";
 
 @Component({
   selector: 'app-signup',
@@ -9,6 +10,7 @@ import { FormGroup, AbstractControl, Validators, ReactiveFormsModule, FormContro
   styleUrl: './signup.component.sass'
 })
 export class SignupComponent {
+  protected readonly loginService: LoginService = inject(LoginService);
   protected readonly loginForm = new FormGroup({
     firstName: new FormControl("", Validators.required),
     lastName: new FormControl("", Validators.required),
@@ -34,8 +36,7 @@ export class SignupComponent {
 
   onSubmit() {
     if (this.loginForm.valid) {
-      console.log("Form submitted!");
-      console.log(this.loginForm.value);
+      this.loginService.signup(this.loginForm.value);
     }
   }
 }
