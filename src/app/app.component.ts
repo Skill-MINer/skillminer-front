@@ -7,6 +7,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { RecoverAccountComponent } from './components/recover-account/recover-account.component';
+import { ProfileUpdateComponent } from './components/profile-update/profile-update.component';
 
 import { CardContainerComponent } from './components/card-container/card-container.component';
 declare global {
@@ -25,6 +26,7 @@ declare global {
     LoginComponent,
     SignupComponent,
     RecoverAccountComponent,
+    ProfileUpdateComponent,
     CardContainerComponent,
   ],
   templateUrl: './app.component.html',
