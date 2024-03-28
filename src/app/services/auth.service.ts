@@ -21,6 +21,13 @@ export class AuthService {
         "password": user.password 
       }).pipe(tap((response: any) => this.setSession(response))).subscribe();
     }
+
+    login(user: User) {
+        return this.http.post(`${this.api_url}/login`, {
+          "email": user.email, 
+          "password": user.password 
+        }).pipe(tap((response: any) => this.setSession(response))).subscribe();
+      }
           
     private setSession(authResult: any) {
         const expiresAt = moment().add(authResult.expiresIn,'second');

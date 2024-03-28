@@ -1,12 +1,39 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { FormGroup, AbstractControl, Validators, ReactiveFormsModule, FormControl } from "@angular/forms";
+import { AuthService } from "../../services/auth.service";
+import { User } from "../../interfaces/user";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [],
+  imports: [ReactiveFormsModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.sass'
 })
 export class LoginComponent {
 
+  constructor(private router: Router) {
+    this.router = inject(Router);
+  }
+
+  protected readonly authService: AuthService = inject(AuthService);
+  protected readonly loginForm = new FormGroup({
+    email: new FormControl("", [Validators.required, Validators.email]),
+    password: new FormControl("", [Validators.required, Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/)])
+  });
+
+  onSubmit() {
+    if (this.loginForm.valid) {
+      const user: User = {
+        email: this.loginForm.value.email as string,
+        password: this.loginForm.value.password as string
+      };
+      this.authService.login(user);
+      if (this.authService.isLoggedIn()) {
+        console.log('User successfully signed in');
+        this.router.navigate(['/']);
+      }
+    }
+  }
 }

@@ -17,8 +17,9 @@
           </a>
         </p>
       </div>
-
+      
       <div class="mt-5">
+        <!--
         <button
           type="button"
           class="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-background text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-background dark:hover:bg-gray-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
@@ -49,15 +50,15 @@
           </svg>
           Sign in with Google
         </button>
-
+        
         <div
           class="py-3 flex items-center text-xs text-gray-400 uppercase before:flex-[1_1_0%] before:border-t before:border-gray-200 before:me-6 after:flex-[1_1_0%] after:border-t after:border-gray-200 after:ms-6 dark:text-gray-500 dark:before:border-gray-600 dark:after:border-gray-600"
         >
           Or
         </div>
-
+        -->
         <!-- Form -->
-        <form>
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
           <div class="grid gap-y-4">
             <!-- Form Group -->
             <div>
@@ -69,6 +70,7 @@
                   type="email"
                   id="email"
                   name="email"
+                  formControlName="email"
                   class="py-3 px-4 block w-full border border-gray-200 rounded-lg text-sm focus:border-primary focus:ring-primary disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
                   required
                   aria-describedby="email-error"
@@ -90,8 +92,9 @@
                   </svg>
                 </div>
               </div>
-              <p class="hidden text-xs text-red-600 mt-2" id="email-error">
-                Please include a valid email address so we can get back to you
+              <p class="text-xs text-red-600 mt-2" id="email-error"
+                [hidden]="loginForm.controls.email.valid || loginForm.controls.email.pristine">
+                Please include a valid email address
               </p>
             </div>
             <!-- End Form Group -->
@@ -115,6 +118,7 @@
                   type="password"
                   id="password"
                   name="password"
+                  formControlName="password"
                   class="py-3 px-4 block w-full border border-gray-200 rounded-lg text-sm focus:border-primary focus:ring-primary disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
                   required
                   aria-describedby="password-error"
@@ -136,8 +140,9 @@
                   </svg>
                 </div>
               </div>
-              <p class="hidden text-xs text-red-600 mt-2" id="password-error">
-                8+ characters required
+              <p class="text-xs text-red-600 mt-2" id="password-error"
+                [hidden]="loginForm.controls.password.valid || loginForm.controls.password.pristine">
+                8+ characters, special characters, and numbers required
               </p>
             </div>
             <!-- End Form Group -->
@@ -160,10 +165,8 @@
             </div>
             <!-- End Checkbox -->
 
-            <button
-              type="submit"
-              class="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-primary text-background hover:bg-primary-6 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-            >
+            <button type="submit" [disabled]="!loginForm.valid"
+              class="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-primary text-white hover:bg-primary-6 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
               Sign in
             </button>
           </div>
