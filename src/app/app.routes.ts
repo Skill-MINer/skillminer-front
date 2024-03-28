@@ -5,11 +5,20 @@ import { WelcomeComponent } from './components/welcome/welcome.component';
 import { RecoverAccountComponent } from './components/recover-account/recover-account.component';
 import { TestSecureComponent } from './components/test-secure/test-secure.component';
 import { authGuard } from './auth/auth.guard';
+import { noAuthGuard } from './auth/no-auth.guard';
 
 export const routes: Routes = [
   { path: '', component: WelcomeComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'signup', component: SignupComponent },
+  { 
+    path: 'login',
+    component: LoginComponent,
+    canActivate: [noAuthGuard]
+  },
+  { 
+    path: 'signup',
+    component: SignupComponent,
+    canActivate: [noAuthGuard]
+  },
   { path: 'recover-account', component: RecoverAccountComponent },
   { 
     path: 'testsecure',
