@@ -7,6 +7,7 @@ import { TestSecureComponent } from './components/test-secure/test-secure.compon
 import { authGuard } from './auth/auth.guard';
 import { noAuthGuard } from './auth/no-auth.guard';
 import { ProfileUpdateComponent } from './components/profile-update/profile-update.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 export const routes: Routes = [
   { path: '', component: WelcomeComponent },
@@ -26,5 +27,6 @@ export const routes: Routes = [
     component: TestSecureComponent,
     canActivate: [authGuard]
   },
-  { path: 'profile-update', component: ProfileUpdateComponent }
+  { path: 'profile-update', component: ProfileUpdateComponent },
+  { path: 'profile', component: ProfileComponent}
 ];
