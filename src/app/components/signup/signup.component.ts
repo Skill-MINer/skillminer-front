@@ -51,10 +51,6 @@ export class SignupComponent {
         password: this.loginForm.value.password as string
       };
       this.authService.signup(user);
-      if (this.authService.isLoggedIn()) {
-        console.log('User successfully signed up');
-        this.router.navigate(['/']);
-      }
     }
   }
 }

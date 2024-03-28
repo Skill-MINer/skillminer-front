@@ -3,7 +3,8 @@ import { HttpClient } from "@angular/common/http";
 import moment from "moment";
 import { tap } from 'rxjs/internal/operators/tap';
 import { User } from '../interfaces/user';
-import { map } from 'rxjs/operators';
+import { map, retry } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,7 @@ export class AuthService {
 
     private readonly http = inject(HttpClient);
 	private api_url: string = 'http://localhost:3000';
+    private router: Router = inject(Router);
 
     signup(user: User) {
       return this.http.post(`${this.api_url}/users`, { 
@@ -26,7 +28,12 @@ export class AuthService {
         return this.http.post(`${this.api_url}/login`, {
           "email": user.email, 
           "password": user.password 
-        }).pipe(tap((response: any) => this.setSession(response))).subscribe();
+        }).pipe(tap((response: any) => this.setSession(response))).subscribe(() => {
+            if (this.isLoggedIn()) {
+              console.log('User successfully signed in');
+              this.router.navigate(['/']);
+            }
+          });
       }
           
     private setSession(authResult: any) {
@@ -53,7 +60,7 @@ export class AuthService {
 
 	logout() {
 		localStorage.removeItem("token");
-		localStorage.removeItem("id");
+		localStorage.removeItem("id_user");
 		localStorage.removeItem("expires_at");
 	}
 

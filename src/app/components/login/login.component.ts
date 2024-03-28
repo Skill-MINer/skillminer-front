@@ -30,10 +30,6 @@ export class LoginComponent {
         password: this.loginForm.value.password as string
       };
       this.authService.login(user);
-      if (this.authService.isLoggedIn()) {
-        console.log('User successfully signed in');
-        this.router.navigate(['/']);
-      }
     }
   }
 }
