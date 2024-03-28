@@ -10,6 +10,7 @@ import { RecoverAccountComponent } from './components/recover-account/recover-ac
 import { ProfileUpdateComponent } from './components/profile-update/profile-update.component';
 
 import { CardContainerComponent } from './components/card-container/card-container.component';
+import { ProfileComponent } from './components/profile/profile.component';
 declare global {
   interface Window {
     HSStaticMethods: IStaticMethods;
@@ -28,6 +29,7 @@ declare global {
     RecoverAccountComponent,
     ProfileUpdateComponent,
     CardContainerComponent,
+    ProfileComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.sass',
