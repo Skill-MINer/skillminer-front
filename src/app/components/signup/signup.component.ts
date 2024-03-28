@@ -1,6 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { FormGroup, AbstractControl, Validators, ReactiveFormsModule, FormControl } from "@angular/forms";
-import { LoginService } from "../../services/login.service";
+import { AuthService } from "../../services/auth.service";
+import { User } from "../../interfaces/user";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -10,7 +12,12 @@ import { LoginService } from "../../services/login.service";
   styleUrl: './signup.component.sass'
 })
 export class SignupComponent {
-  protected readonly loginService: LoginService = inject(LoginService);
+
+  constructor(private router: Router) {
+    this.router = inject(Router);
+  }
+
+  protected readonly authService: AuthService = inject(AuthService);
   protected readonly loginForm = new FormGroup({
     firstName: new FormControl("", Validators.required),
     lastName: new FormControl("", Validators.required),
@@ -18,6 +25,7 @@ export class SignupComponent {
     password: new FormControl("", [Validators.required, Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/)]),
     confirmPassword: new FormControl("", Validators.required)
   }, { validators: this.passwordsMatch });
+
 
   passwordsMatch(control: AbstractControl) {
     const group = <FormGroup>control;
@@ -36,7 +44,17 @@ export class SignupComponent {
 
   onSubmit() {
     if (this.loginForm.valid) {
-      this.loginService.signup(this.loginForm.value);
+      const user: User = {
+        prenom: this.loginForm.value.firstName as string,
+        nom: this.loginForm.value.lastName as string,
+        email: this.loginForm.value.email as string,
+        password: this.loginForm.value.password as string
+      };
+      this.authService.signup(user);
+      if (this.authService.isLoggedIn()) {
+        console.log('User successfully signed up');
+        this.router.navigate(['/']);
+      }
     }
   }
 }
