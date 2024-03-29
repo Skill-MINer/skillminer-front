@@ -1,12 +1,14 @@
 import { inject, Injectable, signal } from '@angular/core';
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import moment from "moment";
 import { tap } from 'rxjs/internal/operators/tap';
 import { User } from '../interfaces/user';
-import { map, retry } from 'rxjs/operators';
+import { catchError, map, retry } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 import config from '../../../config';
+import { throwError } from 'rxjs';
 
 const { IP_API } = config;
 
@@ -14,7 +16,8 @@ const { IP_API } = config;
 	providedIn: 'root'
 })
 export class AuthService {
-
+	
+	private toastr: ToastrService = inject(ToastrService);
 	private readonly http = inject(HttpClient);
 	private router: Router = inject(Router);
 
@@ -24,10 +27,13 @@ export class AuthService {
 			"nom": user.nom,
 			"email": user.email,
 			"password": user.password
-		}).pipe(tap((response: any) => this.setSession(response))).subscribe(() => {
+		}).pipe(
+			catchError(this.handleError),
+			tap((response: any) => this.setSession(response))).subscribe(() => {
 			if (this.isLoggedIn()) {
 				console.log('User successfully signed in');
 				this.router.navigate(['/']);
+				this.toastr.success('Registration successful', 'Welcome to SkillMiner!');
 			}
 		});
 	}
@@ -36,10 +42,14 @@ export class AuthService {
 		return this.http.post(`${IP_API}/login`, {
 			"email": user.email,
 			"password": user.password
-		}).pipe(tap((response: any) => this.setSession(response))).subscribe(() => {
+		}).pipe(
+			catchError(this.handleError),
+			tap((response: any) => this.setSession(response))			
+			).subscribe(() => {
 			if (this.isLoggedIn()) {
 				console.log('User successfully signed in');
 				this.router.navigate(['/']);
+				this.toastr.success('Registration successful', 'Welcome to SkillMiner!');
 			}
 		});
 	}
@@ -82,5 +92,15 @@ export class AuthService {
 		const expiration: string = localStorage.getItem("expires_at") as string;
 		const expiresAt = JSON.parse(expiration);
 		return moment(expiresAt);
+	}
+
+	private handleError = (error: HttpErrorResponse) => {
+		if (error.status === 0) {
+			this.toastr.error('Server is down', 'Something went wrong');
+		} else {
+			this.toastr.error(error.error.error, 'Something went wrong');
+		}
+
+		return throwError(() => new Error('Something bad happened; please try again later.'));
 	}
 }
