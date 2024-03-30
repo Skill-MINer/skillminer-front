@@ -4,14 +4,16 @@ WORKDIR /app
 
 EXPOSE 4200
 
+RUN npm install -g pnpm
+
 RUN npm install -g @angular/cli
 
 COPY package.json /app/package.json
-COPY package-lock.json /app/package-lock.json
-RUN npm ci
+COPY pnpm-lock.yaml /app/pnpm-lock.yaml
+RUN pnpm i
 
 COPY . /app
-CMD npm start
+CMD pnpm start --host 0.0.0.0 --poll 20
 
 FROM development AS builder
 
