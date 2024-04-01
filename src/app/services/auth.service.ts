@@ -55,13 +55,25 @@ export class AuthService {
 	}
 
 	recoverAccount(email: string) {
-		return this.http.post(`${IP_API}/recover-request`, {
+		return this.http.post(`${IP_API}/reset-request`, {
 			"email": email
 		}).pipe(
 			catchError(this.handleError)
 		).subscribe(() => {
 			this.router.navigate(['/']);
 			this.toastr.success('An email has been sent to you', 'Recover your account');
+		});
+	}
+
+	resetPassword(password: string, token: string) {
+		return this.http.post(`${IP_API}/reset-password`, {
+			password,
+			token
+		}).pipe(
+			catchError(this.handleError)
+		).subscribe(() => {
+			this.router.navigate(['login']);
+			this.toastr.success('Password successfully reset', 'Welcome back!');
 		});
 	}
 
@@ -92,7 +104,12 @@ export class AuthService {
 	}
 
 	public isLoggedIn() {
-		return moment().isBefore(this.getExpiration());
+		if (moment().isBefore(this.getExpiration())){
+			return true;	
+		} else {
+			this.logout();
+			return false;
+		}
 	}
 
 	isLoggedOut() {

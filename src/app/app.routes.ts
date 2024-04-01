@@ -8,6 +8,7 @@ import { authGuard } from './auth/auth.guard';
 import { noAuthGuard } from './auth/no-auth.guard';
 import { ProfileUpdateComponent } from './components/profile-update/profile-update.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 
 export const routes: Routes = [
   { path: '', component: WelcomeComponent },
@@ -28,5 +29,10 @@ export const routes: Routes = [
     canActivate: [authGuard]
   },
   { path: 'profile-update', component: ProfileUpdateComponent },
-  { path: 'profile', component: ProfileComponent}
+  { path: 'profile', component: ProfileComponent},
+  { 
+    path: 'reset-password/:token',
+    component: ResetPasswordComponent,
+    canActivate: [noAuthGuard]
+    },
 ];
