@@ -54,6 +54,17 @@ export class AuthService {
 		});
 	}
 
+	recoverAccount(email: string) {
+		return this.http.post(`${IP_API}/recover-request`, {
+			"email": email
+		}).pipe(
+			catchError(this.handleError)
+		).subscribe(() => {
+			this.router.navigate(['/']);
+			this.toastr.success('An email has been sent to you', 'Recover your account');
+		});
+	}
+
 	private setSession(authResult: any) {
 		const expiresAt = moment().add(authResult.expiresIn, 'second');
 
