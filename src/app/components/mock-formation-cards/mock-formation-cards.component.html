@@ -28,10 +28,10 @@
           <h3
             class="text-lg sm:text-2xl font-semibold text-gray-800 group-hover:text-primary dark:text-gray-300 dark:group-hover:text-white"
           >
-            {{ formationcard.titre }}
+            {{ formationcard.title }}
           </h3>
           <p class="mt-2 text-gray-600 dark:text-gray-400">
-            Description de la formation
+            {{ formationcard.text }}
           </p>
 
           <div class="mt-5 sm:mt-auto">
@@ -46,7 +46,7 @@
               </div>
               <div class="ms-2.5 sm:ms-4">
                 <h4 class="font-semibold text-gray-800 dark:text-gray-200">
-                  {{ formationcard.user?.prenom }} {{ formationcard.user?.nom }}
+                  Alex Larsson
                 </h4>
                 <p class="text-xs text-gray-500">Feb 15, 2021</p>
               </div>

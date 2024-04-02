@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { FormationCard } from '../../Formation-cards';
 import { FORMATIONCARDS } from '../../mock-Formation-cards';
+import { Formation } from '../../interfaces/formation';
 
 @Component({
   selector: 'app-formation-card',
@@ -11,5 +12,5 @@ import { FORMATIONCARDS } from '../../mock-Formation-cards';
 })
 export class FormationCardComponent {
   constructor() {}
-  @Input() formationcard: FormationCard = FORMATIONCARDS[0];
+  @Input() formationcard: Formation = {};
 }
