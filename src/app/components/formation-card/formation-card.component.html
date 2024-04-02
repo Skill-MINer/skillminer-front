@@ -5,7 +5,7 @@
     href="#"
   >
     <!-- Card -->
-    <a class="sm:flex rounded-xl">
+    <a class="sm:flex rounded-xl font-sans">
       <div
         class="flex-shrink-0 relative rounded-xl overflow-hidden w-full h-[200px] sm:w-[250px] sm:h-[350px]"
       >
@@ -15,15 +15,37 @@
           alt="Image Description"
         />
       </div>
-
       <div class="grow">
         <div class="p-4 flex flex-col h-full sm:p-6">
-          <div class="mb-3">
-            <p
-              class="inline-flex items-center gap-1.5 py-1.5 px-3 rounded-md text-xs font-medium bg-accent text-white dark:bg-gray-800 dark:text-gray-200"
-            >
-              {{ formationcard.tag }}
-            </p>
+          <div class="flex space-x-4">
+            @for (tag of formationcard.tag; track $index) {
+            <div class="mb-3">
+              <p
+                class="inline-flex items-center gap-1.5 py-1.5 px-3 rounded-md text-xs font-medium 
+                {{
+                  $index === 0
+                    ? 'bg-primary-5 text-secondary'
+                    : $index === 1
+                    ? 'bg-accent text-secondary'
+                    : $index === 2
+                    ? 'bg-secondary text-black'
+                    : 'bg-couleur2'
+                }}
+                   dark:bg-gray-800 dark:text-gray-200"
+              >
+                {{ tag.nom }}
+              </p>
+            </div>
+
+            }@empty {
+            <div class="mb-3">
+              <p
+                class="inline-flex items-center gap-1.5 py-1.5 px-3 rounded-md text-xs font-medium bg-accent text-white dark:bg-gray-800 dark:text-gray-200"
+              >
+                {{ formationcard.tag?.[0]?.nom }}
+              </p>
+            </div>
+            }
           </div>
           <h3
             class="text-lg sm:text-2xl font-semibold text-gray-800 group-hover:text-primary dark:text-gray-300 dark:group-hover:text-white"
@@ -48,7 +70,9 @@
                 <h4 class="font-semibold text-gray-800 dark:text-gray-200">
                   {{ formationcard.user?.prenom }} {{ formationcard.user?.nom }}
                 </h4>
-                <p class="text-xs text-gray-500">Feb 15, 2021</p>
+                <p class="text-xs text-gray-500">
+                  {{ formationcard.date_creation }}
+                </p>
               </div>
             </div>
             <!-- End Avatar -->

@@ -13,4 +13,15 @@ import { Formation } from '../../interfaces/formation';
 export class FormationCardComponent {
   constructor() {}
   @Input() formationcard: Formation = {};
+  ngOnInit(): void {
+    if (this.formationcard && this.formationcard.date_creation) {
+      this.formationcard.date_creation = this.formationcard.date_creation.slice(
+        0,
+        10
+      );
+    }
+    if (this.formationcard && this.formationcard.tag?.[3]) {
+      this.formationcard.tag = this.formationcard.tag.slice(0, 3);
+    }
+  }
 }
