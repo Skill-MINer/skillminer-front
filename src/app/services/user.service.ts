@@ -30,4 +30,10 @@ export class UserService {
       this.router.navigate(['/profile']);
     });
   }
+
+  postImage(image: File): Observable<any> {
+    const formData = new FormData();
+    formData.append('file', image);
+    return this.http.post(`${config.IP_API}/file/users`, formData);
+  }
 }
