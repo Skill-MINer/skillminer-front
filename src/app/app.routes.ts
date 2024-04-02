@@ -28,11 +28,17 @@ export const routes: Routes = [
     component: TestSecureComponent,
     canActivate: [authGuard]
   },
-  { path: 'profile-update', component: ProfileUpdateComponent },
-  { path: 'profile', component: ProfileComponent},
+  { path: 'profile-update', 
+    component: ProfileUpdateComponent,
+    canActivate: [authGuard]
+  },
+  { path: 'profile',
+    component: ProfileComponent,
+    canActivate: [authGuard]
+  },
   { 
     path: 'reset-password/:token',
     component: ResetPasswordComponent,
     canActivate: [noAuthGuard]
-    },
+  },
 ];
