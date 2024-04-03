@@ -10,6 +10,8 @@ import { ProfileUpdateComponent } from './components/profile-update/profile-upda
 import { ProfileComponent } from './components/profile/profile.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { SearchTrainingsComponent } from './search-trainings/search-trainings.component';
+import { CreateHeaderFormationComponent } from './components/formation/create-header-formation/create-header-formation.component';
+import { TestComponent } from './components/formation/test/test.component';
 
 export const routes: Routes = [
   { path: '', component: WelcomeComponent },
@@ -41,10 +43,12 @@ export const routes: Routes = [
     path: 'reset-password/:token',
     component: ResetPasswordComponent,
     canActivate: [noAuthGuard]
-    },
+  },
   {
     path: 'search',
     component: SearchTrainingsComponent,
     canActivate: [noAuthGuard]
-  }
+  },
+  { path: 'create-header-formation', component: CreateHeaderFormationComponent},
+  { path: 'test-multiS-select', component: TestComponent},
 ];
