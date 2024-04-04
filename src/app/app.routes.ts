@@ -11,34 +11,44 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { CreateHeaderFormationComponent } from './components/formation/create-header-formation/create-header-formation.component';
 import { TestComponent } from './components/formation/test/test.component';
+import { CreateSectionsContainerComponent } from './components/formation/create-sections-container/create-sections-container.component';
 import { SummaryComponent } from './components/formation/summary/summary.component';
 
 export const routes: Routes = [
   { path: '', component: WelcomeComponent },
-  { 
+  {
     path: 'login',
     component: LoginComponent,
-    canActivate: [noAuthGuard]
+    canActivate: [noAuthGuard],
   },
-  { 
+  {
     path: 'signup',
     component: SignupComponent,
-    canActivate: [noAuthGuard]
+    canActivate: [noAuthGuard],
   },
   { path: 'recover-account', component: RecoverAccountComponent },
-  { 
+  {
     path: 'testsecure',
     component: TestSecureComponent,
-    canActivate: [authGuard]
+    canActivate: [authGuard],
   },
   { path: 'profile-update', component: ProfileUpdateComponent },
-  { path: 'profile', component: ProfileComponent},
-  { 
+  { path: 'profile', component: ProfileComponent },
+  {
     path: 'reset-password/:token',
     component: ResetPasswordComponent,
-    canActivate: [noAuthGuard]
+    canActivate: [noAuthGuard],
   },
-  { path: 'create-header-formation', component: CreateHeaderFormationComponent},
+  {
+    path: 'create-header-formation',
+    component: CreateHeaderFormationComponent,
+  },
+  //TEST PATHS
+  { path: 'test-multiS-select', component: TestComponent },
+  {
+    path: 'test-formationCreateSections',
+    component: CreateSectionsContainerComponent,
+  },
   { path: 'summary', component: SummaryComponent},
   { path: 'test', component: TestComponent}
 ];
