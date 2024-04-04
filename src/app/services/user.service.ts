@@ -24,7 +24,6 @@ export class UserService {
       "prenom": user.prenom,
       "nom": user.nom,
       "email": user.email,
-      "password": user.password,
       "description": user.description
     }).subscribe(() => {
       this.router.navigate(['/profile']);
@@ -35,5 +34,14 @@ export class UserService {
     const formData = new FormData();
     formData.append('file', image);
     return this.http.post(`${config.IP_API}/file/users`, formData);
+  }
+
+  updatePassword(oldPassword: string, newPassword: string) {
+    return this.http.put(`${IP_API}/users/password`, {
+      "oldPassword": oldPassword,
+      "newPassword": newPassword
+    }).subscribe(() => {
+      this.router.navigate(['/profile']);
+    });
   }
 }
