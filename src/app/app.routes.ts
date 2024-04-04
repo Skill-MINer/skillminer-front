@@ -11,6 +11,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { CreateHeaderFormationComponent } from './components/formation/create-header-formation/create-header-formation.component';
 import { TestComponent } from './components/formation/test/test.component';
+import { SummaryComponent } from './components/formation/summary/summary.component';
 
 export const routes: Routes = [
   { path: '', component: WelcomeComponent },
@@ -38,5 +39,6 @@ export const routes: Routes = [
     canActivate: [noAuthGuard]
   },
   { path: 'create-header-formation', component: CreateHeaderFormationComponent},
-  { path: 'test-multiS-select', component: TestComponent},
+  { path: 'summary', component: SummaryComponent},
+  { path: 'test', component: TestComponent}
 ];
