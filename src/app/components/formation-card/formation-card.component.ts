@@ -14,12 +14,14 @@ export class FormationCardComponent {
   constructor() {}
   @Input() formationcard: Formation = {};
   ngOnInit(): void {
+    //scraps the hours from the date
     if (this.formationcard && this.formationcard.date_creation) {
       this.formationcard.date_creation = this.formationcard.date_creation.slice(
         0,
         10
       );
     }
+    //makes sure the tag array is not longer than 3
     if (this.formationcard && this.formationcard.tag?.[3]) {
       this.formationcard.tag = this.formationcard.tag.slice(0, 3);
     }
