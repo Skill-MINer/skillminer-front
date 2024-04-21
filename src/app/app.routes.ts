@@ -41,14 +41,10 @@ export const routes: Routes = [
     path: 'reset-password/:token',
     component: ResetPasswordComponent,
     canActivate: [noAuthGuard]
-<<<<<<< HEAD
     },
   {
     path: 'search',
     component: SearchTrainingsComponent,
     canActivate: [noAuthGuard]
   }
-=======
-  },
->>>>>>> 3dd73eec944157d1337ec1592ccd94dfc8d724d8
 ];
