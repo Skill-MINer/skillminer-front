@@ -1,0 +1,94 @@
+<!-- Card Section -->
+<div class="max-w-4xl px-4 py-8 sm:px-6 lg:px-8 lg:py-14 mx-auto">
+
+    <form [formGroup]="headerForm" (ngSubmit)="onSubmit()">
+        <!-- Card -->
+        <div class="bg-white rounded-xl shadow dark:bg-slate-900">
+
+            <h2
+                class="text-lg align-middle text-center py-3 items-center sm:text-3xl font-semibold text-gray-800 group-hover:text-primary dark:text-gray-300 dark:group-hover:text-white">
+                Create your own training
+            </h2>
+
+            <div class="pt-0 p-4 sm:pt-0 sm:p-7">
+                <!-- Grid -->
+                <div class="space-y-4 sm:space-y-6">
+                    <div class="space-y-2">
+                        <label for="af-submit-app-project-name"
+                            class="inline-block text-base font-medium text-gray-800 mt-2.5 dark:text-gray-200">
+                            Training title
+                        </label>
+
+                        <input id="af-submit-app-project-name" type="text" formControlName="titre" required
+                            class="py-2 border px-3 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-primary focus:ring-primary disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
+                            placeholder="Enter formation name">
+                    </div>
+
+                    <div class="space-y-2">
+                        <label for="af-submit-app-category p-multiselect-filter-container"
+                            class="inline-block text-base font-medium text-gray-800 mt-2.5 dark:text-gray-200 p-multiselect-filter-container">
+                            Category
+                        </label>
+
+                        <p-multiSelect
+                            class="py-3 border px-3 block w-full border-gray-200 shadow-sm rounded-lg text-sm" [style]="{
+                                'width':'100%'}" display="chip" [maxSelectedLabels]="20" [options]="tags"
+                            formControlName="selectedTags" optionLabel="name"
+                            placeholder="Select tags..."></p-multiSelect>
+                    </div>
+
+                    <div class="space-y-2">
+                        <label for="af-submit-app-description"
+                            class="inline-block text-base font-medium text-gray-800 mt-2.5 dark:text-gray-200">
+                            Description
+                        </label>
+
+                        <textarea id="af-submit-app-description" formControlName="description" required
+                            class="py-2 border px-3 block w-full border-gray-200 rounded-lg text-sm focus:border-primary focus:ring-primary disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
+                            rows="6"
+                            placeholder="A detailed summary will better explain your products to the audiences. Our users will see this in your dedicated product page."></textarea>
+                    </div>
+
+                    <div class="space-y-2">
+                        <label for="af-submit-app-description"
+                            class="inline-block text-base font-medium text-gray-800 mt-2.5 dark:text-gray-200">
+                            Header image
+                        </label>
+
+                        <div
+                            class="relative h-80 rounded-xl bg-no-repeat bg-cover bg-center"
+                            [style.backgroundImage]="'url(' + selectedImageUrl + ')'">
+                            <div class="absolute top-0 end-0 p-4">
+                                <input type="file" class="file-input hidden"
+                                    [accept]="requiredFileType"
+                                    (change)="onFileSelected($event)" #fileUpload required>
+                                <button type="button" (click)="fileUpload.click()"
+                                    class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-white dark:hover:bg-gray-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
+                                    <svg class="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24"
+                                        height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                                        <polyline points="17 8 12 3 7 8" />
+                                        <line x1="12" x2="12" y1="3" y2="15" />
+                                    </svg>
+                                    Upload header
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- End Grid -->
+
+                <div class="mt-5 flex justify-center gap-x-2">
+                    <button type="button" type="submit" [disabled]="!headerForm.valid"
+                        class="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-primary text-white hover:bg-primary-6 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
+                        Submit informations
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- End Card -->
+    </form>
+</div>
+<!-- End Card Section -->

@@ -2,6 +2,9 @@ import { Component, Input } from '@angular/core';
 import { FormationCard } from '../../Formation-cards';
 import { FORMATIONCARDS } from '../../mock-Formation-cards';
 import { Formation } from '../../interfaces/formation';
+import { environment } from '../../../environments/environment';
+
+const IP_API = environment.IP_API;
 
 @Component({
   selector: 'app-formation-card',
@@ -11,6 +14,7 @@ import { Formation } from '../../interfaces/formation';
   styleUrl: './formation-card.component.sass',
 })
 export class FormationCardComponent {
+  imageHeader: string = `${IP_API}/file/formations/`;
   constructor() {}
   @Input() formationcard: Formation = {};
   ngOnInit(): void {
@@ -25,5 +29,7 @@ export class FormationCardComponent {
     if (this.formationcard && this.formationcard.tag?.[3]) {
       this.formationcard.tag = this.formationcard.tag.slice(0, 3);
     }
+
+    this.imageHeader = `${IP_API}/file/formations/${this.formationcard.id}.png`;
   }
 }

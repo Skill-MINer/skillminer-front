@@ -52,4 +52,14 @@ export class AppComponent {
       }
     });
   }
+
+  isFooterVisible() {
+    const currentRoute = this.router.url.split("#")[0].split("/")[1];
+    return currentRoute !== 'summary' && currentRoute !== 'signup' && currentRoute !== 'recover-account' && currentRoute !== 'login' && currentRoute !== 'reset-password';
+  }
+
+  isNavbarVisible() {
+    const currentRoute = this.router.url.split("/")[1];
+    return currentRoute !== 'signup' && currentRoute !== 'recover-account' && currentRoute !== 'login' && currentRoute !== 'reset-password';
+  }
 }

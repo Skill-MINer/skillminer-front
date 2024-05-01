@@ -10,24 +10,28 @@ import { ProfileUpdateComponent } from './components/profile-update/profile-upda
 import { ProfileComponent } from './components/profile/profile.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { SearchTrainingsComponent } from './search-trainings/search-trainings.component';
+import { CreateHeaderFormationComponent } from './components/formation/create-header-formation/create-header-formation.component';
+import { TestComponent } from './components/formation/test/test.component';
+import { SummaryComponent } from './components/formation/summary/summary.component';
+import { CreateSectionsContainerComponent } from './components/formation/create-sections-container/create-sections-container.component';
 
 export const routes: Routes = [
   { path: '', component: WelcomeComponent },
-  { 
+  {
     path: 'login',
     component: LoginComponent,
-    canActivate: [noAuthGuard]
+    canActivate: [noAuthGuard],
   },
-  { 
+  {
     path: 'signup',
     component: SignupComponent,
-    canActivate: [noAuthGuard]
+    canActivate: [noAuthGuard],
   },
   { path: 'recover-account', component: RecoverAccountComponent },
-  { 
+  {
     path: 'testsecure',
     component: TestSecureComponent,
-    canActivate: [authGuard]
+    canActivate: [authGuard],
   },
   { path: 'profile-update', 
     component: ProfileUpdateComponent,
@@ -40,11 +44,23 @@ export const routes: Routes = [
   { 
     path: 'reset-password/:token',
     component: ResetPasswordComponent,
-    canActivate: [noAuthGuard]
-    },
+    canActivate: [noAuthGuard],
+  },
   {
     path: 'search',
     component: SearchTrainingsComponent,
     canActivate: [noAuthGuard]
-  }
+  },
+  { path: 'summary', component: SummaryComponent},
+  { path: 'test', component: TestComponent},
+  {
+    path: 'create-header-formation',
+    component: CreateHeaderFormationComponent,
+  },
+  //TEST PATHS
+  { path: 'test-multiS-select', component: TestComponent },
+  {
+    path: 'test-formationCreateSections',
+    component: CreateSectionsContainerComponent,
+  },
 ];
