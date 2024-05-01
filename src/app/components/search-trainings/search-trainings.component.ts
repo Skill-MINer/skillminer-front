@@ -17,11 +17,13 @@ import { FormationCardComponent } from '../formation-card/formation-card.compone
 })
 export class SearchTrainingsComponent {
   valeurInput: string = "";
+  formaPerPage: number = 4;
+  pageNumber: number = 0;
   listFormation: Formation[] = [];
   constructor(private formationService : FormationService){}
 
   getFormations() {
-    this.formationService.getFormations(this.valeurInput).subscribe(
+    this.formationService.getFormations(this.valeurInput, this.formaPerPage, this.pageNumber*this.formaPerPage).subscribe(
         (listFormation) => {
           this.listFormation = listFormation;
         },
@@ -32,9 +34,45 @@ export class SearchTrainingsComponent {
       );
   }
 
+  smoothScroll(target: string) {
+    const element = document.getElementById(target);
+    if (element) {
+      window.scrollTo({
+        top: element.offsetTop,
+        behavior: 'smooth'
+      });
+    }
+  }
+
+  nextPage() {
+    this.pageNumber++;
+    this.getFormations();
+
+    setTimeout(() => {
+      const inputElement = document.getElementById('hs-search-article-1');
+      if (inputElement) {
+        this.smoothScroll(inputElement.id);
+        //inputElement.focus();
+      }
+    });
+  }
+
+  previousPage() {
+    this.pageNumber--;
+    this.getFormations();
+
+    setTimeout(() => {
+      const inputElement = document.getElementById('hs-search-article-1');
+      if (inputElement) {
+        this.smoothScroll(inputElement.id);
+      }
+    });
+  }
+
   ngOnInit(): void {
     this.getFormations();
   }
+
 
 
   

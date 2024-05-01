@@ -13,10 +13,12 @@ export class FormationService {
   public listFormation: Observable<Formation[]> = of([]);
   constructor(private http: HttpClient) { }
 
-  public getFormations(titre: string){
+  public getFormations(titre: string, limit: number, offset: number): Observable<Formation[]>{
     const params = new HttpParams()
     //.set('titre', 'angular')
-    .set('titre', titre) //.join pour stringifier objet tab 
+    .set('titre', titre) //.join pour stringifier objet tab
+    .set('limit', limit)
+    .set('offset', offset); 
     this.listFormation = this.http.get<Formation[]>(`${IP_API}/formations`, {params});
     return this.listFormation;
   }
