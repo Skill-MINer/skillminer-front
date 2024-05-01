@@ -9,6 +9,7 @@ import { noAuthGuard } from './auth/no-auth.guard';
 import { ProfileUpdateComponent } from './components/profile-update/profile-update.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
+import { SearchTrainingsComponent } from './search-trainings/search-trainings.component';
 
 export const routes: Routes = [
   { path: '', component: WelcomeComponent },
@@ -40,5 +41,10 @@ export const routes: Routes = [
     path: 'reset-password/:token',
     component: ResetPasswordComponent,
     canActivate: [noAuthGuard]
-  },
+    },
+  {
+    path: 'search',
+    component: SearchTrainingsComponent,
+    canActivate: [noAuthGuard]
+  }
 ];
