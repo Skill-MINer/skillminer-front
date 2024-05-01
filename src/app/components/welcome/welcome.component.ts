@@ -13,6 +13,14 @@ export class WelcomeComponent {
   constructor(private router : Router) {}
 
   clickNavBar(){
-    this.router.navigate(['/search'])
+    this.router.navigate(['/search']).then(() => {
+      setTimeout(() => {
+        const inputElement = document.getElementById('hs-search-article-1');
+        if (inputElement) {
+          inputElement.focus();
+        }
+      });
+    });
   }
+  
 }
