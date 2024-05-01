@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { RouterOutlet, Router, Event, NavigationEnd } from '@angular/router';
 
 import { IStaticMethods } from 'preline/preline';
+
+import { ThemeService } from './services/theme.service';
+
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { LoginComponent } from './components/login/login.component';
@@ -37,13 +40,14 @@ declare global {
 export class AppComponent {
   title: string = 'skillminer-front';
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, public themeService: ThemeService) { }
 
   ngOnInit() {
     this.router.events.subscribe((event: Event) => {
       if (event instanceof NavigationEnd) {
         setTimeout(() => {
           window.HSStaticMethods.autoInit();
+          this.themeService.updateTheme();
         }, 100);
       }
     });

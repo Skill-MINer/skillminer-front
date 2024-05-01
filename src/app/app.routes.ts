@@ -9,10 +9,11 @@ import { noAuthGuard } from './auth/no-auth.guard';
 import { ProfileUpdateComponent } from './components/profile-update/profile-update.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
+import { SearchTrainingsComponent } from './search-trainings/search-trainings.component';
 import { CreateHeaderFormationComponent } from './components/formation/create-header-formation/create-header-formation.component';
 import { TestComponent } from './components/formation/test/test.component';
-import { CreateSectionsContainerComponent } from './components/formation/create-sections-container/create-sections-container.component';
 import { SummaryComponent } from './components/formation/summary/summary.component';
+import { CreateSectionsContainerComponent } from './components/formation/create-sections-container/create-sections-container.component';
 
 export const routes: Routes = [
   { path: '', component: WelcomeComponent },
@@ -39,16 +40,4 @@ export const routes: Routes = [
     component: ResetPasswordComponent,
     canActivate: [noAuthGuard],
   },
-  {
-    path: 'create-header-formation',
-    component: CreateHeaderFormationComponent,
-  },
-  //TEST PATHS
-  { path: 'test-multiS-select', component: TestComponent },
-  {
-    path: 'test-formationCreateSections',
-    component: CreateSectionsContainerComponent,
-  },
-  { path: 'summary', component: SummaryComponent},
-  { path: 'test', component: TestComponent}
 ];
