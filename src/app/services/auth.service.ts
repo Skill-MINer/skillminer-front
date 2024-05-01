@@ -6,11 +6,10 @@ import { User } from '../interfaces/user';
 import { catchError, map, retry } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-
-import config from '../../../config';
 import { throwError } from 'rxjs';
+import { environment } from '../../environments/environment';
 
-const { IP_API } = config;
+const IP_API = environment.IP_API;
 
 @Injectable({
 	providedIn: 'root'

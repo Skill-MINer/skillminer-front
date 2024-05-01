@@ -3,8 +3,7 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { FormGroup, AbstractControl, Validators, ReactiveFormsModule, FormControl } from '@angular/forms';
 import { UserService } from '../../services/user.service';
 import { User } from '../../interfaces/user';
-
-import config from '../../../../config';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-profile-update',
@@ -44,7 +43,7 @@ export class ProfileUpdateComponent {
   getProfile() {
     this.userService.getProfile().subscribe(profile => {
       this.userProfile = profile;
-      this.imageUrl = `${config.IP_API}/file/users/${this.userProfile.id}.png`;
+      this.imageUrl = `${environment.IP_API}/file/users/${this.userProfile.id}.png`;
       this.fieldProfileForm.patchValue({
         firstName: this.userProfile.prenom,
         lastName: this.userProfile.nom,
@@ -95,7 +94,7 @@ export class ProfileUpdateComponent {
     if (file) {
       this.userService.postImage(file).subscribe(() => {
         const timestamp = (new Date()).getTime();
-        this.imageUrl = `${config.IP_API}/file/users/${this.userProfile.id}.png?${timestamp}`;
+        this.imageUrl = `${environment.IP_API}/file/users/${this.userProfile.id}.png?${timestamp}`;
       });
     }
   }
@@ -103,7 +102,7 @@ export class ProfileUpdateComponent {
   onFileRemoved() {
     this.userService.deleteImage().subscribe(() => {
       const timestamp = (new Date()).getTime();
-      this.imageUrl = `${config.IP_API}/file/users/${this.userProfile.id}.png?${timestamp}`;
+      this.imageUrl = `${environment.IP_API}/file/users/${this.userProfile.id}.png?${timestamp}`;
     });
   }
 }

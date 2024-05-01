@@ -4,8 +4,8 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { User } from '../../interfaces/user';
 import { ThemeService } from '../../services/theme.service';
+import { environment } from '../../../environments/environment';
 
-import config from '../../../../config';
 @Component({
   selector: 'app-navbar',
   standalone: true,
@@ -32,7 +32,7 @@ export class NavbarComponent {
   getProfile() {
     this.userService.getProfile().subscribe(profile => {
       this.userProfile = profile;
-      this.imageUrl = `${config.IP_API}/file/users/${this.userProfile.id}.png`;
+      this.imageUrl = `${environment.IP_API}/file/users/${this.userProfile.id}.png`;
       this.firstName = this.userProfile.prenom as string;
       this.lastName = this.userProfile.nom as string;
       this.email = this.userProfile.email as string;

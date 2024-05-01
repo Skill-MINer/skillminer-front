@@ -2,10 +2,10 @@ import { inject, Injectable, signal } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { Router } from '@angular/router';
 import { User } from '../interfaces/user';
-import config from '../../../config';
+import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
 
-const { IP_API } = config;
+const IP_API = environment.IP_API;
 
 
 @Injectable({
@@ -33,11 +33,11 @@ export class UserService {
   postImage(image: File): Observable<any> {
     const formData = new FormData();
     formData.append('file', image);
-    return this.http.post(`${config.IP_API}/file/users`, formData);
+    return this.http.post(`${IP_API}/file/users`, formData);
   }
 
   deleteImage() {
-    return this.http.delete(`${config.IP_API}/file/users`);
+    return this.http.delete(`${IP_API}/file/users`);
   }
 
   updatePassword(oldPassword: string, newPassword: string) {
