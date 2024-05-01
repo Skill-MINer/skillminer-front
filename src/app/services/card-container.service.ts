@@ -1,9 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import config from '../../../config';
+import { environment } from '../../environments/environment';
 import { Observable, of } from 'rxjs';
 import { Formation } from '../interfaces/formation';
-const { IP_API } = config;
+
+const IP_API = environment.IP_API;
+
 @Injectable({
   providedIn: 'root',
 })
