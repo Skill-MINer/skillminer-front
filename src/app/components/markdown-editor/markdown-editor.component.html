@@ -1,3 +1,9 @@
 <p>markdown-editor works!</p>
 <textarea class="variable-textarea" [(ngModel)]="markdown"></textarea>
-<markdown class="variable-binding prose" [data]="markdown"></markdown>
+<markdown
+  emoji
+  katex
+  mermaid
+  class="variable-binding prose"
+  [data]="markdown"
+></markdown>
