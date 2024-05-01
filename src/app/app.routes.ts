@@ -14,6 +14,8 @@ import { CreateHeaderFormationComponent } from './components/formation/create-he
 import { TestComponent } from './components/formation/test/test.component';
 import { SummaryComponent } from './components/formation/summary/summary.component';
 import { CreateSectionsContainerComponent } from './components/formation/create-sections-container/create-sections-container.component';
+import { CreateFormationComponent } from './components/formation/create-formation/create-formation.component';
+
 
 export const routes: Routes = [
   { path: '', component: WelcomeComponent },
@@ -63,4 +65,8 @@ export const routes: Routes = [
     path: 'test-formationCreateSections',
     component: CreateSectionsContainerComponent,
   },
+  {
+    path: 'create-formation',
+    component: CreateFormationComponent,
+  }
 ];
