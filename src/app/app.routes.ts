@@ -33,11 +33,35 @@ export const routes: Routes = [
     component: TestSecureComponent,
     canActivate: [authGuard],
   },
-  { path: 'profile-update', component: ProfileUpdateComponent },
-  { path: 'profile', component: ProfileComponent },
-  {
+  { path: 'profile-update', 
+    component: ProfileUpdateComponent,
+    canActivate: [authGuard]
+  },
+  { path: 'profile',
+    component: ProfileComponent,
+    canActivate: [authGuard]
+  },
+  { 
     path: 'reset-password/:token',
     component: ResetPasswordComponent,
     canActivate: [noAuthGuard],
+  },
+  {
+    path: 'search',
+    component: SearchTrainingsComponent,
+    canActivate: [noAuthGuard]
+  },
+  { path: 'create-header-formation', component: CreateHeaderFormationComponent},
+  { path: 'summary', component: SummaryComponent},
+  { path: 'test', component: TestComponent},
+  {
+    path: 'create-header-formation',
+    component: CreateHeaderFormationComponent,
+  },
+  //TEST PATHS
+  { path: 'test-multiS-select', component: TestComponent },
+  {
+    path: 'test-formationCreateSections',
+    component: CreateSectionsContainerComponent,
   },
 ];
