@@ -21,8 +21,7 @@ export class SearchTrainingsComponent {
   constructor(private formationService : FormationService){}
 
   getFormations() {
-    this.formationService.getFormations(this.valeurInput)
-      .subscribe(
+    this.formationService.getFormations(this.valeurInput).subscribe(
         (listFormation) => {
           this.listFormation = listFormation;
         },
