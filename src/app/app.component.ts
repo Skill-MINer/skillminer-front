@@ -60,7 +60,6 @@ export class AppComponent {
 
   isNavbarVisible() {
     const currentRoute = this.router.url.split("/")[1];
-    console.log(currentRoute);
     return currentRoute !== 'signup' && currentRoute !== 'recover-account' && currentRoute !== 'login' && currentRoute !== 'reset-password';
   }
 }

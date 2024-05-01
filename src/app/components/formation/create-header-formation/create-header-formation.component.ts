@@ -15,6 +15,9 @@ import { map } from 'rxjs';
 export class CreateHeaderFormationComponent  {
 
   tags: any[] = [];
+  imageFile: File | null = null;
+  requiredFileType = 'image/png';
+  selectedImageUrl = 'https://preline.co/assets/svg/examples/abstract-bg-1.svg'; // default image URL
 
   protected readonly createFormationService: CreateFormationService = inject(CreateFormationService);
   protected readonly headerForm = new FormGroup({
@@ -31,22 +34,40 @@ export class CreateHeaderFormationComponent  {
         map((tags) => tags.map((tag) => ({ id: tag.id, name: tag.nom })))
       )
       .subscribe((tags) => {
-        console.log(tags);
         this.tags = tags;});
   }
 
   onSubmit() {
-    console.log(this.headerForm.value);
     if (this.headerForm.valid) {
+      let id: String;
       const selectedTags = this.headerForm.value.selectedTags;
-      console.log(selectedTags);
       const tags = selectedTags ? selectedTags.map((tag) => tag.id) : [];
-      console.log(tags);
-      this.createFormationService.createFormation({
-        ...this.headerForm.value,
-        tags: tags
-      });
-      console.log("Form Submitted!");
+      if (this.imageFile !== null) {
+        this.createFormationService.createFormation({
+          ...this.headerForm.value,
+          tags: tags
+        }).subscribe((formation) => {
+          let id = formation.id;
+          if (this.imageFile !== null) {
+            this.createFormationService.postImageHeader(id, this.imageFile);
+          }
+        });
+
+        console.log("requete envoyée");
+      }
+    }
+  }
+
+  onFileSelected(event: any) {
+    if (event.target.files && event.target.files[0]) {
+      const file = event.target.files[0];
+      const reader = new FileReader();
+      reader.onload = e => {
+        if (e.target) {
+          this.selectedImageUrl = e.target.result as string;
+        }
+      };
+      reader.readAsDataURL(file);
     }
   }
 

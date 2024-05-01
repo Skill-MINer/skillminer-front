@@ -51,7 +51,6 @@ export const routes: Routes = [
     component: SearchTrainingsComponent,
     canActivate: [noAuthGuard]
   },
-  { path: 'create-header-formation', component: CreateHeaderFormationComponent},
   { path: 'summary', component: SummaryComponent},
   { path: 'test', component: TestComponent},
   {
