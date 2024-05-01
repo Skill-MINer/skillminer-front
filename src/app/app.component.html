@@ -1,7 +1,8 @@
 <div
-  class="bg-background bg-[radial-gradient(100%_50%_at_50%_0%,rgba(166,58,80,0.13)_0,rgba(166,58,80,0)_50%,rgba(166,58,80,0)_100%)]"
+  [class]="{'dark': themeService.isDarkMode}"
+  class="bg-background bg-[radial-gradient(100%_50%_at_50%_0%,rgba(166,58,80,0.13)_0,rgba(166,58,80,0)_50%,rgba(166,58,80,0)_100%)] dark:bg-background-darkMode"
 >
-  <app-navbar></app-navbar>
+<app-navbar></app-navbar>
   <router-outlet></router-outlet>
   <app-footer></app-footer>
 </div>
