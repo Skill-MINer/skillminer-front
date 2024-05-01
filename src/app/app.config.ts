@@ -1,6 +1,11 @@
 import { ApplicationConfig, importProvidersFrom, isDevMode } from '@angular/core';
 import { provideRouter, withComponentInputBinding } from '@angular/router';
-import { HttpClientModule, provideHttpClient, withInterceptors } from '@angular/common/http';
+import { provideMarkdown } from 'ngx-markdown';
+import {
+  HttpClientModule,
+  provideHttpClient,
+  withInterceptors,
+} from '@angular/common/http';
 
 import { routes } from './app.routes';
 import { authInterceptor } from './interceptors/auth.interceptor';
@@ -27,5 +32,6 @@ export const appConfig: ApplicationConfig = {
         registrationStrategy: 'registerWhenStable:30000'
     }),
     importProvidersFrom(MarkdownModule.forRoot()),
-]
+    provideMarkdown(),
+  ],
 };
