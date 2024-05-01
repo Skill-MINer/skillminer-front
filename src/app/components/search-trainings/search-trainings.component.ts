@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { FormationService } from '../services/formation.service';
+import { FormationService } from '../../services/formation.service';
 import { FormsModule } from '@angular/forms';
 import { Observable, of } from 'rxjs';
-import { Formation } from '../interfaces/formation';
-import { FormationCardComponent } from '../components/formation-card/formation-card.component';
+import { Formation } from '../../interfaces/formation';
+import { FormationCardComponent } from '../formation-card/formation-card.component';
 
 @Component({
   selector: 'app-search-trainings',
