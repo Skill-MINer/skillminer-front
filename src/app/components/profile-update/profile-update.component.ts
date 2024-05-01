@@ -99,4 +99,11 @@ export class ProfileUpdateComponent {
       });
     }
   }
+
+  onFileRemoved() {
+    this.userService.deleteImage().subscribe(() => {
+      const timestamp = (new Date()).getTime();
+      this.imageUrl = `${config.IP_API}/file/users/${this.userProfile.id}.png?${timestamp}`;
+    });
+  }
 }

@@ -36,6 +36,10 @@ export class UserService {
     return this.http.post(`${config.IP_API}/file/users`, formData);
   }
 
+  deleteImage() {
+    return this.http.delete(`${config.IP_API}/file/users`);
+  }
+
   updatePassword(oldPassword: string, newPassword: string) {
     return this.http.put(`${IP_API}/users/password`, {
       "oldPassword": oldPassword,
