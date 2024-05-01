@@ -16,6 +16,8 @@ import { SummaryComponent } from './components/formation/summary/summary.compone
 import { CreateSectionsContainerComponent } from './components/formation/create-sections-container/create-sections-container.component';
 import { CreateFormationComponent } from './components/formation/create-formation/create-formation.component';
 
+import { MarkdownEditorComponent } from './components/markdown-editor/markdown-editor.component';
+
 
 export const routes: Routes = [
   { path: '', component: WelcomeComponent },
@@ -68,5 +70,9 @@ export const routes: Routes = [
   {
     path: 'create-formation',
     component: CreateFormationComponent,
+  },
+  {
+    path: 'markdown',
+    component: MarkdownEditorComponent,
   }
 ];
