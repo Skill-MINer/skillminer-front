@@ -5,6 +5,7 @@ module.exports = {
     './src/**/**/*.{html,ts}',
     './node_modules/preline/preline.js',
   ],
+  darkMode: 'selector',
   theme: {
     fontFamily: {
       sans: ['Poppins', 'Graphik', 'sans-serif'],
@@ -13,7 +14,7 @@ module.exports = {
     extend: {
       colors: {
         'secondary': {
-          DEFAULT: "#F8F0D5",
+          DEFAULT: "#F8F0D5"
               0: "#fffaeb",
               1: "#fef2ca",
               2: "#fde390",
@@ -25,9 +26,11 @@ module.exports = {
               8: "#943e0f",
               9: "#793410",
               hover: "#fde390",
+              darkMode: "#CD8C23",
         },
         'primary': {
           DEFAULT: "#DC9B34",
+          darkMode: "#2C2307",
           0: '#fefce8',
           1: '#fef8c4',
           2: '#feef8a',
@@ -42,6 +45,7 @@ module.exports = {
         },
         'accent': {
           DEFAULT: '#A63A50',
+          darkMode: '#010104',
           0: '#fef1f5',
           1: '#fee5ec',
           2: '#fdcedd',
@@ -56,11 +60,13 @@ module.exports = {
         },
         'background': {
           DEFAULT: '#FFFBF8',
+          darkMode: '#010104',
           0: '#F7F3F0',
           1:'#fcf8f5',
         },
         'textcolor': {
           DEFAULT: '#2C1A1D',
+          darkMode: '#EBE9FC',
           light: '#7E7E7E',        
         },
       },
