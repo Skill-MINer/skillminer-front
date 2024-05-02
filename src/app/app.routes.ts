@@ -17,7 +17,7 @@ import { CreateSectionsContainerComponent } from './components/formation/create-
 import { CreateFormationComponent } from './components/formation/create-formation/create-formation.component';
 
 import { MarkdownEditorComponent } from './components/markdown-editor/markdown-editor.component';
-
+import { MarkdownWithAiComponent } from './components/markdown-with-ai/markdown-with-ai.component';
 
 export const routes: Routes = [
   { path: '', component: WelcomeComponent },
@@ -74,5 +74,9 @@ export const routes: Routes = [
   {
     path: 'markdown',
     component: MarkdownEditorComponent,
+  },
+  {
+    path: 'markdown-with-ai',
+    component: MarkdownWithAiComponent,
   }
 ];
