@@ -14,6 +14,7 @@ import { CreateHeaderFormationComponent } from './components/formation/create-he
 import { TestComponent } from './components/formation/test/test.component';
 import { SummaryComponent } from './components/formation/summary/summary.component';
 import { CreateSectionsContainerComponent } from './components/formation/create-sections-container/create-sections-container.component';
+import { PageComponent } from './components/formation/page/page.component';
 
 export const routes: Routes = [
   { path: '', component: WelcomeComponent },
@@ -40,6 +41,10 @@ export const routes: Routes = [
   { path: 'profile',
     component: ProfileComponent,
     canActivate: [authGuard]
+  },
+  { path: 'formation/page',
+  component: PageComponent,
+  canActivate: [authGuard]
   },
   { 
     path: 'reset-password/:token',

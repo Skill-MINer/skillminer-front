@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,Input } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { UserService } from '@services/user.service';
 import { User } from '@interfaces/user';
@@ -13,7 +13,7 @@ import { environment } from '@env/environment';
 })
 export class ProfileComponent {
   userProfile: User = {};
-  imageUrl: string = '';
+  @Input() imageUrl: string = '';
   requiredFileType = 'image/png';
   fileName: string = '';
   firstName: string = '';
@@ -34,7 +34,7 @@ export class ProfileComponent {
     });
   }
 
-  ngOnInit() {
+  ngOnChanges() {
     this.getProfile();
   }
   
