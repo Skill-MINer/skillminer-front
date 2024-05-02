@@ -2,7 +2,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MarkdownModule } from 'ngx-markdown';
 import 'prismjs';
-import 'prismjs/components/prism-typescript.min.js';
+import './prism-imports';
 import 'prismjs/plugins/line-numbers/prism-line-numbers.js';
 import 'prismjs/plugins/line-highlight/prism-line-highlight.js';
 
