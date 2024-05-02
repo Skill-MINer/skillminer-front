@@ -1,37 +1,20 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, Input, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MarkdownModule } from 'ngx-markdown';
 import 'prismjs';
 import './prism-imports';
 import 'prismjs/plugins/line-numbers/prism-line-numbers.js';
 import 'prismjs/plugins/line-highlight/prism-line-highlight.js';
+import { AIMarkdown } from '../../interfaces/AImarkdown';
 
 @Component({
   selector: 'app-markdown-editor',
   standalone: true,
-  imports: [
-    FormsModule,
-    MarkdownModule
-  ],
+  imports: [FormsModule, MarkdownModule],
   templateUrl: './markdown-editor.component.html',
   styleUrl: './markdown-editor.component.sass',
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
 })
 export class MarkdownEditorComponent {
-  markdown = `## Markdown __rulez__!
-  ---
-  
-  ### Syntax highlight
-  \`\`\`typescript
-  const language = 'typescript';
-  \`\`\`
-  
-  ### Lists
-  1. Ordered list
-  2. Another bullet point
-     - Unordered list
-     - Another unordered bullet
-  
-  ### Blockquote
-  > Blockquote to the max`;
+  @Input() markdown: AIMarkdown = {};
 }
