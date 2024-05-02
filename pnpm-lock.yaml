@@ -32,6 +32,9 @@ dependencies:
   '@angular/router':
     specifier: ^17.3.2
     version: 17.3.2(@angular/common@17.3.2)(@angular/core@17.3.2)(@angular/platform-browser@17.3.2)(rxjs@7.8.1)
+  '@angular/service-worker':
+    specifier: ^17.3.2
+    version: 17.3.7(@angular/common@17.3.2)(@angular/core@17.3.2)
   jwt-decode:
     specifier: ^4.0.0
     version: 4.0.0
@@ -63,7 +66,7 @@ dependencies:
 devDependencies:
   '@angular-devkit/build-angular':
     specifier: ^17.3.2
-    version: 17.3.2(@angular/compiler-cli@17.3.2)(karma@6.4.3)(tailwindcss@3.4.3)(typescript@5.4.3)
+    version: 17.3.2(@angular/compiler-cli@17.3.2)(@angular/service-worker@17.3.7)(karma@6.4.3)(tailwindcss@3.4.3)(typescript@5.4.3)
   '@angular/cli':
     specifier: ^17.3.2
     version: 17.3.2
@@ -129,7 +132,7 @@ packages:
       - chokidar
     dev: true
 
-  /@angular-devkit/build-angular@17.3.2(@angular/compiler-cli@17.3.2)(karma@6.4.3)(tailwindcss@3.4.3)(typescript@5.4.3):
+  /@angular-devkit/build-angular@17.3.2(@angular/compiler-cli@17.3.2)(@angular/service-worker@17.3.7)(karma@6.4.3)(tailwindcss@3.4.3)(typescript@5.4.3):
     resolution: {integrity: sha512-muPCUyL0uHvRkLH4NLWiccER6P2vCm/Q5DDvqyN4XOzzY3tAHHLrKrpvY87sgd2oNJ6Ci8x7GPNcfzR5KELCnw==}
     engines: {node: ^18.13.0 || >=20.9.0, npm: ^6.11.0 || ^7.5.6 || >=8.0.0, yarn: '>= 1.13.0'}
     peerDependencies:
@@ -175,6 +178,7 @@ packages:
       '@angular-devkit/build-webpack': 0.1703.2(webpack-dev-server@4.15.1)(webpack@5.90.3)
       '@angular-devkit/core': 17.3.2
       '@angular/compiler-cli': 17.3.2(@angular/compiler@17.3.2)(typescript@5.4.3)
+      '@angular/service-worker': 17.3.7(@angular/common@17.3.2)(@angular/core@17.3.2)
       '@babel/core': 7.24.0
       '@babel/generator': 7.23.6
       '@babel/helper-annotate-as-pure': 7.22.5
@@ -353,7 +357,6 @@ packages:
       '@angular/core': 17.3.2(rxjs@7.8.1)(zone.js@0.14.4)
       rxjs: 7.8.1
       tslib: 2.6.2
-    dev: false
 
   /@angular/compiler-cli@17.3.2(@angular/compiler@17.3.2)(typescript@5.4.3):
     resolution: {integrity: sha512-PG81BrJjeF679tkafjt+t9VEBE1rPq39cdLoBTnPY7Q+E/thVoem5JTRG6hmnLmwEc0xxY6sfYpvx2BB5ywUSA==}
@@ -464,6 +467,18 @@ packages:
       rxjs: 7.8.1
       tslib: 2.6.2
     dev: false
+
+  /@angular/service-worker@17.3.7(@angular/common@17.3.2)(@angular/core@17.3.2):
+    resolution: {integrity: sha512-x09Mr0QarAgGusG8Hei6cqBd0tEG9sWaSxp29yvSemAkuG9APewm1WJk0RnuDmjIB7g1Z+FQlZfe+Lo/zyms6A==}
+    engines: {node: ^18.13.0 || >=20.9.0}
+    hasBin: true
+    peerDependencies:
+      '@angular/common': 17.3.7
+      '@angular/core': 17.3.7
+    dependencies:
+      '@angular/common': 17.3.2(@angular/core@17.3.2)(rxjs@7.8.1)
+      '@angular/core': 17.3.2(rxjs@7.8.1)(zone.js@0.14.4)
+      tslib: 2.6.2
 
   /@babel/code-frame@7.24.2:
     resolution: {integrity: sha512-y5+tLQyV8pg3fsiln67BVLD1P13Eg4lh5RW9mF0zUuvLrv9uIQ4MCL+CRT+FTsBlBjcIan6PGsLcBN0m3ClUyQ==}
@@ -5068,8 +5083,6 @@ packages:
       webpack: '*'
     peerDependenciesMeta:
       webpack:
-        optional: true
-      webpack-sources:
         optional: true
     dependencies:
       webpack: 5.90.3(esbuild@0.20.1)
