@@ -24,7 +24,7 @@
         <div class="sm:col-span-9">
           <div class="flex items-center gap-5">
             <img class="inline-block size-16 rounded-full ring-2 ring-white dark:ring-gray-800"
-              [src]="imageUrl" alt="Profile">
+              [src]="userService.currentUser.imageUrl" alt="Profile">
           </div>
         </div>
         <!-- End Col -->
@@ -36,7 +36,7 @@
         </div>
         <div class="sm:col-span-9">
           <div class="sm:flex mt-2 inline-flex items-center gap-x-2">
-            {{ firstName }} {{ lastName }}
+            {{ userService.currentUser.prenom }} {{ userService.currentUser.nom }}
           </div>
           <!-- End Col -->
         </div>
@@ -50,7 +50,7 @@
 
         <div class="sm:col-span-9">
           <div class="sm:flex mt-2 inline-flex items-center gap-x-2">
-            {{ email }}
+            {{ userService.currentUser.email }}
           </div>
           <!-- End Col -->
         </div>
@@ -63,7 +63,7 @@
         <!-- End Grid -->
         <div class="sm:col-span-9">
           <div class="sm:flex mt-2 inline-flex items-center gap-x-2">
-            {{ description }}
+            {{ userService.currentUser.description }}
           </div>
           <div class="mt-5 flex justify-end gap-x-2">
             <button type="button"  routerLink="/profile-update" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent  text-white bg-accent hover:bg-accent-9 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">

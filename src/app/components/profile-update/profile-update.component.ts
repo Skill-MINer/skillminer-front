@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { FormGroup, AbstractControl, Validators, ReactiveFormsModule, FormControl } from '@angular/forms';
 import { UserService } from '../../services/user.service';
-import { User } from '../../interfaces/user';
 import { environment } from '../../../environments/environment';
+import { User } from '../../interfaces/user';
 
 @Component({
   selector: 'app-profile-update',
@@ -15,11 +15,10 @@ import { environment } from '../../../environments/environment';
 export class ProfileUpdateComponent {
 
   userProfile: User = {};
-  imageUrl: string = '';
   requiredFileType = 'image/png';
   fileName: string = '';
   
-  constructor(protected readonly userService: UserService) {}
+  constructor(protected userService: UserService) {}
 
   protected fieldProfileForm = new FormGroup({
     imageUrl: new FormControl(""),
@@ -38,18 +37,17 @@ export class ProfileUpdateComponent {
 
   ngOnInit() {
     this.getProfile();
+    // this.userService.updateUser();
   }
 
   getProfile() {
-    this.userService.getProfile().subscribe(profile => {
-      this.userProfile = profile;
-      this.imageUrl = `${environment.IP_API}/file/users/${this.userProfile.id}.png`;
-      this.fieldProfileForm.patchValue({
-        firstName: this.userProfile.prenom,
-        lastName: this.userProfile.nom,
-        email: this.userProfile.email,
-        description: this.userProfile.description
-      });
+    this.userService.getProfile();
+
+    this.fieldProfileForm.patchValue({
+      firstName: this.userService.currentUser.prenom,
+      lastName: this.userService.currentUser.nom,
+      email: this.userService.currentUser.email,
+      description: this.userService.currentUser.description
     });
   }
 
@@ -78,6 +76,7 @@ export class ProfileUpdateComponent {
       };
       console.log(user);
       this.userService.updateProfile(user);
+      this.userService.getProfile();
     }
   }
 
@@ -92,17 +91,11 @@ export class ProfileUpdateComponent {
   onFileSelected(event: any) {
     const file: File = event.target.files[0];
     if (file) {
-      this.userService.postImage(file).subscribe(() => {
-        const timestamp = (new Date()).getTime();
-        this.imageUrl = `${environment.IP_API}/file/users/${this.userProfile.id}.png?${timestamp}`;
-      });
+      this.userService.postImage(file);
     }
   }
 
   onFileRemoved() {
-    this.userService.deleteImage().subscribe(() => {
-      const timestamp = (new Date()).getTime();
-      this.imageUrl = `${environment.IP_API}/file/users/${this.userProfile.id}.png?${timestamp}`;
-    });
+    this.userService.deleteImage();
   }
 }
