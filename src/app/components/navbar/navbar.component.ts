@@ -14,14 +14,7 @@ import { environment } from '../../../environments/environment';
   styleUrl: './navbar.component.sass'
 })
 export class NavbarComponent {
-
-  imageUrl: string = '';
-  firstName: string = '';
-  lastName: string = '';
-  email: string = '';
-  userProfile: User = {};
-
-  constructor(protected readonly userService: UserService, protected themeService: ThemeService) {}
+  constructor(protected userService: UserService, protected themeService: ThemeService) {}
 
   protected readonly authService: AuthService = new AuthService();
 
@@ -30,13 +23,7 @@ export class NavbarComponent {
   }
 
   getProfile() {
-    this.userService.getProfile().subscribe(profile => {
-      this.userProfile = profile;
-      this.imageUrl = `${environment.IP_API}/file/users/${this.userProfile.id}.png`;
-      this.firstName = this.userProfile.prenom as string;
-      this.lastName = this.userProfile.nom as string;
-      this.email = this.userProfile.email as string;
-    });
+    this.userService.getProfile();
   }
 
   logout() {

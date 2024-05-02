@@ -22,7 +22,7 @@
 
       <div class="sm:col-span-9">
         <div class="flex items-center gap-5">
-          <img class="inline-block size-16 rounded-full ring-2 ring-white dark:ring-gray-800" [src]="imageUrl" alt="Profile image">
+          <img class="inline-block size-16 rounded-full ring-2 ring-white dark:ring-gray-800" [src]="userService.currentUser.imageUrl" alt="Profile image">
           <div class="flex gap-x-2">
             <div>
               <input type="file" class="file-input hidden"

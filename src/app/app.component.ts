@@ -45,9 +45,9 @@ export class AppComponent {
   ngOnInit() {
     this.router.events.subscribe((event: Event) => {
       if (event instanceof NavigationEnd) {
+        this.themeService.updateTheme();
         setTimeout(() => {
           window.HSStaticMethods.autoInit();
-          this.themeService.updateTheme();
         }, 100);
       }
     });
