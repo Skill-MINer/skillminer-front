@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
-import { UserService } from '../../services/user.service';
-import { User } from '../../interfaces/user';
-import config from '../../../../config';
+import { UserService } from '@services/user.service';
+import { User } from '@interfaces/user';
+import { environment } from '@env/environment';
+
 @Component({
   selector: 'app-profile',
   standalone: true,
@@ -29,7 +30,7 @@ export class ProfileComponent {
       this.lastName = this.userProfile.nom ?? ' and no last name provided.';
       this.email = this.userProfile.email ?? 'No email provided.';
       this.description = this.userProfile.description ?? 'No description provided.';
-      this.imageUrl = `${config.IP_API}/file/users/${this.userProfile.id}.png`;
+      this.imageUrl = `${environment.IP_API}/file/users/${this.userProfile.id}.png`;
     });
   }
 
