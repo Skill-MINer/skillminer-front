@@ -9,7 +9,7 @@ import { noAuthGuard } from './auth/no-auth.guard';
 import { ProfileUpdateComponent } from './components/profile-update/profile-update.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
-import { SearchTrainingsComponent } from './search-trainings/search-trainings.component';
+import { SearchTrainingsComponent } from './components/search-trainings/search-trainings.component';
 import { CreateHeaderFormationComponent } from './components/formation/create-header-formation/create-header-formation.component';
 import { TestComponent } from './components/formation/test/test.component';
 import { SummaryComponent } from './components/formation/summary/summary.component';
