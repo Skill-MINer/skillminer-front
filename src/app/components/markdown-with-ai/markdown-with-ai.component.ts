@@ -14,8 +14,11 @@ export class MarkdownWithAiComponent {
   constructor(private MarkdownWithAIService: MarkdownWithAIService) {}
   markdown: AIMarkdown = { text: '' };
   valeurInput: string = '';
+  requestPending = false;
   generateMarkdown() {
+    this.requestPending = true;
     this.MarkdownWithAIService.generate(this.valeurInput).subscribe((md) => {
+      this.requestPending = false;
       this.markdown = md;
     });
   }

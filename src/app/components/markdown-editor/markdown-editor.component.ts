@@ -16,5 +16,5 @@ import { AIMarkdown } from '../../interfaces/AImarkdown';
   encapsulation: ViewEncapsulation.None,
 })
 export class MarkdownEditorComponent {
-  @Input() markdown: AIMarkdown = {};
+  @Input() markdown: AIMarkdown = { text: '' };
 }
