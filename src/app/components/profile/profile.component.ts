@@ -13,7 +13,7 @@ import { environment } from '@env/environment';
 })
 export class ProfileComponent {
   userProfile: User = {};
-  @Input() imageUrl: string = '';
+  imageUrl: string = '';
   requiredFileType = 'image/png';
   fileName: string = '';
   firstName: string = '';
