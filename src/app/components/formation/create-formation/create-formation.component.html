@@ -1,0 +1,91 @@
+<div class="max-w-[90rem] min-h-[70vh] relative mx-auto px-4 pb-3 pt-8">
+    <!-- Stepper -->
+    <ul class="relative flex flex-row gap-x-2 w-fit mx-auto">
+        <!-- Item -->
+        <li class="shrink basis-0 group cursor-pointer" (click)="setActiveStep(1)">
+            <div class="min-w-7 min-h-7 w-full inline-flex items-center text-xs align-middle">
+                <span [ngClass]="{'bg-primary-5': getActiveStep() > 0, 'bg-gray-100': getActiveStep() === 0}"
+                    class="size-7 flex justify-center items-center flex-shrink-0 font-medium text-gray-800 rounded-full dark:bg-neutral-700 dark:text-white">
+                    1
+                </span>
+                <span class="ms-2 block text-sm font-medium text-gray-800 dark:text-white">
+                    Header
+                </span>
+                <div [ngClass]="{'bg-primary-4': getActiveStep() > 1, 'bg-gray-300': getActiveStep() === 1}"
+                    class="ms-2 w-48 h-px group-last:hidden dark:bg-neutral-700"></div>
+            </div>
+        </li>
+        <!-- End Item -->
+
+        <!-- Item -->
+        <li class="shrink basis-0 group cursor-pointer" (click)="setActiveStep(2)">
+            <div class="min-w-7 min-h-7 w-full inline-flex items-center text-xs align-middle">
+                <span [ngClass]="{'bg-primary-5': getActiveStep() > 1, 'bg-gray-100': getActiveStep() <= 1}"
+                    class="size-7 flex justify-center items-center flex-shrink-0 font-medium text-gray-800 rounded-full dark:bg-neutral-700 dark:text-white">
+                    2
+                </span>
+                <span class="ms-2 block text-sm font-medium text-gray-800 dark:text-white">
+                    Summary
+                </span>
+                <div [ngClass]="{'bg-primary-4': getActiveStep() > 2, 'bg-gray-300': getActiveStep() <= 2}"
+                    class="ms-2 w-48 h-px group-last:hidden dark:bg-neutral-700"></div>
+            </div>
+        </li>
+        <!-- End Item -->
+
+        <!-- Item -->
+        <li class="shrink basis-0 group cursor-pointer" (click)="setActiveStep(3)">
+            <div class="min-w-7 min-h-7 w-full inline-flex items-center text-xs align-middle">
+                <span [ngClass]="{'bg-primary-5': getActiveStep() > 2, 'bg-gray-100': getActiveStep() <= 2}"
+                    class="size-7 flex justify-center items-center flex-shrink-0 bg-gray-100 font-medium text-gray-800 rounded-full dark:bg-neutral-700 dark:text-white">
+                    3
+                </span>
+                <span class="ms-2 block text-sm font-medium text-gray-800 dark:text-white">
+                    Body
+                </span>
+                <div class="ms-2 w-full h-px bg-gray-200 group-last:hidden dark:bg-neutral-700"></div>
+            </div>
+        </li>
+        <!-- End Item -->
+    </ul>
+    <!-- End Stepper -->
+
+    @switch (activeStep) {
+    @case(1) {
+    <div>
+        <app-create-header-formation></app-create-header-formation>
+    </div>
+    }
+    @case(2) {
+    <div>
+        section 2
+    </div>
+    }
+    @case(3) {
+    <div>
+        section 3
+    </div>
+    }
+    }
+
+    <div class="flex justify-between flex-row w-full py-3 px-24">
+        <button type="button" (click)="previousStep()" [disabled]="previousButtonDisabled()"
+            class="py-3 px-4 text-sm font-semibold rounded-lg border border-gray-500 text-gray-500 hover:border-gray-800 hover:text-gray-800 disabled:opacity-50 disabled:pointer-events-none dark:border-neutral-400 dark:text-neutral-400 dark:hover:text-neutral-300 dark:hover:border-neutral-300">
+            Previous
+        </button>
+        @if (endStepper())
+        {
+        <button type="button" (click)="submit()"
+            class="py-3 px-4 text-sm font-semibold rounded-lg border border-transparent bg-accent text-white hover:bg-accent-hover disabled:opacity-50 disabled:pointer-events-none">
+            Submit
+        </button>
+        } @else {
+        <button type="button" (click)="nextStep()" [disabled]="nextButtonDisabled()"
+            class="py-3 px-4 text-sm font-semibold rounded-lg border border-transparent bg-primary text-white hover:bg-primary-hover disabled:opacity-50 disabled:pointer-events-none">
+            Next
+        </button>
+        }
+
+    </div>
+
+</div>
