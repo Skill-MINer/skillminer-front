@@ -19,6 +19,17 @@
     "target": "ES2022",
     "module": "ES2022",
     "useDefineForClassFields": false,
+    "baseUrl": "src",
+    "paths": {
+      "@app/*": ["app/*"],
+      "@auth/*": ["app/auth/*"],
+      "@env/*": ["environments/*"],
+      "@components/*": ["app/components/*"],
+      "@interceptors/*": ["app/interceptors/*"],
+      "@interfaces/*": ["app/interfaces/*"],
+      "@services/*": ["app/services/*"],
+      "@assets/*": ["assets/*"]
+    },
     "lib": [
       "ES2022",
       "dom"

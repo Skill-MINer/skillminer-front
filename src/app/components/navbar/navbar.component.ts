@@ -21,7 +21,7 @@ export class NavbarComponent {
   email: string = '';
   userProfile: User = {};
 
-  constructor(protected readonly userService: UserService, private themeService: ThemeService) {}
+  constructor(protected readonly userService: UserService, protected themeService: ThemeService) {}
 
   protected readonly authService: AuthService = new AuthService();
 

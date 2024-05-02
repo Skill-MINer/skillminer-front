@@ -1,6 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { FormationCard } from '../../Formation-cards';
-import { FORMATIONCARDS } from '../../mock-Formation-cards';
 import { Formation } from '../../interfaces/formation';
 import { environment } from '../../../environments/environment';
 
@@ -15,7 +13,10 @@ const IP_API = environment.IP_API;
 })
 export class FormationCardComponent {
   imageHeader: string = `${IP_API}/file/formations/`;
+  imageUser: string = '';
+
   constructor() {}
+
   @Input() formationcard: Formation = {};
   ngOnInit(): void {
     //scraps the hours from the date
@@ -31,5 +32,6 @@ export class FormationCardComponent {
     }
 
     this.imageHeader = `${IP_API}/file/formations/${this.formationcard.id}.png`;
+    this.imageUser = `${IP_API}/file/users/${this.formationcard.user?.id}.png`;
   }
 }

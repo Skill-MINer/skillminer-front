@@ -1,6 +1,8 @@
+import { ThemeService } from '@services/theme.service';
 import { Component } from '@angular/core';
-import { CardContainerComponent } from '../card-container/card-container.component';
+import { CardContainerComponent } from '@components/card-container/card-container.component';
 import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-welcome',
@@ -10,7 +12,7 @@ import { Router } from '@angular/router';
   styleUrl: './welcome.component.sass',
 })
 export class WelcomeComponent {
-  constructor(private router : Router) {}
+  constructor(private router : Router, protected themeService : ThemeService) {}
 
   clickNavBar(){
     this.router.navigate(['/search']).then(() => {
