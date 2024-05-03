@@ -16,20 +16,6 @@ export class MarkdownWithAIService {
 
   constructor() {}
   generate(title: string): Observable<AIMarkdown> {
-    return this.http
-      .post(`${IP_API}/formations/generate`, { name: title })
-      .pipe(catchError(this.handleError));
+    return this.http.post(`${IP_API}/formations/generate`, { name: title });
   }
-
-  private handleError = (error: HttpErrorResponse) => {
-    if (error.status === 0) {
-      this.toastr.error('Server is down', 'Something went wrong');
-    } else {
-      this.toastr.error(error.error.error, 'Something went wrong');
-    }
-
-    return throwError(
-      () => new Error('Something bad happened; please try again later.')
-    );
-  };
 }
