@@ -15,7 +15,7 @@ import { TestComponent } from './components/formation/test/test.component';
 import { SummaryComponent } from './components/formation/summary/summary.component';
 import { CreateSectionsContainerComponent } from './components/formation/create-sections-container/create-sections-container.component';
 import { CreateFormationComponent } from './components/formation/create-formation/create-formation.component';
-
+import { DragDropComponent } from './components/formation/drag-drop/drag-drop.component';
 import { MarkdownEditorComponent } from './components/markdown-editor/markdown-editor.component';
 import { MarkdownWithAiComponent } from './components/markdown-with-ai/markdown-with-ai.component';
 
@@ -37,15 +37,13 @@ export const routes: Routes = [
     component: TestSecureComponent,
     canActivate: [authGuard],
   },
-  { path: 'profile-update', 
+  {
+    path: 'profile-update',
     component: ProfileUpdateComponent,
-    canActivate: [authGuard]
+    canActivate: [authGuard],
   },
-  { path: 'profile',
-    component: ProfileComponent,
-    canActivate: [authGuard]
-  },
-  { 
+  { path: 'profile', component: ProfileComponent, canActivate: [authGuard] },
+  {
     path: 'reset-password/:token',
     component: ResetPasswordComponent,
     canActivate: [noAuthGuard],
@@ -53,10 +51,10 @@ export const routes: Routes = [
   {
     path: 'search',
     component: SearchTrainingsComponent,
-    canActivate: [noAuthGuard]
+    canActivate: [noAuthGuard],
   },
-  { path: 'summary', component: SummaryComponent},
-  { path: 'test', component: TestComponent},
+  { path: 'summary', component: SummaryComponent },
+  { path: 'test', component: TestComponent },
   {
     path: 'create-header-formation',
     component: CreateHeaderFormationComponent,
@@ -72,11 +70,15 @@ export const routes: Routes = [
     component: CreateFormationComponent,
   },
   {
+    path: 'drag-drop',
+    component: DragDropComponent,
+  },
+  {
     path: 'markdown',
     component: MarkdownEditorComponent,
   },
   {
     path: 'markdown-with-ai',
     component: MarkdownWithAiComponent,
-  }
+  },
 ];

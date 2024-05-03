@@ -1,0 +1,13 @@
+<div class="flex justify-center my-8">
+    <div cdkDropList class="flex flex-col" (cdkDropListDropped)="drop($event)">
+        @for (movie of movies; track movie) {
+        <div class="flex justify-between" cdkDrag>
+            <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
+            <app-title1-section [title]="movie.title" (titleHasChanged)="handleEventTitleHasChanged($event, movie.id)"></app-title1-section>
+            <div>
+                <mat-icon class="cursor-pointer" (click)="edit(movie.title)">edit</mat-icon>
+            </div>
+        </div>
+        }
+    </div>
+</div>
