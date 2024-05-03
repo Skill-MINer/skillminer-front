@@ -1,18 +1,20 @@
 import { Component, inject } from '@angular/core';
 import { SummaryPage } from '../../../interfaces/summary-page';
 import { RouterLink, Router } from '@angular/router';
-import { Title } from '@angular/platform-browser';
+import { MarkdownModule } from 'ngx-markdown';
+import 'prismjs';
+import 'prismjs/plugins/line-numbers/prism-line-numbers.js';
+import 'prismjs/plugins/line-highlight/prism-line-highlight.js';
 import { FooterComponent } from '../../footer/footer.component';
 
 @Component({
   selector: 'app-summary',
   standalone: true,
-  imports: [RouterLink, FooterComponent],
+  imports: [RouterLink, FooterComponent, MarkdownModule],
   templateUrl: './summary.component.html',
-  styleUrl: './summary.component.sass'
+  styleUrl: './summary.component.sass',
 })
 export class SummaryComponent {
-
   summary: SummaryPage[];
   private router: Router = inject(Router);
 
@@ -25,19 +27,25 @@ export class SummaryComponent {
           {
             id: 1,
             title: 'Introduction section 1',
-            contenu: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi quis mi id quam sodales congue non vitae est. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer eget fermentum elit. Mauris turpis sem, luctus id quam nec, faucibus imperdiet quam. Aenean ex lectus, ultrices eu gravida eu, placerat vitae metus. Cras libero elit, hendrerit eget rhoncus ac, sollicitudin ac ligula. Phasellus nec faucibus diam. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Nam ultricies lorem commodo nibh hendrerit gravida. Suspendisse interdum fringilla aliquet. Quisque malesuada ultrices eros, at gravida leo semper sed. Vivamus ac mattis sapien. Praesent nec leo volutpat elit facilisis iaculis vel ac eros. Donec euismod velit quis dolor auctor pharetra. Vestibulum congue accumsan sem, vel euismod lectus convallis eu. Vivamus quis enim diam. Fusce laoreet varius neque non laoreet. Etiam cursus lobortis nibh, vel efficitur magna convallis ac. Phasellus leo sapien, vehicula eu nibh vitae, tincidunt vulputate tellus. Sed faucibus placerat risus, eu malesuada nibh molestie sit amet. Nunc vitae luctus mauris, sed bibendum tellus. Ut imperdiet justo ut purus suscipit feugiat. Morbi ac nisl quis leo fringilla convallis vitae id enim. Nunc congue dolor nisl, non semper orci euismod non. Ut congue nibh id libero tincidunt, ac placerat libero finibus. Praesent non massa nisl. In a turpis varius odio sodales facilisis."
+            contenu: {
+              text: "Markdown __rulez__!\n\n\nSyntax highlight\n```typescript\nconst language = 'typescript';\n```\n\nLists\n1. Ordered list\n2. Another bullet point\n  - Unordered list\n  - Another unordered bullet point\n\nBlockquote\n> Blockquote to the max\n\nJe suis en dehors ",
+            },
           },
           {
             id: 2,
             title: 'Introduction section 2',
-            contenu: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi quis mi id quam sodales congue non vitae est. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer eget fermentum elit. Mauris turpis sem, luctus id quam nec, faucibus imperdiet quam. Aenean ex lectus, ultrices eu gravida eu, placerat vitae metus. Cras libero elit, hendrerit eget rhoncus ac, sollicitudin ac ligula. Phasellus nec faucibus diam. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Nam ultricies lorem commodo nibh hendrerit gravida. Suspendisse interdum fringilla aliquet. Quisque malesuada ultrices eros, at gravida leo semper sed. Vivamus ac mattis sapien. Praesent nec leo volutpat elit facilisis iaculis vel ac eros. Donec euismod velit quis dolor auctor pharetra. Vestibulum congue accumsan sem, vel euismod lectus convallis eu. Vivamus quis enim diam. Fusce laoreet varius neque non laoreet. Etiam cursus lobortis nibh, vel efficitur magna convallis ac. Phasellus leo sapien, vehicula eu nibh vitae, tincidunt vulputate tellus. Sed faucibus placerat risus, eu malesuada nibh molestie sit amet. Nunc vitae luctus mauris, sed bibendum tellus. Ut imperdiet justo ut purus suscipit feugiat. Morbi ac nisl quis leo fringilla convallis vitae id enim. Nunc congue dolor nisl, non semper orci euismod non. Ut congue nibh id libero tincidunt, ac placerat libero finibus. Praesent non massa nisl. In a turpis varius odio sodales facilisis."
+            contenu: {
+              text: "Markdown __rulez__!\n\n\nSyntax highlight\n```typescript\nconst language = 'typescript';\n```\n\nLists\n1. Ordered list\n2. Another bullet point\n  - Unordered list\n  - Another unordered bullet point\n\nBlockquote\n> Blockquote to the max",
+            },
           },
           {
             id: 3,
             title: 'Introduction section 3',
-            contenu: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi quis mi id quam sodales congue non vitae est. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer eget fermentum elit. Mauris turpis sem, luctus id quam nec, faucibus imperdiet quam. Aenean ex lectus, ultrices eu gravida eu, placerat vitae metus. Cras libero elit, hendrerit eget rhoncus ac, sollicitudin ac ligula. Phasellus nec faucibus diam. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Nam ultricies lorem commodo nibh hendrerit gravida. Suspendisse interdum fringilla aliquet. Quisque malesuada ultrices eros, at gravida leo semper sed. Vivamus ac mattis sapien. Praesent nec leo volutpat elit facilisis iaculis vel ac eros. Donec euismod velit quis dolor auctor pharetra. Vestibulum congue accumsan sem, vel euismod lectus convallis eu. Vivamus quis enim diam. Fusce laoreet varius neque non laoreet. Etiam cursus lobortis nibh, vel efficitur magna convallis ac. Phasellus leo sapien, vehicula eu nibh vitae, tincidunt vulputate tellus. Sed faucibus placerat risus, eu malesuada nibh molestie sit amet. Nunc vitae luctus mauris, sed bibendum tellus. Ut imperdiet justo ut purus suscipit feugiat. Morbi ac nisl quis leo fringilla convallis vitae id enim. Nunc congue dolor nisl, non semper orci euismod non. Ut congue nibh id libero tincidunt, ac placerat libero finibus. Praesent non massa nisl. In a turpis varius odio sodales facilisis."
+            contenu: {
+              text: "Markdown __rulez__!\n\n\nSyntax highlight\n```typescript\nconst language = 'typescript';\n```\n\nLists\n1. Ordered list\n2. Another bullet point\n  - Unordered list\n  - Another unordered bullet point\n\nBlockquote\n> Blockquote to the max",
+            },
           },
-        ]
+        ],
       },
       {
         id: 2,
@@ -46,49 +54,66 @@ export class SummaryComponent {
           {
             id: 1,
             title: 'Chapter section 1',
-            contenu: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi quis mi id quam sodales congue non vitae est. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer eget fermentum elit. Mauris turpis sem, luctus id quam nec, faucibus imperdiet quam. Aenean ex lectus, ultrices eu gravida eu, placerat vitae metus. Cras libero elit, hendrerit eget rhoncus ac, sollicitudin ac ligula. Phasellus nec faucibus diam. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Nam ultricies lorem commodo nibh hendrerit gravida. Suspendisse interdum fringilla aliquet. Quisque malesuada ultrices eros, at gravida leo semper sed. Vivamus ac mattis sapien. Praesent nec leo volutpat elit facilisis iaculis vel ac eros. Donec euismod velit quis dolor auctor pharetra. Vestibulum congue accumsan sem, vel euismod lectus convallis eu. Vivamus quis enim diam. Fusce laoreet varius neque non laoreet. Etiam cursus lobortis nibh, vel efficitur magna convallis ac. Phasellus leo sapien, vehicula eu nibh vitae, tincidunt vulputate tellus. Sed faucibus placerat risus, eu malesuada nibh molestie sit amet. Nunc vitae luctus mauris, sed bibendum tellus. Ut imperdiet justo ut purus suscipit feugiat. Morbi ac nisl quis leo fringilla convallis vitae id enim. Nunc congue dolor nisl, non semper orci euismod non. Ut congue nibh id libero tincidunt, ac placerat libero finibus. Praesent non massa nisl. In a turpis varius odio sodales facilisis."
+            contenu: {
+              text: "Markdown __rulez__!\n\n\nSyntax highlight\n```typescript\nconst language = 'typescript';\n```\n\nLists\n1. Ordered list\n2. Another bullet point\n  - Unordered list\n  - Another unordered bullet point\n\nBlockquote\n> Blockquote to the max",
+            },
           },
           {
             id: 2,
             title: 'Chapter section 2',
-            contenu: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi quis mi id quam sodales congue non vitae est. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer eget fermentum elit. Mauris turpis sem, luctus id quam nec, faucibus imperdiet quam. Aenean ex lectus, ultrices eu gravida eu, placerat vitae metus. Cras libero elit, hendrerit eget rhoncus ac, sollicitudin ac ligula. Phasellus nec faucibus diam. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Nam ultricies lorem commodo nibh hendrerit gravida. Suspendisse interdum fringilla aliquet. Quisque malesuada ultrices eros, at gravida leo semper sed. Vivamus ac mattis sapien. Praesent nec leo volutpat elit facilisis iaculis vel ac eros. Donec euismod velit quis dolor auctor pharetra. Vestibulum congue accumsan sem, vel euismod lectus convallis eu. Vivamus quis enim diam. Fusce laoreet varius neque non laoreet. Etiam cursus lobortis nibh, vel efficitur magna convallis ac. Phasellus leo sapien, vehicula eu nibh vitae, tincidunt vulputate tellus. Sed faucibus placerat risus, eu malesuada nibh molestie sit amet. Nunc vitae luctus mauris, sed bibendum tellus. Ut imperdiet justo ut purus suscipit feugiat. Morbi ac nisl quis leo fringilla convallis vitae id enim. Nunc congue dolor nisl, non semper orci euismod non. Ut congue nibh id libero tincidunt, ac placerat libero finibus. Praesent non massa nisl. In a turpis varius odio sodales facilisis."
+            contenu: {
+              text: "Markdown __rulez__!\n\n\nSyntax highlight\n```typescript\nconst language = 'typescript';\n```\n\nLists\n1. Ordered list\n2. Another bullet point\n  - Unordered list\n  - Another unordered bullet point\n\nBlockquote\n> Blockquote to the max",
+            },
           },
           {
             id: 3,
             title: 'Chapter section 3',
-            contenu: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi quis mi id quam sodales congue non vitae est. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer eget fermentum elit. Mauris turpis sem, luctus id quam nec, faucibus imperdiet quam. Aenean ex lectus, ultrices eu gravida eu, placerat vitae metus. Cras libero elit, hendrerit eget rhoncus ac, sollicitudin ac ligula. Phasellus nec faucibus diam. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Nam ultricies lorem commodo nibh hendrerit gravida. Suspendisse interdum fringilla aliquet. Quisque malesuada ultrices eros, at gravida leo semper sed. Vivamus ac mattis sapien. Praesent nec leo volutpat elit facilisis iaculis vel ac eros. Donec euismod velit quis dolor auctor pharetra. Vestibulum congue accumsan sem, vel euismod lectus convallis eu. Vivamus quis enim diam. Fusce laoreet varius neque non laoreet. Etiam cursus lobortis nibh, vel efficitur magna convallis ac. Phasellus leo sapien, vehicula eu nibh vitae, tincidunt vulputate tellus. Sed faucibus placerat risus, eu malesuada nibh molestie sit amet. Nunc vitae luctus mauris, sed bibendum tellus. Ut imperdiet justo ut purus suscipit feugiat. Morbi ac nisl quis leo fringilla convallis vitae id enim. Nunc congue dolor nisl, non semper orci euismod non. Ut congue nibh id libero tincidunt, ac placerat libero finibus. Praesent non massa nisl. In a turpis varius odio sodales facilisis."
+            contenu: {
+              text: "Markdown __rulez__!\n\n\nSyntax highlight\n```typescript\nconst language = 'typescript';\n```\n\nLists\n1. Ordered list\n2. Another bullet point\n  - Unordered list\n  - Another unordered bullet point\n\nBlockquote\n> Blockquote to the max",
+            },
           },
           {
             id: 4,
             title: 'Chapter section 4',
-            contenu: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi quis mi id quam sodales congue non vitae est. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer eget fermentum elit. Mauris turpis sem, luctus id quam nec, faucibus imperdiet quam. Aenean ex lectus, ultrices eu gravida eu, placerat vitae metus. Cras libero elit, hendrerit eget rhoncus ac, sollicitudin ac ligula. Phasellus nec faucibus diam. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Nam ultricies lorem commodo nibh hendrerit gravida. Suspendisse interdum fringilla aliquet. Quisque malesuada ultrices eros, at gravida leo semper sed. Vivamus ac mattis sapien. Praesent nec leo volutpat elit facilisis iaculis vel ac eros. Donec euismod velit quis dolor auctor pharetra. Vestibulum congue accumsan sem, vel euismod lectus convallis eu. Vivamus quis enim diam. Fusce laoreet varius neque non laoreet. Etiam cursus lobortis nibh, vel efficitur magna convallis ac. Phasellus leo sapien, vehicula eu nibh vitae, tincidunt vulputate tellus. Sed faucibus placerat risus, eu malesuada nibh molestie sit amet. Nunc vitae luctus mauris, sed bibendum tellus. Ut imperdiet justo ut purus suscipit feugiat. Morbi ac nisl quis leo fringilla convallis vitae id enim. Nunc congue dolor nisl, non semper orci euismod non. Ut congue nibh id libero tincidunt, ac placerat libero finibus. Praesent non massa nisl. In a turpis varius odio sodales facilisis."
+            contenu: {
+              text: "Markdown __rulez__!\n\n\nSyntax highlight\n```typescript\nconst language = 'typescript';\n```\n\nLists\n1. Ordered list\n2. Another bullet point\n  - Unordered list\n  - Another unordered bullet point\n\nBlockquote\n> Blockquote to the max",
+            },
           },
           {
             id: 5,
             title: 'Chapter section 5',
-            contenu: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi quis mi id quam sodales congue non vitae est. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer eget fermentum elit. Mauris turpis sem, luctus id quam nec, faucibus imperdiet quam. Aenean ex lectus, ultrices eu gravida eu, placerat vitae metus. Cras libero elit, hendrerit eget rhoncus ac, sollicitudin ac ligula. Phasellus nec faucibus diam. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Nam ultricies lorem commodo nibh hendrerit gravida. Suspendisse interdum fringilla aliquet. Quisque malesuada ultrices eros, at gravida leo semper sed. Vivamus ac mattis sapien. Praesent nec leo volutpat elit facilisis iaculis vel ac eros. Donec euismod velit quis dolor auctor pharetra. Vestibulum congue accumsan sem, vel euismod lectus convallis eu. Vivamus quis enim diam. Fusce laoreet varius neque non laoreet. Etiam cursus lobortis nibh, vel efficitur magna convallis ac. Phasellus leo sapien, vehicula eu nibh vitae, tincidunt vulputate tellus. Sed faucibus placerat risus, eu malesuada nibh molestie sit amet. Nunc vitae luctus mauris, sed bibendum tellus. Ut imperdiet justo ut purus suscipit feugiat. Morbi ac nisl quis leo fringilla convallis vitae id enim. Nunc congue dolor nisl, non semper orci euismod non. Ut congue nibh id libero tincidunt, ac placerat libero finibus. Praesent non massa nisl. In a turpis varius odio sodales facilisis."
+            contenu: {
+              text: "Markdown __rulez__!\n\n\nSyntax highlight\n```typescript\nconst language = 'typescript';\n```\n\nLists\n1. Ordered list\n2. Another bullet point\n  - Unordered list\n  - Another unordered bullet point\n\nBlockquote\n> Blockquote to the max",
+            },
           },
-        ]
+        ],
       },
       {
         id: 3,
         title: 'Chapter 2',
-        subtitle: [{
-          id: 1,
-          title: 'Chapter section 1',
-          contenu: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi quis mi id quam sodales congue non vitae est. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer eget fermentum elit. Mauris turpis sem, luctus id quam nec, faucibus imperdiet quam. Aenean ex lectus, ultrices eu gravida eu, placerat vitae metus. Cras libero elit, hendrerit eget rhoncus ac, sollicitudin ac ligula. Phasellus nec faucibus diam. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Nam ultricies lorem commodo nibh hendrerit gravida. Suspendisse interdum fringilla aliquet. Quisque malesuada ultrices eros, at gravida leo semper sed. Vivamus ac mattis sapien. Praesent nec leo volutpat elit facilisis iaculis vel ac eros. Donec euismod velit quis dolor auctor pharetra. Vestibulum congue accumsan sem, vel euismod lectus convallis eu. Vivamus quis enim diam. Fusce laoreet varius neque non laoreet. Etiam cursus lobortis nibh, vel efficitur magna convallis ac. Phasellus leo sapien, vehicula eu nibh vitae, tincidunt vulputate tellus. Sed faucibus placerat risus, eu malesuada nibh molestie sit amet. Nunc vitae luctus mauris, sed bibendum tellus. Ut imperdiet justo ut purus suscipit feugiat. Morbi ac nisl quis leo fringilla convallis vitae id enim. Nunc congue dolor nisl, non semper orci euismod non. Ut congue nibh id libero tincidunt, ac placerat libero finibus. Praesent non massa nisl. In a turpis varius odio sodales facilisis."
-        },
-        {
-          id: 2,
-          title: 'Chapter section 2',
-          contenu: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi quis mi id quam sodales congue non vitae est. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer eget fermentum elit. Mauris turpis sem, luctus id quam nec, faucibus imperdiet quam. Aenean ex lectus, ultrices eu gravida eu, placerat vitae metus. Cras libero elit, hendrerit eget rhoncus ac, sollicitudin ac ligula. Phasellus nec faucibus diam. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Nam ultricies lorem commodo nibh hendrerit gravida. Suspendisse interdum fringilla aliquet. Quisque malesuada ultrices eros, at gravida leo semper sed. Vivamus ac mattis sapien. Praesent nec leo volutpat elit facilisis iaculis vel ac eros. Donec euismod velit quis dolor auctor pharetra. Vestibulum congue accumsan sem, vel euismod lectus convallis eu. Vivamus quis enim diam. Fusce laoreet varius neque non laoreet. Etiam cursus lobortis nibh, vel efficitur magna convallis ac. Phasellus leo sapien, vehicula eu nibh vitae, tincidunt vulputate tellus. Sed faucibus placerat risus, eu malesuada nibh molestie sit amet. Nunc vitae luctus mauris, sed bibendum tellus. Ut imperdiet justo ut purus suscipit feugiat. Morbi ac nisl quis leo fringilla convallis vitae id enim. Nunc congue dolor nisl, non semper orci euismod non. Ut congue nibh id libero tincidunt, ac placerat libero finibus. Praesent non massa nisl. In a turpis varius odio sodales facilisis."
-        },
-        {
-          id: 3,
-          title: 'Chapter section 3',
-          contenu: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi quis mi id quam sodales congue non vitae est. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer eget fermentum elit. Mauris turpis sem, luctus id quam nec, faucibus imperdiet quam. Aenean ex lectus, ultrices eu gravida eu, placerat vitae metus. Cras libero elit, hendrerit eget rhoncus ac, sollicitudin ac ligula. Phasellus nec faucibus diam. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Nam ultricies lorem commodo nibh hendrerit gravida. Suspendisse interdum fringilla aliquet. Quisque malesuada ultrices eros, at gravida leo semper sed. Vivamus ac mattis sapien. Praesent nec leo volutpat elit facilisis iaculis vel ac eros. Donec euismod velit quis dolor auctor pharetra. Vestibulum congue accumsan sem, vel euismod lectus convallis eu. Vivamus quis enim diam. Fusce laoreet varius neque non laoreet. Etiam cursus lobortis nibh, vel efficitur magna convallis ac. Phasellus leo sapien, vehicula eu nibh vitae, tincidunt vulputate tellus. Sed faucibus placerat risus, eu malesuada nibh molestie sit amet. Nunc vitae luctus mauris, sed bibendum tellus. Ut imperdiet justo ut purus suscipit feugiat. Morbi ac nisl quis leo fringilla convallis vitae id enim. Nunc congue dolor nisl, non semper orci euismod non. Ut congue nibh id libero tincidunt, ac placerat libero finibus. Praesent non massa nisl. In a turpis varius odio sodales facilisis."
-        }
-        ]
+        subtitle: [
+          {
+            id: 1,
+            title: 'Chapter section 1',
+            contenu: {
+              text: "Markdown __rulez__!\n\n\nSyntax highlight\n```typescript\nconst language = 'typescript';\n```\n\nLists\n1. Ordered list\n2. Another bullet point\n  - Unordered list\n  - Another unordered bullet point\n\nBlockquote\n> Blockquote to the max",
+            },
+          },
+          {
+            id: 2,
+            title: 'Chapter section 2',
+            contenu: {
+              text: "Markdown __rulez__!\n\n\nSyntax highlight\n```typescript\nconst language = 'typescript';\n```\n\nLists\n1. Ordered list\n2. Another bullet point\n  - Unordered list\n  - Another unordered bullet point\n\nBlockquote\n> Blockquote to the max",
+            },
+          },
+          {
+            id: 3,
+            title: 'Chapter section 3',
+            contenu: {
+              text: "Markdown __rulez__!\n\n\nSyntax highlight\n```typescript\nconst language = 'typescript';\n```\n\nLists\n1. Ordered list\n2. Another bullet point\n  - Unordered list\n  - Another unordered bullet point\n\nBlockquote\n> Blockquote to the max",
+            },
+          },
+        ],
       },
       {
         id: 4,
@@ -97,46 +122,58 @@ export class SummaryComponent {
           {
             id: 1,
             title: 'Chapter section 1',
-            contenu: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi quis mi id quam sodales congue non vitae est. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer eget fermentum elit. Mauris turpis sem, luctus id quam nec, faucibus imperdiet quam. Aenean ex lectus, ultrices eu gravida eu, placerat vitae metus. Cras libero elit, hendrerit eget rhoncus ac, sollicitudin ac ligula. Phasellus nec faucibus diam. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Nam ultricies lorem commodo nibh hendrerit gravida. Suspendisse interdum fringilla aliquet. Quisque malesuada ultrices eros, at gravida leo semper sed. Vivamus ac mattis sapien. Praesent nec leo volutpat elit facilisis iaculis vel ac eros. Donec euismod velit quis dolor auctor pharetra. Vestibulum congue accumsan sem, vel euismod lectus convallis eu. Vivamus quis enim diam. Fusce laoreet varius neque non laoreet. Etiam cursus lobortis nibh, vel efficitur magna convallis ac. Phasellus leo sapien, vehicula eu nibh vitae, tincidunt vulputate tellus. Sed faucibus placerat risus, eu malesuada nibh molestie sit amet. Nunc vitae luctus mauris, sed bibendum tellus. Ut imperdiet justo ut purus suscipit feugiat. Morbi ac nisl quis leo fringilla convallis vitae id enim. Nunc congue dolor nisl, non semper orci euismod non. Ut congue nibh id libero tincidunt, ac placerat libero finibus. Praesent non massa nisl. In a turpis varius odio sodales facilisis."
+            contenu: {
+              text: "Markdown __rulez__!\n\n\nSyntax highlight\n```typescript\nconst language = 'typescript';\n```\n\nLists\n1. Ordered list\n2. Another bullet point\n  - Unordered list\n  - Another unordered bullet point\n\nBlockquote\n> Blockquote to the max",
+            },
           },
           {
             id: 2,
             title: 'Chapter section 2',
-            contenu: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi quis mi id quam sodales congue non vitae est. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer eget fermentum elit. Mauris turpis sem, luctus id quam nec, faucibus imperdiet quam. Aenean ex lectus, ultrices eu gravida eu, placerat vitae metus. Cras libero elit, hendrerit eget rhoncus ac, sollicitudin ac ligula. Phasellus nec faucibus diam. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Nam ultricies lorem commodo nibh hendrerit gravida. Suspendisse interdum fringilla aliquet. Quisque malesuada ultrices eros, at gravida leo semper sed. Vivamus ac mattis sapien. Praesent nec leo volutpat elit facilisis iaculis vel ac eros. Donec euismod velit quis dolor auctor pharetra. Vestibulum congue accumsan sem, vel euismod lectus convallis eu. Vivamus quis enim diam. Fusce laoreet varius neque non laoreet. Etiam cursus lobortis nibh, vel efficitur magna convallis ac. Phasellus leo sapien, vehicula eu nibh vitae, tincidunt vulputate tellus. Sed faucibus placerat risus, eu malesuada nibh molestie sit amet. Nunc vitae luctus mauris, sed bibendum tellus. Ut imperdiet justo ut purus suscipit feugiat. Morbi ac nisl quis leo fringilla convallis vitae id enim. Nunc congue dolor nisl, non semper orci euismod non. Ut congue nibh id libero tincidunt, ac placerat libero finibus. Praesent non massa nisl. In a turpis varius odio sodales facilisis."
+            contenu: {
+              text: "Markdown __rulez__!\n\n\nSyntax highlight\n```typescript\nconst language = 'typescript';\n```\n\nLists\n1. Ordered list\n2. Another bullet point\n  - Unordered list\n  - Another unordered bullet point\n\nBlockquote\n> Blockquote to the max",
+            },
           },
           {
             id: 3,
             title: 'Chapter section 3',
-            contenu: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi quis mi id quam sodales congue non vitae est. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer eget fermentum elit. Mauris turpis sem, luctus id quam nec, faucibus imperdiet quam. Aenean ex lectus, ultrices eu gravida eu, placerat vitae metus. Cras libero elit, hendrerit eget rhoncus ac, sollicitudin ac ligula. Phasellus nec faucibus diam. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Nam ultricies lorem commodo nibh hendrerit gravida. Suspendisse interdum fringilla aliquet. Quisque malesuada ultrices eros, at gravida leo semper sed. Vivamus ac mattis sapien. Praesent nec leo volutpat elit facilisis iaculis vel ac eros. Donec euismod velit quis dolor auctor pharetra. Vestibulum congue accumsan sem, vel euismod lectus convallis eu. Vivamus quis enim diam. Fusce laoreet varius neque non laoreet. Etiam cursus lobortis nibh, vel efficitur magna convallis ac. Phasellus leo sapien, vehicula eu nibh vitae, tincidunt vulputate tellus. Sed faucibus placerat risus, eu malesuada nibh molestie sit amet. Nunc vitae luctus mauris, sed bibendum tellus. Ut imperdiet justo ut purus suscipit feugiat. Morbi ac nisl quis leo fringilla convallis vitae id enim. Nunc congue dolor nisl, non semper orci euismod non. Ut congue nibh id libero tincidunt, ac placerat libero finibus. Praesent non massa nisl. In a turpis varius odio sodales facilisis."
+            contenu: {
+              text: "Markdown __rulez__!\n\n\nSyntax highlight\n```typescript\nconst language = 'typescript';\n```\n\nLists\n1. Ordered list\n2. Another bullet point\n  - Unordered list\n  - Another unordered bullet point\n\nBlockquote\n> Blockquote to the max",
+            },
           },
           {
             id: 4,
             title: 'Chapter section 4',
-            contenu: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi quis mi id quam sodales congue non vitae est. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer eget fermentum elit. Mauris turpis sem, luctus id quam nec, faucibus imperdiet quam. Aenean ex lectus, ultrices eu gravida eu, placerat vitae metus. Cras libero elit, hendrerit eget rhoncus ac, sollicitudin ac ligula. Phasellus nec faucibus diam. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Nam ultricies lorem commodo nibh hendrerit gravida. Suspendisse interdum fringilla aliquet. Quisque malesuada ultrices eros, at gravida leo semper sed. Vivamus ac mattis sapien. Praesent nec leo volutpat elit facilisis iaculis vel ac eros. Donec euismod velit quis dolor auctor pharetra. Vestibulum congue accumsan sem, vel euismod lectus convallis eu. Vivamus quis enim diam. Fusce laoreet varius neque non laoreet. Etiam cursus lobortis nibh, vel efficitur magna convallis ac. Phasellus leo sapien, vehicula eu nibh vitae, tincidunt vulputate tellus. Sed faucibus placerat risus, eu malesuada nibh molestie sit amet. Nunc vitae luctus mauris, sed bibendum tellus. Ut imperdiet justo ut purus suscipit feugiat. Morbi ac nisl quis leo fringilla convallis vitae id enim. Nunc congue dolor nisl, non semper orci euismod non. Ut congue nibh id libero tincidunt, ac placerat libero finibus. Praesent non massa nisl. In a turpis varius odio sodales facilisis."
+            contenu: {
+              text: "Markdown __rulez__!\n\n\nSyntax highlight\n```typescript\nconst language = 'typescript';\n```\n\nLists\n1. Ordered list\n2. Another bullet point\n  - Unordered list\n  - Another unordered bullet point\n\nBlockquote\n> Blockquote to the max",
+            },
           },
           {
             id: 5,
             title: 'Chapter section 5',
-            contenu: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi quis mi id quam sodales congue non vitae est. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer eget fermentum elit. Mauris turpis sem, luctus id quam nec, faucibus imperdiet quam. Aenean ex lectus, ultrices eu gravida eu, placerat vitae metus. Cras libero elit, hendrerit eget rhoncus ac, sollicitudin ac ligula. Phasellus nec faucibus diam. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Nam ultricies lorem commodo nibh hendrerit gravida. Suspendisse interdum fringilla aliquet. Quisque malesuada ultrices eros, at gravida leo semper sed. Vivamus ac mattis sapien. Praesent nec leo volutpat elit facilisis iaculis vel ac eros. Donec euismod velit quis dolor auctor pharetra. Vestibulum congue accumsan sem, vel euismod lectus convallis eu. Vivamus quis enim diam. Fusce laoreet varius neque non laoreet. Etiam cursus lobortis nibh, vel efficitur magna convallis ac. Phasellus leo sapien, vehicula eu nibh vitae, tincidunt vulputate tellus. Sed faucibus placerat risus, eu malesuada nibh molestie sit amet. Nunc vitae luctus mauris, sed bibendum tellus. Ut imperdiet justo ut purus suscipit feugiat. Morbi ac nisl quis leo fringilla convallis vitae id enim. Nunc congue dolor nisl, non semper orci euismod non. Ut congue nibh id libero tincidunt, ac placerat libero finibus. Praesent non massa nisl. In a turpis varius odio sodales facilisis."
+            contenu: {
+              text: "Markdown __rulez__!\n\n\nSyntax highlight\n```typescript\nconst language = 'typescript';\n```\n\nLists\n1. Ordered list\n2. Another bullet point\n  - Unordered list\n  - Another unordered bullet point\n\nBlockquote\n> Blockquote to the max",
+            },
           },
           {
             id: 6,
             title: 'Chapter section 6',
-            contenu: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi quis mi id quam sodales congue non vitae est. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer eget fermentum elit. Mauris turpis sem, luctus id quam nec, faucibus imperdiet quam. Aenean ex lectus, ultrices eu gravida eu, placerat vitae metus. Cras libero elit, hendrerit eget rhoncus ac, sollicitudin ac ligula. Phasellus nec faucibus diam. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Nam ultricies lorem commodo nibh hendrerit gravida. Suspendisse interdum fringilla aliquet. Quisque malesuada ultrices eros, at gravida leo semper sed. Vivamus ac mattis sapien. Praesent nec leo volutpat elit facilisis iaculis vel ac eros. Donec euismod velit quis dolor auctor pharetra. Vestibulum congue accumsan sem, vel euismod lectus convallis eu. Vivamus quis enim diam. Fusce laoreet varius neque non laoreet. Etiam cursus lobortis nibh, vel efficitur magna convallis ac. Phasellus leo sapien, vehicula eu nibh vitae, tincidunt vulputate tellus. Sed faucibus placerat risus, eu malesuada nibh molestie sit amet. Nunc vitae luctus mauris, sed bibendum tellus. Ut imperdiet justo ut purus suscipit feugiat. Morbi ac nisl quis leo fringilla convallis vitae id enim. Nunc congue dolor nisl, non semper orci euismod non. Ut congue nibh id libero tincidunt, ac placerat libero finibus. Praesent non massa nisl. In a turpis varius odio sodales facilisis."
+            contenu: {
+              text: "Markdown __rulez__!\n\n\nSyntax highlight\n```typescript\nconst language = 'typescript';\n```\n\nLists\n1. Ordered list\n2. Another bullet point\n  - Unordered list\n  - Another unordered bullet point\n\nBlockquote\n> Blockquote to the max",
+            },
           },
           {
             id: 7,
             title: 'Chapter section 7',
-            contenu: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi quis mi id quam sodales congue non vitae est. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer eget fermentum elit. Mauris turpis sem, luctus id quam nec, faucibus imperdiet quam. Aenean ex lectus, ultrices eu gravida eu, placerat vitae metus. Cras libero elit, hendrerit eget rhoncus ac, sollicitudin ac ligula. Phasellus nec faucibus diam. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Nam ultricies lorem commodo nibh hendrerit gravida. Suspendisse interdum fringilla aliquet. Quisque malesuada ultrices eros, at gravida leo semper sed. Vivamus ac mattis sapien. Praesent nec leo volutpat elit facilisis iaculis vel ac eros. Donec euismod velit quis dolor auctor pharetra. Vestibulum congue accumsan sem, vel euismod lectus convallis eu. Vivamus quis enim diam. Fusce laoreet varius neque non laoreet. Etiam cursus lobortis nibh, vel efficitur magna convallis ac. Phasellus leo sapien, vehicula eu nibh vitae, tincidunt vulputate tellus. Sed faucibus placerat risus, eu malesuada nibh molestie sit amet. Nunc vitae luctus mauris, sed bibendum tellus. Ut imperdiet justo ut purus suscipit feugiat. Morbi ac nisl quis leo fringilla convallis vitae id enim. Nunc congue dolor nisl, non semper orci euismod non. Ut congue nibh id libero tincidunt, ac placerat libero finibus. Praesent non massa nisl. In a turpis varius odio sodales facilisis."
-          }
-        ]
-      }
-    ]
+            contenu: {
+              text: "Markdown __rulez__!\n\n\nSyntax highlight\n```typescript\nconst language = 'typescript';\n```\n\nLists\n1. Ordered list\n2. Another bullet point\n  - Unordered list\n  - Another unordered bullet point\n\nBlockquote\n> Blockquote to the max",
+            },
+          },
+        ],
+      },
+    ];
   }
 
   actualRoute() {
     return this.router.url.split('#')[0];
   }
-
-
 }
