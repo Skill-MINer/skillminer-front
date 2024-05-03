@@ -13,11 +13,11 @@ COPY pnpm-lock.yaml /app/pnpm-lock.yaml
 RUN pnpm i
 
 COPY . /app
-CMD pnpm start --host 0.0.0.0 --poll 20
+CMD pnpm local --host 0.0.0.0 --poll 20
 
 FROM development AS builder
 
-RUN ng build --prod
+RUN pnpm start
 
 FROM development AS dev-envs
 RUN <<EOF
