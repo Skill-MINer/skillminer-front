@@ -36,15 +36,15 @@
     }
   </ul>
 </div>
-<div id="scrollspy-scrollable-parent-2" class="ml-60 mt-6 mr-14 pl-14">
-  <div id="scrollspy-2" class="space-y-4 mb-4">
+<div id="scrollspy-scrollable-parent-2" class="ml-48 mt-6 mr-48 pl-14">
+  <div id="scrollspy-2" class="space-y-4">
     <div id="item-{{ actualPage.id }}">
       <h2 class="text-xl prose font-semibold dark:text-white">
         {{ actualPage.nom }}
       </h2>
       @for (block of actualPage.contenu; track $index) {
       <div id="item-{{ block.id }}">
-        <h3 class="text-lg font-semibold dark:text-white prose">
+        <h3 class="text-lg font-semibold dark:text-white prose my-5">
           {{ block.title }}
         </h3>
         <markdown
@@ -52,7 +52,7 @@
           katex
           mermaid
           ngPreserveWhitespaces
-          class="variable-binding prose"
+          class="variable-binding prose leading-none"
           [data]="block.contenu.text"
         ></markdown>
       </div>
