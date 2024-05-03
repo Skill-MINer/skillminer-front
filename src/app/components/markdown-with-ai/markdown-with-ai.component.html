@@ -1,0 +1,51 @@
+<form>
+  <div
+    class="relative z-10 mt-40 w-3/5 mx-auto flex space-x-3 p-3 bg-white border rounded-full shadow-lg shadow-gray-100 dark:bg-slate-900 dark:border-gray-700 dark:shadow-gray-900/[.2]"
+  >
+    <div class="flex-[1_0_0%]">
+      <input
+        type="text"
+        [(ngModel)]="valeurInput"
+        name="hs-search-training-1"
+        id="hs-search-training-1"
+        class="py-2.5 px-4 block w-full rounded-full focus:outline-none dark:bg-slate-900 dark:border-transparent dark:text-gray-400 dark:focus:ring-gray-600"
+        placeholder="&#x2728; Generate Formation from title"
+      />
+    </div>
+    <div class="flex-[0_1_auto]">
+      <button
+        class="size-[46px] inline-flex justify-center items-center gap-x-10 text-sm font-semibold rounded-full border border-transparent bg-secondary-3 text-white hover:bg-secondary-hover disabled:opacity-50 disabled:pointer-events-none"
+        (click)="generateMarkdown()"
+        [disabled]="requestPending"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="w-6 h-6"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M4.5 10.5 12 3m0 0 7.5 7.5M12 3v18"
+          />
+        </svg>
+      </button>
+    </div>
+  </div>
+</form>
+<app-markdown-editor
+  [markdown]="markdown"
+  [hidden]="requestPending"
+></app-markdown-editor>
+<div class="justify-center" [hidden]="!requestPending">
+  <div
+    class="animate-spin relative my-28 mx-auto flex space-x-3 p-3 size-6 border-[3px] border-current border-t-transparent text-accent rounded-full dark:text-accent"
+    role="status"
+    aria-label="loading"
+  >
+    <span class="sr-only">Loading...</span>
+  </div>
+</div>

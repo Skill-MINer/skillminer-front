@@ -12,9 +12,14 @@ import { ResetPasswordComponent } from './components/reset-password/reset-passwo
 import { SearchTrainingsComponent } from './components/search-trainings/search-trainings.component';
 import { CreateHeaderFormationComponent } from './components/formation/create-header-formation/create-header-formation.component';
 import { TestComponent } from './components/formation/test/test.component';
-import { SummaryComponent } from './components/formation/summary/summary.component';
+import { SummaryViewComponent } from './components/formation/summary-view/summary-view.component';
 import { CreateSectionsContainerComponent } from './components/formation/create-sections-container/create-sections-container.component';
 import { PageComponent } from './components/formation/page/page.component';
+import { CreateFormationComponent } from './components/formation/create-formation/create-formation.component';
+import { DragDropComponent } from './components/summary/drag-drop/drag-drop.component';
+import { BlocVideoComponent } from './components/formation/sections/bloc-video/bloc-video.component';
+import { MarkdownEditorComponent } from './components/markdown-editor/markdown-editor.component';
+import { MarkdownWithAiComponent } from './components/markdown-with-ai/markdown-with-ai.component';
 import { ListCollapseBoxComponent } from './components/CollapseBox/list-collapse-box/list-collapse-box.component';
 
 export const routes: Routes = [
@@ -40,19 +45,18 @@ export const routes: Routes = [
     component: TestSecureComponent,
     canActivate: [authGuard],
   },
-  { path: 'profile-update', 
+  {
+    path: 'profile-update',
     component: ProfileUpdateComponent,
-    canActivate: [authGuard]
+    canActivate: [authGuard],
   },
-  { path: 'profile',
-    component: ProfileComponent,
-    canActivate: [authGuard]
+  { path: 'profile', component: ProfileComponent, canActivate: [authGuard] },
+  {
+    path: 'formation/page',
+    component: PageComponent,
+    canActivate: [authGuard],
   },
-  { path: 'formation/page',
-  component: PageComponent,
-  canActivate: [authGuard]
-  },
-  { 
+  {
     path: 'reset-password/:token',
     component: ResetPasswordComponent,
     canActivate: [noAuthGuard],
@@ -60,10 +64,9 @@ export const routes: Routes = [
   {
     path: 'search',
     component: SearchTrainingsComponent,
-    canActivate: [noAuthGuard]
   },
-  { path: 'summary', component: SummaryComponent},
-  { path: 'test', component: TestComponent},
+  { path: 'summary', component: SummaryViewComponent },
+  { path: 'test', component: TestComponent },
   {
     path: 'create-header-formation',
     component: CreateHeaderFormationComponent,
@@ -73,5 +76,25 @@ export const routes: Routes = [
   {
     path: 'test-formationCreateSections',
     component: CreateSectionsContainerComponent,
+  },
+  {
+    path: 'create-formation',
+    component: CreateFormationComponent,
+  },
+  {
+    path: 'markdown',
+    component: MarkdownEditorComponent,
+  },
+  {
+    path: 'markdown-with-ai',
+    component: MarkdownWithAiComponent,
+  },
+  {
+    path: 'drag-drop',
+    component: DragDropComponent,
+  },
+  {
+    path: 'bloc-video',
+    component: BlocVideoComponent,
   },
 ];

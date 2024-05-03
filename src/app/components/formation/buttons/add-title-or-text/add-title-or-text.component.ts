@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-add-title-or-text',
@@ -10,6 +10,9 @@ import { Component } from '@angular/core';
 export class AddTitleOrTextComponent {
   isPlus_barVisible = true;
   isAdd_title_or_text_buttonsVisible = false;
+  @Output() addTitleEvent = new EventEmitter<null>();
+
+  constructor() {}
 
   toggleVisibility(itemId: string) {
     if (itemId === 'plus_bar') {
@@ -20,5 +23,13 @@ export class AddTitleOrTextComponent {
         !this.isAdd_title_or_text_buttonsVisible;
       this.isPlus_barVisible = !this.isAdd_title_or_text_buttonsVisible; // Assurez-vous qu'un seul élément est visible à la fois
     }
+  }
+
+  addTitle() {
+    this.addTitleEvent.emit();
+  }
+
+  addSection(){
+    
   }
 }
