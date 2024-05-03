@@ -15,6 +15,7 @@ import { TestComponent } from './components/formation/test/test.component';
 import { SummaryComponent } from './components/formation/summary/summary.component';
 import { CreateSectionsContainerComponent } from './components/formation/create-sections-container/create-sections-container.component';
 import { PageComponent } from './components/formation/page/page.component';
+import { ListCollapseBoxComponent } from './components/CollapseBox/list-collapse-box/list-collapse-box.component';
 
 export const routes: Routes = [
   { path: '', component: WelcomeComponent },
@@ -22,6 +23,11 @@ export const routes: Routes = [
     path: 'login',
     component: LoginComponent,
     canActivate: [noAuthGuard],
+  },
+  {
+    path : 'CollapseBox',
+    component : ListCollapseBoxComponent,
+   
   },
   {
     path: 'signup',
