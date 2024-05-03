@@ -4,59 +4,48 @@
     data-hs-scrollspy="#scrollspy-2"
     data-hs-scrollspy-scrollable-parent="#scrollspy-scrollable-parent-2"
   >
-    <h2 class="text-xl font-medium dark:text-white">Navbar</h2>
-    @for (summaryPage of summary; track $index) {
+    <h2 class="text-xl font-medium dark:text-white">Pages</h2>
+    @for (page of formation.body; track $index) {
     <li data-hs-docs-scrollspy-group="">
-      <a
-        href="{{ actualRoute() }}#item-{{ summaryPage.id }}"
+      <button
+        (click)="goToPage(page.id)"
         class="block py-0.5 text-sm font-medium leading-6 text-slate-700 hover:text-slate-900 focus:outline-none focus:text-blue-600 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:text-blue-500 hs-scrollspy-active:text-blue-600 dark:hs-scrollspy-active:text-blue-400 active"
       >
-        {{ summaryPage.title }}</a
-      >
-      <ul>
-        @for (subtitle of summaryPage.subtitle; track $index) {
-        <li class="ms-4">
-          <a
-            href="{{ actualRoute() }}#item-{{ summaryPage.id }}-{{
-              subtitle.id
-            }}"
-            class="group flex items-center gap-x-2 py-0.5 text-sm text-gray-700 leading-6 hover:text-gray-800 focus:outline-none focus:text-blue-600 dark:text-gray-400 dark:hover:text-gray-300 dark:focus:text-blue-500 hs-scrollspy-active:text-blue-600 dark:hs-scrollspy-active:text-blue-400"
-          >
-            <svg
-              class="flex-shrink-0 size-4"
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path d="m9 18 6-6-6-6"></path>
-            </svg>
-            {{ subtitle.title }}
-          </a>
-        </li>
-        }
-      </ul>
+        {{ page.nom }}
+      </button>
     </li>
     }
   </ul>
 </div>
-
+<div class="fixed top-24 z-30 right-10 max-w-fit">
+  <ul
+    class="sticky top-0 pr-6 max-h-[85lvh] overflow-y-hidden hover:overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-gray-300"
+    data-hs-scrollspy="#scrollspy-2"
+    data-hs-scrollspy-scrollable-parent="#scrollspy-scrollable-parent-2"
+  >
+    <h2 class="text-xl font-medium dark:text-white">Chapitres</h2>
+    @for (block of actualPage.contenu; track $index) {
+    <li data-hs-docs-scrollspy-group="">
+      <a
+        href="{{ actualRoute() }}#item-{{ block.id }}"
+        class="block py-0.5 text-sm font-medium leading-6 text-slate-700 hover:text-slate-900 focus:outline-none focus:text-blue-600 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:text-blue-500 hs-scrollspy-active:text-blue-600 dark:hs-scrollspy-active:text-blue-400 active"
+      >
+        {{ block.title }}</a
+      >
+    </li>
+    }
+  </ul>
+</div>
 <div id="scrollspy-scrollable-parent-2" class="ml-60 mt-6 mr-14 pl-14">
   <div id="scrollspy-2" class="space-y-4 mb-4">
-    @for (summaryPage of summary; track $index) {
-    <div id="item-{{ summaryPage.id }}">
-      <h2 class="text-xl font-semibold dark:text-white">
-        {{ summaryPage.title }}
+    <div id="item-{{ actualPage.id }}">
+      <h2 class="text-xl prose font-semibold dark:text-white">
+        {{ actualPage.nom }}
       </h2>
-      @for (subtitle of summaryPage.subtitle; track $index) {
-      <div id="item-{{ summaryPage.id }}-{{ subtitle.id }}">
-        <h3 class="text-lg font-semibold dark:text-white">
-          {{ subtitle.title }}
+      @for (block of actualPage.contenu; track $index) {
+      <div id="item-{{ block.id }}">
+        <h3 class="text-lg font-semibold dark:text-white prose">
+          {{ block.title }}
         </h3>
         <markdown
           emoji
@@ -64,12 +53,11 @@
           mermaid
           ngPreserveWhitespaces
           class="variable-binding prose"
-          [data]="subtitle.contenu.text"
+          [data]="block.contenu.text"
         ></markdown>
       </div>
       }
     </div>
-    }
   </div>
   <app-footer></app-footer>
 </div>

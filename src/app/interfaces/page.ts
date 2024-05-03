@@ -1,9 +1,9 @@
 import { Markdown } from './markdown';
 
-export interface SummaryPage {
+export interface Page {
   id: number;
-  title: string;
-  subtitle: {
+  nom: string;
+  contenu: {
     id: number;
     title: string;
     contenu: Markdown;
