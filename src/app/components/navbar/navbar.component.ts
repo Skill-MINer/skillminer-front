@@ -1,28 +1,25 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
-import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { RouterLink, RouterLinkActive, RouterOutlet, Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { User } from '../../interfaces/user';
 import { ThemeService } from '../../services/theme.service';
 import { environment } from '../../../environments/environment';
+import { NgClass } from '@angular/common';
+
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [ RouterLink, RouterLinkActive, RouterOutlet ],
+  imports: [ RouterLink, RouterLinkActive, RouterOutlet, NgClass ],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.sass'
 })
 export class NavbarComponent {
+  constructor(protected userService: UserService, protected themeService: ThemeService) {}
 
-  imageUrl: string = '';
-  firstName: string = '';
-  lastName: string = '';
-  email: string = '';
-  userProfile: User = {};
-
-  constructor(protected readonly userService: UserService, protected themeService: ThemeService) {}
-
+  protected router: Router = inject(Router);
+  isSearch: boolean = true;
   protected readonly authService: AuthService = new AuthService();
 
   ngOnInit() {
@@ -30,13 +27,7 @@ export class NavbarComponent {
   }
 
   getProfile() {
-    this.userService.getProfile().subscribe(profile => {
-      this.userProfile = profile;
-      this.imageUrl = `${environment.IP_API}/file/users/${this.userProfile.id}.png`;
-      this.firstName = this.userProfile.prenom as string;
-      this.lastName = this.userProfile.nom as string;
-      this.email = this.userProfile.email as string;
-    });
+    this.userService.getProfile();
   }
 
   logout() {

@@ -1,5 +1,8 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  plugins: [
+    require('@tailwindcss/typography'),
+  ],
   content: [
     './src/**/*.{html,ts}',
     './src/**/**/*.{html,ts}',
@@ -74,5 +77,5 @@ module.exports = {
     plugins: [
       require('preline/plugin'),
     ],
-  }
+  },
 }

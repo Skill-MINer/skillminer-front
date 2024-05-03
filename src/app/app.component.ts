@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { RouterOutlet, Router, Event, NavigationEnd } from '@angular/router';
-
 import { IStaticMethods } from 'preline/preline';
 
 import { ThemeService } from './services/theme.service';
@@ -40,22 +39,28 @@ declare global {
 export class AppComponent {
   title: string = 'skillminer-front';
 
-  constructor(private router: Router, public themeService: ThemeService) { }
+  constructor(private router: Router, public themeService: ThemeService) {}
 
   ngOnInit() {
     this.router.events.subscribe((event: Event) => {
       if (event instanceof NavigationEnd) {
+        this.themeService.updateTheme();
         setTimeout(() => {
           window.HSStaticMethods.autoInit();
-          this.themeService.updateTheme();
         }, 100);
       }
     });
   }
 
   isFooterVisible() {
-    const currentRoute = this.router.url.split("#")[0].split("/")[1];
-    return currentRoute !== 'summary' && currentRoute !== 'signup' && currentRoute !== 'recover-account' && currentRoute !== 'login' && currentRoute !== 'reset-password';
+    const currentRoute = this.router.url.split('#')[0].split('/')[1];
+    return (
+      currentRoute !== 'summary' &&
+      currentRoute !== 'signup' &&
+      currentRoute !== 'recover-account' &&
+      currentRoute !== 'login' &&
+      currentRoute !== 'reset-password'
+    );
   }
 
   isNavbarVisible() {

@@ -17,6 +17,8 @@ import { CreateSectionsContainerComponent } from './components/formation/create-
 import { CreateFormationComponent } from './components/formation/create-formation/create-formation.component';
 import { DragDropComponent } from './components/summary/drag-drop/drag-drop.component';
 import { BlocVideoComponent } from './components/formation/sections/bloc-video/bloc-video.component';
+import { MarkdownEditorComponent } from './components/markdown-editor/markdown-editor.component';
+import { MarkdownWithAiComponent } from './components/markdown-with-ai/markdown-with-ai.component';
 
 export const routes: Routes = [
   { path: '', component: WelcomeComponent },
@@ -52,7 +54,6 @@ export const routes: Routes = [
   {
     path: 'search',
     component: SearchTrainingsComponent,
-    canActivate: [noAuthGuard]
   },
   { path: 'summary', component: SummaryViewComponent},
   { path: 'test', component: TestComponent},
@@ -69,6 +70,14 @@ export const routes: Routes = [
   {
     path: 'create-formation',
     component: CreateFormationComponent,
+  },
+  {
+    path: 'markdown',
+    component: MarkdownEditorComponent,
+  },
+  {
+    path: 'markdown-with-ai',
+    component: MarkdownWithAiComponent,
   },
   {
     path: 'drag-drop',
