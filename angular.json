@@ -77,6 +77,17 @@
                   "with": "src/environments/environment.development.ts"
                 }
               ]
+            },
+            "staging": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.staging.ts"
+                }
+              ]
             }
           },
           "defaultConfiguration": "production"
@@ -89,6 +100,9 @@
             },
             "development": {
               "buildTarget": "skillminer-front:build:development"
+            },
+            "staging": {
+              "buildTarget": "skillminer-front:build:staging"
             }
           },
           "defaultConfiguration": "development"
