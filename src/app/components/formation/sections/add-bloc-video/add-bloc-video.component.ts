@@ -14,15 +14,20 @@ export class AddBlocVideoComponent {
   videoId: string = '';
 
   submitVideo() {
-
-    const urlParams = new URLSearchParams(new URL(this.videoUrl).search);
-    
-    if (this.videoUrl.includes('youtu.be')) {
+    try {
+      const urlParams = new URLSearchParams(new URL(this.videoUrl).search);
+      if (this.videoUrl.includes('youtu.be')) {
         const segments = this.videoUrl.split('/');
         this.videoId = segments[segments.length - 1].split('?')[0];
-    } else if (this.videoUrl.includes('watch')) {
+      } else if (this.videoUrl.includes('watch')) {
         this.videoId = urlParams.get('v') || '';
+      } else {
+        this.videoId = '';
+      }
+    } catch (e) {
+      this.videoId = '';
     }
+
 
     this.addVideoEvent.emit(this.videoId);
   }
