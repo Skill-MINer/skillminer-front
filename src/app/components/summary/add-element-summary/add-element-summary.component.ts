@@ -1,13 +1,13 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 
 @Component({
-  selector: 'app-add-title-or-text',
+  selector: 'app-add-element-summary',
   standalone: true,
   imports: [],
-  templateUrl: './add-title-or-text.component.html',
-  styleUrl: './add-title-or-text.component.sass',
+  templateUrl: './add-element-summary.component.html',
+  styleUrl: './add-element-summary.component.sass'
 })
-export class AddTitleOrTextComponent {
+export class AddElementSummaryComponent {
   isPlus_barVisible = true;
   isAdd_title_or_text_buttonsVisible = false;
   @Output() addTitleEvent = new EventEmitter<null>();
@@ -27,9 +27,5 @@ export class AddTitleOrTextComponent {
 
   addTitle() {
     this.addTitleEvent.emit();
-  }
-
-  addSection(){
-    
   }
 }

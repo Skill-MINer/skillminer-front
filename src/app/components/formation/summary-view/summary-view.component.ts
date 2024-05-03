@@ -1,17 +1,16 @@
 import { Component, inject } from '@angular/core';
-import { SummaryPage } from '../../../interfaces/summary-page';
+import { SummaryPage } from '@app/interfaces/summary-page';
 import { RouterLink, Router } from '@angular/router';
-import { Title } from '@angular/platform-browser';
-import { FooterComponent } from '../../footer/footer.component';
+import { FooterComponent } from '@app/components/footer/footer.component';
 
 @Component({
-  selector: 'app-summary',
+  selector: 'app-summary-view',
   standalone: true,
   imports: [RouterLink, FooterComponent],
-  templateUrl: './summary.component.html',
-  styleUrl: './summary.component.sass'
+  templateUrl: './summary-view.component.html',
+  styleUrl: './summary-view.component.sass'
 })
-export class SummaryComponent {
+export class SummaryViewComponent {
 
   summary: SummaryPage[];
   private router: Router = inject(Router);

@@ -13,6 +13,7 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideToastr } from 'ngx-toastr';
 import { provideServiceWorker } from '@angular/service-worker';
 import { MarkdownModule } from 'ngx-markdown';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 export const appConfig: ApplicationConfig = {
     providers: [
@@ -31,6 +32,7 @@ export const appConfig: ApplicationConfig = {
         enabled: !isDevMode(),
         registrationStrategy: 'registerWhenStable:30000'
     }),
+    provideAnimationsAsync(),
     importProvidersFrom(MarkdownModule.forRoot()),
     provideMarkdown(),
   ],
