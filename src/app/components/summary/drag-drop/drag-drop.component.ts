@@ -7,18 +7,19 @@ import {
   moveItemInArray,
 } from '@angular/cdk/drag-drop';
 import {MatIconModule} from '@angular/material/icon';
-import { Title1SectionComponent } from '../sections/title1-section/title1-section.component';
+import { Title1SectionComponent } from '@app/components/formation/sections/title1-section/title1-section.component';
+import { AddElementSummaryComponent } from '@app/components/summary/add-element-summary/add-element-summary.component';
 
 @Component({
   selector: 'app-drag-drop',
   standalone: true,
-  imports: [CdkDropList, CdkDrag, CdkDragPlaceholder, MatIconModule, Title1SectionComponent],
+  imports: [CdkDropList, CdkDrag, CdkDragPlaceholder, MatIconModule, Title1SectionComponent, AddElementSummaryComponent],
   templateUrl: './drag-drop.component.html',
   styleUrl: './drag-drop.component.sass'
 })
 export class DragDropComponent {
 
-  movies = [
+  titles = [
     {
       id: 1,
       title: 'Episode I - The Phantom Menace',
@@ -58,15 +59,24 @@ export class DragDropComponent {
   ];
 
   drop(event: CdkDragDrop<string[]>) {
-    moveItemInArray(this.movies, event.previousIndex, event.currentIndex);
+    moveItemInArray(this.titles, event.previousIndex, event.currentIndex);
   }
 
-  edit(movie: string) {
-    console.log('Editing ' + movie);
+  edit(title: string) {
+    console.log('Editing ' + title);
   }
 
   handleEventTitleHasChanged(title: string, id: number) {
-    this.movies[id-1].title = title;
-    console.log(this.movies)
+    this.titles[id-1].title = title;
+    console.log(this.titles)
+  }
+
+  handleEventAddTitle(parrentTitle: {id: number, title: string}){
+    const newId: number = this.titles.length + 1;
+    this.titles.push({
+      id: newId,
+      title: 'New Title',
+    });
+    moveItemInArray(this.titles, newId, this.titles.indexOf(parrentTitle)+1);
   }
 }

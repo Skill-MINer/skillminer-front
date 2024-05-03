@@ -12,10 +12,11 @@ import { ResetPasswordComponent } from './components/reset-password/reset-passwo
 import { SearchTrainingsComponent } from './components/search-trainings/search-trainings.component';
 import { CreateHeaderFormationComponent } from './components/formation/create-header-formation/create-header-formation.component';
 import { TestComponent } from './components/formation/test/test.component';
-import { SummaryComponent } from './components/formation/summary/summary.component';
+import { SummaryViewComponent } from './components/formation/summary-view/summary-view.component';
 import { CreateSectionsContainerComponent } from './components/formation/create-sections-container/create-sections-container.component';
 import { CreateFormationComponent } from './components/formation/create-formation/create-formation.component';
-import { DragDropComponent } from './components/formation/drag-drop/drag-drop.component';
+import { DragDropComponent } from './components/summary/drag-drop/drag-drop.component';
+import { BlocVideoComponent } from './components/formation/sections/bloc-video/bloc-video.component';
 
 export const routes: Routes = [
   { path: '', component: WelcomeComponent },
@@ -53,7 +54,7 @@ export const routes: Routes = [
     component: SearchTrainingsComponent,
     canActivate: [noAuthGuard]
   },
-  { path: 'summary', component: SummaryComponent},
+  { path: 'summary', component: SummaryViewComponent},
   { path: 'test', component: TestComponent},
   {
     path: 'create-header-formation',
@@ -72,5 +73,9 @@ export const routes: Routes = [
   {
     path: 'drag-drop',
     component: DragDropComponent,
+  },
+  {
+    path: 'bloc-video',
+    component: BlocVideoComponent,
   }
 ];
