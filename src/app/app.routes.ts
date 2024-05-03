@@ -41,7 +41,10 @@ export const routes: Routes = [
   },
   {
     path: 'profile-update',
+  {
+    path: 'profile-update',
     component: ProfileUpdateComponent,
+    canActivate: [authGuard],
     canActivate: [authGuard],
   },
   { path: 'profile', component: ProfileComponent, canActivate: [authGuard] },
@@ -76,6 +79,10 @@ export const routes: Routes = [
     component: CreateFormationComponent,
   },
   {
+<<<<<<<<< Temporary merge branch 1
+    path: 'drag-drop',
+    component: DragDropComponent,
+=========
     path: 'markdown',
     component: MarkdownEditorComponent,
   },

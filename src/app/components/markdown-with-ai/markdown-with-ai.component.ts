@@ -3,7 +3,7 @@ import { MarkdownEditorComponent } from '../markdown-editor/markdown-editor.comp
 import { FormsModule } from '@angular/forms';
 import { MarkdownWithAIService } from '../../services/markdown-with-ai.service';
 import { catchError, throwError } from 'rxjs';
-import { AIMarkdown } from '../../interfaces/AImarkdown';
+import { Markdown } from '../../interfaces/markdown';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
 
@@ -17,7 +17,7 @@ import { ToastrService } from 'ngx-toastr';
 export class MarkdownWithAiComponent {
   private toastr: ToastrService = inject(ToastrService);
   constructor(private MarkdownWithAIService: MarkdownWithAIService) {}
-  markdown: AIMarkdown = { text: '' };
+  markdown: Markdown = { text: '' };
   valeurInput: string = '';
   requestPending = false;
   generateMarkdown() {

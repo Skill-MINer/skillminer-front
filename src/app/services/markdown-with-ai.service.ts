@@ -3,7 +3,7 @@ import { environment } from '../../environments/environment';
 import { Observable, catchError, throwError } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { AIMarkdown } from '../interfaces/AImarkdown';
+import { Markdown } from '../interfaces/markdown';
 
 const IP_API = environment.IP_API;
 
@@ -15,7 +15,7 @@ export class MarkdownWithAIService {
   private toastr: ToastrService = inject(ToastrService);
 
   constructor() {}
-  generate(title: string): Observable<AIMarkdown> {
+  generate(title: string): Observable<Markdown> {
     return this.http.post(`${IP_API}/formations/generate`, { name: title });
   }
 }
