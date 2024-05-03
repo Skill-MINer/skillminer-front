@@ -7,9 +7,9 @@ import { environment } from '@env/environment';
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [ RouterOutlet, RouterLink, RouterLinkActive],
+  imports: [RouterOutlet, RouterLink, RouterLinkActive],
   templateUrl: './profile.component.html',
-  styleUrl: './profile.component.sass'
+  styleUrl: './profile.component.sass',
 })
 export class ProfileComponent {
   constructor(protected userService: UserService) {}

@@ -14,6 +14,7 @@ import { CreateHeaderFormationComponent } from './components/formation/create-he
 import { TestComponent } from './components/formation/test/test.component';
 import { SummaryViewComponent } from './components/formation/summary-view/summary-view.component';
 import { CreateSectionsContainerComponent } from './components/formation/create-sections-container/create-sections-container.component';
+import { PageComponent } from './components/formation/page/page.component';
 import { CreateFormationComponent } from './components/formation/create-formation/create-formation.component';
 import { DragDropComponent } from './components/summary/drag-drop/drag-drop.component';
 import { BlocVideoComponent } from './components/formation/sections/bloc-video/bloc-video.component';
@@ -38,15 +39,18 @@ export const routes: Routes = [
     component: TestSecureComponent,
     canActivate: [authGuard],
   },
-  { path: 'profile-update', 
+  {
+    path: 'profile-update',
     component: ProfileUpdateComponent,
-    canActivate: [authGuard]
+    canActivate: [authGuard],
   },
-  { path: 'profile',
-    component: ProfileComponent,
-    canActivate: [authGuard]
+  { path: 'profile', component: ProfileComponent, canActivate: [authGuard] },
+  {
+    path: 'formation/page',
+    component: PageComponent,
+    canActivate: [authGuard],
   },
-  { 
+  {
     path: 'reset-password/:token',
     component: ResetPasswordComponent,
     canActivate: [noAuthGuard],
@@ -55,8 +59,8 @@ export const routes: Routes = [
     path: 'search',
     component: SearchTrainingsComponent,
   },
-  { path: 'summary', component: SummaryViewComponent},
-  { path: 'test', component: TestComponent},
+  { path: 'summary', component: SummaryViewComponent },
+  { path: 'test', component: TestComponent },
   {
     path: 'create-header-formation',
     component: CreateHeaderFormationComponent,
@@ -86,5 +90,5 @@ export const routes: Routes = [
   {
     path: 'bloc-video',
     component: BlocVideoComponent,
-  }
+  },
 ];
