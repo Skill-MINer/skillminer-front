@@ -7,19 +7,31 @@ import { Formation } from '../interfaces/formation';
 import { Form } from '@angular/forms';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class FormationService {
   public listFormation: Observable<Formation[]> = of([]);
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-  public getFormations(titre: string, limit: number, offset: number): Observable<Formation[]>{
+  public getFormations(
+    titre: string,
+    limit: number,
+    offset: number
+  ): Observable<Formation[]> {
     const params = new HttpParams()
-    //.set('titre', 'angular')
-    .set('titre', titre) //.join pour stringifier objet tab
-    .set('limit', limit)
-    .set('offset', offset); 
-    this.listFormation = this.http.get<Formation[]>(`${IP_API}/formations`, {params});
+      //.set('titre', 'angular')
+      .set('titre', titre) //.join pour stringifier objet tab
+      .set('limit', limit)
+      .set('offset', offset);
+    this.listFormation = this.http.get<Formation[]>(`${IP_API}/formations`, {
+      params,
+    });
     return this.listFormation;
+  }
+  public getFormationById(id: number): Observable<Formation> {
+    return this.http.get<Formation>(`${IP_API}/formations/${id}`);
+  }
+  public getFormationByIdContent(id: number): Observable<Formation> {
+    return this.http.get<Formation>(`${IP_API}/formations/${id}/contenu`);
   }
 }

@@ -16,7 +16,6 @@ import { authInterceptor } from './interceptors/auth.interceptor';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideToastr } from 'ngx-toastr';
 import { provideServiceWorker } from '@angular/service-worker';
-<<<<<<<<< Temporary merge branch 1
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { MarkdownModule } from 'ngx-markdown';
 

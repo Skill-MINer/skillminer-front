@@ -65,6 +65,7 @@ export const routes: Routes = [
     component: CreateHeaderFormationComponent,
   },
   //TEST PATHS
+  { path: 'summary/:id', component: SummaryViewComponent },
   { path: 'test-multiS-select', component: TestComponent },
   {
     path: 'test-formationCreateSections',
