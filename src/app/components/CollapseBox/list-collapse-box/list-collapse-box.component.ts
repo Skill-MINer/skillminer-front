@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ElementCollapseBoxComponent } from '../element-collapse-box/element-collapse-box.component';
 
+
 @Component({
   selector: 'app-list-collapse-box',
   standalone: true,
