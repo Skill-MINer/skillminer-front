@@ -55,12 +55,28 @@
           }
         </div>
 
-        <a class="font-medium text-accent md:py-6 dark:text-accent hover:text-accent-6" routerLink="/"
+        <a 
+        [ngClass]="{
+          'text-accent md:py-6 dark:text-accent hover:text-accent-6': router.url === '/',
+          'text-textcolor hover:text-primary md:py-6 dark:text-gray-400 dark:hover:text-textcolor': router.url !== '/'
+        }"
+        class="font-medium"
+         routerLink="/"
           aria-current="page">Landing</a>
-        <a class="font-medium text-textcolor hover:text-primary md:py-6 dark:text-gray-400 dark:hover:text-textcolor"
-          href="#">Work</a>
-        <a class="font-medium text-textcolor hover:text-primary md:py-6 dark:text-gray-400 dark:hover:text-textcolor"
-          routerLink="/formations">Blog</a>
+        <a 
+        [ngClass]="{
+          'text-accent md:py-6 dark:text-accent hover:text-accent-6': router.url === '/search',
+          'text-textcolor hover:text-primary md:py-6 dark:text-gray-400 dark:hover:text-textcolor': router.url !== '/search'
+        }"
+        class="font-medium"
+        routerLink="/search">Formations</a>
+        <a 
+        [ngClass]="{
+          'text-accent md:py-6 dark:text-accent hover:text-accent-6': router.url === '/create-formation',
+          'text-textcolor hover:text-primary md:py-6 dark:text-gray-400 dark:hover:text-textcolor': router.url !== '/create-formation'
+        }"
+        class="font-medium"
+          routerLink="/create-formation">Create 📝</a>
 
         @if (!isLoggedIn()) {
         <a class="flex items-center gap-x-2 font-medium text-textcolor hover:text-primary md:border-s md:border-gray-300 md:my-6 md:ps-6 dark:border-gray-700 dark:text-gray-400 dark:hover:text-primary"
@@ -88,7 +104,7 @@
           </button>
 
           <div
-            class="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 hidden min-w-60 bg-background-1 shadow-md rounded-lg p-2 mt-2 dark:bg-gray-800 dark:border dark:border-gray-700 dark:divide-gray-700 after:h-4 after:absolute after:-bottom-4 after:start-0 after:w-full before:h-4 before:absolute before:-top-4 before:start-0 before:w-full"
+            class="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 hidden min-w-60 bg-background-1 shadow-md rounded-lg p-2 mt-2 dark:bg-gray-800 dark:border dark:border-gray-700 dark:divide-gray-700 after:h-4 after:absolute after:-bottom-4 after:start-0 after:w-full before:h-4 before:absolute before:-top-4 before:start-0 before:w-full mr-4"
             aria-labelledby="hs-dropdown-hover-event">
 
             <a routerLink="/profile"
