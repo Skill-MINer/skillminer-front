@@ -15,7 +15,7 @@ import { TestComponent } from './components/formation/test/test.component';
 import { SummaryComponent } from './components/formation/summary/summary.component';
 import { CreateSectionsContainerComponent } from './components/formation/create-sections-container/create-sections-container.component';
 import { CreateFormationComponent } from './components/formation/create-formation/create-formation.component';
-
+import { DragDropComponent } from './components/formation/drag-drop/drag-drop.component';
 
 export const routes: Routes = [
   { path: '', component: WelcomeComponent },
@@ -68,5 +68,9 @@ export const routes: Routes = [
   {
     path: 'create-formation',
     component: CreateFormationComponent,
+  },
+  {
+    path: 'drag-drop',
+    component: DragDropComponent,
   }
 ];
