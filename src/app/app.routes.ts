@@ -53,7 +53,6 @@ export const routes: Routes = [
   {
     path: 'search',
     component: SearchTrainingsComponent,
-    canActivate: [noAuthGuard]
   },
   { path: 'summary', component: SummaryComponent},
   { path: 'test', component: TestComponent},
