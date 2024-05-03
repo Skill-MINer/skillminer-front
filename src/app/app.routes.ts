@@ -41,17 +41,13 @@ export const routes: Routes = [
   },
   {
     path: 'profile-update',
-  {
-    path: 'profile-update',
     component: ProfileUpdateComponent,
-    canActivate: [authGuard],
     canActivate: [authGuard],
   },
   { path: 'profile', component: ProfileComponent, canActivate: [authGuard] },
   {
-    path: 'formation/page',
+    path: 'formation/:id',
     component: PageComponent,
-    canActivate: [authGuard],
   },
   {
     path: 'reset-password/:token',
@@ -62,7 +58,7 @@ export const routes: Routes = [
     path: 'search',
     component: SearchTrainingsComponent,
   },
-  { path: 'summary', component: SummaryViewComponent },
+  { path: 'summary/:id', component: SummaryViewComponent },
   { path: 'test', component: TestComponent },
   {
     path: 'create-header-formation',
@@ -79,10 +75,6 @@ export const routes: Routes = [
     component: CreateFormationComponent,
   },
   {
-<<<<<<<<< Temporary merge branch 1
-    path: 'drag-drop',
-    component: DragDropComponent,
-=========
     path: 'markdown',
     component: MarkdownEditorComponent,
   },

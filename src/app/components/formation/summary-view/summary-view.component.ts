@@ -13,10 +13,10 @@ import { ScrollToAnchorService } from '../../../services/scroll-to-anchor.servic
   selector: 'app-summary-view',
   standalone: true,
   imports: [RouterLink, FooterComponent, MarkdownModule],
-  templateUrl: './summary.component.html',
-  styleUrl: './summary.component.sass',
+  templateUrl: './summary-view.component.html',
+  styleUrl: './summary-view.component.sass',
 })
-export class SummaryComponent {
+export class SummaryViewComponent {
   formation: Formation = {
     id: 1,
     titre: 'Formation sur le développement web',
