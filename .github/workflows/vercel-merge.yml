@@ -18,4 +18,5 @@ jobs:
           vercel-project-id: ${{ secrets.PROJECT_ID}}
       - name: preview-url
         run: |
+          using: 'node20'
           echo ${{ steps.vercel-deploy.outputs.preview-url }}
