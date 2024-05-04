@@ -65,6 +65,10 @@
                   "maximumError": "4kb"
                 }
               ],
+              "optimization": true,
+              "extractLicenses": true,
+              "sourceMap": false,
+              "aot": true,
               "outputHashing": "all",
               "serviceWorker": "ngsw-config.json"
             },

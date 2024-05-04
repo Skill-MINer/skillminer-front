@@ -1,0 +1,17 @@
+FROM node:20-alpine as node-helper
+
+ARG build_env=build-prod
+
+WORKDIR /app
+
+RUN npm cache clean --force
+
+COPY . .
+
+FROM nginx:1.20 as ngx
+
+COPY --from=node-helper /app/dist/skillminer-front /usr/share/nginx/html
+
+COPY /nginx.conf /etc/nginx/conf.d/default.conf
+
+EXPOSE 80
