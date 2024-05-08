@@ -21,9 +21,10 @@ export class LiveCursorComponent {
 
   constructor() {
     this.socket = io.connect('http://localhost:3000');
-    this.socket.emit("join", "live-cursor-room");
-    this.socket.on('movecursor', (cursor: cursor_position) => {
+    //this.socket.emit("join", "live-cursor-room");
+    this.socket.on('cursor', (cursor: cursor_position) => {
       this.cursors[0] = cursor;
+      console.log("cursor", cursor);
     });
   }
 
