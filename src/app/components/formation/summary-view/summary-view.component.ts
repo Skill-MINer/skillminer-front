@@ -9,11 +9,14 @@ import 'prismjs/plugins/line-highlight/prism-line-highlight.js';
 import { FooterComponent } from '../../footer/footer.component';
 import { ScrollToAnchorService } from '../../../services/scroll-to-anchor.service';
 import { FormationService } from '../../../services/formation.service';
+import { SummaryPageComponent } from './summary-page/summary-page.component';
+import { FormationViewComponent } from './formation-view/formation-view.component';
+import { SummaryBlockComponent } from './summary-block/summary-block.component';
 
 @Component({
   selector: 'app-summary-view',
   standalone: true,
-  imports: [RouterLink, FooterComponent, MarkdownModule],
+  imports: [RouterLink, FooterComponent, MarkdownModule, SummaryPageComponent, FormationViewComponent, SummaryBlockComponent],
   templateUrl: './summary-view.component.html',
   styleUrl: './summary-view.component.sass',
 })
@@ -309,30 +312,21 @@ export class SummaryViewComponent {
     ],
   };
   private router: Router = inject(Router);
+  activeStep: number = 1;
 
   constructor(
-    private scrollToAnchorService: ScrollToAnchorService,
+    //private scrollToAnchorService: ScrollToAnchorService,
     private route: ActivatedRoute,
     private formationService: FormationService
   ) {}
 
-  actualRoute() {
-    return this.router.url.split('#')[0];
-  }
-  scrollToAnchor(anchorId: string): void {
-    this.scrollToAnchorService.scrollToAnchor(
-      anchorId,
-      20 * parseFloat(getComputedStyle(document.documentElement).fontSize)
-    );
-  }
-  goToPage(id: number) {
-    if (this.formation.body) {
-      const temp = this.formation.body.find((page) => page.id === id);
-      if (temp) {
-        this.actualPage = temp;
-      }
-    }
-  }
+  // scrollToAnchor(anchorId: string): void {
+  //   this.scrollToAnchorService.scrollToAnchor(
+  //     anchorId,
+  //     20 * parseFloat(getComputedStyle(document.documentElement).fontSize)
+  //   );
+  // }
+
   ngOnInit() {
     this.formationId = parseInt(this.route.snapshot.paramMap.get('id') ?? '');
     this.formationService
@@ -350,5 +344,17 @@ export class SummaryViewComponent {
       '#item-' + this.route.snapshot.paramMap.get('id')
     );
     if (anchor) anchor.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  handleEventPageHasChanged(page: Page) {
+    this.actualPage = page;
+  }
+
+  changeActiveStep() {
+    if (this.activeStep === 1) {
+      this.activeStep = 2;
+    } else {
+      this.activeStep = 1;
+    }
   }
 }
