@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import * as io from 'socket.io-client';
 
 interface cursor_position {
@@ -17,11 +18,19 @@ export class LiveCursorComponent {
   private socket: io.Socket;
   my_top_distance: string = "50vh";
   my_left_distance: string = "50vw";
-  cursors: cursor_position[] = [{ top: "50vh", left: "50vw"}];
+  cursors: cursor_position[] = [{ top: "50vh", left: "50vw" }];
+  color_test = "red";
 
-  constructor() {
+
+  constructor(private route: ActivatedRoute) {
     this.socket = io.connect('http://localhost:3000');
-    //this.socket.emit("join", "live-cursor-room");
+
+    this.socket.on('connect', () => {
+      console.log("connected to server");
+    });
+
+    this.socket.emit('connection-to-room', { room_id: this.route.snapshot.paramMap.get('id') ?? "0"})
+
     this.socket.on('cursor', (cursor: cursor_position) => {
       this.cursors[0] = cursor;
       console.log("cursor", cursor);

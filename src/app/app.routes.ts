@@ -93,7 +93,7 @@ export const routes: Routes = [
     component: BlocVideoComponent,
   },
   {
-    path: 'live-cursor',
+    path: 'live-cursor/:id',
     component: LiveCursorComponent,
   }
 ];
