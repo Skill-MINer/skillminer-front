@@ -3,6 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '@services/auth.service';
 import * as io from 'socket.io-client';
+import { environment } from '@env/environment';
+
 
 interface cursor_position {
   id: number,
@@ -26,7 +28,7 @@ export class LiveCursorComponent {
   private colors: string[] = ["blue", "purple", "pink", "orange", "green", "yellow", "gray-dark"];
 
   constructor(private route: ActivatedRoute, private authService: AuthService) {
-    this.socket = io.connect('http://localhost:3000');
+    this.socket = io.connect(`${environment.IP_API}`);
 
     this.socket.on('connect', () => {
       console.log("connected to server");
