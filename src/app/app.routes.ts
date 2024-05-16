@@ -52,9 +52,8 @@ export const routes: Routes = [
   },
   { path: 'profile', component: ProfileComponent, canActivate: [authGuard] },
   {
-    path: 'formation/page',
+    path: 'formation/:id',
     component: PageComponent,
-    canActivate: [authGuard],
   },
   {
     path: 'reset-password/:token',
@@ -65,13 +64,14 @@ export const routes: Routes = [
     path: 'search',
     component: SearchTrainingsComponent,
   },
-  { path: 'summary', component: SummaryViewComponent },
+  { path: 'summary/:id', component: SummaryViewComponent },
   { path: 'test', component: TestComponent },
   {
     path: 'create-header-formation',
     component: CreateHeaderFormationComponent,
   },
   //TEST PATHS
+  { path: 'summary/:id', component: SummaryViewComponent },
   { path: 'test-multiS-select', component: TestComponent },
   {
     path: 'test-formationCreateSections',

@@ -1,6 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { Formation } from '../../interfaces/formation';
+import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
+import { skip } from 'rxjs';
 
 const IP_API = environment.IP_API;
 
@@ -15,7 +17,7 @@ export class FormationCardComponent {
   imageHeader: string = `${IP_API}/file/formations/`;
   imageUser: string = '';
 
-  constructor() {}
+  constructor(private router: Router) {}
 
   @Input() formationcard: Formation = {};
   ngOnInit(): void {
@@ -33,5 +35,11 @@ export class FormationCardComponent {
 
     this.imageHeader = `${IP_API}/file/formations/${this.formationcard.id}.png`;
     this.imageUser = `${IP_API}/file/users/${this.formationcard.user?.id}.png`;
+  }
+  goToFormation() {
+    console.log('formation card' + this.formationcard.id);
+    this.router.navigate(['/formation', this.formationcard.id]).then(() => {
+      window.scrollTo(0, 0); // Scrolls to the top of the page on navigation end
+    });
   }
 }

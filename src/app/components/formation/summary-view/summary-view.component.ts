@@ -1,141 +1,354 @@
 import { Component, inject } from '@angular/core';
-import { SummaryPage } from '@app/interfaces/summary-page';
-import { RouterLink, Router } from '@angular/router';
-import { FooterComponent } from '@app/components/footer/footer.component';
+import { Page } from '../../../interfaces/page';
+import { Formation } from '../../../interfaces/formation';
+import { RouterLink, Router, ActivatedRoute } from '@angular/router';
+import { MarkdownModule } from 'ngx-markdown';
+import 'prismjs';
+import 'prismjs/plugins/line-numbers/prism-line-numbers.js';
+import 'prismjs/plugins/line-highlight/prism-line-highlight.js';
+import { FooterComponent } from '../../footer/footer.component';
+import { ScrollToAnchorService } from '../../../services/scroll-to-anchor.service';
+import { FormationService } from '../../../services/formation.service';
 
 @Component({
   selector: 'app-summary-view',
   standalone: true,
-  imports: [RouterLink, FooterComponent],
+  imports: [RouterLink, FooterComponent, MarkdownModule],
   templateUrl: './summary-view.component.html',
-  styleUrl: './summary-view.component.sass'
+  styleUrl: './summary-view.component.sass',
 })
 export class SummaryViewComponent {
-
-  summary: SummaryPage[];
-  private router: Router = inject(Router);
-
-  constructor() {
-    this.summary = [
+  formationId: number = 1;
+  formation: Formation = {
+    id: 1,
+    titre: 'Formation sur le développement web',
+    date_creation: '2024-05-03',
+    description: 'Une formation complète sur les technologies web modernes',
+    user: {
+      id: '123',
+      nom: 'Doe',
+      prenom: 'John',
+      email: 'john.doe@example.com',
+      password: 'motdepasse123',
+      description: 'Développeur web passionné par les nouvelles technologies',
+      imageUrl: 'https://example.com/john.jpg',
+    },
+    tag: [
+      {
+        id: '1',
+        nom: 'HTML',
+      },
+      {
+        id: '2',
+        nom: 'CSS',
+      },
+      {
+        id: '3',
+        nom: 'JavaScript',
+      },
+    ],
+    body: [
       {
         id: 1,
-        title: 'Introduction',
-        subtitle: [
+        nom: 'Page 1',
+        contenu: [
           {
             id: 1,
-            title: 'Introduction section 1',
-            contenu: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi quis mi id quam sodales congue non vitae est. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer eget fermentum elit. Mauris turpis sem, luctus id quam nec, faucibus imperdiet quam. Aenean ex lectus, ultrices eu gravida eu, placerat vitae metus. Cras libero elit, hendrerit eget rhoncus ac, sollicitudin ac ligula. Phasellus nec faucibus diam. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Nam ultricies lorem commodo nibh hendrerit gravida. Suspendisse interdum fringilla aliquet. Quisque malesuada ultrices eros, at gravida leo semper sed. Vivamus ac mattis sapien. Praesent nec leo volutpat elit facilisis iaculis vel ac eros. Donec euismod velit quis dolor auctor pharetra. Vestibulum congue accumsan sem, vel euismod lectus convallis eu. Vivamus quis enim diam. Fusce laoreet varius neque non laoreet. Etiam cursus lobortis nibh, vel efficitur magna convallis ac. Phasellus leo sapien, vehicula eu nibh vitae, tincidunt vulputate tellus. Sed faucibus placerat risus, eu malesuada nibh molestie sit amet. Nunc vitae luctus mauris, sed bibendum tellus. Ut imperdiet justo ut purus suscipit feugiat. Morbi ac nisl quis leo fringilla convallis vitae id enim. Nunc congue dolor nisl, non semper orci euismod non. Ut congue nibh id libero tincidunt, ac placerat libero finibus. Praesent non massa nisl. In a turpis varius odio sodales facilisis."
+            title: 'Bloc 1',
+            contenu: {
+              id: 1,
+              text: 'Ligne 1\nLigne 2\nLigne 3\nLigne 4',
+            },
           },
           {
             id: 2,
-            title: 'Introduction section 2',
-            contenu: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi quis mi id quam sodales congue non vitae est. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer eget fermentum elit. Mauris turpis sem, luctus id quam nec, faucibus imperdiet quam. Aenean ex lectus, ultrices eu gravida eu, placerat vitae metus. Cras libero elit, hendrerit eget rhoncus ac, sollicitudin ac ligula. Phasellus nec faucibus diam. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Nam ultricies lorem commodo nibh hendrerit gravida. Suspendisse interdum fringilla aliquet. Quisque malesuada ultrices eros, at gravida leo semper sed. Vivamus ac mattis sapien. Praesent nec leo volutpat elit facilisis iaculis vel ac eros. Donec euismod velit quis dolor auctor pharetra. Vestibulum congue accumsan sem, vel euismod lectus convallis eu. Vivamus quis enim diam. Fusce laoreet varius neque non laoreet. Etiam cursus lobortis nibh, vel efficitur magna convallis ac. Phasellus leo sapien, vehicula eu nibh vitae, tincidunt vulputate tellus. Sed faucibus placerat risus, eu malesuada nibh molestie sit amet. Nunc vitae luctus mauris, sed bibendum tellus. Ut imperdiet justo ut purus suscipit feugiat. Morbi ac nisl quis leo fringilla convallis vitae id enim. Nunc congue dolor nisl, non semper orci euismod non. Ut congue nibh id libero tincidunt, ac placerat libero finibus. Praesent non massa nisl. In a turpis varius odio sodales facilisis."
+            title: 'Bloc 2',
+            contenu: {
+              id: 2,
+              text: 'Ligne 1\nLigne 2\nLigne 3\nLigne 4',
+            },
           },
           {
             id: 3,
-            title: 'Introduction section 3',
-            contenu: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi quis mi id quam sodales congue non vitae est. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer eget fermentum elit. Mauris turpis sem, luctus id quam nec, faucibus imperdiet quam. Aenean ex lectus, ultrices eu gravida eu, placerat vitae metus. Cras libero elit, hendrerit eget rhoncus ac, sollicitudin ac ligula. Phasellus nec faucibus diam. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Nam ultricies lorem commodo nibh hendrerit gravida. Suspendisse interdum fringilla aliquet. Quisque malesuada ultrices eros, at gravida leo semper sed. Vivamus ac mattis sapien. Praesent nec leo volutpat elit facilisis iaculis vel ac eros. Donec euismod velit quis dolor auctor pharetra. Vestibulum congue accumsan sem, vel euismod lectus convallis eu. Vivamus quis enim diam. Fusce laoreet varius neque non laoreet. Etiam cursus lobortis nibh, vel efficitur magna convallis ac. Phasellus leo sapien, vehicula eu nibh vitae, tincidunt vulputate tellus. Sed faucibus placerat risus, eu malesuada nibh molestie sit amet. Nunc vitae luctus mauris, sed bibendum tellus. Ut imperdiet justo ut purus suscipit feugiat. Morbi ac nisl quis leo fringilla convallis vitae id enim. Nunc congue dolor nisl, non semper orci euismod non. Ut congue nibh id libero tincidunt, ac placerat libero finibus. Praesent non massa nisl. In a turpis varius odio sodales facilisis."
-          },
-        ]
-      },
-      {
-        id: 2,
-        title: 'Chapter 1',
-        subtitle: [
-          {
-            id: 1,
-            title: 'Chapter section 1',
-            contenu: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi quis mi id quam sodales congue non vitae est. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer eget fermentum elit. Mauris turpis sem, luctus id quam nec, faucibus imperdiet quam. Aenean ex lectus, ultrices eu gravida eu, placerat vitae metus. Cras libero elit, hendrerit eget rhoncus ac, sollicitudin ac ligula. Phasellus nec faucibus diam. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Nam ultricies lorem commodo nibh hendrerit gravida. Suspendisse interdum fringilla aliquet. Quisque malesuada ultrices eros, at gravida leo semper sed. Vivamus ac mattis sapien. Praesent nec leo volutpat elit facilisis iaculis vel ac eros. Donec euismod velit quis dolor auctor pharetra. Vestibulum congue accumsan sem, vel euismod lectus convallis eu. Vivamus quis enim diam. Fusce laoreet varius neque non laoreet. Etiam cursus lobortis nibh, vel efficitur magna convallis ac. Phasellus leo sapien, vehicula eu nibh vitae, tincidunt vulputate tellus. Sed faucibus placerat risus, eu malesuada nibh molestie sit amet. Nunc vitae luctus mauris, sed bibendum tellus. Ut imperdiet justo ut purus suscipit feugiat. Morbi ac nisl quis leo fringilla convallis vitae id enim. Nunc congue dolor nisl, non semper orci euismod non. Ut congue nibh id libero tincidunt, ac placerat libero finibus. Praesent non massa nisl. In a turpis varius odio sodales facilisis."
-          },
-          {
-            id: 2,
-            title: 'Chapter section 2',
-            contenu: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi quis mi id quam sodales congue non vitae est. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer eget fermentum elit. Mauris turpis sem, luctus id quam nec, faucibus imperdiet quam. Aenean ex lectus, ultrices eu gravida eu, placerat vitae metus. Cras libero elit, hendrerit eget rhoncus ac, sollicitudin ac ligula. Phasellus nec faucibus diam. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Nam ultricies lorem commodo nibh hendrerit gravida. Suspendisse interdum fringilla aliquet. Quisque malesuada ultrices eros, at gravida leo semper sed. Vivamus ac mattis sapien. Praesent nec leo volutpat elit facilisis iaculis vel ac eros. Donec euismod velit quis dolor auctor pharetra. Vestibulum congue accumsan sem, vel euismod lectus convallis eu. Vivamus quis enim diam. Fusce laoreet varius neque non laoreet. Etiam cursus lobortis nibh, vel efficitur magna convallis ac. Phasellus leo sapien, vehicula eu nibh vitae, tincidunt vulputate tellus. Sed faucibus placerat risus, eu malesuada nibh molestie sit amet. Nunc vitae luctus mauris, sed bibendum tellus. Ut imperdiet justo ut purus suscipit feugiat. Morbi ac nisl quis leo fringilla convallis vitae id enim. Nunc congue dolor nisl, non semper orci euismod non. Ut congue nibh id libero tincidunt, ac placerat libero finibus. Praesent non massa nisl. In a turpis varius odio sodales facilisis."
-          },
-          {
-            id: 3,
-            title: 'Chapter section 3',
-            contenu: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi quis mi id quam sodales congue non vitae est. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer eget fermentum elit. Mauris turpis sem, luctus id quam nec, faucibus imperdiet quam. Aenean ex lectus, ultrices eu gravida eu, placerat vitae metus. Cras libero elit, hendrerit eget rhoncus ac, sollicitudin ac ligula. Phasellus nec faucibus diam. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Nam ultricies lorem commodo nibh hendrerit gravida. Suspendisse interdum fringilla aliquet. Quisque malesuada ultrices eros, at gravida leo semper sed. Vivamus ac mattis sapien. Praesent nec leo volutpat elit facilisis iaculis vel ac eros. Donec euismod velit quis dolor auctor pharetra. Vestibulum congue accumsan sem, vel euismod lectus convallis eu. Vivamus quis enim diam. Fusce laoreet varius neque non laoreet. Etiam cursus lobortis nibh, vel efficitur magna convallis ac. Phasellus leo sapien, vehicula eu nibh vitae, tincidunt vulputate tellus. Sed faucibus placerat risus, eu malesuada nibh molestie sit amet. Nunc vitae luctus mauris, sed bibendum tellus. Ut imperdiet justo ut purus suscipit feugiat. Morbi ac nisl quis leo fringilla convallis vitae id enim. Nunc congue dolor nisl, non semper orci euismod non. Ut congue nibh id libero tincidunt, ac placerat libero finibus. Praesent non massa nisl. In a turpis varius odio sodales facilisis."
+            title: 'Bloc 3',
+            contenu: {
+              id: 3,
+              text: 'Ligne 1\nLigne 2\nLigne 3\nLigne 4',
+            },
           },
           {
             id: 4,
-            title: 'Chapter section 4',
-            contenu: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi quis mi id quam sodales congue non vitae est. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer eget fermentum elit. Mauris turpis sem, luctus id quam nec, faucibus imperdiet quam. Aenean ex lectus, ultrices eu gravida eu, placerat vitae metus. Cras libero elit, hendrerit eget rhoncus ac, sollicitudin ac ligula. Phasellus nec faucibus diam. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Nam ultricies lorem commodo nibh hendrerit gravida. Suspendisse interdum fringilla aliquet. Quisque malesuada ultrices eros, at gravida leo semper sed. Vivamus ac mattis sapien. Praesent nec leo volutpat elit facilisis iaculis vel ac eros. Donec euismod velit quis dolor auctor pharetra. Vestibulum congue accumsan sem, vel euismod lectus convallis eu. Vivamus quis enim diam. Fusce laoreet varius neque non laoreet. Etiam cursus lobortis nibh, vel efficitur magna convallis ac. Phasellus leo sapien, vehicula eu nibh vitae, tincidunt vulputate tellus. Sed faucibus placerat risus, eu malesuada nibh molestie sit amet. Nunc vitae luctus mauris, sed bibendum tellus. Ut imperdiet justo ut purus suscipit feugiat. Morbi ac nisl quis leo fringilla convallis vitae id enim. Nunc congue dolor nisl, non semper orci euismod non. Ut congue nibh id libero tincidunt, ac placerat libero finibus. Praesent non massa nisl. In a turpis varius odio sodales facilisis."
+            title: 'Bloc 4',
+            contenu: {
+              id: 4,
+              text: 'Ligne 1\nLigne 2\nLigne 3\nLigne 4',
+            },
           },
           {
             id: 5,
-            title: 'Chapter section 5',
-            contenu: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi quis mi id quam sodales congue non vitae est. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer eget fermentum elit. Mauris turpis sem, luctus id quam nec, faucibus imperdiet quam. Aenean ex lectus, ultrices eu gravida eu, placerat vitae metus. Cras libero elit, hendrerit eget rhoncus ac, sollicitudin ac ligula. Phasellus nec faucibus diam. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Nam ultricies lorem commodo nibh hendrerit gravida. Suspendisse interdum fringilla aliquet. Quisque malesuada ultrices eros, at gravida leo semper sed. Vivamus ac mattis sapien. Praesent nec leo volutpat elit facilisis iaculis vel ac eros. Donec euismod velit quis dolor auctor pharetra. Vestibulum congue accumsan sem, vel euismod lectus convallis eu. Vivamus quis enim diam. Fusce laoreet varius neque non laoreet. Etiam cursus lobortis nibh, vel efficitur magna convallis ac. Phasellus leo sapien, vehicula eu nibh vitae, tincidunt vulputate tellus. Sed faucibus placerat risus, eu malesuada nibh molestie sit amet. Nunc vitae luctus mauris, sed bibendum tellus. Ut imperdiet justo ut purus suscipit feugiat. Morbi ac nisl quis leo fringilla convallis vitae id enim. Nunc congue dolor nisl, non semper orci euismod non. Ut congue nibh id libero tincidunt, ac placerat libero finibus. Praesent non massa nisl. In a turpis varius odio sodales facilisis."
-          },
-        ]
-      },
-      {
-        id: 3,
-        title: 'Chapter 2',
-        subtitle: [{
-          id: 1,
-          title: 'Chapter section 1',
-          contenu: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi quis mi id quam sodales congue non vitae est. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer eget fermentum elit. Mauris turpis sem, luctus id quam nec, faucibus imperdiet quam. Aenean ex lectus, ultrices eu gravida eu, placerat vitae metus. Cras libero elit, hendrerit eget rhoncus ac, sollicitudin ac ligula. Phasellus nec faucibus diam. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Nam ultricies lorem commodo nibh hendrerit gravida. Suspendisse interdum fringilla aliquet. Quisque malesuada ultrices eros, at gravida leo semper sed. Vivamus ac mattis sapien. Praesent nec leo volutpat elit facilisis iaculis vel ac eros. Donec euismod velit quis dolor auctor pharetra. Vestibulum congue accumsan sem, vel euismod lectus convallis eu. Vivamus quis enim diam. Fusce laoreet varius neque non laoreet. Etiam cursus lobortis nibh, vel efficitur magna convallis ac. Phasellus leo sapien, vehicula eu nibh vitae, tincidunt vulputate tellus. Sed faucibus placerat risus, eu malesuada nibh molestie sit amet. Nunc vitae luctus mauris, sed bibendum tellus. Ut imperdiet justo ut purus suscipit feugiat. Morbi ac nisl quis leo fringilla convallis vitae id enim. Nunc congue dolor nisl, non semper orci euismod non. Ut congue nibh id libero tincidunt, ac placerat libero finibus. Praesent non massa nisl. In a turpis varius odio sodales facilisis."
-        },
-        {
-          id: 2,
-          title: 'Chapter section 2',
-          contenu: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi quis mi id quam sodales congue non vitae est. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer eget fermentum elit. Mauris turpis sem, luctus id quam nec, faucibus imperdiet quam. Aenean ex lectus, ultrices eu gravida eu, placerat vitae metus. Cras libero elit, hendrerit eget rhoncus ac, sollicitudin ac ligula. Phasellus nec faucibus diam. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Nam ultricies lorem commodo nibh hendrerit gravida. Suspendisse interdum fringilla aliquet. Quisque malesuada ultrices eros, at gravida leo semper sed. Vivamus ac mattis sapien. Praesent nec leo volutpat elit facilisis iaculis vel ac eros. Donec euismod velit quis dolor auctor pharetra. Vestibulum congue accumsan sem, vel euismod lectus convallis eu. Vivamus quis enim diam. Fusce laoreet varius neque non laoreet. Etiam cursus lobortis nibh, vel efficitur magna convallis ac. Phasellus leo sapien, vehicula eu nibh vitae, tincidunt vulputate tellus. Sed faucibus placerat risus, eu malesuada nibh molestie sit amet. Nunc vitae luctus mauris, sed bibendum tellus. Ut imperdiet justo ut purus suscipit feugiat. Morbi ac nisl quis leo fringilla convallis vitae id enim. Nunc congue dolor nisl, non semper orci euismod non. Ut congue nibh id libero tincidunt, ac placerat libero finibus. Praesent non massa nisl. In a turpis varius odio sodales facilisis."
-        },
-        {
-          id: 3,
-          title: 'Chapter section 3',
-          contenu: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi quis mi id quam sodales congue non vitae est. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer eget fermentum elit. Mauris turpis sem, luctus id quam nec, faucibus imperdiet quam. Aenean ex lectus, ultrices eu gravida eu, placerat vitae metus. Cras libero elit, hendrerit eget rhoncus ac, sollicitudin ac ligula. Phasellus nec faucibus diam. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Nam ultricies lorem commodo nibh hendrerit gravida. Suspendisse interdum fringilla aliquet. Quisque malesuada ultrices eros, at gravida leo semper sed. Vivamus ac mattis sapien. Praesent nec leo volutpat elit facilisis iaculis vel ac eros. Donec euismod velit quis dolor auctor pharetra. Vestibulum congue accumsan sem, vel euismod lectus convallis eu. Vivamus quis enim diam. Fusce laoreet varius neque non laoreet. Etiam cursus lobortis nibh, vel efficitur magna convallis ac. Phasellus leo sapien, vehicula eu nibh vitae, tincidunt vulputate tellus. Sed faucibus placerat risus, eu malesuada nibh molestie sit amet. Nunc vitae luctus mauris, sed bibendum tellus. Ut imperdiet justo ut purus suscipit feugiat. Morbi ac nisl quis leo fringilla convallis vitae id enim. Nunc congue dolor nisl, non semper orci euismod non. Ut congue nibh id libero tincidunt, ac placerat libero finibus. Praesent non massa nisl. In a turpis varius odio sodales facilisis."
-        }
-        ]
-      },
-      {
-        id: 4,
-        title: 'Chapter 3',
-        subtitle: [
-          {
-            id: 1,
-            title: 'Chapter section 1',
-            contenu: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi quis mi id quam sodales congue non vitae est. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer eget fermentum elit. Mauris turpis sem, luctus id quam nec, faucibus imperdiet quam. Aenean ex lectus, ultrices eu gravida eu, placerat vitae metus. Cras libero elit, hendrerit eget rhoncus ac, sollicitudin ac ligula. Phasellus nec faucibus diam. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Nam ultricies lorem commodo nibh hendrerit gravida. Suspendisse interdum fringilla aliquet. Quisque malesuada ultrices eros, at gravida leo semper sed. Vivamus ac mattis sapien. Praesent nec leo volutpat elit facilisis iaculis vel ac eros. Donec euismod velit quis dolor auctor pharetra. Vestibulum congue accumsan sem, vel euismod lectus convallis eu. Vivamus quis enim diam. Fusce laoreet varius neque non laoreet. Etiam cursus lobortis nibh, vel efficitur magna convallis ac. Phasellus leo sapien, vehicula eu nibh vitae, tincidunt vulputate tellus. Sed faucibus placerat risus, eu malesuada nibh molestie sit amet. Nunc vitae luctus mauris, sed bibendum tellus. Ut imperdiet justo ut purus suscipit feugiat. Morbi ac nisl quis leo fringilla convallis vitae id enim. Nunc congue dolor nisl, non semper orci euismod non. Ut congue nibh id libero tincidunt, ac placerat libero finibus. Praesent non massa nisl. In a turpis varius odio sodales facilisis."
-          },
-          {
-            id: 2,
-            title: 'Chapter section 2',
-            contenu: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi quis mi id quam sodales congue non vitae est. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer eget fermentum elit. Mauris turpis sem, luctus id quam nec, faucibus imperdiet quam. Aenean ex lectus, ultrices eu gravida eu, placerat vitae metus. Cras libero elit, hendrerit eget rhoncus ac, sollicitudin ac ligula. Phasellus nec faucibus diam. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Nam ultricies lorem commodo nibh hendrerit gravida. Suspendisse interdum fringilla aliquet. Quisque malesuada ultrices eros, at gravida leo semper sed. Vivamus ac mattis sapien. Praesent nec leo volutpat elit facilisis iaculis vel ac eros. Donec euismod velit quis dolor auctor pharetra. Vestibulum congue accumsan sem, vel euismod lectus convallis eu. Vivamus quis enim diam. Fusce laoreet varius neque non laoreet. Etiam cursus lobortis nibh, vel efficitur magna convallis ac. Phasellus leo sapien, vehicula eu nibh vitae, tincidunt vulputate tellus. Sed faucibus placerat risus, eu malesuada nibh molestie sit amet. Nunc vitae luctus mauris, sed bibendum tellus. Ut imperdiet justo ut purus suscipit feugiat. Morbi ac nisl quis leo fringilla convallis vitae id enim. Nunc congue dolor nisl, non semper orci euismod non. Ut congue nibh id libero tincidunt, ac placerat libero finibus. Praesent non massa nisl. In a turpis varius odio sodales facilisis."
-          },
-          {
-            id: 3,
-            title: 'Chapter section 3',
-            contenu: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi quis mi id quam sodales congue non vitae est. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer eget fermentum elit. Mauris turpis sem, luctus id quam nec, faucibus imperdiet quam. Aenean ex lectus, ultrices eu gravida eu, placerat vitae metus. Cras libero elit, hendrerit eget rhoncus ac, sollicitudin ac ligula. Phasellus nec faucibus diam. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Nam ultricies lorem commodo nibh hendrerit gravida. Suspendisse interdum fringilla aliquet. Quisque malesuada ultrices eros, at gravida leo semper sed. Vivamus ac mattis sapien. Praesent nec leo volutpat elit facilisis iaculis vel ac eros. Donec euismod velit quis dolor auctor pharetra. Vestibulum congue accumsan sem, vel euismod lectus convallis eu. Vivamus quis enim diam. Fusce laoreet varius neque non laoreet. Etiam cursus lobortis nibh, vel efficitur magna convallis ac. Phasellus leo sapien, vehicula eu nibh vitae, tincidunt vulputate tellus. Sed faucibus placerat risus, eu malesuada nibh molestie sit amet. Nunc vitae luctus mauris, sed bibendum tellus. Ut imperdiet justo ut purus suscipit feugiat. Morbi ac nisl quis leo fringilla convallis vitae id enim. Nunc congue dolor nisl, non semper orci euismod non. Ut congue nibh id libero tincidunt, ac placerat libero finibus. Praesent non massa nisl. In a turpis varius odio sodales facilisis."
-          },
-          {
-            id: 4,
-            title: 'Chapter section 4',
-            contenu: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi quis mi id quam sodales congue non vitae est. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer eget fermentum elit. Mauris turpis sem, luctus id quam nec, faucibus imperdiet quam. Aenean ex lectus, ultrices eu gravida eu, placerat vitae metus. Cras libero elit, hendrerit eget rhoncus ac, sollicitudin ac ligula. Phasellus nec faucibus diam. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Nam ultricies lorem commodo nibh hendrerit gravida. Suspendisse interdum fringilla aliquet. Quisque malesuada ultrices eros, at gravida leo semper sed. Vivamus ac mattis sapien. Praesent nec leo volutpat elit facilisis iaculis vel ac eros. Donec euismod velit quis dolor auctor pharetra. Vestibulum congue accumsan sem, vel euismod lectus convallis eu. Vivamus quis enim diam. Fusce laoreet varius neque non laoreet. Etiam cursus lobortis nibh, vel efficitur magna convallis ac. Phasellus leo sapien, vehicula eu nibh vitae, tincidunt vulputate tellus. Sed faucibus placerat risus, eu malesuada nibh molestie sit amet. Nunc vitae luctus mauris, sed bibendum tellus. Ut imperdiet justo ut purus suscipit feugiat. Morbi ac nisl quis leo fringilla convallis vitae id enim. Nunc congue dolor nisl, non semper orci euismod non. Ut congue nibh id libero tincidunt, ac placerat libero finibus. Praesent non massa nisl. In a turpis varius odio sodales facilisis."
-          },
-          {
-            id: 5,
-            title: 'Chapter section 5',
-            contenu: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi quis mi id quam sodales congue non vitae est. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer eget fermentum elit. Mauris turpis sem, luctus id quam nec, faucibus imperdiet quam. Aenean ex lectus, ultrices eu gravida eu, placerat vitae metus. Cras libero elit, hendrerit eget rhoncus ac, sollicitudin ac ligula. Phasellus nec faucibus diam. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Nam ultricies lorem commodo nibh hendrerit gravida. Suspendisse interdum fringilla aliquet. Quisque malesuada ultrices eros, at gravida leo semper sed. Vivamus ac mattis sapien. Praesent nec leo volutpat elit facilisis iaculis vel ac eros. Donec euismod velit quis dolor auctor pharetra. Vestibulum congue accumsan sem, vel euismod lectus convallis eu. Vivamus quis enim diam. Fusce laoreet varius neque non laoreet. Etiam cursus lobortis nibh, vel efficitur magna convallis ac. Phasellus leo sapien, vehicula eu nibh vitae, tincidunt vulputate tellus. Sed faucibus placerat risus, eu malesuada nibh molestie sit amet. Nunc vitae luctus mauris, sed bibendum tellus. Ut imperdiet justo ut purus suscipit feugiat. Morbi ac nisl quis leo fringilla convallis vitae id enim. Nunc congue dolor nisl, non semper orci euismod non. Ut congue nibh id libero tincidunt, ac placerat libero finibus. Praesent non massa nisl. In a turpis varius odio sodales facilisis."
+            title: 'Bloc 5',
+            contenu: {
+              id: 5,
+              text: 'Ligne 1\nLigne 2\nLigne 3\nLigne 4',
+            },
           },
           {
             id: 6,
-            title: 'Chapter section 6',
-            contenu: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi quis mi id quam sodales congue non vitae est. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer eget fermentum elit. Mauris turpis sem, luctus id quam nec, faucibus imperdiet quam. Aenean ex lectus, ultrices eu gravida eu, placerat vitae metus. Cras libero elit, hendrerit eget rhoncus ac, sollicitudin ac ligula. Phasellus nec faucibus diam. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Nam ultricies lorem commodo nibh hendrerit gravida. Suspendisse interdum fringilla aliquet. Quisque malesuada ultrices eros, at gravida leo semper sed. Vivamus ac mattis sapien. Praesent nec leo volutpat elit facilisis iaculis vel ac eros. Donec euismod velit quis dolor auctor pharetra. Vestibulum congue accumsan sem, vel euismod lectus convallis eu. Vivamus quis enim diam. Fusce laoreet varius neque non laoreet. Etiam cursus lobortis nibh, vel efficitur magna convallis ac. Phasellus leo sapien, vehicula eu nibh vitae, tincidunt vulputate tellus. Sed faucibus placerat risus, eu malesuada nibh molestie sit amet. Nunc vitae luctus mauris, sed bibendum tellus. Ut imperdiet justo ut purus suscipit feugiat. Morbi ac nisl quis leo fringilla convallis vitae id enim. Nunc congue dolor nisl, non semper orci euismod non. Ut congue nibh id libero tincidunt, ac placerat libero finibus. Praesent non massa nisl. In a turpis varius odio sodales facilisis."
+            title: 'Bloc 6',
+            contenu: {
+              id: 6,
+              text: 'Ligne 1\nLigne 2\nLigne 3\nLigne 4',
+            },
           },
           {
             id: 7,
-            title: 'Chapter section 7',
-            contenu: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi quis mi id quam sodales congue non vitae est. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer eget fermentum elit. Mauris turpis sem, luctus id quam nec, faucibus imperdiet quam. Aenean ex lectus, ultrices eu gravida eu, placerat vitae metus. Cras libero elit, hendrerit eget rhoncus ac, sollicitudin ac ligula. Phasellus nec faucibus diam. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Nam ultricies lorem commodo nibh hendrerit gravida. Suspendisse interdum fringilla aliquet. Quisque malesuada ultrices eros, at gravida leo semper sed. Vivamus ac mattis sapien. Praesent nec leo volutpat elit facilisis iaculis vel ac eros. Donec euismod velit quis dolor auctor pharetra. Vestibulum congue accumsan sem, vel euismod lectus convallis eu. Vivamus quis enim diam. Fusce laoreet varius neque non laoreet. Etiam cursus lobortis nibh, vel efficitur magna convallis ac. Phasellus leo sapien, vehicula eu nibh vitae, tincidunt vulputate tellus. Sed faucibus placerat risus, eu malesuada nibh molestie sit amet. Nunc vitae luctus mauris, sed bibendum tellus. Ut imperdiet justo ut purus suscipit feugiat. Morbi ac nisl quis leo fringilla convallis vitae id enim. Nunc congue dolor nisl, non semper orci euismod non. Ut congue nibh id libero tincidunt, ac placerat libero finibus. Praesent non massa nisl. In a turpis varius odio sodales facilisis."
-          }
-        ]
-      }
-    ]
-  }
+            title: 'Bloc 7',
+            contenu: {
+              id: 7,
+              text: 'Ligne 1\nLigne 2\nLigne 3\nLigne 4',
+            },
+          },
+          {
+            id: 8,
+            title: 'Bloc 8',
+            contenu: {
+              id: 8,
+              text: 'Ligne 1\nLigne 2\nLigne 3\nLigne 4',
+            },
+          },
+          {
+            id: 9,
+            title: 'Bloc 9',
+            contenu: {
+              id: 9,
+              text: 'Ligne 1\nLigne 2\nLigne 3\nLigne 4',
+            },
+          },
+          {
+            id: 10,
+            title: 'Bloc 10',
+            contenu: {
+              id: 10,
+              text: 'Ligne 1\nLigne 2\nLigne 3\nLigne 4',
+            },
+          },
+        ],
+      },
+      {
+        id: 2,
+        nom: 'Page 2',
+        contenu: [
+          {
+            id: 11,
+            title: 'Bloc 11',
+            contenu: {
+              id: 11,
+              text: 'Ligne 1\nLigne 2\nLigne 3\nLigne 4',
+            },
+          },
+          {
+            id: 12,
+            title: 'Bloc 12',
+            contenu: {
+              id: 12,
+              text: 'Ligne 1\nLigne 2\nLigne 3\nLigne 4',
+            },
+          },
+          {
+            id: 13,
+            title: 'Bloc 13',
+            contenu: {
+              id: 13,
+              text: 'Ligne 1\nLigne 2\nLigne 3\nLigne 4',
+            },
+          },
+          {
+            id: 14,
+            title: 'Bloc 14',
+            contenu: {
+              id: 14,
+              text: 'Ligne 1\nLigne 2\nLigne 3\nLigne 4',
+            },
+          },
+          {
+            id: 15,
+            title: 'Bloc 15',
+            contenu: {
+              id: 15,
+              text: 'Ligne 1\nLigne 2\nLigne 3\nLigne 4',
+            },
+          },
+          {
+            id: 16,
+            title: 'Bloc 16',
+            contenu: {
+              id: 16,
+              text: 'Ligne 1\nLigne 2\nLigne 3\nLigne 4',
+            },
+          },
+          {
+            id: 17,
+            title: 'Bloc 17',
+            contenu: {
+              id: 17,
+              text: 'Ligne 1\nLigne 2\nLigne 3\nLigne 4',
+            },
+          },
+          {
+            id: 18,
+            title: 'Bloc 18',
+            contenu: {
+              id: 18,
+              text: 'Ligne 1\nLigne 2\nLigne 3\nLigne 4',
+            },
+          },
+          {
+            id: 19,
+            title: 'Bloc 19',
+            contenu: {
+              id: 19,
+              text: 'Ligne 1\nLigne 2\nLigne 3\nLigne 4',
+            },
+          },
+          {
+            id: 20,
+            title: 'Bloc 20',
+            contenu: {
+              id: 20,
+              text: 'Ligne 1\nLigne 2\nLigne 3\nLigne 4',
+            },
+          },
+        ],
+      },
+    ],
+  };
+  actualPage: Page = {
+    id: 1,
+    nom: 'Page 1',
+    contenu: [
+      {
+        id: 1,
+        title: 'Bloc 1',
+        contenu: {
+          id: 1,
+          text: 'Ligne 1\nLigne 2\nLigne 3\nLigne 4',
+        },
+      },
+      {
+        id: 2,
+        title: 'Bloc 2',
+        contenu: {
+          id: 2,
+          text: 'Ligne 1\nLigne 2\nLigne 3\nLigne 4',
+        },
+      },
+      {
+        id: 3,
+        title: 'Bloc 3',
+        contenu: {
+          id: 3,
+          text: 'Ligne 1\nLigne 2\nLigne 3\nLigne 4',
+        },
+      },
+      {
+        id: 4,
+        title: 'Bloc 4',
+        contenu: {
+          id: 4,
+          text: 'Ligne 1\nLigne 2\nLigne 3\nLigne 4',
+        },
+      },
+      {
+        id: 5,
+        title: 'Bloc 5',
+        contenu: {
+          id: 5,
+          text: 'Ligne 1\nLigne 2\nLigne 3\nLigne 4',
+        },
+      },
+      {
+        id: 6,
+        title: 'Bloc 6',
+        contenu: {
+          id: 6,
+          text: 'Ligne 1\nLigne 2\nLigne 3\nLigne 4',
+        },
+      },
+      {
+        id: 7,
+        title: 'Bloc 7',
+        contenu: {
+          id: 7,
+          text: 'Ligne 1\nLigne 2\nLigne 3\nLigne 4',
+        },
+      },
+      {
+        id: 8,
+        title: 'Bloc 8',
+        contenu: {
+          id: 8,
+          text: 'Ligne 1\nLigne 2\nLigne 3\nLigne 4',
+        },
+      },
+      {
+        id: 9,
+        title: 'Bloc 9',
+        contenu: {
+          id: 9,
+          text: 'Ligne 1\nLigne 2\nLigne 3\nLigne 4',
+        },
+      },
+      {
+        id: 10,
+        title: 'Bloc 10',
+        contenu: {
+          id: 10,
+          text: 'Ligne 1\nLigne 2\nLigne 3\nLigne 4',
+        },
+      },
+    ],
+  };
+  private router: Router = inject(Router);
+
+  constructor(
+    private scrollToAnchorService: ScrollToAnchorService,
+    private route: ActivatedRoute,
+    private formationService: FormationService
+  ) {}
 
   actualRoute() {
     return this.router.url.split('#')[0];
   }
-
-
+  scrollToAnchor(anchorId: string): void {
+    this.scrollToAnchorService.scrollToAnchor(
+      anchorId,
+      20 * parseFloat(getComputedStyle(document.documentElement).fontSize)
+    );
+  }
+  goToPage(id: number) {
+    if (this.formation.body) {
+      const temp = this.formation.body.find((page) => page.id === id);
+      if (temp) {
+        this.actualPage = temp;
+      }
+    }
+  }
+  ngOnInit() {
+    this.formationId = parseInt(this.route.snapshot.paramMap.get('id') ?? '');
+    this.formationService
+      .getFormationByIdContent(this.formationId)
+      .subscribe((data) => {
+        this.formation = data;
+        if (this.formation.body) {
+          console.log(this.formation);
+          this.actualPage = this.formation.body[0];
+        }
+      });
+  }
+  ngAfterViewInit(): void {
+    const anchor = document.querySelector(
+      '#item-' + this.route.snapshot.paramMap.get('id')
+    );
+    if (anchor) anchor.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
 }

@@ -1,11 +1,17 @@
-import { Component, Input, ViewEncapsulation } from '@angular/core';
+import {
+  Component,
+  Input,
+  Output,
+  ViewEncapsulation,
+  EventEmitter,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MarkdownModule } from 'ngx-markdown';
 import 'prismjs';
 import './prism-imports';
 import 'prismjs/plugins/line-numbers/prism-line-numbers.js';
 import 'prismjs/plugins/line-highlight/prism-line-highlight.js';
-import { AIMarkdown } from '../../interfaces/AImarkdown';
+import { Markdown } from '../../interfaces/markdown';
 
 @Component({
   selector: 'app-markdown-editor',
@@ -16,5 +22,11 @@ import { AIMarkdown } from '../../interfaces/AImarkdown';
   encapsulation: ViewEncapsulation.None,
 })
 export class MarkdownEditorComponent {
-  @Input() markdown: AIMarkdown = { text: '' };
+  @Input() markdown: Markdown = { text: '' };
+  @Output() markdownHasChanged = new EventEmitter<Markdown>();
+
+  sendEventMarkdown() {
+    console.log(this.markdown);
+    this.markdownHasChanged.emit(this.markdown);
+  }
 }
