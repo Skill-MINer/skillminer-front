@@ -1,0 +1,17 @@
+<div class="flex justify-center my-8">
+  <div
+    cdkDropList
+    class="flex flex-col w-[50rem]"
+    (cdkDropListDropped)="drop($event)"
+  >
+    @for (block of blocks; track block) {
+    <div class="relative bg-transparent" cdkDrag>
+      <div class="example-custom-placeholder mr-4" *cdkDragPlaceholder></div>
+      <app-element-collapse-box (click)="(edit)"> </app-element-collapse-box>
+      <app-add-element-summary
+        (addBlockEvent)="handleEventAddBlock(block)"
+      ></app-add-element-summary>
+    </div>
+    }
+  </div>
+</div>
