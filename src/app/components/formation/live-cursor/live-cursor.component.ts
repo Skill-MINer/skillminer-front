@@ -22,7 +22,7 @@ export class LiveCursorComponent {
   private socket: io.Socket;
   my_top_distance: string = "50vh";
   my_left_distance: string = "50vw";
-  cursors: cursor_position[] = [{ top: "50vh", left: "50vw", name: "User", id: 0}];
+  cursors: cursor_position[] = [];
   private colors: string[] = ["blue", "purple", "pink", "orange", "green", "yellow", "gray-dark"];
 
   constructor(private route: ActivatedRoute, private authService: AuthService) {
@@ -42,12 +42,14 @@ export class LiveCursorComponent {
     }
 
     this.socket.on('cursor', (param) => {
-      let cursor: cursor_position = param.stringify();
-      for (let current_cursor in this.cursors) {
-        if ((this.cursors[current_cursor] as cursor_position).id === cursor.id) {
-          this.cursors[current_cursor] = { ...cursor };
-        }
+      let cursor: cursor_position = param;
+      let index: number = this.cursors.findIndex(c => c.id === cursor.id);
+      if (index === -1) {
+        this.cursors.push(cursor);
+      } else {
+        this.cursors[index] = cursor;
       }
+
       console.log("cursor", cursor);
     });
   }
@@ -56,7 +58,6 @@ export class LiveCursorComponent {
     this.my_top_distance = (100 * (event.clientY + window.scrollY) / window.innerHeight) + "vh";
     this.my_left_distance = (100 * event.clientX  / window.innerWidth) + "vw";
 
-    console.log("mys-cursor position", this.my_top_distance, this.my_left_distance);
     this.socket.emit('cursor', { top: this.my_top_distance, left: this.my_left_distance });
   }
 
