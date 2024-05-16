@@ -41,8 +41,13 @@ export class LiveCursorComponent {
       console.error("Error while connecting to room", error);
     }
 
-    this.socket.on('cursor', (cursor: cursor_position) => {
-      this.cursors[0] = {...this.cursors[0], ...cursor};
+    this.socket.on('cursor', (param) => {
+      let cursor: cursor_position = param.stringify();
+      for (let current_cursor in this.cursors) {
+        if ((this.cursors[current_cursor] as cursor_position).id === cursor.id) {
+          this.cursors[current_cursor] = { ...cursor };
+        }
+      }
       console.log("cursor", cursor);
     });
   }
