@@ -1,16 +1,20 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { AuthService } from '@services/auth.service';
 import * as io from 'socket.io-client';
 
 interface cursor_position {
+  id: number,
   top: string,
-  left: string
+  left: string,
+  name: string
 };
 
 @Component({
   selector: 'app-live-cursor',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './live-cursor.component.html',
   styleUrl: './live-cursor.component.sass'
 })
@@ -18,21 +22,27 @@ export class LiveCursorComponent {
   private socket: io.Socket;
   my_top_distance: string = "50vh";
   my_left_distance: string = "50vw";
-  cursors: cursor_position[] = [{ top: "50vh", left: "50vw" }];
-  color_test = "red";
+  cursors: cursor_position[] = [{ top: "50vh", left: "50vw", name: "User", id: 0}];
+  private colors: string[] = ["blue", "purple", "pink", "orange", "green", "yellow", "gray-dark"];
 
-
-  constructor(private route: ActivatedRoute) {
+  constructor(private route: ActivatedRoute, private authService: AuthService) {
     this.socket = io.connect('http://localhost:3000');
 
     this.socket.on('connect', () => {
       console.log("connected to server");
     });
 
-    this.socket.emit('connection-to-room', { room_id: this.route.snapshot.paramMap.get('id') ?? "0"})
+    try{
+      this.socket.emit('connection-to-room', { 
+        room_id: this.route.snapshot.paramMap.get('id') ?? "0",
+        token: authService.getToken()
+      })
+    } catch (error) {
+      console.error("Error while connecting to room", error);
+    }
 
     this.socket.on('cursor', (cursor: cursor_position) => {
-      this.cursors[0] = cursor;
+      this.cursors[0] = {...this.cursors[0], ...cursor};
       console.log("cursor", cursor);
     });
   }
@@ -47,6 +57,10 @@ export class LiveCursorComponent {
 
   ngOnInit() {
     document.addEventListener('mousemove', this.moveCursor.bind(this));
+  }
+
+  getCursorColor(index: number) {
+    return this.colors[index % this.colors.length];
   }
 
 }
