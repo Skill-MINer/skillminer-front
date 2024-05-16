@@ -44,7 +44,10 @@
     aria-labelledby="hs-basic-with-arrow-heading-two"
   >
     <p class="text-gray-800 dark:text-neutral-200">
-      <app-markdown-editor></app-markdown-editor>
+      <app-markdown-editor
+        [markdown]="markdown"
+        (markdownHasChanged)="sendEventMarkdown($event)"
+      ></app-markdown-editor>
     </p>
   </div>
 </div>
