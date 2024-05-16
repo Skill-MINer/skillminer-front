@@ -1,13 +1,13 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 
 @Component({
-  selector: 'app-add-element-summary',
+  selector: 'app-add-block',
   standalone: true,
   imports: [],
-  templateUrl: './add-element-summary.component.html',
-  styleUrl: './add-element-summary.component.sass',
+  templateUrl: './add-block.component.html',
+  styleUrl: './add-block.component.sass',
 })
-export class AddElementSummaryComponent {
+export class AddBlockComponent {
   isPlus_barVisible = true;
   isAdd_blocks_buttonsVisible = false;
   @Output() addBlockEvent = new EventEmitter<null>();

@@ -9,10 +9,10 @@ import {
 } from '@angular/cdk/drag-drop';
 import { MatIconModule } from '@angular/material/icon';
 import { Title1SectionComponent } from '@app/components/formation/sections/title1-section/title1-section.component';
-import { AddElementSummaryComponent } from '@app/components/summary/add-element-summary/add-element-summary.component';
 import { ElementCollapseBoxComponent } from '@app/components/CollapseBox/element-collapse-box/element-collapse-box.component';
 import { Markdown } from '@app/interfaces/markdown';
 import { pageContent } from '@app/interfaces/pageContent';
+import { AddBlockComponent } from '../add-block/add-block.component';
 @Component({
   selector: 'app-block-drag-drop',
   standalone: true,
@@ -23,7 +23,7 @@ import { pageContent } from '@app/interfaces/pageContent';
     CdkDragHandle,
     MatIconModule,
     Title1SectionComponent,
-    AddElementSummaryComponent,
+    AddBlockComponent,
     ElementCollapseBoxComponent,
   ],
   templateUrl: './block-drag-drop.component.html',
