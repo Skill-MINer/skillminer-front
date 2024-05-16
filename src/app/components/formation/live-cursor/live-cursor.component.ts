@@ -64,7 +64,8 @@ export class LiveCursorComponent {
     document.addEventListener('mousemove', this.moveCursor.bind(this));
   }
 
-  getCursorColor(index: number) {
+  getCursorColor(id: number) {
+    const index: number = this.cursors.findIndex(cursor => cursor.id === id);
     return this.colors[index % this.colors.length];
   }
 
