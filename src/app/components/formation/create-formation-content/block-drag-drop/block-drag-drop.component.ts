@@ -68,7 +68,11 @@ export class BlockDragDropComponent {
     console.log(this.blocks);
   }
 
-  handleEventAddBlock(parentBlock) {
+  handleEventAddBlock(parentBlock: {
+    id: string;
+    title: string;
+    contenu: { id: string; text: string };
+  }) {
     const newId: number = this.blocks.length + 1;
     this.blocks.push({
       id: newId.toString(),
