@@ -73,7 +73,12 @@ export class BlockDragDropComponent {
   handleEventContentHasChanged(markdown: Markdown, id: number) {
     {
       if (markdown.id) {
-        this.blocks[id - 1].contenu = markdown;
+        //change contenu of block with id
+        this.blocks.forEach((t) => {
+          if (t.id === id) {
+            t.contenu.text = markdown.text;
+          }
+        });
       }
       console.log(
         'block content changed' +
