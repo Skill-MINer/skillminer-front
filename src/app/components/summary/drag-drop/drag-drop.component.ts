@@ -67,7 +67,12 @@ export class DragDropComponent {
   }
 
   handleEventTitleHasChanged(title: string, id: number) {
-    this.titles[id-1].title = title;
+    // change the title wich has the id
+    this.titles.forEach((t) => {
+      if (t.id === id) {
+        t.title = title;
+      }
+    });
     console.log(this.titles)
   }
 
