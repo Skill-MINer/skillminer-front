@@ -18,6 +18,6 @@ export class CardContainerService {
   }
 
   getFormationsByUser(): Observable<Formation[]> {
-    return this.http.get<Formation[]>(`${IP_API}/formations/user`);
+    return this.http.get<Formation[]>(`${IP_API}/users/formations`);
   }
 }
