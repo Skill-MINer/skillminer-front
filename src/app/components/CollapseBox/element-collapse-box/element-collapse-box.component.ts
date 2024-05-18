@@ -44,6 +44,7 @@ export class ElementCollapseBoxComponent {
     const changeTitleElement = document.getElementById(
       'TitleChange'
     ) as HTMLInputElement;
+
     const titleElement = document.getElementById('TitleButton') as HTMLElement;
 
     if (changeTitleElement && titleElement) {

@@ -11,6 +11,7 @@ export class AddBlockComponent {
   isPlus_barVisible = true;
   isAdd_blocks_buttonsVisible = false;
   @Output() addBlockEvent = new EventEmitter<null>();
+  @Output() addVideoBlockEvent = new EventEmitter<null>();
 
   constructor() {}
 
@@ -26,5 +27,8 @@ export class AddBlockComponent {
 
   addBlock() {
     this.addBlockEvent.emit();
+  }
+  addVideoBlock() {
+    this.addVideoBlockEvent.emit();
   }
 }

@@ -100,4 +100,16 @@ export class BlockDragDropComponent {
     });
     moveItemInArray(this.blocks, newId, this.blocks.indexOf(parentBlock) + 1);
   }
+  handleEventAddBlock(parentBlock: pageContent) {
+    const newId: number = this.blocks.length + 1;
+    this.blocks.push({
+      id: newId,
+      title: 'Bloc 3',
+      contenu: {
+        id: newId,
+        text: 'url-de-votre-video',
+      },
+    });
+    moveItemInArray(this.blocks, newId, this.blocks.indexOf(parentBlock) + 1);
+  }
 }
