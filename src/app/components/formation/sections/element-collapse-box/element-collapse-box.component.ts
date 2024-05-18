@@ -10,6 +10,7 @@ import {
 } from '@angular/animations';
 import { Title1SectionComponent } from '@app/components/formation/sections/title1-section/title1-section.component';
 import { BlocVideoComponent } from '../bloc-video/bloc-video.component';
+import { CdkDragHandle } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-element-collapse-box',
@@ -18,6 +19,7 @@ import { BlocVideoComponent } from '../bloc-video/bloc-video.component';
     MarkdownEditorComponent,
     Title1SectionComponent,
     BlocVideoComponent,
+    CdkDragHandle,
   ],
   templateUrl: './element-collapse-box.component.html',
   styleUrl: './element-collapse-box.component.sass',
