@@ -1,62 +1,31 @@
-<div
-  class="hs-accordion"
-  id="hs-basic-with-arrow-heading-two"
-  [hidden]="isCollapseBoxVisible"
-  (dblclick)="toggleVisibility()"
->
-  <button
+<div class="hs-accordion" id="hs-basic-with-arrow-heading-two" [hidden]="isCollapseBoxVisible"
+  (dblclick)="toggleVisibility()">
+  <button id="TitleButton"
     class="hs-accordion-toggle hs-accordion-active:text-blue-600 py-3 inline-flex items-center gap-x-3 w-full font-semibold text-start text-gray-800 hover:text-gray-500 rounded-lg disabled:opacity-50 disabled:pointer-events-none dark:hs-accordion-active:text-blue-500 dark:text-neutral-200 dark:hover:text-neutral-400 dark:focus:outline-none dark:focus:text-neutral-400"
-    aria-controls="hs-basic-with-arrow-collapse-two"
-  >
-    <svg
-      class="hs-accordion-active:hidden block size-4"
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-    >
+    aria-controls="hs-basic-with-arrow-collapse-two">
+    <svg class="hs-accordion-active:hidden block size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+      viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+      stroke-linejoin="round">
       <path d="m6 9 6 6 6-6"></path>
     </svg>
-    <svg
-      class="hs-accordion-active:block hidden size-4"
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-    >
+    <svg class="hs-accordion-active:block hidden size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+      viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+      stroke-linejoin="round">
       <path d="m18 15-6-6-6 6"></path>
     </svg>
-    Accordion #2
+    {{title}}
   </button>
-  <div
-    id="hs-basic-with-arrow-collapse-two"
+  <div id="hs-basic-with-arrow-collapse-two"
     class="hs-accordion-content hidden w-full overflow-hidden transition-[height] duration-300"
-    aria-labelledby="hs-basic-with-arrow-heading-two"
-  >
+    aria-labelledby="hs-basic-with-arrow-heading-two">
     <p class="text-gray-800 dark:text-neutral-200">
-      <app-markdown-editor
-        [markdown]="markdown"
-        (markdownHasChanged)="sendEventMarkdown($event)"
-      ></app-markdown-editor>
+      <app-markdown-editor [markdown]="markdown" (markdownHasChanged)="sendEventMarkdown($event)"></app-markdown-editor>
     </p>
   </div>
 </div>
 
 <div id="hs-basic-with-arrow-heading-two" [hidden]="!isCollapseBoxVisible">
-  <textarea
-    (mouseleave)="toggleVisibility()"
+  <input type="text" id="TitleChange" (mouseleave)="changeTitleToText()" (mouseleave)="toggleVisibility()"
     class="py-3 inline-flex items-center gap-x-3 w-full font-semibold text-start text-gray-800 hover:text-gray-500 rounded-lg disabled:opacity-50 disabled:pointer-events-none dark:hs-accordion-active:text-blue-500 dark:text-neutral-200 dark:hover:text-neutral-400 dark:focus:outline-none dark:focus:text-neutral-400"
-    aria-controls="hs-basic-with-arrow-collapse-two"
-  >
-  </textarea>
+    aria-controls="hs-basic-with-arrow-collapse-two">
 </div>
