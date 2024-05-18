@@ -95,18 +95,20 @@ export class BlockDragDropComponent {
       title: 'Bloc 3',
       contenu: {
         id: newId,
+        type: 'markdown',
         text: '```markdown\n### Titre du bloc 3\n\nCeci est un exemple de contenu en Markdown pour le bloc 3.\n```',
       },
     });
     moveItemInArray(this.blocks, newId, this.blocks.indexOf(parentBlock) + 1);
   }
-  handleEventAddBlock(parentBlock: pageContent) {
+  handleEventAddVideoBlock(parentBlock: pageContent) {
     const newId: number = this.blocks.length + 1;
     this.blocks.push({
       id: newId,
       title: 'Bloc 3',
       contenu: {
         id: newId,
+        type: 'video',
         text: 'url-de-votre-video',
       },
     });

@@ -1,27 +1,35 @@
 import { Component, EventEmitter, input, Input, Output } from '@angular/core';
 import { MarkdownEditorComponent } from '@app/components/markdown-editor/markdown-editor.component';
 import { Markdown } from '@app/interfaces/markdown';
-import {animate, state, style, transition, trigger} from '@angular/animations';
-
+import {
+  animate,
+  state,
+  style,
+  transition,
+  trigger,
+} from '@angular/animations';
+import { Title1SectionComponent } from '@app/components/formation/sections/title1-section/title1-section.component';
 
 @Component({
   selector: 'app-element-collapse-box',
   standalone: true,
-  imports: [MarkdownEditorComponent],
+  imports: [MarkdownEditorComponent, Title1SectionComponent],
   templateUrl: './element-collapse-box.component.html',
   styleUrl: './element-collapse-box.component.sass',
-  animations: [trigger('toggle', [
-    state('collapsed', style({opacity: 0.0, height: 0})),
-    state('expanded', style({opacity: 1.0, height: '*'})),
-    transition('collapsed => expanded', [
-      style({opacity: 0.0, height: 0}),
-      animate('0.3s ease-in-out', style({opacity: 1.0, height: '*'}))
+  animations: [
+    trigger('toggle', [
+      state('collapsed', style({ opacity: 0.0, height: 0 })),
+      state('expanded', style({ opacity: 1.0, height: '*' })),
+      transition('collapsed => expanded', [
+        style({ opacity: 0.0, height: 0 }),
+        animate('0.3s ease-in-out', style({ opacity: 1.0, height: '*' })),
+      ]),
+      transition('expanded => collapsed', [
+        style({ opacity: 1.0, height: '*' }),
+        animate('0.3s ease-in-out', style({ opacity: 0.0, height: 0 })),
+      ]),
     ]),
-    transition('expanded => collapsed', [
-      style({opacity: 1.0, height: '*'}),
-      animate('0.3s ease-in-out', style({opacity: 0.0, height: 0}))
-    ])
-  ])]
+  ],
 })
 export class ElementCollapseBoxComponent {
   [x: string]: any;
@@ -36,21 +44,14 @@ export class ElementCollapseBoxComponent {
   constructor() {}
 
   toggleVisibility() {
-    //this.isCollapseBoxVisible = !this.isCollapseBoxVisible;
     this.state = this.state === 'collapsed' ? 'expanded' : 'collapsed';
   }
-
-  changeTitleToText() {
-    const changeTitleElement = document.getElementById(
-      'TitleChange'
-    ) as HTMLInputElement;
-
-    const titleElement = document.getElementById('TitleButton') as HTMLElement;
-
-    if (changeTitleElement && titleElement) {
-      this.title = changeTitleElement.value;
-      this.titleHasChanged.emit(this.title);
-    }
+  toggleTitleVisibility() {
+    this.isCollapseBoxVisible = !this.isCollapseBoxVisible;
+  }
+  sendEventTitle(newTitle: string) {
+    this.title = newTitle;
+    this.titleHasChanged.emit(this.title);
   }
   sendEventMarkdown(markdown: Markdown) {
     this.markdownHasChanged.emit(markdown);
