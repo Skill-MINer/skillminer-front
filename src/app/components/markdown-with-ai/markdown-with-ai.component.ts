@@ -17,7 +17,7 @@ import { ToastrService } from 'ngx-toastr';
 export class MarkdownWithAiComponent {
   private toastr: ToastrService = inject(ToastrService);
   constructor(private MarkdownWithAIService: MarkdownWithAIService) {}
-  markdown: Markdown = { text: '' };
+  markdown: Markdown = { type: 'markdown', text: '' };
   valeurInput: string = '';
   requestPending = false;
   generateMarkdown() {

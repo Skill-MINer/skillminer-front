@@ -31,28 +31,14 @@ import { AddBlockComponent } from '../add-block/add-block.component';
 })
 export class BlockDragDropComponent {
   blocks: pageContent[] = [
+    //just one block
     {
       id: 1,
       title: 'Bloc 1',
       contenu: {
         id: 1,
-        text: '```markdown\n# Titre du bloc 1\n\nCeci est un exemple de contenu en Markdown pour le bloc 1.\n```',
-      },
-    },
-    {
-      id: 2,
-      title: 'Bloc 2',
-      contenu: {
-        id: 2,
-        text: '```markdown\n## Titre du bloc 2\n\nCeci est un exemple de contenu en Markdown pour le bloc 2.\n```',
-      },
-    },
-    {
-      id: 3,
-      title: 'Bloc 3',
-      contenu: {
-        id: 3,
-        text: '```markdown\n### Titre du bloc 3\n\nCeci est un exemple de contenu en Markdown pour le bloc 3.\n```',
+        type: 'markdown',
+        text: '```markdown\n### Titre du bloc 1\n\nCeci est un exemple de contenu en Markdown pour le bloc 1.\n```',
       },
     },
   ];

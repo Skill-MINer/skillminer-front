@@ -20,7 +20,6 @@ import { DragDropComponent } from './components/summary/drag-drop/drag-drop.comp
 import { BlocVideoComponent } from './components/formation/sections/bloc-video/bloc-video.component';
 import { MarkdownEditorComponent } from './components/markdown-editor/markdown-editor.component';
 import { MarkdownWithAiComponent } from './components/markdown-with-ai/markdown-with-ai.component';
-import { ListCollapseBoxComponent } from './components/CollapseBox/list-collapse-box/list-collapse-box.component';
 import { BlockDragDropComponent } from './components/formation/create-formation-content/block-drag-drop/block-drag-drop.component';
 
 export const routes: Routes = [
@@ -29,10 +28,6 @@ export const routes: Routes = [
     path: 'login',
     component: LoginComponent,
     canActivate: [noAuthGuard],
-  },
-  {
-    path: 'CollapseBox',
-    component: ListCollapseBoxComponent,
   },
   {
     path: 'signup',

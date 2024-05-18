@@ -57,6 +57,7 @@ export class SummaryViewComponent {
             title: 'Bloc 1',
             contenu: {
               id: 1,
+              type: 'markdown',
               text: 'Ligne 1\nLigne 2\nLigne 3\nLigne 4',
             },
           },
@@ -65,6 +66,7 @@ export class SummaryViewComponent {
             title: 'Bloc 2',
             contenu: {
               id: 2,
+              type: 'markdown',
               text: 'Ligne 1\nLigne 2\nLigne 3\nLigne 4',
             },
           },
@@ -73,6 +75,7 @@ export class SummaryViewComponent {
             title: 'Bloc 3',
             contenu: {
               id: 3,
+              type: 'markdown',
               text: 'Ligne 1\nLigne 2\nLigne 3\nLigne 4',
             },
           },
@@ -81,6 +84,7 @@ export class SummaryViewComponent {
             title: 'Bloc 4',
             contenu: {
               id: 4,
+              type: 'markdown',
               text: 'Ligne 1\nLigne 2\nLigne 3\nLigne 4',
             },
           },
@@ -89,6 +93,7 @@ export class SummaryViewComponent {
             title: 'Bloc 5',
             contenu: {
               id: 5,
+              type: 'markdown',
               text: 'Ligne 1\nLigne 2\nLigne 3\nLigne 4',
             },
           },
@@ -97,6 +102,7 @@ export class SummaryViewComponent {
             title: 'Bloc 6',
             contenu: {
               id: 6,
+              type: 'markdown',
               text: 'Ligne 1\nLigne 2\nLigne 3\nLigne 4',
             },
           },
@@ -105,6 +111,7 @@ export class SummaryViewComponent {
             title: 'Bloc 7',
             contenu: {
               id: 7,
+              type: 'markdown',
               text: 'Ligne 1\nLigne 2\nLigne 3\nLigne 4',
             },
           },
@@ -113,6 +120,7 @@ export class SummaryViewComponent {
             title: 'Bloc 8',
             contenu: {
               id: 8,
+              type: 'markdown',
               text: 'Ligne 1\nLigne 2\nLigne 3\nLigne 4',
             },
           },
@@ -121,6 +129,7 @@ export class SummaryViewComponent {
             title: 'Bloc 9',
             contenu: {
               id: 9,
+              type: 'markdown',
               text: 'Ligne 1\nLigne 2\nLigne 3\nLigne 4',
             },
           },
@@ -129,6 +138,7 @@ export class SummaryViewComponent {
             title: 'Bloc 10',
             contenu: {
               id: 10,
+              type: 'markdown',
               text: 'Ligne 1\nLigne 2\nLigne 3\nLigne 4',
             },
           },
@@ -143,6 +153,7 @@ export class SummaryViewComponent {
             title: 'Bloc 11',
             contenu: {
               id: 11,
+              type: 'markdown',
               text: 'Ligne 1\nLigne 2\nLigne 3\nLigne 4',
             },
           },
@@ -151,6 +162,7 @@ export class SummaryViewComponent {
             title: 'Bloc 12',
             contenu: {
               id: 12,
+              type: 'markdown',
               text: 'Ligne 1\nLigne 2\nLigne 3\nLigne 4',
             },
           },
@@ -159,6 +171,7 @@ export class SummaryViewComponent {
             title: 'Bloc 13',
             contenu: {
               id: 13,
+              type: 'markdown',
               text: 'Ligne 1\nLigne 2\nLigne 3\nLigne 4',
             },
           },
@@ -167,6 +180,7 @@ export class SummaryViewComponent {
             title: 'Bloc 14',
             contenu: {
               id: 14,
+              type: 'markdown',
               text: 'Ligne 1\nLigne 2\nLigne 3\nLigne 4',
             },
           },
@@ -175,6 +189,7 @@ export class SummaryViewComponent {
             title: 'Bloc 15',
             contenu: {
               id: 15,
+              type: 'markdown',
               text: 'Ligne 1\nLigne 2\nLigne 3\nLigne 4',
             },
           },
@@ -183,6 +198,7 @@ export class SummaryViewComponent {
             title: 'Bloc 16',
             contenu: {
               id: 16,
+              type: 'markdown',
               text: 'Ligne 1\nLigne 2\nLigne 3\nLigne 4',
             },
           },
@@ -191,6 +207,7 @@ export class SummaryViewComponent {
             title: 'Bloc 17',
             contenu: {
               id: 17,
+              type: 'markdown',
               text: 'Ligne 1\nLigne 2\nLigne 3\nLigne 4',
             },
           },
@@ -199,6 +216,7 @@ export class SummaryViewComponent {
             title: 'Bloc 18',
             contenu: {
               id: 18,
+              type: 'markdown',
               text: 'Ligne 1\nLigne 2\nLigne 3\nLigne 4',
             },
           },
@@ -207,6 +225,7 @@ export class SummaryViewComponent {
             title: 'Bloc 19',
             contenu: {
               id: 19,
+              type: 'markdown',
               text: 'Ligne 1\nLigne 2\nLigne 3\nLigne 4',
             },
           },
@@ -215,6 +234,7 @@ export class SummaryViewComponent {
             title: 'Bloc 20',
             contenu: {
               id: 20,
+              type: 'markdown',
               text: 'Ligne 1\nLigne 2\nLigne 3\nLigne 4',
             },
           },
@@ -231,6 +251,7 @@ export class SummaryViewComponent {
         title: 'Bloc 1',
         contenu: {
           id: 1,
+          type: 'markdown',
           text: 'Ligne 1\nLigne 2\nLigne 3\nLigne 4',
         },
       },
@@ -239,6 +260,7 @@ export class SummaryViewComponent {
         title: 'Bloc 2',
         contenu: {
           id: 2,
+          type: 'markdown',
           text: 'Ligne 1\nLigne 2\nLigne 3\nLigne 4',
         },
       },
@@ -247,6 +269,7 @@ export class SummaryViewComponent {
         title: 'Bloc 3',
         contenu: {
           id: 3,
+          type: 'markdown',
           text: 'Ligne 1\nLigne 2\nLigne 3\nLigne 4',
         },
       },
@@ -255,6 +278,7 @@ export class SummaryViewComponent {
         title: 'Bloc 4',
         contenu: {
           id: 4,
+          type: 'markdown',
           text: 'Ligne 1\nLigne 2\nLigne 3\nLigne 4',
         },
       },
@@ -263,6 +287,7 @@ export class SummaryViewComponent {
         title: 'Bloc 5',
         contenu: {
           id: 5,
+          type: 'markdown',
           text: 'Ligne 1\nLigne 2\nLigne 3\nLigne 4',
         },
       },
@@ -271,6 +296,7 @@ export class SummaryViewComponent {
         title: 'Bloc 6',
         contenu: {
           id: 6,
+          type: 'markdown',
           text: 'Ligne 1\nLigne 2\nLigne 3\nLigne 4',
         },
       },
@@ -279,6 +305,7 @@ export class SummaryViewComponent {
         title: 'Bloc 7',
         contenu: {
           id: 7,
+          type: 'markdown',
           text: 'Ligne 1\nLigne 2\nLigne 3\nLigne 4',
         },
       },
@@ -287,6 +314,7 @@ export class SummaryViewComponent {
         title: 'Bloc 8',
         contenu: {
           id: 8,
+          type: 'markdown',
           text: 'Ligne 1\nLigne 2\nLigne 3\nLigne 4',
         },
       },
@@ -295,6 +323,7 @@ export class SummaryViewComponent {
         title: 'Bloc 9',
         contenu: {
           id: 9,
+          type: 'markdown',
           text: 'Ligne 1\nLigne 2\nLigne 3\nLigne 4',
         },
       },
@@ -303,6 +332,7 @@ export class SummaryViewComponent {
         title: 'Bloc 10',
         contenu: {
           id: 10,
+          type: 'markdown',
           text: 'Ligne 1\nLigne 2\nLigne 3\nLigne 4',
         },
       },

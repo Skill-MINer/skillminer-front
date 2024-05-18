@@ -22,7 +22,7 @@ import { Markdown } from '../../interfaces/markdown';
   encapsulation: ViewEncapsulation.None,
 })
 export class MarkdownEditorComponent {
-  @Input() markdown: Markdown = { text: '' };
+  @Input() markdown: Markdown = { type: 'markdown', text: '' };
   @Output() markdownHasChanged = new EventEmitter<Markdown>();
 
   sendEventMarkdown() {

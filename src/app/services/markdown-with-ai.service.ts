@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
-import { Observable, catchError, throwError } from 'rxjs';
+import { Observable, catchError, map, throwError } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Markdown } from '../interfaces/markdown';
@@ -16,6 +16,8 @@ export class MarkdownWithAIService {
 
   constructor() {}
   generate(title: string): Observable<Markdown> {
-    return this.http.post(`${IP_API}/formations/generate`, { name: title });
+    return this.http
+      .post(`${IP_API}/formations/generate`, { name: title })
+      .pipe(map((obj) => obj as Markdown));
   }
 }

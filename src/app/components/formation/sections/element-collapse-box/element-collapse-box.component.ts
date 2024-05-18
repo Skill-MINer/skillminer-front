@@ -1,4 +1,4 @@
-import { Component, EventEmitter, input, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MarkdownEditorComponent } from '@app/components/markdown-editor/markdown-editor.component';
 import { Markdown } from '@app/interfaces/markdown';
 import {
@@ -9,11 +9,16 @@ import {
   trigger,
 } from '@angular/animations';
 import { Title1SectionComponent } from '@app/components/formation/sections/title1-section/title1-section.component';
+import { BlocVideoComponent } from '../bloc-video/bloc-video.component';
 
 @Component({
   selector: 'app-element-collapse-box',
   standalone: true,
-  imports: [MarkdownEditorComponent, Title1SectionComponent],
+  imports: [
+    MarkdownEditorComponent,
+    Title1SectionComponent,
+    BlocVideoComponent,
+  ],
   templateUrl: './element-collapse-box.component.html',
   styleUrl: './element-collapse-box.component.sass',
   animations: [
@@ -34,7 +39,7 @@ import { Title1SectionComponent } from '@app/components/formation/sections/title
 export class ElementCollapseBoxComponent {
   [x: string]: any;
   @Input() title: string = 'Title ';
-  @Input() markdown: Markdown = { text: '' };
+  @Input() markdown: Markdown = { type: 'markdown', text: 'I love markdown' };
   @Output() titleHasChanged = new EventEmitter<string>();
   @Output() markdownHasChanged = new EventEmitter<Markdown>();
 
