@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { AuthService } from '@services/auth.service';
 import * as io from 'socket.io-client';
 import { environment } from '@env/environment';
+import { UserService } from '@services/user.service';
 
 
 interface cursor_position {
@@ -27,7 +28,7 @@ export class LiveCursorComponent {
   cursors: cursor_position[] = [];
   private colors: string[] = ["blue", "purple", "pink", "orange", "green", "yellow", "gray-dark"];
 
-  constructor(private route: ActivatedRoute, private authService: AuthService) {
+  constructor(private route: ActivatedRoute, private authService: AuthService, protected userService: UserService) {
     this.socket = io.connect(`${environment.IP_API}`);
 
     this.socket.on('connect', () => {
@@ -44,15 +45,15 @@ export class LiveCursorComponent {
     }
 
     this.socket.on('cursor', (param) => {
-      let cursor: cursor_position = param;
-      let index: number = this.cursors.findIndex(c => c.id === cursor.id);
-      if (index === -1) {
-        this.cursors.push(cursor);
-      } else {
-        this.cursors[index] = cursor;
+      if (userService.currentUser.id !== param.id) {
+        let cursor: cursor_position = param;
+        let index: number = this.cursors.findIndex(c => c.id === cursor.id);
+        if (index === -1) {
+          this.cursors.push(cursor);
+        } else {
+          this.cursors[index] = cursor;
+        }
       }
-
-      console.log("cursor", cursor);
     });
   }
 
