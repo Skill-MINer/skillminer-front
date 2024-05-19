@@ -130,4 +130,11 @@ export class AuthService {
 
 		return throwError(() => new Error('Something bad happened; please try again later.'));
 	}
+
+	getToken() {
+		if (this.isValidToken()){
+			return localStorage.getItem("token");
+		}
+		return new Error("Token is not valid");
+	}
 }
