@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { FormGroup, AbstractControl, Validators, ReactiveFormsModule, FormControl } from '@angular/forms';
-import { UserService } from '../../services/user.service';
-import { environment } from '../../../environments/environment';
+import { UserService } from '@services/user.service';
 import { User } from '../../interfaces/user';
 
 @Component({
@@ -13,8 +12,6 @@ import { User } from '../../interfaces/user';
   styleUrl: './profile-update.component.sass'
 })
 export class ProfileUpdateComponent {
-
-  userProfile: User = {};
   requiredFileType = 'image/png';
   fileName: string = '';
   
