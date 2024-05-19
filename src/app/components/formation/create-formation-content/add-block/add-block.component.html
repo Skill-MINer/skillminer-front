@@ -2,7 +2,7 @@
   id="plus_bar"
   [class.flex]="isPlus_barVisible"
   [class.hidden]="isAdd_blocks_buttonsVisible"
-  class="items-center w-full"
+  class="items-center w-full pt-2 pb-1"
   (click)="toggleVisibility('add-blocks_buttons')"
 >
   <button
@@ -30,7 +30,7 @@
   id="add-blocks_buttons"
   [class.hidden]="isPlus_barVisible"
   [class.flex]="isAdd_blocks_buttonsVisible"
-  class="items-center justify-center space-x-4"
+  class="items-center justify-center space-x-4 pt-2 pb-1"
   (mouseleave)="toggleVisibility('plus_bar')"
 >
   <button
