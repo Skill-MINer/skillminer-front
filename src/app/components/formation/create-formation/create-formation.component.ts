@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { NgClass } from '@angular/common';
 import { CreateHeaderFormationComponent } from '../create-header-formation/create-header-formation.component';
+import { DragDropComponent } from '@app/components/summary/drag-drop/drag-drop.component';
 
 @Component({
   selector: 'app-create-formation',
   standalone: true,
-  imports: [NgClass, CreateHeaderFormationComponent],
+  imports: [NgClass, CreateHeaderFormationComponent, DragDropComponent],
   templateUrl: './create-formation.component.html',
   styleUrl: './create-formation.component.sass',
 })
