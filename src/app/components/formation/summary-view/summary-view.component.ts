@@ -1,4 +1,4 @@
-import { Component, Input, inject } from '@angular/core';
+import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { Page } from '../../../interfaces/page';
 import { Formation } from '../../../interfaces/formation';
 import { RouterLink, Router, ActivatedRoute } from '@angular/router';
@@ -252,6 +252,9 @@ export class SummaryViewComponent {
   private router: Router = inject(Router);
 
   @Input() activeStep: number = 1;
+
+  @Output() formationChange = new EventEmitter<Formation>();
+  // TODO: Send this event to the parent component each time the page has changed
 
   @Input()
   set setFormation(formation: Formation) {
