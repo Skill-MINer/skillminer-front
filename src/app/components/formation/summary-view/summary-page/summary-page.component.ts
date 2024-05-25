@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Page } from '@app/interfaces/page';
+
+import { PageTitle } from '@app/interfaces/page-title';
 
 @Component({
   selector: 'app-summary-page',
@@ -15,17 +16,16 @@ export class SummaryPageComponent {
     private route: ActivatedRoute,
   ) {}
 
-  actualPage: Page = {} as Page;
+  _pages: PageTitle[] = [];
 
-  @Input() formation_body: any = [];
-  @Output() pageHasChanged = new EventEmitter<Page>();
+  @Input() 
+  set pages(pages: PageTitle[]) {
+    this._pages = pages;
+  }
+
+  @Output() pageHasChanged = new EventEmitter<PageTitle>();
 
   goToPage(id: number) {
-    if (this.formation_body) {
-      const temp = this.formation_body.find((page: Page) => page.id === id);
-      if (temp) {
-        this.pageHasChanged.emit(temp);
-      }
-    }
+    this.pageHasChanged.emit(this._pages.find((page) => page.id === id) as PageTitle);
   }
 }

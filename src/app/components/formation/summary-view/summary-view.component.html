@@ -1,5 +1,5 @@
 <div class="fixed top-24 z-30 left-10 max-w-fit">
-  <app-summary-page [formation_body]="formation.body" (pageHasChanged)="handleEventPageHasChanged($event)" ></app-summary-page>
+  <app-summary-page [pages]="getFormationPagesTitles()" (pageHasChanged)="handleEventPageTitleHasChanged($event)" ></app-summary-page>
   
   <div class="flex items-center">
     <label for="hs-basic-with-description" class="text-sm text-gray-500 me-3 dark:text-neutral-400">Off</label>
@@ -21,14 +21,14 @@
 @switch (activeStep) {
   @case(1) {
   <div>
-    <app-formation-view [actualPage]="actualPage" [formationTitle]="formation.titre"></app-formation-view>
+    <app-formation-view [setActualPage]="actualPage" [setFormationTitle]="formation.titre"></app-formation-view>
   </div>
   }
   @case(2) {
   <div id="scrollspy-scrollable-parent-2" class="ml-48 mt-6 mr-48 pl-14">
-    <app-blocks-drag-drop [pageBlocks]="getActualPageBlocks()"></app-blocks-drag-drop>
+    <app-blocks-drag-drop [setPageBlocks]="actualPage" (pageBlocksChanged)="handleEventPageHasChanged($event)"></app-blocks-drag-drop>
   </div>
   }
 }
 
-<app-summary-block [actualPage]="actualPage"></app-summary-block>
+<app-summary-block [setActualPage]="actualPage"></app-summary-block>

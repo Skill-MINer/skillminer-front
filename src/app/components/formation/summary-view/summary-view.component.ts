@@ -7,12 +7,12 @@ import 'prismjs';
 import 'prismjs/plugins/line-numbers/prism-line-numbers.js';
 import 'prismjs/plugins/line-highlight/prism-line-highlight.js';
 import { FooterComponent } from '../../footer/footer.component';
-import { ScrollToAnchorService } from '../../../services/scroll-to-anchor.service';
 import { FormationService } from '../../../services/formation.service';
 import { SummaryPageComponent } from './summary-page/summary-page.component';
 import { FormationViewComponent } from './formation-view/formation-view.component';
 import { SummaryBlockComponent } from './summary-block/summary-block.component';
 import { BlocksDragDropComponent } from '../create-formation-content/blocks-drag-drop/blocks-drag-drop.component';
+import { PageTitle } from '@app/interfaces/page-title';
 
 @Component({
   selector: 'app-summary-view',
@@ -23,7 +23,7 @@ import { BlocksDragDropComponent } from '../create-formation-content/blocks-drag
 })
 export class SummaryViewComponent {
   formationId: number = 1;
-  @Input() formation: Formation = {
+  formation: Formation = {
     id: 1,
     titre: 'Formation sur le développement web',
     date_creation: '2024-05-03',
@@ -247,105 +247,17 @@ export class SummaryViewComponent {
     ],
   };
 
-  actualPage: Page = {
-    id: 1,
-    nom: 'Page 1',
-    contenu: [
-      {
-        id: 1,
-        title: 'Bloc 1',
-        contenu: {
-          id: 1,
-          type: 'markdown',
-          text: 'Ligne 1\nLigne 2\nLigne 3\nLigne 4',
-        },
-      },
-      {
-        id: 2,
-        title: 'Bloc 2',
-        contenu: {
-          id: 2,
-          type: 'markdown',
-          text: 'Ligne 1\nLigne 2\nLigne 3\nLigne 4',
-        },
-      },
-      {
-        id: 3,
-        title: 'Bloc 3',
-        contenu: {
-          id: 3,
-          type: 'markdown',
-          text: 'Ligne 1\nLigne 2\nLigne 3\nLigne 4',
-        },
-      },
-      {
-        id: 4,
-        title: 'Bloc 4',
-        contenu: {
-          id: 4,
-          type: 'markdown',
-          text: 'Ligne 1\nLigne 2\nLigne 3\nLigne 4',
-        },
-      },
-      {
-        id: 5,
-        title: 'Bloc 5',
-        contenu: {
-          id: 5,
-          type: 'markdown',
-          text: 'Ligne 1\nLigne 2\nLigne 3\nLigne 4',
-        },
-      },
-      {
-        id: 6,
-        title: 'Bloc 6',
-        contenu: {
-          id: 6,
-          type: 'markdown',
-          text: 'Ligne 1\nLigne 2\nLigne 3\nLigne 4',
-        },
-      },
-      {
-        id: 7,
-        title: 'Bloc 7',
-        contenu: {
-          id: 7,
-          type: 'markdown',
-          text: 'Ligne 1\nLigne 2\nLigne 3\nLigne 4',
-        },
-      },
-      {
-        id: 8,
-        title: 'Bloc 8',
-        contenu: {
-          id: 8,
-          type: 'markdown',
-          text: 'Ligne 1\nLigne 2\nLigne 3\nLigne 4',
-        },
-      },
-      {
-        id: 9,
-        title: 'Bloc 9',
-        contenu: {
-          id: 9,
-          type: 'markdown',
-          text: 'Ligne 1\nLigne 2\nLigne 3\nLigne 4',
-        },
-      },
-      {
-        id: 10,
-        title: 'Bloc 10',
-        contenu: {
-          id: 10,
-          type: 'markdown',
-          text: 'Ligne 1\nLigne 2\nLigne 3\nLigne 4',
-        },
-      },
-    ],
-  };
+  actualPage: Page = {} as Page;
 
   private router: Router = inject(Router);
+
   @Input() activeStep: number = 1;
+
+  @Input()
+  set setFormation(formation: Formation) {
+    this.formation = formation;
+    this.actualPage = formation.body?.[0] as Page;
+  }
 
   constructor(
     //private scrollToAnchorService: ScrollToAnchorService,
@@ -379,8 +291,9 @@ export class SummaryViewComponent {
     if (anchor) anchor.scrollIntoView({ behavior: 'smooth', block: 'center' });
   }
 
-  handleEventPageHasChanged(page: Page) {
-    this.actualPage = page;
+  handleEventPageTitleHasChanged(page: PageTitle) {
+    console.log('Page has changed', page);
+    this.actualPage = this.formation.body?.find((p) => p.id === page.id) as Page;
   }
 
   changeActiveStep() {
@@ -391,8 +304,20 @@ export class SummaryViewComponent {
     }
   }
 
-  getActualPageBlocks() {
-    return this.actualPage.contenu;
+  getFormationPagesTitles() {
+    if (this.formation.body) {
+      return this.formation.body?.map((page) => {
+        return { id: page.id, nom: page.nom } as PageTitle;
+      }) as PageTitle[];
+    } else {
+      return [] as PageTitle[];
+    }
+  }
+
+  handleEventPageHasChanged(page: Page) {
+    if (this.formation.body) {
+      this.actualPage = this.formation.body.find((p) => p.id === page.id) as Page;
+    }
   }
 
 }

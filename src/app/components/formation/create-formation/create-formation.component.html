@@ -58,12 +58,12 @@
     }
     @case(2) {
     <div>
-        <app-create-summary-formation [emitFormation]="activeStep===2" (nextStepEvent)="setFormationSummary($event)"></app-create-summary-formation>
+        <app-create-summary-formation (nextStepEvent)="setFormationSummary($event)"></app-create-summary-formation>
     </div>
     }
     @case(3) {
     <div>
-        <app-summary-view></app-summary-view>
+        <app-summary-view [setFormation]="formation"></app-summary-view>
     </div>
     }
     }

@@ -15,7 +15,12 @@ export class SummaryBlockComponent {
   constructor(
   ) {}
 
-  @Input() actualPage: Page = {} as Page;
+  actualPage: Page = {} as Page;
+
+  @Input()
+  set setActualPage(page: Page) {
+    this.actualPage = page;
+  }
 
   actualRoute() {
     return this.router.url.split('#')[0];

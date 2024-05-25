@@ -5,7 +5,7 @@
       data-hs-scrollspy-scrollable-parent="#scrollspy-scrollable-parent-2"
     >
       <h2 class="text-xl font-medium dark:text-white">Pages</h2>
-      @for (page of formation_body; track $index) {
+      @for (page of _pages; track $index) {
       <li data-hs-docs-scrollspy-group="">
         <button
           (click)="goToPage(page.id)"

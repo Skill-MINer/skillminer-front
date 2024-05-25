@@ -20,16 +20,7 @@ import { SummaryTitle } from '@app/interfaces/summary-title';
 })
 export class CreateSummaryFormationComponent {
 
-  private _nextStep: boolean = false;
   @Output() nextStepEvent = new EventEmitter<SummaryTitle[]>();
-
-  @Input()
-  set emitFormation(nextStep: boolean) {
-    this._nextStep = nextStep;
-    if (this._nextStep) {
-      this.nextStepEvent.emit(this.titles);
-    }
-  }
   
   titles: SummaryTitle[] = [
     {
@@ -40,6 +31,7 @@ export class CreateSummaryFormationComponent {
 
   drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.titles, event.previousIndex, event.currentIndex);
+    this.nextStepEvent.emit(this.titles);
   }
 
   edit(title: string) {
@@ -53,7 +45,7 @@ export class CreateSummaryFormationComponent {
         t.title = title;
       }
     });
-    console.log(this.titles)
+    this.nextStepEvent.emit(this.titles);
   }
 
   handleEventAddTitle(parrentTitle: {id: number, title: string}){
@@ -63,5 +55,6 @@ export class CreateSummaryFormationComponent {
       title: 'New Title',
     });
     moveItemInArray(this.titles, newId, this.titles.indexOf(parrentTitle)+1);
+    this.nextStepEvent.emit(this.titles);
   }
 }

@@ -18,7 +18,17 @@ export class FormationViewComponent {
   ) {}
 
   
-  @Input() formationTitle: string | undefined = 'defaut title';
-  @Input() actualPage: Page = {} as Page;
+  formationTitle: string | undefined = 'defaut title';
+  actualPage: Page = {} as Page;
+
+  @Input()
+  set setFormationTitle(title: string | undefined) {
+    this.formationTitle = title;
+  }
+
+  @Input()
+  set setActualPage(page: Page) {
+    this.actualPage = page;
+  }
 
 }

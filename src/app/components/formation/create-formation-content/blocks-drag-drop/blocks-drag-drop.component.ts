@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import {
   CdkDrag,
   CdkDragDrop,
@@ -13,6 +13,7 @@ import { ElementCollapseBoxComponent } from '@app/components/formation/sections/
 import { Markdown } from '@app/interfaces/markdown';
 import { pageContent } from '@app/interfaces/page-content';
 import { AddBlockComponent } from '@app/components/formation/create-formation-content/add-block/add-block.component';
+import { Page } from '@app/interfaces/page';
 @Component({
   selector: 'app-blocks-drag-drop',
   standalone: true,
@@ -31,67 +32,76 @@ import { AddBlockComponent } from '@app/components/formation/create-formation-co
 })
 export class BlocksDragDropComponent {
 
-  @Input() pageBlocks: pageContent[] = [
-    {
-      id: 1,
-      title: 'Bloc 1',
-      contenu: {
+  page: Page = {
+    id: 1,
+    nom: 'Page 1',
+    contenu: [
+      {
         id: 1,
-        type: 'markdown',
-        text: '### Titre du bloc 1\n```\nCeci est un exemple de contenu en Markdown pour le bloc 1.\n```',
+        title: 'Bloc 1',
+        contenu: {
+          id: 1,
+          type: 'markdown',
+          text: '#### Contenu du bloc 1\n```\nCeci est un exemple de contenu en Markdown pour le bloc 1.\n```',
+        },
       },
-    },
-  ];
+    ]
+  };
 
-  drop(event: CdkDragDrop<string[]>) {
-    moveItemInArray(this.pageBlocks, event.previousIndex, event.currentIndex);
+  @Input()
+  set setPageBlocks(page: Page) {
+    this.page = page;
   }
 
-  edit(title: string) {
-    console.log('Editing ' + title);
+  @Output() pageBlocksChanged = new EventEmitter<Page>();
+
+  drop(event: CdkDragDrop<string[]>) {
+    moveItemInArray(this.page.contenu, event.previousIndex, event.currentIndex);
+    this.pageBlocksChanged.emit(this.page);
   }
 
   handleEventTitleHasChanged(title: string, id: number) {
-    this.pageBlocks[id - 1].title = title;
-    console.log(this.pageBlocks);
+    this.page.contenu.find((block) => block.id === id)!.title = title;
+    console.log(this.page.contenu);
+    this.pageBlocksChanged.emit(this.page);
   }
 
   handleEventContentHasChanged(markdown: Markdown, id: number) {
-    {
-      if (markdown.id) {
-        //change contenu of block with id
-        this.pageBlocks.forEach((t) => {
-          if (t.id === id) {
-            t.contenu.text = markdown.text;
-          }
-        });
-      }
-      console.log(
-        'block content changed' +
-          this.pageBlocks[id - 1].contenu.text +
-          'RECEIVED' +
-          markdown.text
-      );
+    if (markdown.id) {
+      //change contenu of block with id
+      this.page.contenu.forEach((t) => {
+        if (t.id === id) {
+          t.contenu.text = markdown.text;
+        }
+      });
     }
+    console.log(
+      'block content changed' +
+      this.page.contenu.find((block) => block.id === id)!.contenu.text +
+      'RECEIVED' +
+      markdown.text
+    );
+    this.pageBlocksChanged.emit(this.page);
   }
 
   handleEventAddBlock(parentBlock: pageContent) {
-    const newId: number = Math.max(...this.pageBlocks.map(block => block.id)) + 1;
-    this.pageBlocks.push({
+    const newId: number = Math.max(...this.page.contenu.map(block => block.id)) + 1;
+    this.page.contenu.push({
       id: newId,
-      title: 'Bloc 3',
+      title: 'New Bloc',
       contenu: {
         id: newId,
         type: 'markdown',
-        text: '```markdown\n### Titre du bloc 3\n\nCeci est un exemple de contenu en Markdown.\n```',
+        text: 'markdown\n### Content of the new bloc\n```\nCeci est un exemple de contenu en Markdown.\n```',
       },
     });
-    moveItemInArray(this.pageBlocks, newId, this.pageBlocks.indexOf(parentBlock) + 1);
+    moveItemInArray(this.page.contenu, newId, this.page.contenu.indexOf(parentBlock) + 1);
+    this.pageBlocksChanged.emit(this.page);
   }
 
   handleEventAddVideoBlock(parentBlock: pageContent) {
-    const newId: number = Math.max(...this.pageBlocks.map(block => block.id)) + 1;
-    this.pageBlocks.push({
+    const newId: number = Math.max(...this.page.contenu.map(block => block.id)) + 1;
+    this.page.contenu.push({
       id: newId,
       title: 'Bloc 3',
       contenu: {
@@ -100,6 +110,7 @@ export class BlocksDragDropComponent {
         text: 'url-de-votre-video',
       },
     });
-    moveItemInArray(this.pageBlocks, newId, this.pageBlocks.indexOf(parentBlock) + 1);
+    moveItemInArray(this.page.contenu, newId, this.page.contenu.indexOf(parentBlock) + 1);
+    this.pageBlocksChanged.emit(this.page);
   }
 }

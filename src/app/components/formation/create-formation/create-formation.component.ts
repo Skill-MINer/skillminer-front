@@ -25,6 +25,7 @@ export class CreateFormationComponent {
 
   constructor() {
     this.activeStep = 1;
+    this.setFormationSummary([{id: 1, title: 'First Title'}] as SummaryTitle[])
   }
 
   ngOnInit(): void {
@@ -82,16 +83,15 @@ export class CreateFormationComponent {
             contenu: [
             {
                 id: 0,
-                title: 'First Title',
+                title: 'First bloc title',
                 contenu: {
                 id: 1,
                 type: 'markdown',
-                text: '### Titre du bloc 1\n```\nCeci est un exemple de contenu en Markdown pour le bloc 1.\n```',
+                text: '#### Contenu du bloc 1\n```\nCeci est un exemple de contenu en Markdown pour le bloc 1.\n```',
                 } as Markdown,
             } as pageContent,
             ],
         } as Page);
-    }  
+    }
   }
-
 }
