@@ -1,0 +1,48 @@
+<div [hidden]="isCollapseBoxVisible">
+  <button
+    id="TitleButton"
+    (click)="toggleVisibility()"
+    (dblclick)="toggleTitleVisibility()"
+    class="py-3 inline-flex items-center gap-x-3 w-full font-semibold text-start text-gray-800 hover:text-gray-500 rounded-lg disabled:opacity-50 disabled:pointer-events-none dark:hs-accordion-active:text-blue-500 dark:text-neutral-200 dark:hover:text-neutral-400 dark:focus:outline-none dark:focus:text-neutral-400"
+    cdkDragHandle
+  >
+    <svg
+      class="size-4"
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <path d="m6 9 6 6 6-6"></path>
+    </svg>
+    {{ title }}
+  </button>
+  <div
+    [@toggle]="state"
+    class="w-full overflow-hidden transition-[height] duration-300"
+  >
+    @switch (markdown.type) { @case('markdown') {
+    <app-markdown-editor
+      [markdown]="markdown"
+      (markdownHasChanged)="sendEventMarkdown($event)"
+    >
+    </app-markdown-editor>
+    } @case('video') {
+    <app-bloc-video
+      [markdown]="markdown"
+      (markdownHasChanged)="sendEventMarkdown($event)"
+    ></app-bloc-video>
+    } }
+  </div>
+</div>
+<app-title1-section
+  [hidden]="!isCollapseBoxVisible"
+  [title]="title"
+  (mouseleave)="toggleTitleVisibility()"
+  (titleHasChanged)="sendEventTitle($event)"
+></app-title1-section>

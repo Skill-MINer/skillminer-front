@@ -1,0 +1,76 @@
+<div
+  id="plus_bar"
+  [class.flex]="isPlus_barVisible"
+  [class.hidden]="isAdd_blocks_buttonsVisible"
+  class="items-center w-full pt-2 pb-1"
+  (click)="toggleVisibility('add-blocks_buttons')"
+>
+  <button
+    class="h-6 w-6 flex items-center justify-center border border-gray-300 rounded-full text-gray-300 hover:text-gray-600 hover:bg-gray-200 focus:outline-none"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="h-3 w-3"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M12 4v16m8-8H4"
+      />
+    </svg>
+  </button>
+  <div class="flex-1 h-px bg-gray-300 ml-1/10"></div>
+</div>
+
+<div
+  id="add-blocks_buttons"
+  [class.hidden]="isPlus_barVisible"
+  [class.flex]="isAdd_blocks_buttonsVisible"
+  class="items-center justify-center space-x-4 pt-2 pb-1"
+  (mouseleave)="toggleVisibility('plus_bar')"
+>
+  <button
+    class="flex items-center font-sans text-xs justify-center w-auto h-8 px-2 py-1 rounded-full text-gray-300 hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-300"
+    (click)="addBlock()"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="h-3 w-3 mr-1"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M12 4v16m8-8H4"
+      />
+    </svg>
+    Add Block
+  </button>
+  <button
+    class="flex items-center font-sans text-xs justify-center w-auto h-8 px-2 py-1 rounded-full text-gray-300 hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-300"
+    (click)="addVideoBlock()"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="h-3 w-3 mr-1"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M12 4v16m8-8H4"
+      />
+    </svg>
+    Add VideoBlock
+  </button>
+</div>

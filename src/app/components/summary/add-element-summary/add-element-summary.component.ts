@@ -1,7 +1,7 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 
 @Component({
-  selector: 'app-add-element-summary',
+  selector: 'app-add-block',
   standalone: true,
   imports: [],
   templateUrl: './add-element-summary.component.html',

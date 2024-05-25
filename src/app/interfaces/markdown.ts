@@ -1,4 +1,5 @@
 export interface Markdown {
   id?: number;
-  text?: string;
+  type: string;
+  text: string;
 }

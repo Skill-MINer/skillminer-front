@@ -21,6 +21,7 @@ import { BlocVideoComponent } from './components/formation/sections/bloc-video/b
 import { MarkdownEditorComponent } from './components/markdown-editor/markdown-editor.component';
 import { MarkdownWithAiComponent } from './components/markdown-with-ai/markdown-with-ai.component';
 import { LiveCursorComponent } from './components/formation/live-cursor/live-cursor.component';
+import { BlockDragDropComponent } from './components/formation/create-formation-content/block-drag-drop/block-drag-drop.component';
 
 export const routes: Routes = [
   { path: '', component: WelcomeComponent },
@@ -88,6 +89,7 @@ export const routes: Routes = [
     path: 'drag-drop',
     component: DragDropComponent,
   },
+  { path: 'block-drag-drop', component: BlockDragDropComponent },
   {
     path: 'bloc-video',
     component: BlocVideoComponent,
