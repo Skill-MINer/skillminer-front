@@ -52,8 +52,6 @@ export class CreateHeaderFormationComponent  {
             this.createFormationService.postImageHeader(id, this.imageFile);
           }
         });
-
-        console.log("requete envoyée");
       }
     }
   }
@@ -68,6 +66,7 @@ export class CreateHeaderFormationComponent  {
         }
       };
       reader.readAsDataURL(file);
+      this.imageFile = file;
     }
   }
 
