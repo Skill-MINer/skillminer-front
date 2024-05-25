@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { Page } from '../../../interfaces/page';
 import { Formation } from '../../../interfaces/formation';
 import { RouterLink, Router, ActivatedRoute } from '@angular/router';
@@ -12,17 +12,18 @@ import { FormationService } from '../../../services/formation.service';
 import { SummaryPageComponent } from './summary-page/summary-page.component';
 import { FormationViewComponent } from './formation-view/formation-view.component';
 import { SummaryBlockComponent } from './summary-block/summary-block.component';
+import { BlocksDragDropComponent } from '../create-formation-content/blocks-drag-drop/blocks-drag-drop.component';
 
 @Component({
   selector: 'app-summary-view',
   standalone: true,
-  imports: [RouterLink, FooterComponent, MarkdownModule, SummaryPageComponent, FormationViewComponent, SummaryBlockComponent],
+  imports: [RouterLink, FooterComponent, MarkdownModule, SummaryPageComponent, FormationViewComponent, SummaryBlockComponent, BlocksDragDropComponent],
   templateUrl: './summary-view.component.html',
   styleUrl: './summary-view.component.sass',
 })
 export class SummaryViewComponent {
   formationId: number = 1;
-  formation: Formation = {
+  @Input() formation: Formation = {
     id: 1,
     titre: 'Formation sur le développement web',
     date_creation: '2024-05-03',
@@ -245,6 +246,7 @@ export class SummaryViewComponent {
       },
     ],
   };
+
   actualPage: Page = {
     id: 1,
     nom: 'Page 1',
@@ -341,8 +343,9 @@ export class SummaryViewComponent {
       },
     ],
   };
+
   private router: Router = inject(Router);
-  activeStep: number = 1;
+  @Input() activeStep: number = 1;
 
   constructor(
     //private scrollToAnchorService: ScrollToAnchorService,
@@ -387,4 +390,9 @@ export class SummaryViewComponent {
       this.activeStep = 1;
     }
   }
+
+  getActualPageBlocks() {
+    return this.actualPage.contenu;
+  }
+
 }

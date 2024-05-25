@@ -4,7 +4,7 @@
     class="flex flex-col w-[80rem]"
     (cdkDropListDropped)="drop($event)"
   >
-    @for (block of blocks; track block) {
+    @for (block of pageBlocks; track block) {
     <div
       class="relative bg-transparent hs-accordion-group"
       cdkDrag

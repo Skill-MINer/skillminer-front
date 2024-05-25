@@ -33,10 +33,10 @@ export class CreateFormationService {
       .pipe(catchError(this.handleError));
   }
 
-  postImageHeader(id: String, file: File) {
+  postImageHeader(id: String, file: File): Observable<any> {
     const formData = new FormData();
     formData.append('file', file);
-    this.http.post(`${IP_API}/file/formations/${id}`, formData).subscribe();
+    return this.http.post(`${IP_API}/file/formations/${id}`, formData);
   }
 
 

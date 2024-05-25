@@ -16,12 +16,12 @@ import { SummaryViewComponent } from './components/formation/summary-view/summar
 import { CreateSectionsContainerComponent } from './components/formation/create-sections-container/create-sections-container.component';
 import { PageComponent } from './components/formation/page/page.component';
 import { CreateFormationComponent } from './components/formation/create-formation/create-formation.component';
-import { DragDropComponent } from './components/summary/drag-drop/drag-drop.component';
+import { CreateSummaryFormationComponent } from './components/formation/summary/create-summary-formation/create-summary-formation.component';
 import { BlocVideoComponent } from './components/formation/sections/bloc-video/bloc-video.component';
 import { MarkdownEditorComponent } from './components/markdown-editor/markdown-editor.component';
 import { MarkdownWithAiComponent } from './components/markdown-with-ai/markdown-with-ai.component';
 import { LiveCursorComponent } from './components/formation/live-cursor/live-cursor.component';
-import { BlockDragDropComponent } from './components/formation/create-formation-content/block-drag-drop/block-drag-drop.component';
+import { BlocksDragDropComponent } from './components/formation/create-formation-content/blocks-drag-drop/blocks-drag-drop.component';
 
 export const routes: Routes = [
   { path: '', component: WelcomeComponent },
@@ -66,8 +66,6 @@ export const routes: Routes = [
     path: 'create-header-formation',
     component: CreateHeaderFormationComponent,
   },
-  //TEST PATHS
-  { path: 'summary/:id', component: SummaryViewComponent },
   { path: 'test-multiS-select', component: TestComponent },
   {
     path: 'test-formationCreateSections',
@@ -87,9 +85,9 @@ export const routes: Routes = [
   },
   {
     path: 'drag-drop',
-    component: DragDropComponent,
+    component: CreateSummaryFormationComponent,
   },
-  { path: 'block-drag-drop', component: BlockDragDropComponent },
+  { path: 'block-drag-drop', component: BlocksDragDropComponent },
   {
     path: 'bloc-video',
     component: BlocVideoComponent,
@@ -97,5 +95,5 @@ export const routes: Routes = [
   {
     path: 'live-cursor/:id',
     component: LiveCursorComponent,
-  }
+  },
 ];

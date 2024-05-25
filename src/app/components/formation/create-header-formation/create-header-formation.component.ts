@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, EventEmitter, Output, inject } from '@angular/core';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { FormGroup, AbstractControl, Validators, ReactiveFormsModule, FormControl } from "@angular/forms";
 import { Tag } from "../../../interfaces/tag"
@@ -18,6 +18,7 @@ export class CreateHeaderFormationComponent  {
   imageFile: File | null = null;
   requiredFileType = 'image/png';
   selectedImageUrl = 'https://preline.co/assets/svg/examples/abstract-bg-1.svg'; // default image URL
+  @Output() nextStep = new EventEmitter<null>();;
 
   protected readonly createFormationService: CreateFormationService = inject(CreateFormationService);
   protected readonly headerForm = new FormGroup({
@@ -49,7 +50,9 @@ export class CreateHeaderFormationComponent  {
         }).subscribe((formation) => {
           let id = formation.id;
           if (this.imageFile !== null) {
-            this.createFormationService.postImageHeader(id, this.imageFile);
+            this.createFormationService.postImageHeader(id, this.imageFile).subscribe(() => {
+              this.nextStep.emit();
+            });
           }
         });
       }

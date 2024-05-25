@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import {
   CdkDrag,
   CdkDragDrop,
@@ -8,53 +8,33 @@ import {
 } from '@angular/cdk/drag-drop';
 import {MatIconModule} from '@angular/material/icon';
 import { Title1SectionComponent } from '@app/components/formation/sections/title1-section/title1-section.component';
-import { AddElementSummaryComponent } from '@app/components/summary/add-element-summary/add-element-summary.component';
+import { AddElementSummaryComponent } from '@app/components/formation/summary/add-element-summary/add-element-summary.component';
+import { SummaryTitle } from '@app/interfaces/summary-title';
 
 @Component({
-  selector: 'app-drag-drop',
+  selector: 'app-create-summary-formation',
   standalone: true,
   imports: [CdkDropList, CdkDrag, CdkDragPlaceholder, MatIconModule, Title1SectionComponent, AddElementSummaryComponent],
-  templateUrl: './drag-drop.component.html',
-  styleUrl: './drag-drop.component.sass'
+  templateUrl: './create-summary-formation.component.html',
+  styleUrl: './create-summary-formation.component.sass'
 })
-export class DragDropComponent {
+export class CreateSummaryFormationComponent {
 
-  titles = [
+  private _nextStep: boolean = false;
+  @Output() nextStepEvent = new EventEmitter<SummaryTitle[]>();
+
+  @Input()
+  set emitFormation(nextStep: boolean) {
+    this._nextStep = nextStep;
+    if (this._nextStep) {
+      this.nextStepEvent.emit(this.titles);
+    }
+  }
+  
+  titles: SummaryTitle[] = [
     {
       id: 1,
-      title: 'Episode I - The Phantom Menace',
-    },
-    {
-      id: 2,
-      title: 'Episode II - Attack of the Clones',
-    },
-    {
-      id: 3,
-      title: 'Episode III - Revenge of the Sith',
-    },
-    {
-      id: 4,
-      title: 'Episode IV - A New Hope',
-    },
-    {
-      id: 5,
-      title: 'Episode V - The Empire Strikes Back',
-    },
-    {
-      id: 6,
-      title: 'Episode VI - Return of the Jedi',
-    },
-    {
-      id: 7,
-      title: 'Episode VII - The Force Awakens',
-    },
-    {
-      id: 8,
-      title: 'Episode VIII - The Last Jedi',
-    },
-    {
-      id: 9,
-      title: 'Episode IX – The Rise of Skywalker',
+      title: 'First Title',
     },
   ];
 
