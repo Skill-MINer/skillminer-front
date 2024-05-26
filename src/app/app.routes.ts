@@ -12,7 +12,7 @@ import { ResetPasswordComponent } from './components/reset-password/reset-passwo
 import { SearchTrainingsComponent } from './components/search-trainings/search-trainings.component';
 import { CreateHeaderFormationComponent } from './components/formation/create-header-formation/create-header-formation.component';
 import { TestComponent } from './components/formation/test/test.component';
-import { SummaryViewComponent } from './components/formation/summary-view/summary-view.component';
+import { SummaryViewOnlyComponent } from './components/formation/summary/summary-view-only/summary-view-only.component';
 import { CreateSectionsContainerComponent } from './components/formation/create-sections-container/create-sections-container.component';
 import { PageComponent } from './components/formation/page/page.component';
 import { CreateFormationComponent } from './components/formation/create-formation/create-formation.component';
@@ -60,7 +60,7 @@ export const routes: Routes = [
     path: 'search',
     component: SearchTrainingsComponent,
   },
-  { path: 'summary/:id', component: SummaryViewComponent },
+  { path: 'summary/:id', component: SummaryViewOnlyComponent },
   { path: 'test', component: TestComponent },
   {
     path: 'create-header-formation',

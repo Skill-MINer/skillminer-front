@@ -2,13 +2,13 @@ import { Component } from '@angular/core';
 import { NgClass } from '@angular/common';
 import { CreateHeaderFormationComponent } from '../create-header-formation/create-header-formation.component';
 import { CreateSummaryFormationComponent } from '@app/components/formation/summary/create-summary-formation/create-summary-formation.component';
-import { SummaryViewComponent } from '../summary-view/summary-view.component';
+import { SummaryEditComponent } from '@app/components/formation/summary/summary-edit/summary-edit.component';
 import { CreateFormationService } from '@app/services/create-formation.service';
 
 @Component({
   selector: 'app-create-formation',
   standalone: true,
-  imports: [NgClass, CreateHeaderFormationComponent, CreateSummaryFormationComponent, SummaryViewComponent],
+  imports: [NgClass, CreateHeaderFormationComponent, CreateSummaryFormationComponent, SummaryEditComponent],
   templateUrl: './create-formation.component.html',
   styleUrl: './create-formation.component.sass',
 })

@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SummaryViewComponent } from './summary-view.component';
+import { SummaryEditComponent } from './summary-edit.component';
 
-describe('SummaryViewComponent', () => {
-  let component: SummaryViewComponent;
-  let fixture: ComponentFixture<SummaryViewComponent>;
+describe('SummaryEditComponent', () => {
+  let component: SummaryEditComponent;
+  let fixture: ComponentFixture<SummaryEditComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SummaryViewComponent]
+      imports: [SummaryEditComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(SummaryViewComponent);
+    fixture = TestBed.createComponent(SummaryEditComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
