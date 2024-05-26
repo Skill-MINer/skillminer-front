@@ -10,6 +10,10 @@ import {MatIconModule} from '@angular/material/icon';
 import { Title1SectionComponent } from '@app/components/formation/sections/title1-section/title1-section.component';
 import { AddElementSummaryComponent } from '@app/components/formation/summary/add-element-summary/add-element-summary.component';
 import { SummaryTitle } from '@app/interfaces/summary-title';
+import { CreateFormationService } from '@app/services/create-formation.service';
+import { Page } from '@app/interfaces/page';
+import { Markdown } from '@app/interfaces/markdown';
+import { pageContent } from '@app/interfaces/page-content';
 
 @Component({
   selector: 'app-create-summary-formation',
@@ -20,18 +24,10 @@ import { SummaryTitle } from '@app/interfaces/summary-title';
 })
 export class CreateSummaryFormationComponent {
 
-  @Output() nextStepEvent = new EventEmitter<SummaryTitle[]>();
-  
-  titles: SummaryTitle[] = [
-    {
-      id: 1,
-      title: 'First Title',
-    },
-  ];
+  constructor(protected createFormationService: CreateFormationService) {}
 
   drop(event: CdkDragDrop<string[]>) {
-    moveItemInArray(this.titles, event.previousIndex, event.currentIndex);
-    this.nextStepEvent.emit(this.titles);
+    moveItemInArray(this.createFormationService.formation.body as Page[], event.previousIndex, event.currentIndex);
   }
 
   edit(title: string) {
@@ -40,21 +36,34 @@ export class CreateSummaryFormationComponent {
 
   handleEventTitleHasChanged(title: string, id: number) {
     // change the title wich has the id
-    this.titles.forEach((t) => {
+    this.createFormationService.formation.body?.forEach((t) => {
       if (t.id === id) {
-        t.title = title;
+        t.nom = title;
       }
     });
-    this.nextStepEvent.emit(this.titles);
   }
 
-  handleEventAddTitle(parrentTitle: {id: number, title: string}){
-    const newId: number = this.titles.length + 1;
-    this.titles.push({
+  handleEventAddTitle(parrentTitle: Page){
+    const newId: number = Math.max(...(this.createFormationService.formation.body ?? []).map((t) => t.id )) + 1;
+    this.createFormationService.formation.body?.push({
       id: newId,
-      title: 'New Title',
+      nom: 'New Title',
+      contenu: [
+        {
+          id: 0,
+          title: 'First bloc title',
+          contenu: {
+          id: 1,
+          type: 'markdown',
+          text: '#### Contenu du bloc 1\n```\nCeci est un exemple de contenu en Markdown pour le bloc 1.\n```',
+          } as Markdown,
+      } as pageContent,
+      ],
     });
-    moveItemInArray(this.titles, newId, this.titles.indexOf(parrentTitle)+1);
-    this.nextStepEvent.emit(this.titles);
+    moveItemInArray(
+      this.createFormationService.formation.body as Page[],
+      newId,
+      (this.createFormationService.formation.body ?? []).indexOf(parrentTitle)+1
+    );
   }
 }

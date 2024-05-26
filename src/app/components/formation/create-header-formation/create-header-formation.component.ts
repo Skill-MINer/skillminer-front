@@ -12,20 +12,26 @@ import { map } from 'rxjs';
   templateUrl: './create-header-formation.component.html',
   styleUrl: './create-header-formation.component.sass',
 })
-export class CreateHeaderFormationComponent  {
+export class CreateHeaderFormationComponent {
 
   tags: any[] = [];
   imageFile: File | null = null;
   requiredFileType = 'image/png';
-  selectedImageUrl = 'https://preline.co/assets/svg/examples/abstract-bg-1.svg'; // default image URL
-  @Output() nextStep = new EventEmitter<null>();;
+  selectedImageUrl = 'https://preline.co/assets/svg/examples/abstract-bg-1.svg'; // default image url
 
-  protected readonly createFormationService: CreateFormationService = inject(CreateFormationService);
-  protected readonly headerForm = new FormGroup({
-    titre: new FormControl("", [Validators.required, Validators.minLength(3)]),
-    description: new FormControl("", [Validators.required, Validators.minLength(10)]),
-    selectedTags: new FormControl<Tag[]>([])
-  });
+  protected readonly headerForm;
+
+  constructor(protected createFormationService: CreateFormationService) {
+    this.headerForm = new FormGroup({
+      titre: new FormControl(this.createFormationService.formation.titre, [Validators.required, Validators.minLength(3)]),
+      description: new FormControl(this.createFormationService.formation.description, [Validators.required, Validators.minLength(10)]),
+      selectedTags: new FormControl<Tag[]>(this.createFormationService.formation.tag as Tag[])
+    });
+    if (this.createFormationService.imageUrl) {
+      this.selectedImageUrl = this.createFormationService.imageUrl;
+    }
+    console.log(this.createFormationService.imageUrl);
+  }
 
   ngOnInit() {
     this.createFormationService
@@ -35,16 +41,21 @@ export class CreateHeaderFormationComponent  {
         map((tags) => tags.map((tag) => ({ id: tag.id, name: tag.nom })))
       )
       .subscribe((tags) => {
-        this.tags = tags;});
+        this.tags = tags;
+      });
   }
 
   onSubmit() {
     if (this.headerForm.valid) {
       let id: String;
-      const selectedTags = this.headerForm.value.selectedTags;
-      const tags = selectedTags ? selectedTags.map((tag) => tag.id) : [];
+      const selectedTags: Tag[] = this.headerForm.value.selectedTags as Tag[];
       if (this.imageFile !== null) {
-        this.createFormationService.createFormation({
+        this.createFormationService.formation.titre = this.headerForm.value.titre as string;
+        this.createFormationService.formation.description = this.headerForm.value.description as string;
+        this.createFormationService.formation.tag = selectedTags;
+        this.createFormationService.imageFile = this.imageFile;
+        this.createFormationService.headerIsValidated = true;
+        /*this.createFormationService.createFormation({
           ...this.headerForm.value,
           tags: tags
         }).subscribe((formation) => {
@@ -54,8 +65,12 @@ export class CreateHeaderFormationComponent  {
               this.nextStep.emit();
             });
           }
-        });
+        });*/
+      } else {
+        this.createFormationService.headerIsValidated = false;
       }
+    } else {
+      this.createFormationService.headerIsValidated = false;
     }
   }
 
@@ -65,6 +80,7 @@ export class CreateHeaderFormationComponent  {
       const reader = new FileReader();
       reader.onload = e => {
         if (e.target) {
+          this.createFormationService.imageUrl = e.target.result as string;
           this.selectedImageUrl = e.target.result as string;
         }
       };

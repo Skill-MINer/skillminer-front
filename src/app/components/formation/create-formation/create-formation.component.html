@@ -53,17 +53,17 @@
     @switch (activeStep) {
     @case(1) {
     <div>
-        <app-create-header-formation (nextStep)="enableNextStep(1)"></app-create-header-formation>
+        <app-create-header-formation></app-create-header-formation>
     </div>
     }
     @case(2) {
     <div>
-        <app-create-summary-formation (nextStepEvent)="setFormationSummary($event)"></app-create-summary-formation>
+        <app-create-summary-formation></app-create-summary-formation>
     </div>
     }
     @case(3) {
     <div>
-        <app-summary-view [setFormation]="formation"></app-summary-view>
+        <app-summary-view></app-summary-view>
     </div>
     }
     }

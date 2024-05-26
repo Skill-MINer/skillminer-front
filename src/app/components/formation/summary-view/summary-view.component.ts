@@ -13,6 +13,7 @@ import { FormationViewComponent } from './formation-view/formation-view.componen
 import { SummaryBlockComponent } from './summary-block/summary-block.component';
 import { BlocksDragDropComponent } from '../create-formation-content/blocks-drag-drop/blocks-drag-drop.component';
 import { PageTitle } from '@app/interfaces/page-title';
+import { CreateFormationService } from '@app/services/create-formation.service';
 
 @Component({
   selector: 'app-summary-view',
@@ -23,231 +24,7 @@ import { PageTitle } from '@app/interfaces/page-title';
 })
 export class SummaryViewComponent {
   formationId: number = 1;
-  formation: Formation = {
-    id: 1,
-    titre: 'Formation sur le développement web',
-    date_creation: '2024-05-03',
-    description: 'Une formation complète sur les technologies web modernes',
-    user: {
-      id: '123',
-      nom: 'Doe',
-      prenom: 'John',
-      email: 'john.doe@example.com',
-      password: 'motdepasse123',
-      description: 'Développeur web passionné par les nouvelles technologies',
-      imageUrl: 'https://example.com/john.jpg',
-    },
-    tag: [
-      {
-        id: '1',
-        nom: 'HTML',
-      },
-      {
-        id: '2',
-        nom: 'CSS',
-      },
-      {
-        id: '3',
-        nom: 'JavaScript',
-      },
-    ],
-    body: [
-      {
-        id: 1,
-        nom: 'Page 1',
-        contenu: [
-          {
-            id: 1,
-            title: 'Bloc 1',
-            contenu: {
-              id: 1,
-              type: 'markdown',
-              text: 'Ligne 1\nLigne 2\nLigne 3\nLigne 4',
-            },
-          },
-          {
-            id: 2,
-            title: 'Bloc 2',
-            contenu: {
-              id: 2,
-              type: 'markdown',
-              text: 'Ligne 1\nLigne 2\nLigne 3\nLigne 4',
-            },
-          },
-          {
-            id: 3,
-            title: 'Bloc 3',
-            contenu: {
-              id: 3,
-              type: 'markdown',
-              text: 'Ligne 1\nLigne 2\nLigne 3\nLigne 4',
-            },
-          },
-          {
-            id: 4,
-            title: 'Bloc 4',
-            contenu: {
-              id: 4,
-              type: 'markdown',
-              text: 'Ligne 1\nLigne 2\nLigne 3\nLigne 4',
-            },
-          },
-          {
-            id: 5,
-            title: 'Bloc 5',
-            contenu: {
-              id: 5,
-              type: 'markdown',
-              text: 'Ligne 1\nLigne 2\nLigne 3\nLigne 4',
-            },
-          },
-          {
-            id: 6,
-            title: 'Bloc 6',
-            contenu: {
-              id: 6,
-              type: 'markdown',
-              text: 'Ligne 1\nLigne 2\nLigne 3\nLigne 4',
-            },
-          },
-          {
-            id: 7,
-            title: 'Bloc 7',
-            contenu: {
-              id: 7,
-              type: 'markdown',
-              text: 'Ligne 1\nLigne 2\nLigne 3\nLigne 4',
-            },
-          },
-          {
-            id: 8,
-            title: 'Bloc 8',
-            contenu: {
-              id: 8,
-              type: 'markdown',
-              text: 'Ligne 1\nLigne 2\nLigne 3\nLigne 4',
-            },
-          },
-          {
-            id: 9,
-            title: 'Bloc 9',
-            contenu: {
-              id: 9,
-              type: 'markdown',
-              text: 'Ligne 1\nLigne 2\nLigne 3\nLigne 4',
-            },
-          },
-          {
-            id: 10,
-            title: 'Bloc 10',
-            contenu: {
-              id: 10,
-              type: 'markdown',
-              text: 'Ligne 1\nLigne 2\nLigne 3\nLigne 4',
-            },
-          },
-        ],
-      },
-      {
-        id: 2,
-        nom: 'Page 2',
-        contenu: [
-          {
-            id: 11,
-            title: 'Bloc 11',
-            contenu: {
-              id: 11,
-              type: 'markdown',
-              text: 'Ligne 1\nLigne 2\nLigne 3\nLigne 4',
-            },
-          },
-          {
-            id: 12,
-            title: 'Bloc 12',
-            contenu: {
-              id: 12,
-              type: 'markdown',
-              text: 'Ligne 1\nLigne 2\nLigne 3\nLigne 4',
-            },
-          },
-          {
-            id: 13,
-            title: 'Bloc 13',
-            contenu: {
-              id: 13,
-              type: 'markdown',
-              text: 'Ligne 1\nLigne 2\nLigne 3\nLigne 4',
-            },
-          },
-          {
-            id: 14,
-            title: 'Bloc 14',
-            contenu: {
-              id: 14,
-              type: 'markdown',
-              text: 'Ligne 1\nLigne 2\nLigne 3\nLigne 4',
-            },
-          },
-          {
-            id: 15,
-            title: 'Bloc 15',
-            contenu: {
-              id: 15,
-              type: 'markdown',
-              text: 'Ligne 1\nLigne 2\nLigne 3\nLigne 4',
-            },
-          },
-          {
-            id: 16,
-            title: 'Bloc 16',
-            contenu: {
-              id: 16,
-              type: 'markdown',
-              text: 'Ligne 1\nLigne 2\nLigne 3\nLigne 4',
-            },
-          },
-          {
-            id: 17,
-            title: 'Bloc 17',
-            contenu: {
-              id: 17,
-              type: 'markdown',
-              text: 'Ligne 1\nLigne 2\nLigne 3\nLigne 4',
-            },
-          },
-          {
-            id: 18,
-            title: 'Bloc 18',
-            contenu: {
-              id: 18,
-              type: 'markdown',
-              text: 'Ligne 1\nLigne 2\nLigne 3\nLigne 4',
-            },
-          },
-          {
-            id: 19,
-            title: 'Bloc 19',
-            contenu: {
-              id: 19,
-              type: 'markdown',
-              text: 'Ligne 1\nLigne 2\nLigne 3\nLigne 4',
-            },
-          },
-          {
-            id: 20,
-            title: 'Bloc 20',
-            contenu: {
-              id: 20,
-              type: 'markdown',
-              text: 'Ligne 1\nLigne 2\nLigne 3\nLigne 4',
-            },
-          },
-        ],
-      },
-    ],
-  };
-
-  actualPage: Page = {} as Page;
+  actualPage: Page;
 
   private router: Router = inject(Router);
 
@@ -256,17 +33,18 @@ export class SummaryViewComponent {
   @Output() formationChange = new EventEmitter<Formation>();
   // TODO: Send this event to the parent component each time the page has changed
 
-  @Input()
-  set setFormation(formation: Formation) {
-    this.formation = formation;
-    this.actualPage = formation.body?.[0] as Page;
-  }
-
   constructor(
     //private scrollToAnchorService: ScrollToAnchorService,
     private route: ActivatedRoute,
-    private formationService: FormationService
-  ) {}
+    private formationService: FormationService,
+    protected createFormationService: CreateFormationService
+  ) {
+    if (this.createFormationService.formation.body) {
+      this.actualPage = this.createFormationService.formation.body[0] as Page;
+    } else {
+      this.actualPage = {} as Page;
+    }
+  }
 
   // scrollToAnchor(anchorId: string): void {
   //   this.scrollToAnchorService.scrollToAnchor(
@@ -275,7 +53,7 @@ export class SummaryViewComponent {
   //   );
   // }
 
-  ngOnInit() {
+  /*ngOnInit() {
     this.formationId = parseInt(this.route.snapshot.paramMap.get('id') ?? '');
     this.formationService
       .getFormationByIdContent(this.formationId)
@@ -286,7 +64,8 @@ export class SummaryViewComponent {
           this.actualPage = this.formation.body[0];
         }
       });
-  }
+  }*/
+
   ngAfterViewInit(): void {
     const anchor = document.querySelector(
       '#item-' + this.route.snapshot.paramMap.get('id')
@@ -296,7 +75,7 @@ export class SummaryViewComponent {
 
   handleEventPageTitleHasChanged(page: PageTitle) {
     console.log('Page has changed', page);
-    this.actualPage = this.formation.body?.find((p) => p.id === page.id) as Page;
+    this.actualPage = this.createFormationService.formation.body?.find((p) => p.id === page.id) as Page;
   }
 
   changeActiveStep() {
@@ -308,8 +87,8 @@ export class SummaryViewComponent {
   }
 
   getFormationPagesTitles() {
-    if (this.formation.body) {
-      return this.formation.body?.map((page) => {
+    if (this.createFormationService.formation.body) {
+      return this.createFormationService.formation.body?.map((page) => {
         return { id: page.id, nom: page.nom } as PageTitle;
       }) as PageTitle[];
     } else {
@@ -318,8 +97,8 @@ export class SummaryViewComponent {
   }
 
   handleEventPageHasChanged(page: Page) {
-    if (this.formation.body) {
-      this.actualPage = this.formation.body.find((p) => p.id === page.id) as Page;
+    if (this.createFormationService.formation.body) {
+      this.actualPage = this.createFormationService.formation.body.find((p) => p.id === page.id) as Page;
     }
   }
 

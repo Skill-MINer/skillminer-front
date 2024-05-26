@@ -8,6 +8,7 @@ import { Markdown } from '@app/interfaces/markdown';
 import { pageContent } from '@app/interfaces/page-content';
 import { Page } from '@app/interfaces/page';
 import { SummaryViewComponent } from '../summary-view/summary-view.component';
+import { CreateFormationService } from '@app/services/create-formation.service';
 
 @Component({
   selector: 'app-create-formation',
@@ -20,12 +21,9 @@ export class CreateFormationComponent {
 
   activeStep: number;
   numberOfSteps: number = 3;
-  headerValidated: boolean = true;
-  formation: Formation = {} as Formation;
 
-  constructor() {
+  constructor(protected createFormationService: CreateFormationService) {
     this.activeStep = 1;
-    this.setFormationSummary([{id: 1, title: 'First Title'}] as SummaryTitle[])
   }
 
   ngOnInit(): void {
@@ -48,7 +46,7 @@ export class CreateFormationComponent {
   }
 
   nextButtonDisabled() {
-    return this.activeStep === this.numberOfSteps || !this.headerValidated;
+    return this.activeStep === this.numberOfSteps || !this.createFormationService.headerIsValidated;
   }
 
   getActiveStep() {
@@ -60,38 +58,12 @@ export class CreateFormationComponent {
   }
 
   setActiveStep(step: number) {
-    if (step <= this.numberOfSteps && step >= 1 && this.headerValidated){
+    if (step <= this.numberOfSteps && step >= 1 && this.createFormationService.headerIsValidated){
       this.activeStep = step;
     }
   }
 
   submit() {
     console.log('submit');
-  }
-
-  enableNextStep(step: number) {
-    this.headerValidated = true;
-  }
-
-  setFormationSummary(titles: SummaryTitle[]) {
-    this.formation.body = [] as Page[];
-    for (let i = 0; i < titles.length; i++) {
-        const title = titles[i];
-        this.formation.body.push({
-            id: i,
-            nom: title.title,
-            contenu: [
-            {
-                id: 0,
-                title: 'First bloc title',
-                contenu: {
-                id: 1,
-                type: 'markdown',
-                text: '#### Contenu du bloc 1\n```\nCeci est un exemple de contenu en Markdown pour le bloc 1.\n```',
-                } as Markdown,
-            } as pageContent,
-            ],
-        } as Page);
-    }
   }
 }
