@@ -36,7 +36,6 @@ export class SummaryViewComponent {
   constructor(
     //private scrollToAnchorService: ScrollToAnchorService,
     private route: ActivatedRoute,
-    private formationService: FormationService,
     protected createFormationService: CreateFormationService
   ) {
     if (this.createFormationService.formation.body) {
@@ -74,7 +73,6 @@ export class SummaryViewComponent {
   }
 
   handleEventPageTitleHasChanged(page: PageTitle) {
-    console.log('Page has changed', page);
     this.actualPage = this.createFormationService.formation.body?.find((p) => p.id === page.id) as Page;
   }
 
@@ -93,12 +91,6 @@ export class SummaryViewComponent {
       }) as PageTitle[];
     } else {
       return [] as PageTitle[];
-    }
-  }
-
-  handleEventPageHasChanged(page: Page) {
-    if (this.createFormationService.formation.body) {
-      this.actualPage = this.createFormationService.formation.body.find((p) => p.id === page.id) as Page;
     }
   }
 

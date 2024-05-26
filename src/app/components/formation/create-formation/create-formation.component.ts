@@ -2,11 +2,6 @@ import { Component } from '@angular/core';
 import { NgClass } from '@angular/common';
 import { CreateHeaderFormationComponent } from '../create-header-formation/create-header-formation.component';
 import { CreateSummaryFormationComponent } from '@app/components/formation/summary/create-summary-formation/create-summary-formation.component';
-import { Formation } from '@app/interfaces/formation';
-import { SummaryTitle } from '@app/interfaces/summary-title';
-import { Markdown } from '@app/interfaces/markdown';
-import { pageContent } from '@app/interfaces/page-content';
-import { Page } from '@app/interfaces/page';
 import { SummaryViewComponent } from '../summary-view/summary-view.component';
 import { CreateFormationService } from '@app/services/create-formation.service';
 
@@ -24,6 +19,7 @@ export class CreateFormationComponent {
 
   constructor(protected createFormationService: CreateFormationService) {
     this.activeStep = 1;
+    this.createFormationService.getFormationFromLocal();
   }
 
   ngOnInit(): void {
@@ -65,5 +61,6 @@ export class CreateFormationComponent {
 
   submit() {
     console.log('submit');
+    this.createFormationService.saveAllFormationInRemote();
   }
 }

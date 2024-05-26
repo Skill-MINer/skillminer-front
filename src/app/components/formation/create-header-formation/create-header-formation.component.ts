@@ -30,7 +30,6 @@ export class CreateHeaderFormationComponent {
     if (this.createFormationService.imageUrl) {
       this.selectedImageUrl = this.createFormationService.imageUrl;
     }
-    console.log(this.createFormationService.imageUrl);
   }
 
   ngOnInit() {
@@ -72,6 +71,8 @@ export class CreateHeaderFormationComponent {
     } else {
       this.createFormationService.headerIsValidated = false;
     }
+
+    this.createFormationService.saveFormationInLocal();
   }
 
   onFileSelected(event: any) {
@@ -88,5 +89,4 @@ export class CreateHeaderFormationComponent {
       this.imageFile = file;
     }
   }
-
 }

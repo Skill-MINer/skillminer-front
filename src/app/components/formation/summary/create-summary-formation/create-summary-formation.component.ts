@@ -9,7 +9,6 @@ import {
 import {MatIconModule} from '@angular/material/icon';
 import { Title1SectionComponent } from '@app/components/formation/sections/title1-section/title1-section.component';
 import { AddElementSummaryComponent } from '@app/components/formation/summary/add-element-summary/add-element-summary.component';
-import { SummaryTitle } from '@app/interfaces/summary-title';
 import { CreateFormationService } from '@app/services/create-formation.service';
 import { Page } from '@app/interfaces/page';
 import { Markdown } from '@app/interfaces/markdown';
@@ -28,6 +27,7 @@ export class CreateSummaryFormationComponent {
 
   drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.createFormationService.formation.body as Page[], event.previousIndex, event.currentIndex);
+    this.createFormationService.saveFormationInLocal();
   }
 
   edit(title: string) {
@@ -35,12 +35,12 @@ export class CreateSummaryFormationComponent {
   }
 
   handleEventTitleHasChanged(title: string, id: number) {
-    // change the title wich has the id
     this.createFormationService.formation.body?.forEach((t) => {
       if (t.id === id) {
         t.nom = title;
       }
     });
+    this.createFormationService.saveFormationInLocal();
   }
 
   handleEventAddTitle(parrentTitle: Page){
@@ -65,5 +65,6 @@ export class CreateSummaryFormationComponent {
       newId,
       (this.createFormationService.formation.body ?? []).indexOf(parrentTitle)+1
     );
+    this.createFormationService.saveFormationInLocal();
   }
 }

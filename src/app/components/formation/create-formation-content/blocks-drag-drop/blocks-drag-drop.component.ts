@@ -14,6 +14,9 @@ import { Markdown } from '@app/interfaces/markdown';
 import { pageContent } from '@app/interfaces/page-content';
 import { AddBlockComponent } from '@app/components/formation/create-formation-content/add-block/add-block.component';
 import { Page } from '@app/interfaces/page';
+import { CreateFormationService } from '@app/services/create-formation.service';
+
+
 @Component({
   selector: 'app-blocks-drag-drop',
   standalone: true,
@@ -53,17 +56,17 @@ export class BlocksDragDropComponent {
     this.page = page;
   }
 
-  @Output() pageBlocksChanged = new EventEmitter<Page>();
+  constructor(protected createFormationService: CreateFormationService) { }
 
   drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.page.contenu, event.previousIndex, event.currentIndex);
-    this.pageBlocksChanged.emit(this.page);
+    this.createFormationService.saveFormationInLocal();
   }
 
   handleEventTitleHasChanged(title: string, id: number) {
     this.page.contenu.find((block) => block.id === id)!.title = title;
     console.log(this.page.contenu);
-    this.pageBlocksChanged.emit(this.page);
+    this.createFormationService.saveFormationInLocal();
   }
 
   handleEventContentHasChanged(markdown: Markdown, id: number) {
@@ -81,7 +84,7 @@ export class BlocksDragDropComponent {
       'RECEIVED' +
       markdown.text
     );
-    this.pageBlocksChanged.emit(this.page);
+    this.createFormationService.saveFormationInLocal();
   }
 
   handleEventAddBlock(parentBlock: pageContent) {
@@ -96,7 +99,7 @@ export class BlocksDragDropComponent {
       },
     });
     moveItemInArray(this.page.contenu, newId, this.page.contenu.indexOf(parentBlock) + 1);
-    this.pageBlocksChanged.emit(this.page);
+    this.createFormationService.saveFormationInLocal();
   }
 
   handleEventAddVideoBlock(parentBlock: pageContent) {
@@ -111,6 +114,6 @@ export class BlocksDragDropComponent {
       },
     });
     moveItemInArray(this.page.contenu, newId, this.page.contenu.indexOf(parentBlock) + 1);
-    this.pageBlocksChanged.emit(this.page);
+    this.createFormationService.saveFormationInLocal();
   }
 }
