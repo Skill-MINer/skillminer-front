@@ -16,7 +16,7 @@ const IP_API = environment.IP_API;
 export class CreateFormationService {
   private toastr: ToastrService = inject(ToastrService);
   private readonly http = inject(HttpClient);
-  public formation: Formation = {
+  private readonly  defaultFormation: Formation = {
     titre: 'My new Formation',
     description: 'This is a description',
     tag: [],
@@ -38,6 +38,7 @@ export class CreateFormationService {
       },
     ],
   } as Formation;
+  public formation: Formation = this.defaultFormation;
   public headerIsValidated = false;
   public imageFile: File | undefined;
   public imageUrl: string | undefined;
@@ -53,6 +54,10 @@ export class CreateFormationService {
   }
 
   createEmptyFormation() {
+    this.formation = this.defaultFormation;
+    this.headerIsValidated = false;
+    this.imageFile = undefined;
+    this.imageUrl = undefined;
     this.http.post<{ id: number }>(`${IP_API}/formations`, {}).subscribe((rep) => {
       this.formation.id = rep.id;
       this.router.navigate(['create-formation', this.formation.id])
