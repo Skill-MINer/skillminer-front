@@ -52,14 +52,21 @@
           <h3 class="text-lg font-semibold dark:text-white prose my-5">
             {{ block.title }}
           </h3>
-          <markdown
-            emoji
-            katex
-            mermaid
-            ngPreserveWhitespaces
-            class="variable-binding prose leading-none"
-            [data]="block.contenu.text"
-          ></markdown>
+          @switch (block.contenu.type) {
+            @case('markdown') {
+              <markdown
+              emoji
+              katex
+              mermaid
+              ngPreserveWhitespaces
+              class="variable-binding prose leading-none"
+              [data]="block.contenu.text"
+            ></markdown>
+            }
+            @case ('video') {
+              <app-bloc-video-view [videoId]="block.contenu.text"></app-bloc-video-view>
+            }
+            }
         </div>
         }
       </div>

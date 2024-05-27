@@ -53,7 +53,7 @@ export class CreateFormationService {
   }
 
   createEmptyFormation() {
-    this.http.post<{id: number}>(`${IP_API}/formations`, {}).subscribe((rep) => {
+    this.http.post<{ id: number }>(`${IP_API}/formations`, {}).subscribe((rep) => {
       this.formation.id = rep.id;
       this.router.navigate(['create-formation', this.formation.id])
     });
@@ -92,7 +92,6 @@ export class CreateFormationService {
     localStorage.setItem('formation-' + this.formation.id, JSON.stringify(this.formation));
     localStorage.setItem('headerIsValidated-' + this.formation.id, JSON.stringify(this.headerIsValidated));
     localStorage.setItem('imageUrl-' + this.formation.id, JSON.stringify(this.imageUrl));
-    localStorage.setItem('imageFile-' + this.formation.id, JSON.stringify(this.imageFile));
   }
 
   loadFormation() {
@@ -100,7 +99,6 @@ export class CreateFormationService {
       const formation = localStorage.getItem('formation-' + this.formation.id);
       const headerIsValidated = localStorage.getItem('headerIsValidated-' + this.formation.id);
       const imageUrl = localStorage.getItem('imageUrl-' + this.formation.id);
-      const imageFile = localStorage.getItem('imageFile-' + this.formation.id);
       if (formation) {
         this.formation = JSON.parse(formation);
         if (headerIsValidated) {
@@ -109,12 +107,31 @@ export class CreateFormationService {
         if (imageUrl) {
           this.imageUrl = JSON.parse(imageUrl);
         }
-        if (imageFile) {
-          this.imageFile = JSON.parse(imageFile);
-        }
+        this.loading = false;
       } else {
         this.formationService.getFormationByIdContent(this.formation.id).subscribe((formation) => {
-          this.formation = formation;
+          if (formation.titre) {
+            this.formation.titre = formation.titre;
+          }
+          if (formation.description) {
+            this.formation.description = formation.description;
+          }
+          if (formation.tag) {
+            this.formation.tag = formation.tag;
+          }
+          if (formation.body && formation.body?.length > 0) {
+            this.formation.body = formation.body;
+          }
+          if (formation.publier) {
+            this.formation.publier = formation.publier;
+          }
+          if (formation.user) {
+            this.formation.user = formation.user;
+          }
+          if (formation.date_creation) {
+            this.formation.date_creation = formation.date_creation;
+          }
+          this.imageUrl = `${IP_API}/file/formations/${this.formation.id}.png`;
           this.loading = false;
         });
       }
@@ -128,18 +145,23 @@ export class CreateFormationService {
         description: this.formation.description,
         tags: this.formation.tag?.map((tag) => tag.id),
       }).pipe(catchError(this.handleError)).subscribe();
-      if (this.imageFile) {
-        this.postImageHeader(this.formation.id, this.imageFile as File).pipe(catchError(this.handleError)).subscribe();
-      }
       if (this.formation.body) {
-          this.http.put(`${IP_API}/formations/${this.formation.id}/contenu`, this.formation.body)
-            .pipe(catchError(this.handleError))
-            .subscribe();
+        this.http.put(`${IP_API}/formations/${this.formation.id}/contenu`, this.formation.body)
+          .pipe(catchError(this.handleError))
+          .subscribe();
       }
       localStorage.removeItem('formation-' + this.formation.id);
       localStorage.removeItem('headerIsValidated-' + this.formation.id);
       localStorage.removeItem('imageUrl-' + this.formation.id);
       localStorage.removeItem('imageFile-' + this.formation.id);
+    }
+  }
+
+  saveHeaderImage() {
+    if (this.imageFile && this.formation.id) {
+      this.postImageHeader(this.formation.id, this.imageFile as File).pipe(catchError(this.handleError)).subscribe(() => {
+        this.toastr.success('Image uploaded', 'Success');
+      });
     }
   }
 }

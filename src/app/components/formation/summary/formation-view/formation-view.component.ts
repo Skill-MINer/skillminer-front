@@ -3,11 +3,12 @@ import { ActivatedRoute } from '@angular/router';
 import { FooterComponent } from '@app/components/footer/footer.component';
 import { Page } from '@app/interfaces/page';
 import { MarkdownModule } from 'ngx-markdown';
+import { BlocVideoViewComponent } from '../../sections/bloc-video-view/bloc-video-view.component';
 
 @Component({
   selector: 'app-formation-view',
   standalone: true,
-  imports: [FooterComponent, MarkdownModule],
+  imports: [FooterComponent, MarkdownModule, BlocVideoViewComponent],
   templateUrl: './formation-view.component.html',
   styleUrl: './formation-view.component.sass'
 })

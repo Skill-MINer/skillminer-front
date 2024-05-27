@@ -13,11 +13,11 @@ import { map } from 'rxjs';
   styleUrl: './create-header-formation.component.sass',
 })
 export class CreateHeaderFormationComponent {
-
+  readonly deafaultImageUrl: string = 'https://preline.co/assets/svg/examples/abstract-bg-1.svg';
   tags: any[] = [];
   imageFile: File | null = null;
   requiredFileType = 'image/png';
-  selectedImageUrl = 'https://preline.co/assets/svg/examples/abstract-bg-1.svg'; // default image url
+  selectedImageUrl = this.deafaultImageUrl;
 
   protected readonly headerForm;
 
@@ -32,6 +32,9 @@ export class CreateHeaderFormationComponent {
     }
     if (this.createFormationService.imageFile) {
       this.imageFile = this.createFormationService.imageFile;
+    }
+    if (this.headerForm.valid && this.createFormationService.imageUrl !== this.deafaultImageUrl) {
+      this.createFormationService.headerIsValidated = true;
     }
   }
 
@@ -51,12 +54,12 @@ export class CreateHeaderFormationComponent {
     if (this.headerForm.valid) {
       let id: String;
       const selectedTags: Tag[] = this.headerForm.value.selectedTags as Tag[];
-      if (this.imageFile !== null) {
+      if (this.selectedImageUrl !== this.deafaultImageUrl) {
         this.createFormationService.formation.titre = this.headerForm.value.titre as string;
         this.createFormationService.formation.description = this.headerForm.value.description as string;
         this.createFormationService.formation.tag = selectedTags;
-        this.createFormationService.imageFile = this.imageFile;
         this.createFormationService.headerIsValidated = true;
+        this.createFormationService.saveFormationInLocal();
         /*this.createFormationService.createFormation({
           ...this.headerForm.value,
           tags: tags
@@ -74,8 +77,6 @@ export class CreateHeaderFormationComponent {
     } else {
       this.createFormationService.headerIsValidated = false;
     }
-
-    this.createFormationService.saveFormationInLocal();
   }
 
   onFileSelected(event: any) {
@@ -90,6 +91,10 @@ export class CreateHeaderFormationComponent {
       };
       reader.readAsDataURL(file);
       this.imageFile = file;
+      if (this.imageFile !== null) {
+        this.createFormationService.imageFile = this.imageFile;
+        this.createFormationService.saveHeaderImage();
+      }
     }
   }
 }

@@ -9,11 +9,13 @@ import 'prismjs/plugins/line-highlight/prism-line-highlight.js';
 import { FooterComponent } from '@app/components/footer/footer.component';
 import { FormationService } from '@app/services/formation.service';
 import { ScrollToAnchorService } from '@app/services/scroll-to-anchor.service';
+import { BlocVideoViewComponent } from '../../sections/bloc-video-view/bloc-video-view.component';
+
 
 @Component({
   selector: 'app-summary-view-only',
   standalone: true,
-  imports: [RouterLink, FooterComponent, MarkdownModule],
+  imports: [RouterLink, FooterComponent, MarkdownModule, BlocVideoViewComponent],
   templateUrl: './summary-view-only.component.html',
   styleUrl: './summary-view-only.component.sass',
 })
