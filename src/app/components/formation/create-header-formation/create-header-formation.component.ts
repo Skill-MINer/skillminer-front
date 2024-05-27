@@ -30,6 +30,9 @@ export class CreateHeaderFormationComponent {
     if (this.createFormationService.imageUrl) {
       this.selectedImageUrl = this.createFormationService.imageUrl;
     }
+    if (this.createFormationService.imageFile) {
+      this.imageFile = this.createFormationService.imageFile;
+    }
   }
 
   ngOnInit() {

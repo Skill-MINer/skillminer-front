@@ -1,3 +1,11 @@
+@if (createFormationService.loading) {
+<div class="justify-center">
+    <div class="animate-spin relative my-28 mx-auto flex space-x-3 p-3 size-6 border-[3px] border-current border-t-transparent text-accent rounded-full dark:text-accent"
+        role="status" aria-label="loading">
+        <span class="sr-only">Loading...</span>
+    </div>
+</div>
+} @else {
 <div class="max-w-[90rem] min-h-[70vh] relative mx-auto px-4 pb-3 pt-8">
     <!-- Stepper -->
     <ul class="relative flex flex-row gap-x-2 w-fit mx-auto">
@@ -89,3 +97,4 @@
     </div>
 
 </div>
+}

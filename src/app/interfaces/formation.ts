@@ -9,4 +9,5 @@ export interface Formation {
   user?: User;
   tag?: Tag[];
   body?: Page[];
+  publier?: boolean;
 }

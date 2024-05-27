@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { NgClass } from '@angular/common';
 import { CreateHeaderFormationComponent } from '../create-header-formation/create-header-formation.component';
 import { CreateSummaryFormationComponent } from '@app/components/formation/summary/create-summary-formation/create-summary-formation.component';
 import { SummaryEditComponent } from '@app/components/formation/summary/summary-edit/summary-edit.component';
 import { CreateFormationService } from '@app/services/create-formation.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-formation',
@@ -16,13 +17,20 @@ export class CreateFormationComponent {
 
   activeStep: number;
   numberOfSteps: number = 3;
+  @Input() id: number | undefined;
 
-  constructor(protected createFormationService: CreateFormationService) {
+  constructor(protected createFormationService: CreateFormationService, private router: Router) {
     this.activeStep = 1;
-    this.createFormationService.getFormationFromLocal();
+    this.router = inject(Router);
   }
 
   ngOnInit(): void {
+    if(!this.id) {
+      this.createFormationService.createEmptyFormation();
+    } else {
+      this.createFormationService.formation.id = this.id;
+      this.createFormationService.loadFormation();
+    }
   }
 
   nextStep() {
@@ -60,7 +68,6 @@ export class CreateFormationComponent {
   }
 
   submit() {
-    console.log('submit');
     this.createFormationService.saveAllFormationInRemote();
   }
 }

@@ -76,6 +76,10 @@ export const routes: Routes = [
     component: CreateFormationComponent,
   },
   {
+    path: 'create-formation/:id',
+    component: CreateFormationComponent,
+  },
+  {
     path: 'markdown',
     component: MarkdownEditorComponent,
   },

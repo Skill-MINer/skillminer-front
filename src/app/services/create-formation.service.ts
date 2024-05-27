@@ -3,9 +3,10 @@ import { Injectable, inject } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Tag } from '../interfaces/tag';
-
+import { FormationService } from './formation.service';
 import { environment } from '../../environments/environment';
 import { Observable, catchError, throwError } from 'rxjs';
+import { Router } from '@angular/router';
 
 const IP_API = environment.IP_API;
 
@@ -40,6 +41,9 @@ export class CreateFormationService {
   public headerIsValidated = false;
   public imageFile: File | undefined;
   public imageUrl: string | undefined;
+  public loading: boolean = true;
+  private router: Router = inject(Router);
+  private formationService: FormationService = inject(FormationService);
 
   constructor() { }
 
@@ -51,6 +55,7 @@ export class CreateFormationService {
   createEmptyFormation() {
     this.http.post<{id: number}>(`${IP_API}/formations`, {}).subscribe((rep) => {
       this.formation.id = rep.id;
+      this.router.navigate(['create-formation', this.formation.id])
     });
   }
 
@@ -90,25 +95,28 @@ export class CreateFormationService {
     localStorage.setItem('imageFile-' + this.formation.id, JSON.stringify(this.imageFile));
   }
 
-  getFormationFromLocal() {
-    if (!this.formation.id) {
-      this.createEmptyFormation();
-    } else {
+  loadFormation() {
+    if (this.formation.id) {
       const formation = localStorage.getItem('formation-' + this.formation.id);
       const headerIsValidated = localStorage.getItem('headerIsValidated-' + this.formation.id);
       const imageUrl = localStorage.getItem('imageUrl-' + this.formation.id);
       const imageFile = localStorage.getItem('imageFile-' + this.formation.id);
       if (formation) {
         this.formation = JSON.parse(formation);
-      }
-      if (headerIsValidated) {
-        this.headerIsValidated = JSON.parse(headerIsValidated);
-      }
-      if (imageUrl) {
-        this.imageUrl = JSON.parse(imageUrl);
-      }
-      if (imageFile) {
-        this.imageFile = JSON.parse(imageFile);
+        if (headerIsValidated) {
+          this.headerIsValidated = JSON.parse(headerIsValidated);
+        }
+        if (imageUrl) {
+          this.imageUrl = JSON.parse(imageUrl);
+        }
+        if (imageFile) {
+          this.imageFile = JSON.parse(imageFile);
+        }
+      } else {
+        this.formationService.getFormationByIdContent(this.formation.id).subscribe((formation) => {
+          this.formation = formation;
+          this.loading = false;
+        });
       }
     }
   }
