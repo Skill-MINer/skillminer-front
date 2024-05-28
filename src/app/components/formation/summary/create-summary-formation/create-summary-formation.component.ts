@@ -28,10 +28,11 @@ export class CreateSummaryFormationComponent {
   drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.createFormationService.formation.body as Page[], event.previousIndex, event.currentIndex);
     this.createFormationService.saveFormationInLocal();
+    this.createFormationService.wsSendMovePage(event.previousIndex, event.currentIndex);
   }
 
-  edit(title: string) {
-    console.log('Editing ' + title);
+  supprimer(id: number) {
+    console.log('Suppression de la page ' + id);
   }
 
   handleEventTitleHasChanged(title: string, id: number) {
@@ -41,11 +42,13 @@ export class CreateSummaryFormationComponent {
       }
     });
     this.createFormationService.saveFormationInLocal();
+    this.createFormationService.wsSendEditPageTitle(id, title);
   }
 
   handleEventAddTitle(parrentTitle: Page){
     const newId: number = Math.max(...(this.createFormationService.formation.body ?? []).map((t) => t.id )) + 1;
-    this.createFormationService.formation.body?.push({
+    if(!this.createFormationService.formation.body) this.createFormationService.formation.body = [];
+    this.createFormationService.formation.body.push({
       id: newId,
       nom: 'New Title',
       contenu: [
@@ -62,9 +65,10 @@ export class CreateSummaryFormationComponent {
     });
     moveItemInArray(
       this.createFormationService.formation.body as Page[],
-      newId,
-      (this.createFormationService.formation.body ?? []).indexOf(parrentTitle)+1
+      this.createFormationService.formation.body.length + 1,
+      this.createFormationService.formation.body.indexOf(parrentTitle)+1
     );
     this.createFormationService.saveFormationInLocal();
+    this.createFormationService.wsSendAddPage(this.createFormationService.formation.body.indexOf(parrentTitle)+1, newId);
   }
 }

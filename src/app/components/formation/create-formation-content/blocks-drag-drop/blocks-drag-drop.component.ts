@@ -61,17 +61,18 @@ export class BlocksDragDropComponent {
   drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.page.contenu, event.previousIndex, event.currentIndex);
     this.createFormationService.saveFormationInLocal();
+    this.createFormationService.wsSendMoveBlock(this.page.id, event.previousIndex, event.currentIndex);
   }
 
   handleEventTitleHasChanged(title: string, id: number) {
     this.page.contenu.find((block) => block.id === id)!.title = title;
     console.log(this.page.contenu);
     this.createFormationService.saveFormationInLocal();
+    this.createFormationService.wsSendEdit(this.page.id, id, title);
   }
 
   handleEventContentHasChanged(markdown: Markdown, id: number) {
     if (markdown.id) {
-      //change contenu of block with id
       this.page.contenu.forEach((t) => {
         if (t.id === id) {
           t.contenu.text = markdown.text;
@@ -85,6 +86,7 @@ export class BlocksDragDropComponent {
       markdown.text
     );
     this.createFormationService.saveFormationInLocal();
+    this.createFormationService.wsSendEdit(this.page.id, id, markdown.text);
   }
 
   handleEventAddBlock(parentBlock: pageContent) {
@@ -98,8 +100,10 @@ export class BlocksDragDropComponent {
         text: 'markdown\n### Content of the new bloc\n```\nCeci est un exemple de contenu en Markdown.\n```',
       },
     });
-    moveItemInArray(this.page.contenu, newId, this.page.contenu.indexOf(parentBlock) + 1);
+    const parentBlockIndex = this.page.contenu.indexOf(parentBlock);
+    moveItemInArray(this.page.contenu, newId, parentBlockIndex + 1);
     this.createFormationService.saveFormationInLocal();
+    this.createFormationService.wsSendAddBlock(this.page.id, parentBlockIndex, newId);
   }
 
   handleEventAddVideoBlock(parentBlock: pageContent) {

@@ -7,6 +7,11 @@ import { FormationService } from './formation.service';
 import { environment } from '../../environments/environment';
 import { Observable, catchError, throwError } from 'rxjs';
 import { Router } from '@angular/router';
+import * as io from 'socket.io-client';
+import { AuthService } from '@services/auth.service';
+import { moveItemInArray } from '@angular/cdk/drag-drop';
+import { Markdown } from '@app/interfaces/markdown';
+import { pageContent } from '@app/interfaces/page-content';
 
 const IP_API = environment.IP_API;
 
@@ -43,10 +48,17 @@ export class CreateFormationService {
   public imageFile: File | undefined;
   public imageUrl: string | undefined;
   public loading: boolean = true;
+  public socket: io.Socket;
   private router: Router = inject(Router);
   private formationService: FormationService = inject(FormationService);
 
-  constructor() { }
+  constructor(private authService: AuthService) {
+    this.socket = io.connect(`${environment.IP_API}`);
+
+    this.socket.on('connect', () => {
+      console.log("connected to server");
+    });
+   }
 
   getTags(): Observable<Tag[]> {
     const temp = this.http.get<Tag[]>(`${IP_API}/tags`);
@@ -101,6 +113,7 @@ export class CreateFormationService {
 
   loadFormation() {
     if (this.formation.id) {
+      this.initWebSocket();
       const formation = localStorage.getItem('formation-' + this.formation.id);
       const headerIsValidated = localStorage.getItem('headerIsValidated-' + this.formation.id);
       const imageUrl = localStorage.getItem('imageUrl-' + this.formation.id);
@@ -169,4 +182,158 @@ export class CreateFormationService {
       });
     }
   }
+
+  initWebSocket() {
+    try{
+      this.socket.emit('connection-to-room', { 
+        room_id: this.formation.id,
+        token: this.authService.getToken()
+      })
+    } catch (error) {
+      console.error("Error while connecting to room", error);
+    }
+
+    this.socket.on('edit', (param) => {
+      if (this.formation.body) {
+        const page = this.formation.body.find((p) => p.id === param.idPage);
+        if (page) {
+          const bloc = page.contenu.find((b) => b.id === param.idBloc);
+          if (bloc) {
+            bloc.contenu.text = param.text;
+          }
+        }
+      }
+    });
+
+    this.socket.on('moveBlock', (param) => {
+      if (this.formation.body) {
+        const page = this.formation.body.find((p) => p.id === param.idPage);
+        if (page) {
+          moveItemInArray(page.contenu, param.previousIndex, param.currentIndex);
+        }
+      }
+    });
+
+    this.socket.on('addBlockMD', (param) => {
+      if (this.formation.body) {
+        const page = this.formation.body.find((p) => p.id === param.idPage);
+        if (page) {
+          const newId = Math.max(...page.contenu.map((block) => block.id)) + 1;
+          page.contenu.push({
+            id: newId,
+            title: 'New Bloc',
+            contenu: {
+              id: newId,
+              type: 'markdown',
+              text: 'markdown\n### Content of the new bloc\n```\nCeci est un exemple de contenu en Markdown.\n```',
+            },
+          });
+          moveItemInArray(page.contenu, newId, param.parentBlockIndex + 1);
+        }
+      }
+    });
+
+    this.socket.on('editTitle', (param) => {
+      if (this.formation.body) {
+        const page = this.formation.body.find((p) => p.id === param.idPage);
+        if (page) {
+          const bloc = page.contenu.find((b) => b.id === param.idBloc);
+          if (bloc) {
+            bloc.title = param.title;
+          }
+        }
+      }
+    });
+
+    this.socket.on('addPage', (param) => {
+      if (this.formation.body) {
+        this.formation.body.push({
+          id: param.newPageId,
+          nom: 'New Title',
+          contenu: [
+            {
+              id: 0,
+              title: 'First bloc title',
+              contenu: {
+              id: 1,
+              type: 'markdown',
+              text: '#### Contenu du bloc 1\n```\nCeci est un exemple de contenu en Markdown pour le bloc 1.\n```',
+              } as Markdown,
+          } as pageContent,
+          ],
+        });
+        moveItemInArray(this.formation.body, this.formation.body.length-1, param.parentPageIndex);
+      }
+    });
+
+    this.socket.on('movePage', (param) => {
+      if (this.formation.body) {
+        moveItemInArray(this.formation.body, param.previousIndex, param.currentIndex);
+      }
+    });
+
+    this.socket.on('editPageTitle', (param) => {
+      if (this.formation.body) {
+        const page = this.formation.body.find((p) => p.id === param.idPage);
+        console.log('page', page);
+        if (page) {
+          page.nom = param.title;
+        }
+      }
+    });
+  }
+
+  wsSendEdit(idPage: number, idBloc: number, text: string) {
+    this.socket.emit('edit', {
+      idPage: idPage,
+      idBloc: idBloc,
+      text: text
+    });
+  }
+
+  wsSendMoveBlock(idPage: number, previousIndex: number, currentIndex: number) {
+    this.socket.emit('moveBlock', {
+      idPage: idPage,
+      previousIndex: previousIndex,
+      currentIndex: currentIndex
+    });
+  }
+
+  wsSendAddBlock(idPage: number, parentBlockIndex: number, newBlockId: number) {
+    this.socket.emit('addBlockMD', {
+      idPage: idPage,
+      parentBlockIndex: parentBlockIndex,
+      newBlockId: newBlockId
+    });
+  }
+
+  wsSendEditTitle(idPage: number, idBloc: number, title: string) {
+    this.socket.emit('editTitle', {
+      idPage: idPage,
+      idBloc: idBloc,
+      title: title
+    });
+  }
+
+  wsSendAddPage(parentPageIndex: number, newPageId: number) {
+    this.socket.emit('addPage', {
+      parentPageIndex: parentPageIndex,
+      newPageId: newPageId
+    });
+  }
+
+  wsSendMovePage(previousIndex: number, currentIndex: number) {
+    this.socket.emit('movePage', {
+      previousIndex: previousIndex,
+      currentIndex: currentIndex
+    });
+  }
+
+  wsSendEditPageTitle(idPage: number, title: string) {
+    this.socket.emit('editPageTitle', {
+      idPage: idPage,
+      title: title
+    });
+  }
+  
 }
