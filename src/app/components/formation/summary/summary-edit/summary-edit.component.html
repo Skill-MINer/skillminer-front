@@ -21,7 +21,7 @@
 @switch (activeStep) {
   @case(1) {
   <div>
-    <app-formation-view [setActualPage]="actualPage" [setFormationTitle]="createFormationService.formation.titre"></app-formation-view>
+    <app-formation-view [setActualPage]="actualPage" [setFormationTitle]="createFormationService.formation.titre" [isFooterVisible]="false"></app-formation-view>
   </div>
   }
   @case(2) {

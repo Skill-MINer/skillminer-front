@@ -5,11 +5,12 @@ import { CreateSummaryFormationComponent } from '@app/components/formation/summa
 import { SummaryEditComponent } from '@app/components/formation/summary/summary-edit/summary-edit.component';
 import { CreateFormationService } from '@app/services/create-formation.service';
 import { Router } from '@angular/router';
+import { LiveCursorComponent } from '../live-cursor/live-cursor.component';
 
 @Component({
   selector: 'app-create-formation',
   standalone: true,
-  imports: [NgClass, CreateHeaderFormationComponent, CreateSummaryFormationComponent, SummaryEditComponent],
+  imports: [NgClass, CreateHeaderFormationComponent, CreateSummaryFormationComponent, SummaryEditComponent, LiveCursorComponent],
   templateUrl: './create-formation.component.html',
   styleUrl: './create-formation.component.sass',
 })

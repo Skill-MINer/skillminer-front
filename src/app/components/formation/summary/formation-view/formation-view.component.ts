@@ -13,6 +13,8 @@ import { BlocVideoViewComponent } from '../../sections/bloc-video-view/bloc-vide
   styleUrl: './formation-view.component.sass'
 })
 export class FormationViewComponent {
+  @Input() isFooterVisible: boolean = true;
+
   constructor(
     //private scrollToAnchorService: ScrollToAnchorService,
     private route: ActivatedRoute,

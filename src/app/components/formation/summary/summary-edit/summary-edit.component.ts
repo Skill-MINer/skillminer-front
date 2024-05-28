@@ -17,7 +17,7 @@ import { CreateFormationService } from '@app/services/create-formation.service';
 @Component({
   selector: 'app-summary-edit',
   standalone: true,
-  imports: [RouterLink, FooterComponent, MarkdownModule, SummaryPageComponent, FormationViewComponent, SummaryBlockComponent, BlocksDragDropComponent],
+  imports: [RouterLink, MarkdownModule, SummaryPageComponent, FormationViewComponent, SummaryBlockComponent, BlocksDragDropComponent],
   templateUrl: './summary-edit.component.html',
   styleUrl: './summary-edit.component.sass',
 })
