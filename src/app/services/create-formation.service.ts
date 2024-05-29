@@ -106,9 +106,10 @@ export class CreateFormationService {
   };
 
   saveFormationInLocal() {
-    localStorage.setItem('formation-' + this.formation.id, JSON.stringify(this.formation));
-    localStorage.setItem('headerIsValidated-' + this.formation.id, JSON.stringify(this.headerIsValidated));
-    localStorage.setItem('imageUrl-' + this.formation.id, JSON.stringify(this.imageUrl));
+    // TODO: use api to save formation
+    //localStorage.setItem('formation-' + this.formation.id, JSON.stringify(this.formation));
+    //localStorage.setItem('headerIsValidated-' + this.formation.id, JSON.stringify(this.headerIsValidated));
+    //localStorage.setItem('imageUrl-' + this.formation.id, JSON.stringify(this.imageUrl));
   }
 
   loadFormation() {

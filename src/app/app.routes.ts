@@ -74,10 +74,12 @@ export const routes: Routes = [
   {
     path: 'create-formation',
     component: CreateFormationComponent,
+    canActivate: [authGuard],
   },
   {
     path: 'create-formation/:id',
     component: CreateFormationComponent,
+    canActivate: [authGuard],
   },
   {
     path: 'markdown',
