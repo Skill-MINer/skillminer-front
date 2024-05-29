@@ -20,7 +20,7 @@ export class ResetPasswordComponent {
 
   protected readonly authService: AuthService = inject(AuthService);
   protected readonly resetPasswordForm = new FormGroup({
-    password: new FormControl("", [Validators.required, Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/)]),
+    password: new FormControl("", [Validators.required, Validators.pattern(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[ !"#$%&'()*+,\-./:;<=>?@[\\\]^_`{|}~]).{12,}$/)]),
     confirmPassword: new FormControl("", Validators.required)
   }, { validators: this.passwordsMatch });
 
