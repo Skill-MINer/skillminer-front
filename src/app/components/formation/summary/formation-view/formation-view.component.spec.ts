@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BlockDragDropComponent } from './block-drag-drop.component';
+import { FormationViewComponent } from './formation-view.component';
 
-describe('BlockDragDropComponent', () => {
-  let component: BlockDragDropComponent;
-  let fixture: ComponentFixture<BlockDragDropComponent>;
+describe('FormationViewComponent', () => {
+  let component: FormationViewComponent;
+  let fixture: ComponentFixture<FormationViewComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [BlockDragDropComponent]
+      imports: [FormationViewComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(BlockDragDropComponent);
+    fixture = TestBed.createComponent(FormationViewComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -2,6 +2,7 @@
 module.exports = {
   plugins: [
     require('@tailwindcss/typography'),
+    require('@tailwindcss/forms'),
   ],
   content: [
     './src/**/*.{html,ts}',

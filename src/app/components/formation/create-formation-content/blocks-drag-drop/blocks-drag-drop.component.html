@@ -4,7 +4,7 @@
     class="flex flex-col w-[80rem]"
     (cdkDropListDropped)="drop($event)"
   >
-    @for (block of blocks; track block) {
+    @for (block of page.contenu; track block) {
     <div
       class="relative bg-transparent hs-accordion-group"
       cdkDrag
@@ -14,6 +14,7 @@
       <app-element-collapse-box
         [markdown]="block.contenu"
         (markdownHasChanged)="handleEventContentHasChanged($event, block.id)"
+        (titleHasChanged)="handleEventTitleHasChanged($event, block.id)"
       >
       </app-element-collapse-box>
       <app-add-block

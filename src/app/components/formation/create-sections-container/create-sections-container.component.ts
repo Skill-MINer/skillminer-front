@@ -21,10 +21,6 @@ export class CreateSectionsContainerComponent{
 
   constructor(private dynamicComponentService: DynamicComponentService) {}
 
-  // addSection(type: string) {
-  //   this.sections.push();
-  // }
-
   removeSection(index: number) {
     this.sections.splice(index, 1);
   }

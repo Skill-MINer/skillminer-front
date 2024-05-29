@@ -1,23 +1,25 @@
-import { Component, inject } from '@angular/core';
-import { Page } from '../../../interfaces/page';
-import { Formation } from '../../../interfaces/formation';
+import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
+import { Page } from '@app/interfaces/page';
+import { Formation } from '@app/interfaces/formation';
 import { RouterLink, Router, ActivatedRoute } from '@angular/router';
 import { MarkdownModule } from 'ngx-markdown';
 import 'prismjs';
 import 'prismjs/plugins/line-numbers/prism-line-numbers.js';
 import 'prismjs/plugins/line-highlight/prism-line-highlight.js';
-import { FooterComponent } from '../../footer/footer.component';
-import { ScrollToAnchorService } from '../../../services/scroll-to-anchor.service';
-import { FormationService } from '../../../services/formation.service';
+import { FooterComponent } from '@app/components/footer/footer.component';
+import { FormationService } from '@app/services/formation.service';
+import { ScrollToAnchorService } from '@app/services/scroll-to-anchor.service';
+import { BlocVideoViewComponent } from '../../sections/bloc-video-view/bloc-video-view.component';
+
 
 @Component({
-  selector: 'app-summary-view',
+  selector: 'app-summary-view-only',
   standalone: true,
-  imports: [RouterLink, FooterComponent, MarkdownModule],
-  templateUrl: './summary-view.component.html',
-  styleUrl: './summary-view.component.sass',
+  imports: [RouterLink, FooterComponent, MarkdownModule, BlocVideoViewComponent],
+  templateUrl: './summary-view-only.component.html',
+  styleUrl: './summary-view-only.component.sass',
 })
-export class SummaryViewComponent {
+export class SummaryViewOnlyComponent {
   formationId: number = 1;
   formation: Formation = {
     id: 1,
