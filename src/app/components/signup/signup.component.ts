@@ -22,7 +22,7 @@ export class SignupComponent {
     firstName: new FormControl("", Validators.required),
     lastName: new FormControl("", Validators.required),
     email: new FormControl("", [Validators.required, Validators.email]),
-    password: new FormControl("", [Validators.required, Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/)]),
+    password: new FormControl("", [Validators.required, Validators.pattern(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[ !"#$%&'()*+,\-./:;<=>?@[\\\]^_`{|}~]).{12,}$/)]),
     confirmPassword: new FormControl("", Validators.required)
   }, { validators: this.passwordsMatch });
 
