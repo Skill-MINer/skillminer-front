@@ -60,14 +60,12 @@ export class BlocksDragDropComponent {
 
   drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.page.contenu, event.previousIndex, event.currentIndex);
-    this.createFormationService.saveFormationInLocal();
     this.createFormationService.wsSendMoveBlock(this.page.id, event.previousIndex, event.currentIndex);
   }
 
   handleEventTitleHasChanged(title: string, id: number) {
     this.page.contenu.find((block) => block.id === id)!.title = title;
     console.log(this.page.contenu);
-    this.createFormationService.saveFormationInLocal();
     this.createFormationService.wsSendEdit(this.page.id, id, title);
   }
 
@@ -85,7 +83,6 @@ export class BlocksDragDropComponent {
       'RECEIVED' +
       markdown.text
     );
-    this.createFormationService.saveFormationInLocal();
     this.createFormationService.wsSendEdit(this.page.id, id, markdown.text);
   }
 
@@ -102,7 +99,6 @@ export class BlocksDragDropComponent {
     });
     const parentBlockIndex = this.page.contenu.indexOf(parentBlock);
     moveItemInArray(this.page.contenu, newId, parentBlockIndex + 1);
-    this.createFormationService.saveFormationInLocal();
     this.createFormationService.wsSendAddBlock(this.page.id, parentBlockIndex, newId);
   }
 
@@ -118,6 +114,5 @@ export class BlocksDragDropComponent {
       },
     });
     moveItemInArray(this.page.contenu, newId, this.page.contenu.indexOf(parentBlock) + 1);
-    this.createFormationService.saveFormationInLocal();
   }
 }
