@@ -92,7 +92,7 @@ export class BlocksDragDropComponent {
       },
     });
     const parentBlockIndex = this.page.contenu.indexOf(parentBlock);
-    moveItemInArray(this.page.contenu, this.page.contenu.length-1, parentBlockIndex + 1);
+    moveItemInArray(this.page.contenu, this.page.contenu.length - 1, parentBlockIndex + 1);
     this.createFormationService.wsSendAddBlock(this.page.id, parentBlockIndex, newId);
   }
 
@@ -108,6 +108,13 @@ export class BlocksDragDropComponent {
       },
     });
     this.createFormationService.wsSendAddVideoBlock(this.page.id, this.page.contenu.indexOf(parentBlock), newId);
-    moveItemInArray(this.page.contenu, this.page.contenu.length-1, this.page.contenu.indexOf(parentBlock) + 1);
+    moveItemInArray(this.page.contenu, this.page.contenu.length - 1, this.page.contenu.indexOf(parentBlock) + 1);
+  }
+
+  supprimer(id: number) {
+    if (this.page.contenu.length > 1) {
+      this.page.contenu = this.page.contenu.filter((t) => t.id !== id);
+      this.createFormationService.wsSendDeleteBlock(this.page.id, id);
+    }
   }
 }

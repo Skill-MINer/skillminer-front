@@ -23,6 +23,9 @@
         (addBlockEvent)="handleEventAddBlock(block)"
         (addVideoBlockEvent)="handleEventAddVideoBlock(block)"
       ></app-add-block>
+      <div class="top-4 right-4 absolute">
+        <mat-icon class="cursor-pointer" (click)="supprimer(block.id)">delete_forever</mat-icon>
+    </div>
     </div>
     }
   </div>

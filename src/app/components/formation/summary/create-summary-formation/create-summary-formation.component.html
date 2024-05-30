@@ -5,7 +5,7 @@
             <div class="example-custom-placeholder mr-4" *cdkDragPlaceholder></div>
             <app-title1-section [title]="title.nom" (titleHasChanged)="handleEventTitleHasChanged($event, title.id)" (titleHasFinishedToChange)="handleEventTitleHasChanged($event, title.id, true)"></app-title1-section>
             <div class="top-0 right-0 absolute">
-                <mat-icon class="cursor-pointer" (click)="supprimer(title.id)">edit</mat-icon>
+                <mat-icon class="cursor-pointer" (click)="supprimer(title.id)">delete_forever</mat-icon>
             </div>
             <app-add-block (addTitleEvent)="handleEventAddTitle(title)"></app-add-block>
         </div>
