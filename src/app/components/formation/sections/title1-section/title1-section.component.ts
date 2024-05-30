@@ -11,11 +11,17 @@ import { FormsModule } from '@angular/forms';
 export class Title1SectionComponent {
   @Input() title: string = 'defaut title';
   @Output() titleHasChanged = new EventEmitter<string>();
+  @Output() titleHasFinishedToChange = new EventEmitter<string>();
 
   constructor() { }
 
   sendEventTitle() {
     console.log(this.title);
     this.titleHasChanged.emit(this.title);
+  }
+
+  sendEventTitleEditFinish() {
+    console.log('finish', this.title);
+    this.titleHasFinishedToChange.emit(this.title);
   }
 }

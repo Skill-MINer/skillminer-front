@@ -34,13 +34,13 @@ export class CreateSummaryFormationComponent {
     console.log('Suppression de la page ' + id);
   }
 
-  handleEventTitleHasChanged(title: string, id: number) {
+  handleEventTitleHasChanged(title: string, id: number, endEdit: boolean = false) {
     this.createFormationService.formation.body?.forEach((t) => {
       if (t.id === id) {
         t.nom = title;
       }
     });
-    this.createFormationService.wsSendEditPageTitle(id, title);
+    this.createFormationService.wsSendEditPageTitle(id, title, endEdit);
   }
 
   handleEventAddTitle(parrentTitle: Page){
@@ -61,9 +61,10 @@ export class CreateSummaryFormationComponent {
       } as pageContent,
       ],
     });
+    console.log('test', this.createFormationService.formation.body[this.createFormationService.formation.body.length -1]);
     moveItemInArray(
       this.createFormationService.formation.body as Page[],
-      this.createFormationService.formation.body.length + 1,
+      this.createFormationService.formation.body.length - 1,
       this.createFormationService.formation.body.indexOf(parrentTitle)+1
     );
     this.createFormationService.wsSendAddPage(this.createFormationService.formation.body.indexOf(parrentTitle)+1, newId);

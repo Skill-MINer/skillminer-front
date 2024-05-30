@@ -30,12 +30,13 @@
     <app-markdown-editor
       [markdown]="markdown"
       (markdownHasChanged)="sendEventMarkdown($event)"
+      (markdownHasFinishedToChange)="sendEventMarkdown($event, true)"
     >
     </app-markdown-editor>
     } @case('video') {
     <app-bloc-video
       [markdown]="markdown"
-      (markdownHasChanged)="sendEventMarkdown($event)"
+      (markdownHasChanged)="sendEventMarkdown($event, true)"
     ></app-bloc-video>
     } }
   </div>
@@ -45,4 +46,5 @@
   [title]="title"
   (mouseleave)="toggleTitleVisibility()"
   (titleHasChanged)="sendEventTitle($event)"
+  (titleHasFinishedToChange)="sendEventTitle($event, true)"
 ></app-title1-section>
