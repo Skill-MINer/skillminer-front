@@ -53,7 +53,7 @@ export class CreateFormationService {
   private formationService: FormationService = inject(FormationService);
   private nbModif: number = 0;
   private timeLastSave: Date = new Date();
-  private readonly timeBetweenSave: number = 900000;
+  private readonly timeBetweenSave: number = 90000;
   private readonly nbModifBeforeSave: number = 10;
   private amILastContributor: boolean = true;
   private intervalSave: any;
@@ -143,7 +143,6 @@ export class CreateFormationService {
   }
 
   saveAllFormationInRemote() {
-    console.log('Save all formation', this.formation);
     if (this.formation.id) {
       console.log(this.http.put(`${IP_API}/formations/${this.formation.id}/header`, {
         titre: this.formation.titre,
@@ -206,17 +205,16 @@ export class CreateFormationService {
       if (this.formation.body) {
         const page = this.formation.body.find((p) => p.id === param.idPage);
         if (page) {
-          const newId = Math.max(...page.contenu.map((block) => block.id)) + 1;
           page.contenu.push({
-            id: newId,
+            id: param.newBlockId,
             title: 'New Bloc',
             contenu: {
-              id: newId,
+              id: param.newBlockId,
               type: 'markdown',
               text: 'markdown\n### Content of the new bloc\n```\nCeci est un exemple de contenu en Markdown.\n```',
             },
           });
-          moveItemInArray(page.contenu, newId, param.parentBlockIndex + 1);
+          moveItemInArray(page.contenu, page.contenu.length-1 , param.parentBlockIndex + 1);
         }
       }
     });
@@ -252,7 +250,7 @@ export class CreateFormationService {
             } as pageContent,
           ],
         });
-        moveItemInArray(this.formation.body, this.formation.body.length - 1, param.parentPageIndex);
+        moveItemInArray(this.formation.body, this.formation.body.length - 1, param.parentPageIndex + 1);
       }
     });
 
@@ -287,15 +285,38 @@ export class CreateFormationService {
       this.amILastContributor = false;
       this.formation = param.formation;
     });
+
+    this.socket.on('addBlockVideo', (param) => {
+      this.amILastContributor = false;
+      if (this.formation.body) {
+        const page = this.formation.body.find((p) => p.id === param.idPage);
+        if (page) {
+          page.contenu.push({
+            id: param.newBlockId,
+            title: 'New Bloc',
+            contenu: {
+              id: param.newBlockId,
+              type: 'video',
+              text: '',
+            },
+          });
+          moveItemInArray(page.contenu,  page.contenu.length - 1, param.parentBlockIndex + 1);
+          console.log('page.contenu', page.contenu);
+        }
+      }
+    });
   }
 
-  wsSendEdit(idPage: number, idBloc: number, text: string) {
+  wsSendEdit(idPage: number, idBloc: number, text: string, endEdit: boolean = false) {
     this.socket.emit('edit', {
       idPage: idPage,
       idBloc: idBloc,
       text: text
     });
     this.amILastContributor = true;
+    if (endEdit) {
+      this.saveIfNecessary();
+    }
   }
 
   wsSendMoveBlock(idPage: number, previousIndex: number, currentIndex: number) {
@@ -318,14 +339,16 @@ export class CreateFormationService {
     this.saveIfNecessary();
   }
 
-  wsSendEditTitle(idPage: number, idBloc: number, title: string) {
+  wsSendEditTitle(idPage: number, idBloc: number, title: string, endEdit: boolean = false) {
     this.socket.emit('editTitle', {
       idPage: idPage,
       idBloc: idBloc,
       title: title
     });
     this.amILastContributor = true;
-    this.saveIfNecessary();
+    if (endEdit) {
+      this.saveIfNecessary();
+    }
   }
 
   wsSendAddPage(parentPageIndex: number, newPageId: number) {
@@ -346,13 +369,15 @@ export class CreateFormationService {
     this.saveIfNecessary();
   }
 
-  wsSendEditPageTitle(idPage: number, title: string) {
+  wsSendEditPageTitle(idPage: number, title: string, endEdit: boolean = false) {
     this.socket.emit('editPageTitle', {
       idPage: idPage,
       title: title
     });
     this.amILastContributor = true;
-    this.saveIfNecessary();
+    if (endEdit) {
+      this.saveIfNecessary();
+    }
   }
 
   wsSendAllFormation() {
@@ -362,8 +387,19 @@ export class CreateFormationService {
     this.amILastContributor = true;
   }
 
+  wsSendAddVideoBlock(idPage: number, parentBlockIndex: number, newBlockId: number) {
+    this.socket.emit('addBlockVideo', {
+      idPage: idPage,
+      parentBlockIndex: parentBlockIndex,
+      newBlockId: newBlockId
+    });
+    this.amILastContributor = true;
+    this.saveIfNecessary();
+  }
+
   saveIfNecessary(increment: number = 1) {
     this.nbModif += increment;
+    console.log('nbModif', this.nbModif);
     if (this.nbModif >= this.nbModifBeforeSave || ((new Date().getTime() - this.timeLastSave.getTime()) >= this.timeBetweenSave && this.nbModif > 0)) {
       console.log('Save');
       this.saveAllFormationInRemote();

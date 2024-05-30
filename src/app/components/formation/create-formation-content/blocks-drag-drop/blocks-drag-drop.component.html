@@ -14,7 +14,9 @@
       <app-element-collapse-box
         [markdown]="block.contenu"
         (markdownHasChanged)="handleEventContentHasChanged($event, block.id)"
+        (markdownHasFinishedToChange)="handleEventContentHasChanged($event, block.id, true)"
         (titleHasChanged)="handleEventTitleHasChanged($event, block.id)"
+        (titleHasFinishedToChange)="handleEventTitleHasChanged($event, block.id, true)"
       >
       </app-element-collapse-box>
       <app-add-block

@@ -3,6 +3,7 @@
     <textarea
       class="variable-textarea"
       (input)="sendEventMarkdown()"
+      (change)="sendEventMarkdownEditFinish()"
       [(ngModel)]="markdown.text"
     ></textarea>
     <markdown

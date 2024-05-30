@@ -63,13 +63,13 @@ export class BlocksDragDropComponent {
     this.createFormationService.wsSendMoveBlock(this.page.id, event.previousIndex, event.currentIndex);
   }
 
-  handleEventTitleHasChanged(title: string, id: number) {
+  handleEventTitleHasChanged(title: string, id: number, endEdit: boolean = false) {
     this.page.contenu.find((block) => block.id === id)!.title = title;
     console.log(this.page.contenu);
-    this.createFormationService.wsSendEdit(this.page.id, id, title);
+    this.createFormationService.wsSendEdit(this.page.id, id, title, endEdit);
   }
 
-  handleEventContentHasChanged(markdown: Markdown, id: number) {
+  handleEventContentHasChanged(markdown: Markdown, id: number, endEdit: boolean = false) {
     if (markdown.id) {
       this.page.contenu.forEach((t) => {
         if (t.id === id) {
@@ -77,13 +77,7 @@ export class BlocksDragDropComponent {
         }
       });
     }
-    console.log(
-      'block content changed' +
-      this.page.contenu.find((block) => block.id === id)!.contenu.text +
-      'RECEIVED' +
-      markdown.text
-    );
-    this.createFormationService.wsSendEdit(this.page.id, id, markdown.text);
+    this.createFormationService.wsSendEdit(this.page.id, id, markdown.text, endEdit);
   }
 
   handleEventAddBlock(parentBlock: pageContent) {
@@ -98,7 +92,7 @@ export class BlocksDragDropComponent {
       },
     });
     const parentBlockIndex = this.page.contenu.indexOf(parentBlock);
-    moveItemInArray(this.page.contenu, newId, parentBlockIndex + 1);
+    moveItemInArray(this.page.contenu, this.page.contenu.length-1, parentBlockIndex + 1);
     this.createFormationService.wsSendAddBlock(this.page.id, parentBlockIndex, newId);
   }
 
@@ -110,9 +104,10 @@ export class BlocksDragDropComponent {
       contenu: {
         id: newId,
         type: 'video',
-        text: 'url-de-votre-video',
+        text: '',
       },
     });
-    moveItemInArray(this.page.contenu, newId, this.page.contenu.indexOf(parentBlock) + 1);
+    this.createFormationService.wsSendAddVideoBlock(this.page.id, this.page.contenu.indexOf(parentBlock), newId);
+    moveItemInArray(this.page.contenu, this.page.contenu.length-1, this.page.contenu.indexOf(parentBlock) + 1);
   }
 }

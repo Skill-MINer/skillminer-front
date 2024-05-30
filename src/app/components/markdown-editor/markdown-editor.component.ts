@@ -24,9 +24,15 @@ import { Markdown } from '../../interfaces/markdown';
 export class MarkdownEditorComponent {
   @Input() markdown: Markdown = { type: 'markdown', text: '' };
   @Output() markdownHasChanged = new EventEmitter<Markdown>();
+  @Output() markdownHasFinishedToChange = new EventEmitter<Markdown>();
 
   sendEventMarkdown() {
     console.log(this.markdown);
     this.markdownHasChanged.emit(this.markdown);
+  }
+
+  sendEventMarkdownEditFinish() {
+    console.log('finish', this.markdown);
+    this.markdownHasFinishedToChange.emit(this.markdown);
   }
 }

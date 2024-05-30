@@ -1,4 +1,4 @@
-import { Component, Input, inject } from '@angular/core';
+import { Component, HostListener, Input, inject } from '@angular/core';
 import { NgClass } from '@angular/common';
 import { CreateHeaderFormationComponent } from '../create-header-formation/create-header-formation.component';
 import { CreateSummaryFormationComponent } from '@app/components/formation/summary/create-summary-formation/create-summary-formation.component';
@@ -6,6 +6,8 @@ import { SummaryEditComponent } from '@app/components/formation/summary/summary-
 import { CreateFormationService } from '@app/services/create-formation.service';
 import { Router } from '@angular/router';
 import { LiveCursorComponent } from '../live-cursor/live-cursor.component';
+import { environment } from '@env/environment';
+const IP_API = environment.IP_API;
 
 @Component({
   selector: 'app-create-formation',
@@ -19,6 +21,7 @@ export class CreateFormationComponent {
   activeStep: number;
   numberOfSteps: number = 3;
   @Input() id: number | undefined;
+  isFormationCreated: boolean = false;
 
   constructor(protected createFormationService: CreateFormationService, private router: Router) {
     this.activeStep = 1;
@@ -26,22 +29,23 @@ export class CreateFormationComponent {
   }
 
   ngOnInit(): void {
-    if(!this.id) {
+    if (!this.id) {
       this.createFormationService.createEmptyFormation();
     } else {
+      this.isFormationCreated = true;
       this.createFormationService.formation.id = this.id;
       this.createFormationService.loadFormation();
     }
   }
 
   nextStep() {
-    if (this.activeStep < this.numberOfSteps){
+    if (this.activeStep < this.numberOfSteps) {
       this.activeStep += 1;
     }
   }
 
   previousStep() {
-    if (this.activeStep > 1){
+    if (this.activeStep > 1) {
       this.activeStep -= 1;
     }
   }
@@ -63,7 +67,7 @@ export class CreateFormationComponent {
   }
 
   setActiveStep(step: number) {
-    if (step <= this.numberOfSteps && step >= 1 && this.createFormationService.headerIsValidated){
+    if (step <= this.numberOfSteps && step >= 1 && this.createFormationService.headerIsValidated) {
       this.activeStep = step;
     }
   }
@@ -71,4 +75,20 @@ export class CreateFormationComponent {
   submit() {
     this.createFormationService.saveAllFormationInRemote();
   }
+
+  @HostListener('window:beforeunload', ['$event'])
+  onBeforeUnload(event: Event): void {
+    if (this.isFormationCreated) {
+      this.createFormationService.saveAllFormationInRemote();
+      this.createFormationService.wsSendAllFormation();
+    }
+  }
+
+  ngOnDestroy() {
+    if (this.isFormationCreated) {
+      this.createFormationService.saveAllFormationInRemote();
+      this.createFormationService.wsSendAllFormation();
+    }
+  }
+
 }

@@ -41,14 +41,21 @@ import { CdkDragHandle } from '@angular/cdk/drag-drop';
 export class ElementCollapseBoxComponent {
   [x: string]: any;
   @Input() title: string = 'Title ';
-  @Input() markdown: Markdown = { type: 'markdown', text: 'I love markdown' };
+  _markdown: Markdown = { type: 'markdown', text: 'I love markdown' };
   @Output() titleHasChanged = new EventEmitter<string>();
+  @Output() titleHasFinishedToChange = new EventEmitter<string>();
   @Output() markdownHasChanged = new EventEmitter<Markdown>();
+  @Output() markdownHasFinishedToChange = new EventEmitter<Markdown>();
 
   public state: 'collapsed' | 'expanded' = 'expanded';
   isCollapseBoxVisible = false;
 
   constructor() {}
+
+  @Input()
+  set markdown(_markdown: Markdown) {
+    this._markdown = _markdown;
+  }
 
   toggleVisibility() {
     this.state = this.state === 'collapsed' ? 'expanded' : 'collapsed';
@@ -56,11 +63,19 @@ export class ElementCollapseBoxComponent {
   toggleTitleVisibility() {
     this.isCollapseBoxVisible = !this.isCollapseBoxVisible;
   }
-  sendEventTitle(newTitle: string) {
+  sendEventTitle(newTitle: string, endEdit: boolean = false) {
     this.title = newTitle;
-    this.titleHasChanged.emit(this.title);
+    if (endEdit) {
+      this.titleHasFinishedToChange.emit(this.title);
+    } else {
+      this.titleHasChanged.emit(this.title);
+    }
   }
-  sendEventMarkdown(markdown: Markdown) {
-    this.markdownHasChanged.emit(markdown);
+  sendEventMarkdown(markdown: Markdown, endEdit: boolean = false) {
+    if (endEdit) {
+      this.markdownHasFinishedToChange.emit(markdown);
+    } else {
+      this.markdownHasChanged.emit(markdown);
+    }
   }
 }
