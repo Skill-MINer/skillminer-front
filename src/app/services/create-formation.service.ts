@@ -53,7 +53,7 @@ export class CreateFormationService {
   private formationService: FormationService = inject(FormationService);
   private nbModif: number = 0;
   private timeLastSave: Date = new Date();
-  private readonly timeBetweenSave: number = 900000;
+  private readonly timeBetweenSave: number = 90000;
   private readonly nbModifBeforeSave: number = 10;
   private amILastContributor: boolean = true;
   private intervalSave: any;
