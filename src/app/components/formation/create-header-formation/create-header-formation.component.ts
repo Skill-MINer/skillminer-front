@@ -9,7 +9,11 @@ import {
 } from '@angular/forms';
 import { Tag } from '../../../interfaces/tag';
 import { CreateFormationService } from '../../../services/create-formation.service';
+import { catchError, throwError } from 'rxjs';
 import { map } from 'rxjs';
+import { MarkdownWithAIService } from '@app/services/markdown-with-ai.service';
+import { HttpErrorResponse } from '@angular/common/http';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-create-header-formation',
@@ -21,14 +25,18 @@ import { map } from 'rxjs';
 export class CreateHeaderFormationComponent {
   readonly defaultImageUrl: string =
     'https://preline.co/assets/svg/examples/abstract-bg-1.svg';
+  private toastr: ToastrService = inject(ToastrService);
   tags: any[] = [];
   imageFile: File | null = null;
   requiredFileType = 'image/png';
   selectedImageUrl = this.defaultImageUrl;
-
+  requestPending = false;
   protected readonly headerForm;
 
-  constructor(protected createFormationService: CreateFormationService) {
+  constructor(
+    protected createFormationService: CreateFormationService,
+    private MarkdownWithAIService: MarkdownWithAIService
+  ) {
     this.headerForm = new FormGroup({
       titre: new FormControl(this.createFormationService.formation.titre, [
         Validators.required,
@@ -67,6 +75,29 @@ export class CreateHeaderFormationComponent {
         this.tags = tags;
       });
   }
+  generateFormation() {
+    this.onSubmit();
+    this.requestPending = true;
+    this.MarkdownWithAIService.generate(this.headerForm.value.titre as string)
+      .pipe(catchError(this.handleError))
+      .subscribe((md) => {
+        this.requestPending = false;
+        this.createFormationService.formation.body = md;
+        console.log(md);
+      });
+  }
+  private handleError = (error: HttpErrorResponse) => {
+    this.requestPending = false;
+    if (error.status === 0) {
+      this.toastr.error('Server is down', 'Something went wrong');
+    } else {
+      this.toastr.error(error.error.error, 'Something went wrong');
+    }
+
+    return throwError(
+      () => new Error('Something bad happened; please try again later.')
+    );
+  };
   onSubmit() {
     if (this.headerForm.valid) {
       let id: String;

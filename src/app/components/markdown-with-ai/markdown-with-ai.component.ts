@@ -6,6 +6,7 @@ import { catchError, throwError } from 'rxjs';
 import { Markdown } from '../../interfaces/markdown';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
+import { Page } from '@app/interfaces/page';
 
 @Component({
   selector: 'app-markdown-with-ai',
@@ -17,7 +18,23 @@ import { ToastrService } from 'ngx-toastr';
 export class MarkdownWithAiComponent {
   private toastr: ToastrService = inject(ToastrService);
   constructor(private MarkdownWithAIService: MarkdownWithAIService) {}
-  markdown: Markdown = { type: 'markdown', text: '' };
+  markdown: Page[] = [
+    {
+      id: 1,
+      nom: 'Page 1',
+      contenu: [
+        {
+          id: 1,
+          title: 'Bloc 1',
+          contenu: {
+            id: 1,
+            type: 'markdown',
+            text: '#### Contenu du bloc 1\n```\nCeci est un exemple de contenu en Markdown pour le bloc 1.\n```',
+          },
+        },
+      ],
+    },
+  ];
   valeurInput: string = '';
   requestPending = false;
   generateMarkdown() {
