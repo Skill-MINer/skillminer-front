@@ -104,10 +104,11 @@ export class BlocksDragDropComponent {
       contenu: {
         id: newId,
         type: 'video',
-        text: 'url-de-votre-video',
+        text: '',
       },
     });
     moveItemInArray(this.page.contenu, this.page.contenu.length-1, this.page.contenu.indexOf(parentBlock) + 1);
-    this.createFormationService.wsSendAddBlock(this.page.id, this.page.contenu.indexOf(parentBlock), newId);
+    console.log('add video block');
+    this.createFormationService.wsSendAddVideoBlock(this.page.id, this.page.contenu.indexOf(parentBlock), newId);
   }
 }

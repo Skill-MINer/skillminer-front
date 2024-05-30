@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { Markdown } from '@app/interfaces/markdown';
 
 @Component({
   selector: 'app-bloc-video-view',
@@ -10,21 +11,22 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 })
 export class BlocVideoViewComponent {
 
-  private _videoId: string = '';
+  private _contenu: Markdown = { type: 'video', text: '' };
   safeUrl: SafeResourceUrl;
 
   constructor(private sanitizer: DomSanitizer) {
-    this.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`https://www.youtube.com/embed/${this._videoId}`);
+    this.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`https://www.youtube.com/embed/${this._contenu.text}`);
   }
 
   @Input()
-  set videoId(value: string) {
-    this._videoId = value;
-    this.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`https://www.youtube.com/embed/${this._videoId}`);
+  set setContenu(contenu: Markdown) {
+    this._contenu = contenu;
+    console.log('markdown', this._contenu);
+    this.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`https://www.youtube.com/embed/${this._contenu.text}`);
   }
 
   isIdEmpty() {
-    return this._videoId === '';
+    return this._contenu.text === '';
   }
 
 }

@@ -11,16 +11,14 @@ import { Markdown } from '@app/interfaces/markdown';
   styleUrl: './bloc-video.component.sass',
 })
 export class BlocVideoComponent {
-  @Input() markdown: Markdown = { type: 'vidéo', text: '' };
+  @Input() contenu: Markdown = { type: 'video', text: '' };
   @Output() markdownHasChanged = new EventEmitter<Markdown>();
-  videoId: string = this.markdown.text;
 
   constructor() {}
 
   addVideo(videoId: string) {
-    this.videoId = videoId;
-    this.markdown.text = videoId;
-    console.log(videoId);
-    this.markdownHasChanged.emit(this.markdown);
+    this.contenu = {...this.contenu, text: videoId};
+    console.log('videoId', this.contenu.text);
+    this.markdownHasChanged.emit(this.contenu);
   }
 }

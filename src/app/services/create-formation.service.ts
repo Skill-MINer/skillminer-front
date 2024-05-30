@@ -288,6 +288,7 @@ export class CreateFormationService {
 
     this.socket.on('addBlockVideo', (param) => {
       this.amILastContributor = false;
+      console.log('addBlockVideo', param);
       if (this.formation.body) {
         const page = this.formation.body.find((p) => p.id === param.idPage);
         if (page) {

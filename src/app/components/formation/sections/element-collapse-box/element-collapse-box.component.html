@@ -35,7 +35,7 @@
     </app-markdown-editor>
     } @case('video') {
     <app-bloc-video
-      [markdown]="markdown"
+      [contenu]="markdown"
       (markdownHasChanged)="sendEventMarkdown($event, true)"
     ></app-bloc-video>
     } }

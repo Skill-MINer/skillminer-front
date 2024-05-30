@@ -28,7 +28,6 @@ export class AddBlocVideoComponent {
       this.videoId = '';
     }
 
-
     this.addVideoEvent.emit(this.videoId);
   }
 
