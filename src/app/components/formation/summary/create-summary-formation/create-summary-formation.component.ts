@@ -27,7 +27,6 @@ export class CreateSummaryFormationComponent {
 
   drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.createFormationService.formation.body as Page[], event.previousIndex, event.currentIndex);
-    this.createFormationService.saveFormationInLocal();
     this.createFormationService.wsSendMovePage(event.previousIndex, event.currentIndex);
   }
 
@@ -41,7 +40,6 @@ export class CreateSummaryFormationComponent {
         t.nom = title;
       }
     });
-    this.createFormationService.saveFormationInLocal();
     this.createFormationService.wsSendEditPageTitle(id, title);
   }
 
@@ -68,7 +66,6 @@ export class CreateSummaryFormationComponent {
       this.createFormationService.formation.body.length + 1,
       this.createFormationService.formation.body.indexOf(parrentTitle)+1
     );
-    this.createFormationService.saveFormationInLocal();
     this.createFormationService.wsSendAddPage(this.createFormationService.formation.body.indexOf(parrentTitle)+1, newId);
   }
 }

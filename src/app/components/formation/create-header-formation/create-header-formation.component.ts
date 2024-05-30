@@ -59,7 +59,6 @@ export class CreateHeaderFormationComponent {
         this.createFormationService.formation.description = this.headerForm.value.description as string;
         this.createFormationService.formation.tag = selectedTags;
         this.createFormationService.headerIsValidated = true;
-        this.createFormationService.saveFormationInLocal();
         /*this.createFormationService.createFormation({
           ...this.headerForm.value,
           tags: tags
