@@ -305,6 +305,23 @@ export class CreateFormationService {
         }
       }
     });
+
+    this.socket.on('deletePage', (param) => {
+      this.amILastContributor = false;
+      if (this.formation.body) {
+        this.formation.body = this.formation.body.filter((t) => t.id !== param.idPage);
+      }
+    });
+
+    this.socket.on('deleteBlock', (param) => {
+      this.amILastContributor = false;
+      if (this.formation.body) {
+        const page = this.formation.body.find((p) => p.id === param.idPage);
+        if (page) {
+          page.contenu = page.contenu.filter((t) => t.id !== param.idBloc);
+        }
+      }
+    });
   }
 
   wsSendEdit(idPage: number, idBloc: number, text: string, endEdit: boolean = false) {
@@ -392,6 +409,23 @@ export class CreateFormationService {
       idPage: idPage,
       parentBlockIndex: parentBlockIndex,
       newBlockId: newBlockId
+    });
+    this.amILastContributor = true;
+    this.saveIfNecessary();
+  }
+
+  wsSendDeletePage(idPage: number) {
+    this.socket.emit('deletePage', {
+      idPage: idPage
+    });
+    this.amILastContributor = true;
+    this.saveIfNecessary();
+  }
+
+  wsSendDeleteBlock(idPage: number, idBloc: number) {
+    this.socket.emit('deleteBlock', {
+      idPage: idPage,
+      idBloc: idBloc
     });
     this.amILastContributor = true;
     this.saveIfNecessary();

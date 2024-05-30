@@ -31,7 +31,10 @@ export class CreateSummaryFormationComponent {
   }
 
   supprimer(id: number) {
-    console.log('Suppression de la page ' + id);
+    if(this.createFormationService.formation.body && this.createFormationService.formation.body.length > 1){
+      this.createFormationService.formation.body = this.createFormationService.formation.body?.filter((t) => t.id !== id);
+      this.createFormationService.wsSendDeletePage(id);
+    }
   }
 
   handleEventTitleHasChanged(title: string, id: number, endEdit: boolean = false) {
