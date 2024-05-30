@@ -107,6 +107,7 @@ export class BlocksDragDropComponent {
         text: '',
       },
     });
+    this.createFormationService.wsSendAddVideoBlock(this.page.id, this.page.contenu.indexOf(parentBlock), newId);
     moveItemInArray(this.page.contenu, this.page.contenu.length-1, this.page.contenu.indexOf(parentBlock) + 1);
-    this.createFormationService.wsSendAddVideoBlock(this.page.id, this.page.contenu.indexOf(parentBlock), newId);  }
+  }
 }

@@ -61,12 +61,11 @@ export class CreateSummaryFormationComponent {
       } as pageContent,
       ],
     });
-    console.log('test', this.createFormationService.formation.body[this.createFormationService.formation.body.length -1]);
+    this.createFormationService.wsSendAddPage(this.createFormationService.formation.body.indexOf(parrentTitle), newId);
     moveItemInArray(
       this.createFormationService.formation.body as Page[],
       this.createFormationService.formation.body.length - 1,
       this.createFormationService.formation.body.indexOf(parrentTitle)+1
     );
-    this.createFormationService.wsSendAddPage(this.createFormationService.formation.body.indexOf(parrentTitle)+1, newId);
   }
 }

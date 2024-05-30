@@ -250,7 +250,7 @@ export class CreateFormationService {
             } as pageContent,
           ],
         });
-        moveItemInArray(this.formation.body, this.formation.body.length - 1, param.parentPageIndex);
+        moveItemInArray(this.formation.body, this.formation.body.length - 1, param.parentPageIndex + 1);
       }
     });
 
@@ -300,7 +300,8 @@ export class CreateFormationService {
               text: '',
             },
           });
-          moveItemInArray(page.contenu,  this.formation.body.length - 1, param.parentBlockIndex + 1);
+          moveItemInArray(page.contenu,  page.contenu.length - 1, param.parentBlockIndex + 1);
+          console.log('page.contenu', page.contenu);
         }
       }
     });
