@@ -41,7 +41,7 @@ import { CdkDragHandle } from '@angular/cdk/drag-drop';
 export class ElementCollapseBoxComponent {
   [x: string]: any;
   @Input() title: string = 'Title ';
-  @Input() markdown: Markdown = { type: 'markdown', text: 'I love markdown' };
+  _markdown: Markdown = { type: 'markdown', text: 'I love markdown' };
   @Output() titleHasChanged = new EventEmitter<string>();
   @Output() titleHasFinishedToChange = new EventEmitter<string>();
   @Output() markdownHasChanged = new EventEmitter<Markdown>();
@@ -51,6 +51,11 @@ export class ElementCollapseBoxComponent {
   isCollapseBoxVisible = false;
 
   constructor() {}
+
+  @Input()
+  set markdown(_markdown: Markdown) {
+    this._markdown = _markdown;
+  }
 
   toggleVisibility() {
     this.state = this.state === 'collapsed' ? 'expanded' : 'collapsed';

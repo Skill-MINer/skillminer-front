@@ -26,16 +26,16 @@
     [@toggle]="state"
     class="w-full overflow-hidden transition-[height] duration-300"
   >
-    @switch (markdown.type) { @case('markdown') {
+    @switch (_markdown.type) { @case('markdown') {
     <app-markdown-editor
-      [markdown]="markdown"
+      [markdown]="_markdown"
       (markdownHasChanged)="sendEventMarkdown($event)"
       (markdownHasFinishedToChange)="sendEventMarkdown($event, true)"
     >
     </app-markdown-editor>
     } @case('video') {
     <app-bloc-video
-      [markdown]="markdown"
+      [markdown]="_markdown"
       (markdownHasChanged)="sendEventMarkdown($event, true)"
     ></app-bloc-video>
     } }
