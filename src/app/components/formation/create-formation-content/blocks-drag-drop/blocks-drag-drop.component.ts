@@ -8,7 +8,6 @@ import {
   moveItemInArray,
 } from '@angular/cdk/drag-drop';
 import { MatIconModule } from '@angular/material/icon';
-import { Title1SectionComponent } from '@app/components/formation/sections/title1-section/title1-section.component';
 import { ElementCollapseBoxComponent } from '@app/components/formation/sections/element-collapse-box/element-collapse-box.component';
 import { Markdown } from '@app/interfaces/markdown';
 import { pageContent } from '@app/interfaces/page-content';
@@ -26,7 +25,6 @@ import { CreateFormationService } from '@app/services/create-formation.service';
     CdkDragPlaceholder,
     CdkDragHandle,
     MatIconModule,
-    Title1SectionComponent,
     AddBlockComponent,
     ElementCollapseBoxComponent,
   ],

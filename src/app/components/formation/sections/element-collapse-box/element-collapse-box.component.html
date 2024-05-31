@@ -20,7 +20,7 @@
     >
       <path d="m6 9 6 6 6-6"></path>
     </svg>
-    {{ title }}
+    {{ block.title }}
   </button>
   <div
     [@toggle]="state"
@@ -43,7 +43,7 @@
 </div>
 <app-title1-section
   [hidden]="!isCollapseBoxVisible"
-  [title]="title"
+  [title]="block.title"
   (toggleTitleVisibility)="toggleTitleVisibility()"
   (titleHasChanged)="sendEventTitle($event)"
   (titleHasFinishedToChange)="sendEventTitle($event, true)"
