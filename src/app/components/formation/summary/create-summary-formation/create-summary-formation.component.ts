@@ -36,9 +36,8 @@ export class CreateSummaryFormationComponent {
     protected createFormationService: CreateFormationService,
     protected markdownWithAiService: MarkdownWithAIService
   ) {}
-  requestPending: { [key: string]: boolean } = {};
+  public requestPending: boolean = false;
   private toastr: ToastrService = inject(ToastrService);
-
   drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(
       this.createFormationService.formation.body as Page[],
@@ -62,42 +61,33 @@ export class CreateSummaryFormationComponent {
     }
   }
 
-  async generatePageContentWithAi(id: number, pageTitle: string) {
-    this.requestPending[id] = true;
-    try {
-      this.markdownWithAiService
-        .generate(pageTitle, this.createFormationService.formation.titre)
-        .subscribe((page) => {
-          this.requestPending[id] = false;
-          if (this.createFormationService.formation.body) {
-            console.log('id', id);
-            let indexPageToChange =
-              this.createFormationService.formation.body.findIndex(
-                (page) => page.id == id
-              );
-            if (indexPageToChange !== -1) {
-              console.log('page', page);
-              console.log(
-                'tochange',
-                this.createFormationService.formation.body[indexPageToChange]
-              );
-              this.createFormationService.formation.body[indexPageToChange] =
-                page;
-              console.log(
-                'changed',
-                this.createFormationService.formation.body[indexPageToChange]
-              );
-            }
+  generatePageContentWithAi(id: number, pageTitle: string) {
+    this.requestPending = true;
+
+    this.markdownWithAiService
+      .generate(pageTitle, this.createFormationService.formation.titre)
+      .pipe(catchError(this.handleError))
+      .subscribe((page) => {
+        this.requestPending = false;
+        if (this.createFormationService.formation.body) {
+          let indexPageToChange =
+            this.createFormationService.formation.body.findIndex(
+              (page) => page.id == id
+            );
+          if (indexPageToChange !== -1) {
+            let temp =
+              this.createFormationService.formation.body[indexPageToChange].nom;
+            this.createFormationService.formation.body[indexPageToChange] =
+              page;
+            this.createFormationService.formation.body[indexPageToChange].nom =
+              temp;
           }
-        });
-    } catch (error) {
-      this.handleError(error as HttpErrorResponse);
-    } finally {
-      this.requestPending[id] = false;
-    }
+        }
+      });
   }
 
   private handleError = (error: HttpErrorResponse) => {
+    this.requestPending = false;
     if (error.status === 0) {
       this.toastr.error('Server is down', 'Something went wrong');
     } else {

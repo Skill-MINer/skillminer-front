@@ -21,45 +21,55 @@
           (click)="supprimer(title.id)"
           >delete_forever</mat-icon
         >
-        <button
-          (click)="generatePageContentWithAi(title.id, title.nom)"
-          class="absolute right-[3.75rem] p-[0.6rem] inline-flex justify-center items-center gap-x-[1.875rem] text-sm font-semibold rounded-full bg-secondary hover:bg-secondary-hover disabled:opacity-50 disabled:pointer-events-none"
+        <div
+          [hidden]="requestPending"
+          class="absolute right-[3.75rem] p-[0.6rem]"
         >
-          <svg
-            width="1rem"
-            height="1rem"
-            viewBox="0 0 64 64"
-            xmlns="http://www.w3.org/2000/svg"
-            xmlns:xlink="http://www.w3.org/1999/xlink"
-            aria-hidden="true"
-            role="img"
-            class="iconify iconify--emojione"
-            preserveAspectRatio="xMidYMid meet"
-            [hidden]="requestPending"
+          <div class="relative">
+            <button
+              (click)="generatePageContentWithAi(title.id, title.nom)"
+              class="w-9 h-9 flex justify-center items-center text-sm font-semibold rounded-full bg-secondary hover:bg-secondary-hover disabled:opacity-50 disabled:pointer-events-none"
+            >
+              <svg
+                width="1rem"
+                height="1rem"
+                viewBox="0 0 64 64"
+                xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+                aria-hidden="true"
+                role="img"
+                class="iconify iconify--emojione"
+                preserveAspectRatio="xMidYMid meet"
+              >
+                <path
+                  d="M22 0c0 16.9-9.1 32-22 32c12.9 0 22 15.1 22 32c0-16.9 9.1-32 22-32c-12.9 0-22-15.1-22-32"
+                  fill="#A63A50"
+                ></path>
+                <path
+                  d="M53 0c0 8.4-4.6 16-11 16c6.4 0 11 7.6 11 16c0-8.4 4.6-16 11-16c-6.4 0-11-7.6-11-16"
+                  fill="#A63A50"
+                ></path>
+                <path
+                  d="M48 32c0 8.4-4.6 16-11 16c6.4 0 11 7.6 11 16c0-8.4 4.6-16 11-16c-6.4 0-11-7.6-11-16"
+                  fill="#A63A50"
+                ></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+        <div [hidden]="!requestPending" class="absolute right-16 p-2">
+          <button
+            class="w-9 h-9 flex justify-center items-center text-sm font-semibold rounded-full bg-secondary hover:bg-secondary-hover disabled:opacity-50 disabled:pointer-events-none"
           >
-            <path
-              d="M22 0c0 16.9-9.1 32-22 32c12.9 0 22 15.1 22 32c0-16.9 9.1-32 22-32c-12.9 0-22-15.1-22-32"
-              fill="#A63A50"
-            ></path>
-            <path
-              d="M53 0c0 8.4-4.6 16-11 16c6.4 0 11 7.6 11 16c0-8.4 4.6-16 11-16c-6.4 0-11-7.6-11-16"
-              fill="#A63A50"
-            ></path>
-            <path
-              d="M48 32c0 8.4-4.6 16-11 16c6.4 0 11 7.6 11 16c0-8.4 4.6-16 11-16c-6.4 0-11-7.6-11-16"
-              fill="#A63A50"
-            ></path>
-          </svg>
-          <div [hidden]="!requestPending">
             <div
-              class="animate-spin my-15 flex space-x-3 p-2 size-2 border-[3px] border-current border-t-transparent text-accent rounded-full dark:text-accent"
+              class="animate-spin p-[0.4rem] flex justify-center items-center w-2 h-2 border-4 border-current border-t-transparent text-accent rounded-full"
               role="status"
               aria-label="loading"
             >
               <span class="sr-only">Loading...</span>
             </div>
-          </div>
-        </button>
+          </button>
+        </div>
       </div>
 
       <app-add-block
