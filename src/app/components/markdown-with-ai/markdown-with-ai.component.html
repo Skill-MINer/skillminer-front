@@ -37,7 +37,7 @@
   </div>
 </form>
 <app-markdown-editor
-  [markdown]="markdown"
+  [markdown]="markdown[0].contenu[0].contenu"
   [hidden]="requestPending"
 ></app-markdown-editor>
 <div class="justify-center" [hidden]="!requestPending">

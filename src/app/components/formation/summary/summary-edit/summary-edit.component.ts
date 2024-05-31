@@ -68,7 +68,9 @@ export class SummaryEditComponent {
   }
 
   handleEventPageTitleHasChanged(page: PageTitle) {
-    this.actualPage = this.createFormationService.formation.body?.find((p) => p.id === page.id) as Page;
+    this.actualPage = this.createFormationService.formation.body?.find(
+      (p) => p.id === page.id
+    ) as Page;
   }
 
   changeActiveStep() {
@@ -81,6 +83,7 @@ export class SummaryEditComponent {
 
   getFormationPagesTitles() {
     if (this.createFormationService.formation.body) {
+      console.log(this.createFormationService.formation.body);
       return this.createFormationService.formation.body?.map((page) => {
         return { id: page.id, nom: page.nom } as PageTitle;
       }) as PageTitle[];
@@ -88,5 +91,4 @@ export class SummaryEditComponent {
       return [] as PageTitle[];
     }
   }
-
 }
