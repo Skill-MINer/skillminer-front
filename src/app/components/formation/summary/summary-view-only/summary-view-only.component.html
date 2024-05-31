@@ -9,7 +9,7 @@
       <li data-hs-docs-scrollspy-group="">
         <button
           (click)="goToPage(page.id)"
-          class="block py-0.5 text-sm font-medium leading-6 text-slate-700 hover:text-slate-900 focus:outline-none focus:text-blue-600 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:text-blue-500 hs-scrollspy-active:text-blue-600 dark:hs-scrollspy-active:text-blue-400 active"
+          class="block py-0.5 text-sm font-medium leading-6 text-slate-700 hover:text-slate-900 focus:outline-none focus:text-primary-hover dark:text-slate-400 dark:hover:text-slate-300 dark:focus:text-primary hs-scrollspy-active:text-primary-hover dark:hs-scrollspy-active:text-blue-400 active"
         >
           {{ page.nom }}
         </button>
@@ -28,7 +28,7 @@
       <li data-hs-docs-scrollspy-group="">
         <a
           href="{{ actualRoute() }}#item-{{ block.id }}"
-          class="block py-0.5 text-sm font-medium leading-6 text-slate-700 hover:text-slate-900 focus:outline-none focus:text-blue-600 dark:text-slate-400 dark:hover:text-slate-300 dark:focus:text-blue-500 hs-scrollspy-active:text-blue-600 dark:hs-scrollspy-active:text-blue-400 active"
+          class="block py-0.5 text-sm font-medium leading-6 text-slate-700 hover:text-slate-900 focus:outline-none focus:text-primary-hover dark:text-slate-400 dark:hover:text-slate-300 dark:focus:text-primary hs-scrollspy-active:text-primary-hover dark:hs-scrollspy-active:text-blue-400 active"
         >
           {{ block.title }}</a
         >
