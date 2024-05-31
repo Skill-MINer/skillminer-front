@@ -11,6 +11,7 @@ import {
 import { Title1SectionComponent } from '@app/components/formation/sections/title1-section/title1-section.component';
 import { BlocVideoComponent } from '../bloc-video/bloc-video.component';
 import { CdkDragHandle } from '@angular/cdk/drag-drop';
+import { pageContent } from '@app/interfaces/page-content';
 
 @Component({
   selector: 'app-element-collapse-box',
@@ -40,7 +41,7 @@ import { CdkDragHandle } from '@angular/cdk/drag-drop';
 })
 export class ElementCollapseBoxComponent {
   [x: string]: any;
-  @Input() title: string = 'Title ';
+  @Input() block: pageContent = {} as pageContent;
   _markdown: Markdown = { type: 'markdown', text: 'I love markdown' };
   @Output() titleHasChanged = new EventEmitter<string>();
   @Output() titleHasFinishedToChange = new EventEmitter<string>();
@@ -64,11 +65,11 @@ export class ElementCollapseBoxComponent {
     this.isCollapseBoxVisible = !this.isCollapseBoxVisible;
   }
   sendEventTitle(newTitle: string, endEdit: boolean = false) {
-    this.title = newTitle;
+    this.block.title = newTitle;
     if (endEdit) {
-      this.titleHasFinishedToChange.emit(this.title);
+      this.titleHasFinishedToChange.emit(this.block.title);
     } else {
-      this.titleHasChanged.emit(this.title);
+      this.titleHasChanged.emit(this.block.title);
     }
   }
   sendEventMarkdown(markdown: Markdown, endEdit: boolean = false) {

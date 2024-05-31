@@ -32,11 +32,11 @@ export class CreateFormationService {
         contenu: [
           {
             id: 1,
-            title: 'Bloc 1',
+            title: 'New bloc',
             contenu: {
               id: 1,
               type: 'markdown',
-              text: 'Ligne 1\nLigne 2\nLigne 3\nLigne 4',
+              text: '```\nContent\n```',
             },
           }
         ],
@@ -211,7 +211,7 @@ export class CreateFormationService {
             contenu: {
               id: param.newBlockId,
               type: 'markdown',
-              text: 'markdown\n### Content of the new bloc\n```\nCeci est un exemple de contenu en Markdown.\n```',
+              text: '```\nContent\n```',
             },
           });
           moveItemInArray(page.contenu, page.contenu.length-1 , param.parentBlockIndex + 1);
@@ -241,11 +241,11 @@ export class CreateFormationService {
           contenu: [
             {
               id: 0,
-              title: 'First bloc title',
+              title: 'New Bloc',
               contenu: {
                 id: 1,
                 type: 'markdown',
-                text: '#### Contenu du bloc 1\n```\nCeci est un exemple de contenu en Markdown pour le bloc 1.\n```',
+                text: '```\nContent\n```',
               } as Markdown,
             } as pageContent,
           ],
