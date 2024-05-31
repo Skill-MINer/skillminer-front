@@ -3,5 +3,7 @@
   [(ngModel)]="title"
   (input)="sendEventTitle()"
   (change)="sendEventTitleEditFinish()"
+  (focusout)="sendEventTitleEditCancel()"
+  (keydown.enter)="sendEventTitleEditFinish()"
   class="py-3 my-3 px-4 min-w-[98%] block font-sans border border-gray-200 rounded-lg text-xl focus:border-primary focus:ring-primary disabled:opacity-50 disabled:pointer-events-none"
 />

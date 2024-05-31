@@ -14,7 +14,9 @@ export class Title1SectionComponent {
   @Output() titleHasFinishedToChange = new EventEmitter<string>();
   @Output() toggleTitleVisibility = new EventEmitter<null>();
 
-  constructor() { }
+  constructor() {
+    
+  }
 
   sendEventTitle() {
     console.log(this.title);
@@ -24,6 +26,10 @@ export class Title1SectionComponent {
   sendEventTitleEditFinish() {
     console.log('finish', this.title);
     this.titleHasFinishedToChange.emit(this.title);
+    this.toggleTitleVisibility.emit();
+  }
+
+  sendEventTitleEditCancel() {
     this.toggleTitleVisibility.emit();
   }
 }
