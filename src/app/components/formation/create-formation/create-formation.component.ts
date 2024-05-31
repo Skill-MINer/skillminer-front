@@ -80,8 +80,18 @@ export class CreateFormationComponent {
   @HostListener('window:beforeunload', ['$event'])
   onBeforeUnload(event: Event): void {
     if (this.isFormationCreated) {
-      this.createFormationService.saveAllFormationInRemote();
       this.createFormationService.wsSendAllFormation();
+      fetch(`${IP_API}/formations/${this.createFormationService.formation.id}/contenu`, {
+        keepalive: true,
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `${localStorage.getItem('token')}`,
+        },
+        body: JSON.stringify(this.createFormationService.formation.body),
+      }).then((response) => {
+        console.log(response);
+      });
       this.createFormationService.formation = {} as Formation;
       this.createFormationService.headerIsValidated = false;
       this.createFormationService.imageFile = undefined;
@@ -91,8 +101,18 @@ export class CreateFormationComponent {
 
   ngOnDestroy() {
     if (this.isFormationCreated) {
-      this.createFormationService.saveAllFormationInRemote();
       this.createFormationService.wsSendAllFormation();
+      fetch(`${IP_API}/formations/${this.createFormationService.formation.id}/contenu`, {
+        keepalive: true,
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `${localStorage.getItem('token')}`,
+        },
+        body: JSON.stringify(this.createFormationService.formation.body),
+      }).then((response) => {
+        console.log(response);
+      });
       this.createFormationService.formation = {} as Formation;
       this.createFormationService.headerIsValidated = false;
       this.createFormationService.imageFile = undefined;
