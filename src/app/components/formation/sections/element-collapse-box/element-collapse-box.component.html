@@ -8,6 +8,7 @@
   >
     <svg
       class="size-4"
+      [ngClass]="{ 'rotate-180': state === 'collapsed', 'rotate-0': state === 'expanded'}"
       xmlns="http://www.w3.org/2000/svg"
       width="24"
       height="24"

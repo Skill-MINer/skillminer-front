@@ -22,6 +22,9 @@ import { MarkdownEditorComponent } from './components/markdown-editor/markdown-e
 import { MarkdownWithAiComponent } from './components/markdown-with-ai/markdown-with-ai.component';
 import { LiveCursorComponent } from './components/formation/live-cursor/live-cursor.component';
 import { BlocksDragDropComponent } from './components/formation/create-formation-content/blocks-drag-drop/blocks-drag-drop.component';
+import { MergeEditProposalComponent } from './components/formation/edit-proposal/merge-edit-proposal/merge-edit-proposal.component';
+import { ShowEditProposalsComponent } from './components/formation/edit-proposal/show-edit-proposals/show-edit-proposals.component';
+
 
 export const routes: Routes = [
   { path: '', component: WelcomeComponent },
@@ -101,5 +104,13 @@ export const routes: Routes = [
   {
     path: 'live-cursor/:id',
     component: LiveCursorComponent,
+  },
+  {
+    path: 'merge-edit-proposal',
+    component: MergeEditProposalComponent,
+  },
+  {
+    path: 'show-edit-proposals',
+    component: ShowEditProposalsComponent,
   },
 ];

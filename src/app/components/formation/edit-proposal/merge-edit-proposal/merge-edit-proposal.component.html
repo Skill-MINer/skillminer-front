@@ -1,0 +1,9 @@
+<div class="flex justify-center my-8">
+  <div class="flex flex-col max-w-[65rem] w-[80vw] justify-center">
+    @for (blockPorposals of blocksProposals; track $index) {
+    <div class="relative bg-transparent">
+      <app-collapse-edit-proposals [blockProposals]="blockPorposals"></app-collapse-edit-proposals>
+    </div>
+    }
+  </div>
+</div>
