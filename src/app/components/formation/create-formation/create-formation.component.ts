@@ -7,6 +7,7 @@ import { CreateFormationService } from '@app/services/create-formation.service';
 import { Router } from '@angular/router';
 import { LiveCursorComponent } from '../live-cursor/live-cursor.component';
 import { environment } from '@env/environment';
+import { Formation } from '@app/interfaces/formation';
 const IP_API = environment.IP_API;
 
 @Component({
@@ -81,6 +82,10 @@ export class CreateFormationComponent {
     if (this.isFormationCreated) {
       this.createFormationService.saveAllFormationInRemote();
       this.createFormationService.wsSendAllFormation();
+      this.createFormationService.formation = {} as Formation;
+      this.createFormationService.headerIsValidated = false;
+      this.createFormationService.imageFile = undefined;
+      this.createFormationService.imageUrl = undefined;
     }
   }
 
@@ -88,6 +93,10 @@ export class CreateFormationComponent {
     if (this.isFormationCreated) {
       this.createFormationService.saveAllFormationInRemote();
       this.createFormationService.wsSendAllFormation();
+      this.createFormationService.formation = {} as Formation;
+      this.createFormationService.headerIsValidated = false;
+      this.createFormationService.imageFile = undefined;
+      this.createFormationService.imageUrl = undefined;
     }
   }
 

@@ -40,7 +40,7 @@ import { CdkDragHandle } from '@angular/cdk/drag-drop';
 })
 export class ElementCollapseBoxComponent {
   [x: string]: any;
-  @Input() title: string = 'Title ';
+  @Input() title: string = 'New Bloc';
   _markdown: Markdown = { type: 'markdown', text: 'I love markdown' };
   @Output() titleHasChanged = new EventEmitter<string>();
   @Output() titleHasFinishedToChange = new EventEmitter<string>();

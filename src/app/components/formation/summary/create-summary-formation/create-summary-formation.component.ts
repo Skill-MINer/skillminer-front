@@ -55,11 +55,11 @@ export class CreateSummaryFormationComponent {
       contenu: [
         {
           id: 0,
-          title: 'First bloc title',
+          title: 'New Bloc',
           contenu: {
           id: 1,
           type: 'markdown',
-          text: '#### Contenu du bloc 1\n```\nCeci est un exemple de contenu en Markdown pour le bloc 1.\n```',
+          text: '```\nContent\n```',
           } as Markdown,
       } as pageContent,
       ],
