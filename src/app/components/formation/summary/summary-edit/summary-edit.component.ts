@@ -91,7 +91,6 @@ export class SummaryEditComponent {
 
   getFormationPagesTitles() {
     if (this.createFormationService.formation.body) {
-      console.log(this.createFormationService.formation.body);
       return this.createFormationService.formation.body?.map((page) => {
         return { id: page.id, nom: page.nom } as PageTitle;
       }) as PageTitle[];

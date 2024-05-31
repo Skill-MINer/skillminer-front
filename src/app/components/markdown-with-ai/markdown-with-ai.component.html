@@ -36,10 +36,7 @@
     </div>
   </div>
 </form>
-<app-markdown-editor
-  [markdown]="markdown[0].contenu[0].contenu"
-  [hidden]="requestPending"
-></app-markdown-editor>
+<app-markdown-editor [hidden]="requestPending"></app-markdown-editor>
 <div class="justify-center" [hidden]="!requestPending">
   <div
     class="animate-spin relative my-28 mx-auto flex space-x-3 p-3 size-6 border-[3px] border-current border-t-transparent text-accent rounded-full dark:text-accent"
