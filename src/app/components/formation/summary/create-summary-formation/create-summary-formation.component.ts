@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import {
   CdkDrag,
   CdkDragDrop,
@@ -16,6 +16,7 @@ import { pageContent } from '@app/interfaces/page-content';
 import { MarkdownWithAIService } from '@app/services/markdown-with-ai.service';
 import { catchError, throwError } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-create-summary-formation',
   standalone: true,
@@ -31,12 +32,12 @@ import { HttpErrorResponse } from '@angular/common/http';
   styleUrl: './create-summary-formation.component.sass',
 })
 export class CreateSummaryFormationComponent {
-  toastr: any;
   constructor(
     protected createFormationService: CreateFormationService,
     protected markdownWithAiService: MarkdownWithAIService
   ) {}
-  requestPending = false;
+  requestPending: { [key: string]: boolean } = {};
+  private toastr: ToastrService = inject(ToastrService);
 
   drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(
@@ -61,38 +62,42 @@ export class CreateSummaryFormationComponent {
     }
   }
 
-  generatePageContentWithAi(id: number, pageTitle: string) {
-    this.requestPending = true;
-    this.markdownWithAiService
-      .generate(pageTitle, this.createFormationService.formation.titre)
-      .pipe(catchError(this.handleError))
-      .subscribe((page) => {
-        this.requestPending = false;
-        if (this.createFormationService.formation.body) {
-          const indexPageToChange =
-            this.createFormationService.formation.body?.findIndex(
-              (id) => id === id
-            );
-          console.log('indexPageToChange', indexPageToChange);
-          if (indexPageToChange !== -1) {
-            console.log('page', page);
-            console.log(
-              'tochange',
-              this.createFormationService.formation.body[indexPageToChange]
-            );
-            this.createFormationService.formation.body[indexPageToChange] =
-              page;
-            console.log(
-              'changed',
-              this.createFormationService.formation.body[indexPageToChange]
-            );
+  async generatePageContentWithAi(id: number, pageTitle: string) {
+    this.requestPending[id] = true;
+    try {
+      this.markdownWithAiService
+        .generate(pageTitle, this.createFormationService.formation.titre)
+        .subscribe((page) => {
+          this.requestPending[id] = false;
+          if (this.createFormationService.formation.body) {
+            console.log('id', id);
+            let indexPageToChange =
+              this.createFormationService.formation.body.findIndex(
+                (page) => page.id == id
+              );
+            if (indexPageToChange !== -1) {
+              console.log('page', page);
+              console.log(
+                'tochange',
+                this.createFormationService.formation.body[indexPageToChange]
+              );
+              this.createFormationService.formation.body[indexPageToChange] =
+                page;
+              console.log(
+                'changed',
+                this.createFormationService.formation.body[indexPageToChange]
+              );
+            }
           }
-        }
-      });
+        });
+    } catch (error) {
+      this.handleError(error as HttpErrorResponse);
+    } finally {
+      this.requestPending[id] = false;
+    }
   }
 
   private handleError = (error: HttpErrorResponse) => {
-    this.requestPending = false;
     if (error.status === 0) {
       this.toastr.error('Server is down', 'Something went wrong');
     } else {
