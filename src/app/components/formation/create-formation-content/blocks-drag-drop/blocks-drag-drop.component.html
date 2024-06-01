@@ -18,6 +18,7 @@
         (markdownHasFinishedToChange)="handleEventContentHasChanged($event, block.id, true)"
         (titleHasChanged)="handleEventTitleHasChanged($event, block.id)"
         (titleHasFinishedToChange)="handleEventTitleHasChanged($event, block.id, true)"
+        id="item-{{ block.id }}"
       >
       </app-element-collapse-box>
       <app-add-block
