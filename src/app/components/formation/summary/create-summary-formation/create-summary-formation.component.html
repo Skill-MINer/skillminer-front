@@ -16,11 +16,10 @@
           "
           class="w-[95%]"
         ></app-title1-section>
-        <mat-icon
-          class="cursor-pointer absolute right-0 top-0"
-          (click)="supprimer(title.id)"
-          >delete_forever</mat-icon
-        >
+        <div class="cursor-pointer text-red-600 absolute right-6 top-0"
+          (click)="supprimer(title.id)">
+          <mat-icon>delete_forever</mat-icon>
+        </div>
         <div
           [hidden]="requestPending"
           class="absolute right-[3.75rem] p-[0.6rem]"
