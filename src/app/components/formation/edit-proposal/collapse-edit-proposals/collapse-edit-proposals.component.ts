@@ -11,6 +11,7 @@ import { NgClass } from '@angular/common';
 import { MarkdownModule } from 'ngx-markdown';
 import { BlocVideoViewComponent } from '../../sections/bloc-video-view/bloc-video-view.component';
 import { ShowEditProposalsComponent } from '../show-edit-proposals/show-edit-proposals.component';
+import { Markdown } from '@app/interfaces/markdown';
 
 @Component({
   selector: 'app-collapse-edit-proposals',
@@ -41,5 +42,10 @@ export class CollapseEditProposalsComponent {
 
   toggleVisibility() {
     this.state = this.state === 'collapsed' ? 'expanded' : 'collapsed';
+  }
+
+  handleblocPorposalAccepted(blockProposal: Markdown) {
+    console.log('Accepting block proposal', blockProposal);
+    this.blockProposals.actualContenu = blockProposal;
   }
 }

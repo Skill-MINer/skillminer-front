@@ -18,6 +18,6 @@
             <app-bloc-video-view class="m-2" [width]="'494'" [height]="'278'" [videoId]="blockProposals.actualContenu.text"></app-bloc-video-view>
         }
         }
-        <app-show-edit-proposals [blockProposals]="blockProposals.contenu"></app-show-edit-proposals>
+        <app-show-edit-proposals [blockProposals]="blockProposals.contenu" (blocPorposalAccepted)="handleblocPorposalAccepted($event)"></app-show-edit-proposals>
     </div>
 </div>
