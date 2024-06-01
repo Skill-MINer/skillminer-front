@@ -4,11 +4,14 @@ import { MarkdownModule } from 'ngx-markdown';
 import { BlocVideoViewComponent } from '../../sections/bloc-video-view/bloc-video-view.component';
 import { MatIcon } from '@angular/material/icon';
 import { NgClass } from '@angular/common';
+import { CarouselModule } from 'primeng/carousel';
+import { ButtonModule } from 'primeng/button';
+import { TagModule } from 'primeng/tag';
 
 @Component({
   selector: 'app-show-edit-proposals',
   standalone: true,
-  imports: [MarkdownModule, BlocVideoViewComponent, MatIcon, NgClass],
+  imports: [MarkdownModule, BlocVideoViewComponent, MatIcon, NgClass, CarouselModule, ButtonModule, TagModule],
   templateUrl: './show-edit-proposals.component.html',
   styleUrl: './show-edit-proposals.component.sass'
 })

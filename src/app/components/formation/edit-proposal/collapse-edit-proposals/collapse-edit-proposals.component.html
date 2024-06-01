@@ -11,11 +11,11 @@
     <div [@toggle]="state" class="w-full overflow-hidden transition-[height] duration-300 flex justify-between flex-wrap">
         @switch (blockProposals.actualContenu.type) {
         @case('markdown') {
-            <markdown emoji katex mermaid ngPreserveWhitespaces class="variable-binding p-2 my-1 prose leading-none w-[32rem] border rounded-lg shadow-sm"
+            <markdown emoji katex mermaid ngPreserveWhitespaces class="variable-binding p-2 my-1 prose leading-none w-[30rem] border rounded-lg shadow-sm"
             [data]="blockProposals.actualContenu.text"></markdown>
         }
         @case ('video') {
-            <app-bloc-video-view class="m-2" [width]="'494'" [height]="'278'" [videoId]="blockProposals.actualContenu.text"></app-bloc-video-view>
+            <app-bloc-video-view class="m-2" [width]="'472'" [height]="'266'" [videoId]="blockProposals.actualContenu.text"></app-bloc-video-view>
         }
         }
         <app-show-edit-proposals [blockProposals]="blockProposals.contenu" (blocPorposalAccepted)="handleblocPorposalAccepted($event)"></app-show-edit-proposals>
