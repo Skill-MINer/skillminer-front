@@ -130,27 +130,6 @@
             Submit informations
           </button>
         </div>
-        <div class="mt-5 flex justify-center gap-x-2">
-          <button
-            type="button"
-            type="submit"
-            [disabled]="!headerForm.valid"
-            [hidden]="requestPending"
-            (click)="generateFormation()"
-            class="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-primary text-white hover:bg-primary-6 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-          >
-            Generate with AI
-          </button>
-          <div [hidden]="!requestPending">
-            <div
-              class="animate-spin relative my-28 mx-auto flex space-x-3 p-3 size-6 border-[3px] border-current border-t-transparent text-accent rounded-full dark:text-accent"
-              role="status"
-              aria-label="loading"
-            >
-              <span class="sr-only">Loading...</span>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
     <!-- End Card -->

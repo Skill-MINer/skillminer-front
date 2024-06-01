@@ -15,9 +15,12 @@ export class MarkdownWithAIService {
   private toastr: ToastrService = inject(ToastrService);
 
   constructor() {}
-  generate(title: string): Observable<Page[]> {
+  generate(pageTitle: string, formationTitle?: string): Observable<Page> {
     return this.http
-      .post(`${IP_API}/formations/generate`, { name: title })
-      .pipe(map((obj) => obj as Page[]));
+      .post(`${IP_API}/formations/generate`, {
+        formationTitle: formationTitle as string,
+        pageTitle: pageTitle,
+      })
+      .pipe(map((obj) => obj as Page));
   }
 }
