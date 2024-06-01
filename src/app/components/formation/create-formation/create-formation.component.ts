@@ -7,6 +7,7 @@ import { CreateFormationService } from '@app/services/create-formation.service';
 import { Router } from '@angular/router';
 import { LiveCursorComponent } from '../live-cursor/live-cursor.component';
 import { environment } from '@env/environment';
+import { Formation } from '@app/interfaces/formation';
 const IP_API = environment.IP_API;
 
 @Component({
@@ -79,15 +80,43 @@ export class CreateFormationComponent {
   @HostListener('window:beforeunload', ['$event'])
   onBeforeUnload(event: Event): void {
     if (this.isFormationCreated) {
-      this.createFormationService.saveAllFormationInRemote();
       this.createFormationService.wsSendAllFormation();
+      fetch(`${IP_API}/formations/${this.createFormationService.formation.id}/contenu`, {
+        keepalive: true,
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `${localStorage.getItem('token')}`,
+        },
+        body: JSON.stringify(this.createFormationService.formation.body),
+      }).then((response) => {
+        console.log(response);
+      });
+      this.createFormationService.formation = {} as Formation;
+      this.createFormationService.headerIsValidated = false;
+      this.createFormationService.imageFile = undefined;
+      this.createFormationService.imageUrl = undefined;
     }
   }
 
   ngOnDestroy() {
     if (this.isFormationCreated) {
-      this.createFormationService.saveAllFormationInRemote();
       this.createFormationService.wsSendAllFormation();
+      fetch(`${IP_API}/formations/${this.createFormationService.formation.id}/contenu`, {
+        keepalive: true,
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `${localStorage.getItem('token')}`,
+        },
+        body: JSON.stringify(this.createFormationService.formation.body),
+      }).then((response) => {
+        console.log(response);
+      });
+      this.createFormationService.formation = {} as Formation;
+      this.createFormationService.headerIsValidated = false;
+      this.createFormationService.imageFile = undefined;
+      this.createFormationService.imageUrl = undefined;
     }
   }
 

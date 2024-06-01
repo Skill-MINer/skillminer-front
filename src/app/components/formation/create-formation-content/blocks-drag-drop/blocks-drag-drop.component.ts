@@ -8,7 +8,6 @@ import {
   moveItemInArray,
 } from '@angular/cdk/drag-drop';
 import { MatIconModule } from '@angular/material/icon';
-import { Title1SectionComponent } from '@app/components/formation/sections/title1-section/title1-section.component';
 import { ElementCollapseBoxComponent } from '@app/components/formation/sections/element-collapse-box/element-collapse-box.component';
 import { Markdown } from '@app/interfaces/markdown';
 import { pageContent } from '@app/interfaces/page-content';
@@ -26,7 +25,6 @@ import { CreateFormationService } from '@app/services/create-formation.service';
     CdkDragPlaceholder,
     CdkDragHandle,
     MatIconModule,
-    Title1SectionComponent,
     AddBlockComponent,
     ElementCollapseBoxComponent,
   ],
@@ -41,11 +39,11 @@ export class BlocksDragDropComponent {
     contenu: [
       {
         id: 1,
-        title: 'Bloc 1',
+        title: 'New bloc',
         contenu: {
           id: 1,
           type: 'markdown',
-          text: '#### Contenu du bloc 1\n```\nCeci est un exemple de contenu en Markdown pour le bloc 1.\n```',
+          text: '```\nContent\n```',
         },
       },
     ]
@@ -88,7 +86,7 @@ export class BlocksDragDropComponent {
       contenu: {
         id: newId,
         type: 'markdown',
-        text: 'markdown\n### Content of the new bloc\n```\nCeci est un exemple de contenu en Markdown.\n```',
+        text: '```\nContent\n```',
       },
     });
     const parentBlockIndex = this.page.contenu.indexOf(parentBlock);
@@ -100,7 +98,7 @@ export class BlocksDragDropComponent {
     const newId: number = Math.max(...this.page.contenu.map(block => block.id)) + 1;
     this.page.contenu.push({
       id: newId,
-      title: 'Bloc 3',
+      title: 'New Bloc',
       contenu: {
         id: newId,
         type: 'video',

@@ -1,12 +1,11 @@
 import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { Page } from '@app/interfaces/page';
-import { Formation } from '@app/interfaces/formation';
+import { MatIconModule } from '@angular/material/icon';
 import { RouterLink, Router, ActivatedRoute } from '@angular/router';
 import { MarkdownModule } from 'ngx-markdown';
 import 'prismjs';
 import 'prismjs/plugins/line-numbers/prism-line-numbers.js';
 import 'prismjs/plugins/line-highlight/prism-line-highlight.js';
-import { FooterComponent } from '@app/components/footer/footer.component';
 import { SummaryPageComponent } from '@app/components/formation/summary/summary-page/summary-page.component';
 import { FormationViewComponent } from '@app/components/formation/summary/formation-view/formation-view.component';
 import { SummaryBlockComponent } from '@app/components/formation/summary/summary-block/summary-block.component';
@@ -17,14 +16,7 @@ import { CreateFormationService } from '@app/services/create-formation.service';
 @Component({
   selector: 'app-summary-edit',
   standalone: true,
-  imports: [
-    RouterLink,
-    MarkdownModule,
-    SummaryPageComponent,
-    FormationViewComponent,
-    SummaryBlockComponent,
-    BlocksDragDropComponent,
-  ],
+  imports: [RouterLink, MarkdownModule, MatIconModule, SummaryPageComponent, FormationViewComponent, SummaryBlockComponent, BlocksDragDropComponent],
   templateUrl: './summary-edit.component.html',
   styleUrl: './summary-edit.component.sass',
 })
