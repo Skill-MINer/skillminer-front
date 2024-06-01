@@ -12,6 +12,7 @@ import { Title1SectionComponent } from '@app/components/formation/sections/title
 import { BlocVideoComponent } from '../bloc-video/bloc-video.component';
 import { CdkDragHandle } from '@angular/cdk/drag-drop';
 import { pageContent } from '@app/interfaces/page-content';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-element-collapse-box',
@@ -21,6 +22,7 @@ import { pageContent } from '@app/interfaces/page-content';
     Title1SectionComponent,
     BlocVideoComponent,
     CdkDragHandle,
+    NgClass
   ],
   templateUrl: './element-collapse-box.component.html',
   styleUrl: './element-collapse-box.component.sass',

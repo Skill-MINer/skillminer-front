@@ -1,0 +1,23 @@
+<div>
+    <button id="TitleButton" (click)="toggleVisibility()"
+        class="py-3 inline-flex text-2xl items-center gap-x-3 w-full font-semibold text-start text-gray-800 hover:text-gray-500 rounded-lg disabled:opacity-50 disabled:pointer-events-none dark:text-neutral-200 dark:hover:text-neutral-400 dark:focus:outline-none dark:focus:text-neutral-400">
+        <svg class="size-4" [ngClass]="{ 'rotate-180': state === 'collapsed', 'rotate-0': state === 'expanded'}"
+            xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m6 9 6 6 6-6"></path>
+        </svg>
+        {{ blockProposals.title }}
+    </button>
+    <div [@toggle]="state" class="w-full overflow-hidden transition-[height] duration-300 flex justify-between flex-wrap">
+        @switch (blockProposals.actualContenu.type) {
+        @case('markdown') {
+            <markdown emoji katex mermaid ngPreserveWhitespaces class="variable-binding p-2 my-1 prose leading-none w-[30rem] border rounded-lg shadow-sm"
+            [data]="blockProposals.actualContenu.text"></markdown>
+        }
+        @case ('video') {
+            <app-bloc-video-view class="m-2" [width]="'472'" [height]="'266'" [videoId]="blockProposals.actualContenu.text"></app-bloc-video-view>
+        }
+        }
+        <app-show-edit-proposals [blockProposals]="blockProposals.contenu" (blocPorposalAccepted)="handleblocPorposalAccepted($event)"></app-show-edit-proposals>
+    </div>
+</div>
