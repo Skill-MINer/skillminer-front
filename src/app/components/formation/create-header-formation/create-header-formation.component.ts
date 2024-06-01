@@ -75,17 +75,6 @@ export class CreateHeaderFormationComponent {
         this.tags = tags;
       });
   }
-  generateFormation() {
-    this.onSubmit();
-    this.requestPending = true;
-    this.MarkdownWithAIService.generate(this.headerForm.value.titre as string)
-      .pipe(catchError(this.handleError))
-      .subscribe((md) => {
-        this.requestPending = false;
-        this.createFormationService.formation.body = md;
-        console.log(md);
-      });
-  }
   private handleError = (error: HttpErrorResponse) => {
     this.requestPending = false;
     if (error.status === 0) {
