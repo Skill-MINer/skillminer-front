@@ -86,7 +86,7 @@ export class CreateFormationService {
     return this.http
       .post<Formation>(`${IP_API}/formations`, {
         titre: formation.titre,
-        tags: formation.tags,
+        tag: formation.tags,
         description: formation.description,
       })
       .pipe(catchError(this.handleError));
@@ -147,7 +147,7 @@ export class CreateFormationService {
       console.log(this.http.put(`${IP_API}/formations/${this.formation.id}/header`, {
         titre: this.formation.titre,
         description: this.formation.description,
-        tags: this.formation.tag?.map((tag) => tag.id),
+        tag: this.formation.tag?.map((tag) => tag.id),
       }).pipe(catchError(this.handleError)).subscribe());
       if (this.formation.body) {
         this.http.put(`${IP_API}/formations/${this.formation.id}/contenu`, this.formation.body)

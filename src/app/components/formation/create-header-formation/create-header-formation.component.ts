@@ -98,17 +98,7 @@ export class CreateHeaderFormationComponent {
           .value.description as string;
         this.createFormationService.formation.tag = selectedTags;
         this.createFormationService.headerIsValidated = true;
-        /*this.createFormationService.createFormation({
-          ...this.headerForm.value,
-          tags: tags
-        }).subscribe((formation) => {
-          let id = formation.id;
-          if (this.imageFile !== null) {
-            this.createFormationService.postImageHeader(id, this.imageFile).subscribe(() => {
-              this.nextStep.emit();
-            });
-          }
-        });*/
+        this.createFormationService.saveAllFormationInRemote();
       } else {
         this.createFormationService.headerIsValidated = false;
       }
