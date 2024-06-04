@@ -12,6 +12,7 @@ import { MarkdownModule } from 'ngx-markdown';
 import { BlocVideoViewComponent } from '../../sections/bloc-video-view/bloc-video-view.component';
 import { ShowEditProposalsComponent } from '../show-edit-proposals/show-edit-proposals.component';
 import { Markdown } from '@app/interfaces/markdown';
+import { MergeEditProposalsService } from '@app/services/merge-edit-proposals.service';
 
 @Component({
   selector: 'app-collapse-edit-proposals',
@@ -37,20 +38,28 @@ import { Markdown } from '@app/interfaces/markdown';
 export class CollapseEditProposalsComponent {
   public state: 'collapsed' | 'expanded' = 'expanded';
   blockProposals: BlocksProposals = {} as BlocksProposals;
+  @Output() blocPorposalRejected = new EventEmitter<{idBlock: number, idProposal: number}>();
 
   @Input()
   set setBlockProposals(blockProposals: BlocksProposals) {
     this.blockProposals = blockProposals;
   }
 
-  constructor() {}
+  constructor(private mergeEditProposalsService: MergeEditProposalsService) { }
 
   toggleVisibility() {
     this.state = this.state === 'collapsed' ? 'expanded' : 'collapsed';
   }
 
   handleblocPorposalAccepted(blockProposal: Markdown) {
-    console.log('Accepting block proposal', blockProposal);
     this.blockProposals.contenu = blockProposal;
+    this.mergeEditProposalsService.updateBlockProposal();
+  }
+
+  handleblocPorposalRejected(blockProposal: Markdown) {
+    if (!blockProposal.id) {
+      return;
+    }
+    this.blocPorposalRejected.emit({idBlock: this.blockProposals.id, idProposal: blockProposal.id});
   }
 }
