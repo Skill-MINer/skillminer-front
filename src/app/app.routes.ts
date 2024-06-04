@@ -109,5 +109,10 @@ export const routes: Routes = [
     path: 'merge-edit-proposal/:id',
     canActivate: [authGuard],
     component: MergeEditProposalComponent,
-  }
+  },
+  {
+    path: 'show-edit-proposals',
+    component: ShowEditProposalsComponent,
+  },
+  { path: '**', redirectTo: ''}
 ];
