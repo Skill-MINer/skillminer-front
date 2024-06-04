@@ -60,13 +60,6 @@ export class SummaryEditComponent {
       });
   }*/
 
-  ngAfterViewInit(): void {
-    const anchor = document.querySelector(
-      '#item-' + this.route.snapshot.paramMap.get('id')
-    );
-    if (anchor) anchor.scrollIntoView({ behavior: 'smooth', block: 'center' });
-  }
-
   handleEventPageTitleHasChanged(page: PageTitle) {
     this.actualPage = this.createFormationService.formation.body?.find(
       (p) => p.id === page.id

@@ -106,11 +106,8 @@ export const routes: Routes = [
     component: LiveCursorComponent,
   },
   {
-    path: 'merge-edit-proposal',
+    path: 'merge-edit-proposal/:id',
+    canActivate: [authGuard],
     component: MergeEditProposalComponent,
-  },
-  {
-    path: 'show-edit-proposals',
-    component: ShowEditProposalsComponent,
-  },
+  }
 ];

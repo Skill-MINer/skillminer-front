@@ -18,13 +18,12 @@ import { TagModule } from 'primeng/tag';
 export class ShowEditProposalsComponent {
   blockProposals: Markdown[] = [];
   @Output() blocPorposalAccepted = new EventEmitter<Markdown>();
+  @Output() blocPorposalRejected = new EventEmitter<Markdown>();
 
   @Input()
   set setBlockProposals(blockProposals: Markdown[]) {
     this.blockProposals = blockProposals;
   }
-
-  constructor() { }
 
   acceptBlockProposal(blockProposal: Markdown) {
     console.log('Accepting block proposal', blockProposal);
@@ -37,9 +36,10 @@ export class ShowEditProposalsComponent {
 
   rejectBlockProposal(blockProposal: Markdown) {
     console.log('Rejecting block proposal', blockProposal);
+    this.blocPorposalRejected.emit(blockProposal);
     const index = this.blockProposals.indexOf(blockProposal);
     if (index > -1) {
       this.blockProposals.splice(index, 1);
-    }    
+    }
   }
 }
