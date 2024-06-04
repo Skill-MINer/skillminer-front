@@ -403,7 +403,7 @@ export class SummaryViewOnlyComponent {
     if (page) {
       const block = page.contenu.find(block => block.id === blockid);
       if (block) {
-      block.editMode = false;
+        block.editMode = false;
       }
     }
   }
@@ -413,10 +413,10 @@ export class SummaryViewOnlyComponent {
     if (page) {
       const block = page.contenu.find(block => block.id === blockid);
       if (block && block.editContent) {
-        block.contenu = block.editContent;
+        block.contenu = JSON.parse(JSON.stringify(block.editContent));
       }
     }
-    console.log(this.formation);
+    // TODO call API to update block
   }
 
 }
