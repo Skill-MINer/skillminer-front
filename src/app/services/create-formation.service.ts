@@ -442,4 +442,24 @@ export class CreateFormationService {
       this.timeLastSave = new Date();
     }
   }
+
+  addCollaborator(email: string) {
+    this.http.post(`${IP_API}/formations/${this.formation.id}/contributors`, { email: email })
+    .pipe(catchError( (error: HttpErrorResponse) => {
+      if (error.status === 0) {
+        this.toastr.error('Server is down', 'Something went wrong');
+      } else {
+        this.toastr.error(error.error.error, 'Something went wrong');
+      }
+      return throwError(() => new Error('Something bad happened; please try again later.'));
+    }
+    ))
+    .subscribe(() => {
+      this.toastr.success('Collaborator added', 'Success');
+    });
+  }
+
+  getCollaborators(): Observable<any> {
+    return this.http.get(`${IP_API}/formations/${this.formation.id}/contributors`);
+  }
 }
