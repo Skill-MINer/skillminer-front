@@ -137,4 +137,8 @@ export class AuthService {
 		}
 		return new Error("Token is not valid");
 	}
+
+	isContributor(formationId: number) {
+		return this.http.get(`${IP_API}/formations/${formationId}/contributors/token-info`)
+	}
 }

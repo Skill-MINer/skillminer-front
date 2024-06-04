@@ -8,12 +8,13 @@ import { Router } from '@angular/router';
 import { LiveCursorComponent } from '../live-cursor/live-cursor.component';
 import { environment } from '@env/environment';
 import { Formation } from '@app/interfaces/formation';
+import { FormsModule } from '@angular/forms';
 const IP_API = environment.IP_API;
 
 @Component({
   selector: 'app-create-formation',
   standalone: true,
-  imports: [NgClass, CreateHeaderFormationComponent, CreateSummaryFormationComponent, SummaryEditComponent, LiveCursorComponent],
+  imports: [NgClass, CreateHeaderFormationComponent, CreateSummaryFormationComponent, SummaryEditComponent, LiveCursorComponent, FormsModule],
   templateUrl: './create-formation.component.html',
   styleUrl: './create-formation.component.sass',
 })
@@ -23,6 +24,7 @@ export class CreateFormationComponent {
   numberOfSteps: number = 3;
   @Input() id: number | undefined;
   isFormationCreated: boolean = false;
+  collaboratorEmail: string = '';
 
   constructor(protected createFormationService: CreateFormationService, private router: Router) {
     this.activeStep = 1;
@@ -75,6 +77,7 @@ export class CreateFormationComponent {
 
   submit() {
     this.createFormationService.saveAllFormationInRemote();
+    this.nextStep();
   }
 
   @HostListener('window:beforeunload', ['$event'])
@@ -120,4 +123,10 @@ export class CreateFormationComponent {
     }
   }
 
+  addCollaborator() {
+    if (this.collaboratorEmail !== '') {
+      this.createFormationService.addCollaborator(this.collaboratorEmail);
+      this.collaboratorEmail = '';
+    }
+  }
 }
