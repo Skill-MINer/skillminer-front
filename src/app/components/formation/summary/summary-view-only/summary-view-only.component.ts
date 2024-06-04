@@ -421,15 +421,13 @@ export class SummaryViewOnlyComponent {
     if (page) {
       const block = page.contenu.find((block) => block.id === blockid);
       if (block && block.editContent) {
-        const proposal = JSON.parse(JSON.stringify(block.editContent));
-        console.log('proposal=', proposal);
+        block.contenu = JSON.parse(JSON.stringify(block.editContent));
         this.modificationProposalService.postModificationProposal(
           this.formationId,
           pageId,
           blockid,
-          proposal
+          block.contenu
         );
-        block.contenu = proposal;
       }
       this.switchBlockToView(blockid, pageId);
     }
