@@ -388,12 +388,6 @@ export class SummaryViewOnlyComponent {
         }
       });
   }
-  ngAfterViewInit(): void {
-    const anchor = document.querySelector(
-      '#item-' + this.route.snapshot.paramMap.get('id')
-    );
-    if (anchor) anchor.scrollIntoView({ behavior: 'smooth', block: 'center' });
-  }
 
   switchBlockToEdit(blockid: number, pageId: number) {
     const page = this.formation.body?.find((page) => page.id === pageId);
