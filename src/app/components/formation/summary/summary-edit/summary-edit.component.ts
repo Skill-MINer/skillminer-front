@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { Page } from '@app/interfaces/page';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterLink, Router, ActivatedRoute } from '@angular/router';
@@ -16,7 +16,15 @@ import { CreateFormationService } from '@app/services/create-formation.service';
 @Component({
   selector: 'app-summary-edit',
   standalone: true,
-  imports: [RouterLink, MarkdownModule, MatIconModule, SummaryPageComponent, FormationViewComponent, SummaryBlockComponent, BlocksDragDropComponent],
+  imports: [
+    RouterLink,
+    MarkdownModule,
+    MatIconModule,
+    SummaryPageComponent,
+    FormationViewComponent,
+    SummaryBlockComponent,
+    BlocksDragDropComponent,
+  ],
   templateUrl: './summary-edit.component.html',
   styleUrl: './summary-edit.component.sass',
 })

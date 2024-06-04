@@ -14,11 +14,18 @@ import { MarkdownEditorComponent } from '@app/components/markdown-editor/markdow
 import { BlocVideoComponent } from '../../sections/bloc-video/bloc-video.component';
 import { MarkdownViewOnlyComponent } from '@app/components/markdown-view-only/markdown-view-only.component';
 
-
 @Component({
   selector: 'app-summary-view-only',
   standalone: true,
-  imports: [RouterLink, BlocVideoComponent, FooterComponent, MarkdownViewOnlyComponent, BlocVideoViewComponent, MatIcon, MarkdownEditorComponent],
+  imports: [
+    RouterLink,
+    BlocVideoComponent,
+    FooterComponent,
+    MarkdownViewOnlyComponent,
+    BlocVideoViewComponent,
+    MatIcon,
+    MarkdownEditorComponent,
+  ],
   templateUrl: './summary-view-only.component.html',
   styleUrl: './summary-view-only.component.sass',
 })
@@ -388,20 +395,20 @@ export class SummaryViewOnlyComponent {
   }
 
   switchBlockToEdit(blockid: number, pageId: number) {
-    const page = this.formation.body?.find(page => page.id === pageId);
+    const page = this.formation.body?.find((page) => page.id === pageId);
     if (page) {
-      const block = page.contenu.find(block => block.id === blockid);
+      const block = page.contenu.find((block) => block.id === blockid);
       if (block) {
-      block.editMode = true;
-      block.editContent = JSON.parse(JSON.stringify(block.contenu));
+        block.editMode = true;
+        block.editContent = JSON.parse(JSON.stringify(block.contenu));
       }
     }
   }
 
   switchBlockToView(blockid: number, pageId: number) {
-    const page = this.formation.body?.find(page => page.id === pageId);
+    const page = this.formation.body?.find((page) => page.id === pageId);
     if (page) {
-      const block = page.contenu.find(block => block.id === blockid);
+      const block = page.contenu.find((block) => block.id === blockid);
       if (block) {
         block.editMode = false;
       }
@@ -409,14 +416,12 @@ export class SummaryViewOnlyComponent {
   }
 
   updateBlock(blockid: number, pageId: number) {
-    const page = this.formation.body?.find(page => page.id === pageId);
+    const page = this.formation.body?.find((page) => page.id === pageId);
     if (page) {
-      const block = page.contenu.find(block => block.id === blockid);
+      const block = page.contenu.find((block) => block.id === blockid);
       if (block && block.editContent) {
         block.contenu = JSON.parse(JSON.stringify(block.editContent));
       }
     }
-    // TODO call API to update block
   }
-
 }
