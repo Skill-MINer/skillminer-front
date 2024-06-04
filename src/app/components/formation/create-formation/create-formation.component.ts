@@ -77,6 +77,7 @@ export class CreateFormationComponent {
 
   submit() {
     this.createFormationService.saveAllFormationInRemote();
+    this.nextStep();
   }
 
   @HostListener('window:beforeunload', ['$event'])
