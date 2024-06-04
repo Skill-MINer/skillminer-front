@@ -113,4 +113,5 @@ export const routes: Routes = [
     path: 'show-edit-proposals',
     component: ShowEditProposalsComponent,
   },
+  { path: '**', redirectTo: ''}
 ];
