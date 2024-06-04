@@ -13,6 +13,7 @@ import { BlocVideoViewComponent } from '../../sections/bloc-video-view/bloc-vide
 import { MarkdownEditorComponent } from '@app/components/markdown-editor/markdown-editor.component';
 import { BlocVideoComponent } from '../../sections/bloc-video/bloc-video.component';
 import { MarkdownViewOnlyComponent } from '@app/components/markdown-view-only/markdown-view-only.component';
+import { ModificationProposalService } from '@app/services/modification-proposal.service';
 
 @Component({
   selector: 'app-summary-view-only',
@@ -355,7 +356,8 @@ export class SummaryViewOnlyComponent {
   constructor(
     private scrollToAnchorService: ScrollToAnchorService,
     private route: ActivatedRoute,
-    private formationService: FormationService
+    private formationService: FormationService,
+    private modificationProposalService: ModificationProposalService
   ) {}
 
   actualRoute() {
@@ -382,7 +384,6 @@ export class SummaryViewOnlyComponent {
       .subscribe((data) => {
         this.formation = data;
         if (this.formation.body) {
-          console.log(this.formation);
           this.actualPage = this.formation.body[0];
         }
       });
@@ -421,7 +422,14 @@ export class SummaryViewOnlyComponent {
       const block = page.contenu.find((block) => block.id === blockid);
       if (block && block.editContent) {
         block.contenu = JSON.parse(JSON.stringify(block.editContent));
+        this.modificationProposalService.postModificationProposal(
+          this.formationId,
+          pageId,
+          blockid,
+          block.contenu
+        );
       }
+      this.switchBlockToView(blockid, pageId);
     }
   }
 }
