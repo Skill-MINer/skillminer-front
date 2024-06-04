@@ -6,6 +6,7 @@ import { RecoverAccountComponent } from './components/recover-account/recover-ac
 import { TestSecureComponent } from './components/test-secure/test-secure.component';
 import { authGuard } from './auth/auth.guard';
 import { noAuthGuard } from './auth/no-auth.guard';
+import { contributorGuard } from './auth/contributor.guard';
 import { ProfileUpdateComponent } from './components/profile-update/profile-update.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
@@ -82,7 +83,7 @@ export const routes: Routes = [
   {
     path: 'create-formation/:id',
     component: CreateFormationComponent,
-    canActivate: [authGuard],
+    canActivate: [ contributorGuard, authGuard ],
   },
   {
     path: 'markdown',
