@@ -16,33 +16,30 @@ import { TagModule } from 'primeng/tag';
   styleUrl: './show-edit-proposals.component.sass'
 })
 export class ShowEditProposalsComponent {
-  @Input() blockProposals: Markdown[] = [];
+  blockProposals: Markdown[] = [];
   @Output() blocPorposalAccepted = new EventEmitter<Markdown>();
-  whichBlockIsVisible: number = 0;
+
+  @Input()
+  set setBlockProposals(blockProposals: Markdown[]) {
+    this.blockProposals = blockProposals;
+  }
 
   constructor() { }
 
   acceptBlockProposal(blockProposal: Markdown) {
     console.log('Accepting block proposal', blockProposal);
     this.blocPorposalAccepted.emit(blockProposal);
-    this.blockProposals = this.blockProposals.filter((proposal) => proposal !== blockProposal);
-    
+    const index = this.blockProposals.indexOf(blockProposal);
+    if (index > -1) {
+      this.blockProposals.splice(index, 1);
+    }    
   }
 
   rejectBlockProposal(blockProposal: Markdown) {
     console.log('Rejecting block proposal', blockProposal);
-    this.blockProposals = this.blockProposals.filter((proposal) => proposal !== blockProposal);
-  }
-
-  isblockProposalVisible(blockProposal: Markdown) {
-    return this.blockProposals[this.whichBlockIsVisible] === blockProposal;
-  }
-
-  nextBlockProposal() {
-    this.whichBlockIsVisible = (this.whichBlockIsVisible + 1) % this.blockProposals.length;
-  }
-
-  previousBlockProposal() {
-    this.whichBlockIsVisible = (this.whichBlockIsVisible - 1 + this.blockProposals.length) % this.blockProposals.length;
+    const index = this.blockProposals.indexOf(blockProposal);
+    if (index > -1) {
+      this.blockProposals.splice(index, 1);
+    }    
   }
 }

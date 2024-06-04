@@ -36,7 +36,12 @@ import { Markdown } from '@app/interfaces/markdown';
 })
 export class CollapseEditProposalsComponent {
   public state: 'collapsed' | 'expanded' = 'expanded';
-  @Input() blockProposals: BlocksProposals = {} as BlocksProposals;
+  blockProposals: BlocksProposals = {} as BlocksProposals;
+
+  @Input()
+  set setBlockProposals(blockProposals: BlocksProposals) {
+    this.blockProposals = blockProposals;
+  }
 
   constructor() {}
 
@@ -46,6 +51,6 @@ export class CollapseEditProposalsComponent {
 
   handleblocPorposalAccepted(blockProposal: Markdown) {
     console.log('Accepting block proposal', blockProposal);
-    this.blockProposals.actualContenu = blockProposal;
+    this.blockProposals.contenu = blockProposal;
   }
 }

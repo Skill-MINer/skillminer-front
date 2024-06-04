@@ -1,6 +1,6 @@
 <div class="fixed top-28 z-30 left-10 max-w-fit">
   <app-summary-page [pages]="getFormationPagesTitles()"
-    (pageHasChanged)="handleEventPageTitleHasChanged($event)"></app-summary-page>
+    (pageHasChanged)="handleEventPageHasChanged($event)"></app-summary-page>
 </div>
 
 <div class="flex justify-center my-8">
@@ -11,9 +11,9 @@
     <h2 class="text-3xl font-semibold dark:text-white mb-5">
       {{ actualPage.nom }}
     </h2>
-    @for (blockPorposals of actualPage.contenu; track $index) {
+    @for (blockPorposals of actualPage.contenu; track actualPage) {
     <div class="relative bg-transparent">
-      <app-collapse-edit-proposals [blockProposals]="blockPorposals" id="item-{{blockPorposals.id}}"></app-collapse-edit-proposals>
+      <app-collapse-edit-proposals [setBlockProposals]="blockPorposals" id="item-{{blockPorposals.id}}"></app-collapse-edit-proposals>
     </div>
     }
   </div>
