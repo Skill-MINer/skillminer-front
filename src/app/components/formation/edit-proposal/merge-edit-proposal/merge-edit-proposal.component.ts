@@ -24,12 +24,12 @@ export class MergeEditProposalComponent {
     {
       id: 1,
       title: 'Block 1',
-      actualContenu: {
+      contenu: {
         id: 1,
         text: 'Proposal 1',
         type: 'markdown'
       },
-      contenu: [
+      proposalsContenu: [
         {
           id: 1,
           text: 'Proposal 1\n\n```javascript\nfunction test() {\n  console.log(\'test\');\n}\n```',
@@ -60,12 +60,12 @@ export class MergeEditProposalComponent {
     {
       id: 2,
       title: 'Block 2',
-      actualContenu: {
+      contenu: {
         id: 1,
         text: 'Proposal 1',
         type: 'markdown'
       },
-      contenu: [
+      proposalsContenu: [
         {
           id: 1,
           text: 'Proposal 1',
@@ -96,12 +96,12 @@ export class MergeEditProposalComponent {
     {
       id: 3,
       title: 'Block 3',
-      actualContenu: {
+      contenu: {
         id: 1,
         text: '5C3YCTL-36c',
         type: 'video'
       },
-      contenu: [
+      proposalsContenu: [
         {
           id: 1,
           text: 'Proposal 1',
@@ -135,12 +135,12 @@ export class MergeEditProposalComponent {
     {
       id: 1,
       title: 'Block 1',
-      actualContenu: {
+      contenu: {
         id: 1,
         text: 'Proposal 1',
         type: 'markdown'
       },
-      contenu: [
+      proposalsContenu: [
         {
           id: 1,
           text: 'Actual cotnent of page 2\n\n```javascript\nfunction test() {\n  console.log(\'test\');\n}\n```',
@@ -171,12 +171,12 @@ export class MergeEditProposalComponent {
     {
       id: 2,
       title: 'Block 2',
-      actualContenu: {
+      contenu: {
         id: 1,
         text: 'Proposal 1',
         type: 'markdown'
       },
-      contenu: [
+      proposalsContenu: [
         {
           id: 1,
           text: 'Proposal 1',
@@ -207,12 +207,12 @@ export class MergeEditProposalComponent {
     {
       id: 3,
       title: 'Block 3',
-      actualContenu: {
+      contenu: {
         id: 1,
         text: 'It is working !',
         type: 'markdown'
       },
-      contenu: [
+      proposalsContenu: [
         {
           id: 1,
           text: 'Proposal 1',
@@ -241,12 +241,12 @@ export class MergeEditProposalComponent {
     {
       id: 1,
       title: 'Block 1',
-      actualContenu: {
+      contenu: {
         id: 1,
         text: 'Actual content of page 3',
         type: 'markdown'
       },
-      contenu: [
+      proposalsContenu: [
         {
           id: 1,
           text: 'Proposal 1',
@@ -277,12 +277,12 @@ export class MergeEditProposalComponent {
     {
       id: 2,
       title: 'Block 2',
-      actualContenu: {
+      contenu: {
         id: 1,
         text: 'Proposal 1',
         type: 'markdown'
       },
-      contenu: [
+      proposalsContenu: [
         {
           id: 1,
           text: 'Proposal 1',
@@ -334,7 +334,7 @@ export class MergeEditProposalComponent {
     ]
   };
 
-  public actualPage: PagesProposals	= this.fomrationMergeProposals.body?.[0] ?? {} as PagesProposals;
+  public actualPage: PagesProposals = this.fomrationMergeProposals.body?.[0] ?? {} as PagesProposals;
 
   constructor() { }
 
@@ -354,15 +354,15 @@ export class MergeEditProposalComponent {
     this.actualPage = this.fomrationMergeProposals.body?.find((pageProposals) => pageProposals.id === page.id) ?? {} as PagesProposals;
   }
 
-    getActualPageWithOutProposals() {
-      return {
-        id: this.actualPage.id,
-        nom: this.actualPage.nom,
-        contenu: this.actualPage.contenu.map((block) => ({
-          id: block.id,
-          title: block.title,
-          contenu: block.actualContenu,
-        })),
-      };
-    }
+  getActualPageWithOutProposals() {
+    return {
+      id: this.actualPage.id,
+      nom: this.actualPage.nom,
+      contenu: this.actualPage.contenu.map((block) => ({
+        id: block.id,
+        title: block.title,
+        contenu: block.contenu,
+      })),
+    };
   }
+}

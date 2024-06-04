@@ -46,6 +46,6 @@ export class CollapseEditProposalsComponent {
 
   handleblocPorposalAccepted(blockProposal: Markdown) {
     console.log('Accepting block proposal', blockProposal);
-    this.blockProposals.actualContenu = blockProposal;
+    this.blockProposals.contenu = blockProposal;
   }
 }

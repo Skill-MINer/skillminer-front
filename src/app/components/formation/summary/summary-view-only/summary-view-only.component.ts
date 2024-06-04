@@ -2,20 +2,23 @@ import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { Page } from '@app/interfaces/page';
 import { Formation } from '@app/interfaces/formation';
 import { RouterLink, Router, ActivatedRoute } from '@angular/router';
-import { MarkdownModule } from 'ngx-markdown';
 import 'prismjs';
 import 'prismjs/plugins/line-numbers/prism-line-numbers.js';
 import 'prismjs/plugins/line-highlight/prism-line-highlight.js';
 import { FooterComponent } from '@app/components/footer/footer.component';
 import { FormationService } from '@app/services/formation.service';
 import { ScrollToAnchorService } from '@app/services/scroll-to-anchor.service';
+import { MatIcon } from '@angular/material/icon';
 import { BlocVideoViewComponent } from '../../sections/bloc-video-view/bloc-video-view.component';
+import { MarkdownEditorComponent } from '@app/components/markdown-editor/markdown-editor.component';
+import { BlocVideoComponent } from '../../sections/bloc-video/bloc-video.component';
+import { MarkdownViewOnlyComponent } from '@app/components/markdown-view-only/markdown-view-only.component';
 
 
 @Component({
   selector: 'app-summary-view-only',
   standalone: true,
-  imports: [RouterLink, FooterComponent, MarkdownModule, BlocVideoViewComponent],
+  imports: [RouterLink, BlocVideoComponent, FooterComponent, MarkdownViewOnlyComponent, BlocVideoViewComponent, MatIcon, MarkdownEditorComponent],
   templateUrl: './summary-view-only.component.html',
   styleUrl: './summary-view-only.component.sass',
 })
@@ -383,4 +386,37 @@ export class SummaryViewOnlyComponent {
     );
     if (anchor) anchor.scrollIntoView({ behavior: 'smooth', block: 'center' });
   }
+
+  switchBlockToEdit(blockid: number, pageId: number) {
+    const page = this.formation.body?.find(page => page.id === pageId);
+    if (page) {
+      const block = page.contenu.find(block => block.id === blockid);
+      if (block) {
+      block.editMode = true;
+      block.editContent = JSON.parse(JSON.stringify(block.contenu));
+      }
+    }
+  }
+
+  switchBlockToView(blockid: number, pageId: number) {
+    const page = this.formation.body?.find(page => page.id === pageId);
+    if (page) {
+      const block = page.contenu.find(block => block.id === blockid);
+      if (block) {
+      block.editMode = false;
+      }
+    }
+  }
+
+  updateBlock(blockid: number, pageId: number) {
+    const page = this.formation.body?.find(page => page.id === pageId);
+    if (page) {
+      const block = page.contenu.find(block => block.id === blockid);
+      if (block && block.editContent) {
+        block.contenu = block.editContent;
+      }
+    }
+    console.log(this.formation);
+  }
+
 }
