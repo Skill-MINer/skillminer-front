@@ -46,8 +46,8 @@ export class CreateHeaderFormationComponent {
         this.createFormationService.formation.description,
         [Validators.required, Validators.minLength(10)]
       ),
-      selectedTags: new FormControl<Tag[]>(
-        this.createFormationService.formation.tag as Tag[]
+      selectedTags: new FormControl<{id: number, name: string}[]>(
+        this.createFormationService.formation.tag?.map((tag) => ({ id: Number(tag.id), name: tag.nom })) as {id: number, name: string}[]
       ),
     });
     if (this.createFormationService.imageUrl) {
@@ -75,6 +75,7 @@ export class CreateHeaderFormationComponent {
         this.tags = tags;
       });
   }
+  
   private handleError = (error: HttpErrorResponse) => {
     this.requestPending = false;
     if (error.status === 0) {
@@ -87,21 +88,18 @@ export class CreateHeaderFormationComponent {
       () => new Error('Something bad happened; please try again later.')
     );
   };
+
   onSubmit() {
     if (this.headerForm.valid) {
       let id: String;
-      const selectedTags: Tag[] = this.headerForm.value.selectedTags as Tag[];
-      if (this.selectedImageUrl !== this.defaultImageUrl) {
-        this.createFormationService.formation.titre = this.headerForm.value
+      const selectedTags: Tag[] = this.headerForm.value.selectedTags?.map((tag) => ({ id: String(tag.id), nom: tag.name })) as Tag[];
+      this.createFormationService.formation.titre = this.headerForm.value
           .titre as string;
         this.createFormationService.formation.description = this.headerForm
           .value.description as string;
         this.createFormationService.formation.tag = selectedTags;
         this.createFormationService.headerIsValidated = true;
         this.createFormationService.saveAllFormationInRemote();
-      } else {
-        this.createFormationService.headerIsValidated = false;
-      }
     } else {
       this.createFormationService.headerIsValidated = false;
     }
