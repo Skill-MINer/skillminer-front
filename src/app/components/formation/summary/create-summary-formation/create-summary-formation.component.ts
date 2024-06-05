@@ -78,6 +78,11 @@ export class CreateSummaryFormationComponent {
             page.nom = this.createFormationService.formation.body[indexPageToChange].nom
             page.id = this.createFormationService.formation.body[indexPageToChange].id
             this.createFormationService.formation.body[indexPageToChange] = page;
+            this.createFormationService.wsSendAllFormation();
+            this.createFormationService.saveAllFormationInRemote();
+            this.toastr.success('Page generated with AI');
+            this.createFormationService.nbModif = 0;
+            this.createFormationService.timeLastSave = new Date();
           }
         }
       });

@@ -51,8 +51,8 @@ export class CreateFormationService {
   public socket: io.Socket;
   private router: Router = inject(Router);
   private formationService: FormationService = inject(FormationService);
-  private nbModif: number = 0;
-  private timeLastSave: Date = new Date();
+  public nbModif: number = 0;
+  public timeLastSave: Date = new Date();
   private readonly timeBetweenSave: number = 90000;
   private readonly nbModifBeforeSave: number = 10;
   private amILastContributor: boolean = true;
