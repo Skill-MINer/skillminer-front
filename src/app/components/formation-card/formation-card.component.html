@@ -1,7 +1,7 @@
 <!-- Card Blog -->
 <div class="formationcard">
   <div
-    class="group max-w-[40rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-7 mx-auto shadow-md border rounded-3xl bg-background hover:bg-background-1 hover:cursor-pointer"
+    class="group max-w-[40rem] px-4 py-10 sm:px-8 sm:py-7 mx-auto shadow-md border rounded-3xl bg-background hover:bg-background-1 hover:cursor-pointer"
     (click)="goToFormation()"
   >
     <!-- Card -->
@@ -16,10 +16,9 @@
         />
       </div>
       <div class="grow">
-        <div class="p-4 flex flex-col h-full sm:p-6">
-          <div class="flex space-x-4">
+        <div class="px-4 flex flex-col h-full">
+          <div class="flex flex-wrap gap-x-3 gap-y-2 mb-2">
             @for (tag of formationcard.tag; track $index) {
-            <div class="mb-3">
               <p
                 class="inline-flex items-center gap-1.5 py-1.5 px-3 rounded-md text-xs font-medium 
                 {{
@@ -35,7 +34,6 @@
               >
                 {{ tag.nom }}
               </p>
-            </div>
 
             }@empty {
             <div class="mb-3">
@@ -56,7 +54,7 @@
             {{ formationcard.description }}
           </p>
 
-          <div class="mt-5 sm:mt-auto">
+          <div class="mt-2">
             <!-- Avatar -->
             <div class="flex items-center">
               <div class="flex-shrink-0">
