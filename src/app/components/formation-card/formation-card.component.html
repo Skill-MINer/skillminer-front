@@ -50,9 +50,9 @@
           >
             {{ formationcard.titre }}
           </h3>
-          <p class="mt-2 text-gray-600 dark:text-gray-400">
-            {{ formationcard.description }}
-          </p>
+            <p class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
+            {{ formationcard.description ? (formationcard.description | slice:0:280) : '' }}{{ formationcard.description && formationcard.description.length > 280 ? '...' : '' }}
+            </p>
 
           <div class="mt-2">
             <!-- Avatar -->
