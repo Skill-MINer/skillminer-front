@@ -3,13 +3,14 @@ import { Formation } from '../../interfaces/formation';
 import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
 import { skip } from 'rxjs';
+import { SlicePipe } from '@angular/common';
 
 const IP_API = environment.IP_API;
 
 @Component({
   selector: 'app-formation-card',
   standalone: true,
-  imports: [],
+  imports: [SlicePipe],
   templateUrl: './formation-card.component.html',
   styleUrl: './formation-card.component.sass',
 })
