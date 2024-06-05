@@ -75,12 +75,9 @@ export class CreateSummaryFormationComponent {
               (page) => page.id == id
             );
           if (indexPageToChange !== -1) {
-            let temp =
-              this.createFormationService.formation.body[indexPageToChange].nom;
-            this.createFormationService.formation.body[indexPageToChange] =
-              page;
-            this.createFormationService.formation.body[indexPageToChange].nom =
-              temp;
+            page.nom = this.createFormationService.formation.body[indexPageToChange].nom
+            page.id = this.createFormationService.formation.body[indexPageToChange].id
+            this.createFormationService.formation.body[indexPageToChange] = page;
           }
         }
       });

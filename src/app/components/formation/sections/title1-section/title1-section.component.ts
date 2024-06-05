@@ -19,7 +19,6 @@ export class Title1SectionComponent {
   }
 
   sendEventTitle() {
-    console.log(this.title);
     this.titleHasChanged.emit(this.title);
   }
 

@@ -12,15 +12,12 @@ const IP_API = environment.IP_API;
 })
 export class MarkdownWithAIService {
   private readonly http = inject(HttpClient);
-  private toastr: ToastrService = inject(ToastrService);
 
-  constructor() {}
   generate(pageTitle: string, formationTitle?: string): Observable<Page> {
     return this.http
-      .post(`${IP_API}/formations/generate`, {
+      .post<Page>(`${IP_API}/formations/generate`, {
         formationTitle: formationTitle as string,
         pageTitle: pageTitle,
       })
-      .pipe(map((obj) => obj as Page));
   }
 }
