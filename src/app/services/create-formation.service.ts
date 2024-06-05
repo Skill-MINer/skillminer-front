@@ -98,6 +98,10 @@ export class CreateFormationService {
     return this.http.post(`${IP_API}/file/formations/${id}`, formData);
   }
 
+  publish(etat: Boolean) {
+    this.http.put(`${IP_API}/formations/${this.formation.id}/publier`, { publier: etat }).subscribe();
+  }
+
 
   private handleError = (error: HttpErrorResponse) => {
     if (error.status === 0) {

@@ -77,7 +77,8 @@ export class CreateFormationComponent {
 
   submit() {
     this.createFormationService.saveAllFormationInRemote();
-    this.nextStep();
+    this.createFormationService.publish(true);
+    this.router.navigate([`summary/${this.createFormationService.formation.id}`]);
   }
 
   @HostListener('window:beforeunload', ['$event'])

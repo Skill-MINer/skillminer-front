@@ -65,3 +65,4 @@ import 'prismjs/components/prism-visual-basic';
 import 'prismjs/components/prism-wasm';
 import 'prismjs/components/prism-wiki';
 import 'prismjs/components/prism-yaml';
+import 'prismjs/components/prism-matlab';
