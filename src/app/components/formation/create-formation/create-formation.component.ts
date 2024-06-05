@@ -83,7 +83,7 @@ export class CreateFormationComponent {
 
   @HostListener('window:beforeunload', ['$event'])
   onBeforeUnload(event: Event): void {
-    if (this.isFormationCreated) {
+    if (this.isFormationCreated && this.createFormationService.nbModif > 0) {
       this.createFormationService.wsSendAllFormation();
       fetch(`${IP_API}/formations/${this.createFormationService.formation.id}/contenu`, {
         keepalive: true,
@@ -104,7 +104,7 @@ export class CreateFormationComponent {
   }
 
   ngOnDestroy() {
-    if (this.isFormationCreated) {
+    if (this.isFormationCreated && this.createFormationService.nbModif > 0) {
       this.createFormationService.wsSendAllFormation();
       fetch(`${IP_API}/formations/${this.createFormationService.formation.id}/contenu`, {
         keepalive: true,
