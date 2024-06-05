@@ -14,6 +14,8 @@ import { MarkdownEditorComponent } from '@app/components/markdown-editor/markdow
 import { BlocVideoComponent } from '../../sections/bloc-video/bloc-video.component';
 import { MarkdownViewOnlyComponent } from '@app/components/markdown-view-only/markdown-view-only.component';
 import { ModificationProposalService } from '@app/services/modification-proposal.service';
+import { NgClass } from '@angular/common';
+
 
 @Component({
   selector: 'app-summary-view-only',
@@ -26,6 +28,7 @@ import { ModificationProposalService } from '@app/services/modification-proposal
     BlocVideoViewComponent,
     MatIcon,
     MarkdownEditorComponent,
+    NgClass,
   ],
   templateUrl: './summary-view-only.component.html',
   styleUrl: './summary-view-only.component.sass',
