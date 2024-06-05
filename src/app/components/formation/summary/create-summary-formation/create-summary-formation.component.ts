@@ -77,7 +77,7 @@ export class CreateSummaryFormationComponent {
           if (indexPageToChange !== -1) {
             page.nom = this.createFormationService.formation.body[indexPageToChange].nom
             page.id = this.createFormationService.formation.body[indexPageToChange].id
-            this.createFormationService.formation.body[indexPageToChange] = page;
+            Object.assign(this.createFormationService.formation.body[indexPageToChange], page);
             this.createFormationService.wsSendAllFormation();
             this.createFormationService.saveAllFormationInRemote();
             this.toastr.success('Page generated with AI');
