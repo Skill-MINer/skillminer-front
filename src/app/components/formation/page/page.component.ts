@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormationService } from '@app/services/formation.service';
 import { Formation } from '@app/interfaces/formation';
+import { environment } from '@env/environment';
+
+const IP_API = environment.IP_API;
 
 @Component({
   selector: 'app-page',
@@ -11,6 +14,8 @@ import { Formation } from '@app/interfaces/formation';
   styleUrl: './page.component.sass',
 })
 export class PageComponent {
+  imageHeader: string = `${IP_API}/file/formations/`;
+
   constructor(
     private router: Router,
     protected formationService: FormationService,
@@ -24,6 +29,7 @@ export class PageComponent {
       .subscribe((data) => {
         this.formation = data;
       });
+    this.imageHeader = `${IP_API}/file/formations/${this.formation.id}.png`;
   }
   goToFormation() {
     this.router.navigate(['/summary', this.formation.id]).then(() => {

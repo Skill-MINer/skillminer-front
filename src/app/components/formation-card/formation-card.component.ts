@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
-import { Formation } from '../../interfaces/formation';
+import { Formation } from '@interfaces/formation';
 import { Router } from '@angular/router';
-import { environment } from '../../../environments/environment';
+import { environment } from '@env/environment';
 import { skip } from 'rxjs';
 import { SlicePipe } from '@angular/common';
 
