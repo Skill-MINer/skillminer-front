@@ -103,20 +103,20 @@
   }
   }
 
-  <div class="flex justify-between flex-row w-full py-3 px-24">
+  <div class="flex justify-center flex-row w-full py-3 px-24 gap-5">
     <button type="button" (click)="previousStep()" [disabled]="previousButtonDisabled()"
-      class="py-3 px-4 text-sm font-semibold rounded-lg border border-gray-500 text-gray-500 hover:border-gray-800 hover:text-gray-800 disabled:opacity-50 disabled:pointer-events-none dark:border-neutral-400 dark:text-neutral-400 dark:hover:text-neutral-300 dark:hover:border-neutral-300">
+      class="py-3 px-4 text-sm w-24 font-semibold rounded-lg border border-gray-500 text-gray-500 hover:border-gray-800 hover:text-gray-800 disabled:opacity-50 disabled:pointer-events-none dark:border-neutral-400 dark:text-neutral-400 dark:hover:text-neutral-300 dark:hover:border-neutral-300">
       Previous
     </button>
     @if (endStepper())
     {
     <button type="button" (click)="submit()"
-      class="py-3 px-4 text-sm font-semibold rounded-lg border border-transparent bg-accent text-white hover:bg-accent-hover disabled:opacity-50 disabled:pointer-events-none">
+      class="py-3 px-4 text-sm w-24 font-semibold rounded-lg border border-transparent bg-accent text-white hover:bg-accent-hover disabled:opacity-50 disabled:pointer-events-none">
       Submit
     </button>
     } @else {
     <button type="button" (click)="nextStep()" [disabled]="nextButtonDisabled()"
-      class="py-3 px-4 text-sm font-semibold rounded-lg border border-transparent bg-primary text-white hover:bg-primary-hover disabled:opacity-50 disabled:pointer-events-none">
+      class="py-3 px-4 text-sm w-24 font-semibold rounded-lg border border-transparent bg-primary text-white hover:bg-primary-hover disabled:opacity-50 disabled:pointer-events-none">
       Next
     </button>
     }
