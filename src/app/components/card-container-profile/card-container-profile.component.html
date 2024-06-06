@@ -1,0 +1,17 @@
+<div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
+  <!-- Grid -->
+  <div class="grid lg:grid-cols-2 gap-6">
+    @for (Formation of cards; track Formation.id) {
+      <div class="relative">
+          <app-formation-card [formationcard]="Formation"></app-formation-card>
+          <button class="absolute top-2 right-2 p-2 bg-white rounded-full shadow-md" (click)="deleteFormation(Formation.id)">
+              <svg class="flex-shrink-0 size-4 text-red-500" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M16 6a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2"/><path d="M10 3L21 3"/></svg>
+          </button>
+          <mat-icon class="absolute top-2 left-2 bg-white rounded-full shadow-md text-primary" (click)="editFormation(Formation.id)">done_all</mat-icon>
+      </div>
+    }@empty {
+    <p>Pas de Données!</p>
+    }
+  </div>
+</div>
+  

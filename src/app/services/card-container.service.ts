@@ -20,4 +20,8 @@ export class CardContainerService {
   getFormationsByUser(): Observable<Formation[]> {
     return this.http.get<Formation[]>(`${IP_API}/users/formations`);
   }
+
+  public deleteFormation(id: number): Observable<Formation> {
+    return this.http.delete<Formation>(`${IP_API}/formations/${id}`);
+  }
 }
