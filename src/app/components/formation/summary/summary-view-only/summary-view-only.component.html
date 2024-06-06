@@ -1,4 +1,4 @@
-@if (formation.id) {
+@if (!loading) {
 <div class="fixed top-24 z-30 left-10 max-w-fit w-[16rem]">
   <ul
     class="sticky top-0 pr-6 max-h-[85lvh] overflow-y-hidden hover:overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-gray-300"
@@ -37,13 +37,13 @@
   </div>
   <div id="scrollspy-2" class="space-y-4 my-8">
     <div id="item-{{ actualPage.id }}">
-      <h2 class="text-2xl font-semibold dark:text-white">
+      <h2 class="text-3xl font-semibold dark:text-white">
         {{ actualPage.nom }}
       </h2>
       @for (block of actualPage.contenu; track $index) {
       <div id="item-{{ block.id }}" class="relative">
         <mat-icon class="absolute -left-7 hover:cursor-pointer" (click)="switchBlockToEdit(block.id, actualPage.id)">edit</mat-icon>
-        <h3 class="text-lg font-semibold dark:text-white my-5">
+        <h3 class="text-2xl font-semibold dark:text-white my-5">
           {{ block.title }}
         </h3>
         @if (!block.editMode) {

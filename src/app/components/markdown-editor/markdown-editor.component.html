@@ -1,7 +1,7 @@
-<div class="max-w-[90rem] mx-auto px-4">
-  <div class="flex gap-10">
+<div class="max-w-[90rem]">
+  <div class="flex gap-5">
     <textarea
-      class="variable-textarea"
+      class="variable-textarea focus:border-primary focus:ring-primary"
       (input)="sendEventMarkdown()"
       (change)="sendEventMarkdownEditFinish()"
       [(ngModel)]="markdown.text"
@@ -11,7 +11,7 @@
       katex
       mermaid
       ngPreserveWhitespaces
-      class="variable-binding prose"
+      class="variable-binding prose leading-none"
       [data]="markdown.text"
     ></markdown>
   </div>

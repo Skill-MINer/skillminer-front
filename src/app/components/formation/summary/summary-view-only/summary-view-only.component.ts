@@ -38,6 +38,7 @@ export class SummaryViewOnlyComponent {
   formation: Formation = {} as Formation;
   actualPage: Page = {} as Page;
   private router: Router = inject(Router);
+  loading = true;
 
   constructor(
     private scrollToAnchorService: ScrollToAnchorService,
@@ -68,10 +69,16 @@ export class SummaryViewOnlyComponent {
     this.formationService
       .getFormationByIdContent(this.formationId)
       .subscribe((data) => {
+        data.body?.forEach((page) => {
+          page.contenu?.forEach((block) => {
+            block.editMode = false;
+          });
+        });
         this.formation = data;
         if (this.formation.body) {
           this.actualPage = this.formation.body[0];
         }
+        this.loading = false;
       });
   }
 
