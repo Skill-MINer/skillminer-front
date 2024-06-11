@@ -16,13 +16,17 @@ export class FormationService {
   public getFormations(
     titre: string,
     limit: number,
-    offset: number
+    offset: number,
+    tags?: string
   ): Observable<Formation[]> {
     const params = new HttpParams()
       //.set('titre', 'angular')
       .set('titre', titre) //.join pour stringifier objet tab
       .set('limit', limit)
       .set('offset', offset);
+    if (tags) {
+      params.set('tags', tags);
+    }
     this.listFormation = this.http.get<Formation[]>(`${IP_API}/formations`, {
       params,
     });
