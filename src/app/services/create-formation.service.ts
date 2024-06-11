@@ -287,7 +287,7 @@ export class CreateFormationService {
 
     this.socket.on('setFormationData', (param) => {
       this.amILastContributor = false;
-      Object.assign(this.formation, param.formation);
+      this.formation = param.formation;
     });
 
     this.socket.on('addBlockVideo', (param) => {
