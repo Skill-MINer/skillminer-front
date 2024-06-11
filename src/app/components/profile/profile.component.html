@@ -79,5 +79,9 @@
   <h2 class="text-xl font-bold text-gray-800 dark:text-gray-200 mt-10">
     My formations
   </h2>
-  <app-card-container-profile></app-card-container-profile>
+  <app-card-container-profile [owner]="true"></app-card-container-profile>
+  <h2 class="text-xl font-bold text-gray-800 dark:text-gray-200 mt-10">
+    Formations I contribute
+  </h2>
+  <app-card-container-profile [owner]="false"></app-card-container-profile>
 </div>
