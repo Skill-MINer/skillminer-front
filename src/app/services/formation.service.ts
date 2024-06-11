@@ -19,18 +19,24 @@ export class FormationService {
     offset: number,
     tags?: string
   ): Observable<Formation[]> {
-    const params = new HttpParams()
-      //.set('titre', 'angular')
-      .set('titre', titre) //.join pour stringifier objet tab
-      .set('limit', limit)
-      .set('offset', offset);
-    if (tags) {
-      params.set('tags', tags);
+    let params: HttpParams;
+    if (tags !== undefined && tags !== '') {
+      params = new HttpParams()
+        //.set('titre', 'angular')
+        .set('titre', titre) //.join pour stringifier objet tab
+        .set('limit', limit)
+        .set('offset', offset)
+        .set('tags', tags);
+    } else {
+      params = new HttpParams()
+        //.set('titre', 'angular')
+        .set('titre', titre) //.join pour stringifier objet tab
+        .set('limit', limit)
+        .set('offset', offset);
     }
-    this.listFormation = this.http.get<Formation[]>(`${IP_API}/formations`, {
+    return this.http.get<Formation[]>(`${IP_API}/formations`, {
       params,
     });
-    return this.listFormation;
   }
   public getFormationById(id: number): Observable<Formation> {
     return this.http.get<Formation>(`${IP_API}/formations/${id}`);
