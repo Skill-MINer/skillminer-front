@@ -14,7 +14,7 @@ import { Tag } from '@app/interfaces/tag';
 })
 export class WelcomeComponent {
   tags: Tag[] = [
-    { id: '940', nom: 'Machine Learning' },
+    { id: '8', nom: 'Machine Learning' },
     { id: '133', nom: 'Productivity' },
     { id: '242', nom: 'Mental Health' },
     { id: '950', nom: 'Mathematical Modeling' },
