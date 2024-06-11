@@ -1,12 +1,18 @@
 import { Component } from '@angular/core';
 import { FormationService } from '../../services/formation.service';
-import { FormControl, FormGroup, ReactiveFormsModule, FormsModule } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  FormsModule,
+} from '@angular/forms';
 import { map } from 'rxjs';
 import { Formation } from '../../interfaces/formation';
 import { FormationCardComponent } from '../formation-card/formation-card.component';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { CreateFormationService } from '@app/services/create-formation.service';
-
+import { Tag } from '@app/interfaces/tag';
+import { TagsService } from '@app/services/tags.service';
 
 @Component({
   selector: 'app-search-trainings',
@@ -15,42 +21,61 @@ import { CreateFormationService } from '@app/services/create-formation.service';
     FormsModule,
     FormationCardComponent,
     MultiSelectModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   templateUrl: './search-trainings.component.html',
-  styleUrl: './search-trainings.component.sass'
+  styleUrl: './search-trainings.component.sass',
 })
 export class SearchTrainingsComponent {
-  valeurInput: string = "";
+  valeurInput: string = '';
   formaPerPage: number = 4;
   pageNumber: number = 0;
   listFormation: Formation[] = [];
+  buttonTags: Tag[] = [
+    { id: '940', nom: 'Machine Learning' },
+    { id: '133', nom: 'Productivity' },
+    { id: '242', nom: 'Mental Health' },
+    { id: '950', nom: 'Mathematical Modeling' },
+    { id: '132', nom: 'Work-Life Balance' },
+    { id: '893', nom: 'Management Skills' },
+  ];
   tags: any[] = [];
-  selectedTags: any[] = [];
+  selectedTags: { id: number; name: string }[] = [];
   isTagsLoading: boolean = true;
 
-  constructor(private formationService : FormationService, protected createFormationService: CreateFormationService){
-
-  }
+  constructor(
+    private formationService: FormationService,
+    protected createFormationService: CreateFormationService,
+    protected tagsService: TagsService
+  ) {}
 
   getFormations() {
     if (this.selectedTags.length === 0) {
-      console.log("requetes sans tags");
-    this.formationService
-      .getFormations(this.valeurInput, this.formaPerPage, this.pageNumber*this.formaPerPage)
-      .subscribe(
+      console.log('requetes sans tags');
+      this.formationService
+        .getFormations(
+          this.valeurInput,
+          this.formaPerPage,
+          this.pageNumber * this.formaPerPage
+        )
+        .subscribe(
           (listFormation) => {
             this.listFormation = listFormation;
           },
           (error) => {
             this.listFormation = [];
           }
-      );
+        );
     } else {
-      console.log("requetes avec tags");
-      console.log(this.selectedTags.map(tag => tag.id).join(','));
+      console.log('requetes avec tags');
+      console.log(this.selectedTags.map((tag) => tag.id).join(','));
       this.formationService
-        .getFormations(this.valeurInput, this.formaPerPage, this.pageNumber*this.formaPerPage, this.selectedTags.map(tag => tag.id).join(','))
+        .getFormations(
+          this.valeurInput,
+          this.formaPerPage,
+          this.pageNumber * this.formaPerPage,
+          this.selectedTags.map((tag) => tag.id).join(',')
+        )
         .subscribe(
           (listFormation) => {
             this.listFormation = listFormation;
@@ -67,7 +92,7 @@ export class SearchTrainingsComponent {
     if (element) {
       window.scrollTo({
         top: element.offsetTop,
-        behavior: 'smooth'
+        behavior: 'smooth',
       });
     }
   }
@@ -101,20 +126,24 @@ export class SearchTrainingsComponent {
 
     this.createFormationService
       .getTags()
-      .pipe(
-        map((tags) => tags.map((tag) => ({ id: tag.id, name: tag.nom })))
-      )
+      .pipe(map((tags) => tags.map((tag) => ({ id: tag.id, name: tag.nom }))))
       .subscribe((tags) => {
         this.tags = tags;
         this.isTagsLoading = false;
       });
-
-    this.selectedTags
+    if (this.tagsService.activeTag) {
+      this.addTagToSearch(this.tagsService.activeTag as Tag);
+    }
   }
 
   onFilterChange() {
     this.getFormations();
-    console.log(this.selectedTags);
   }
-  
+  addTagToSearch(tag: Tag) {
+    this.selectedTags.push({ id: Number(tag.id), name: tag.nom } as {
+      id: number;
+      name: string;
+    });
+    this.getFormations();
+  }
 }

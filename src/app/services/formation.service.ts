@@ -4,7 +4,6 @@ import { environment } from '../../environments/environment';
 const IP_API = environment.IP_API;
 import { Observable, of } from 'rxjs';
 import { Formation } from '../interfaces/formation';
-import { Form } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root',
