@@ -133,6 +133,7 @@ export class SearchTrainingsComponent {
       });
     if (this.tagsService.activeTag) {
       this.addTagToSearch(this.tagsService.activeTag as Tag);
+      this.tagsService.activeTag = null;
     }
   }
 
