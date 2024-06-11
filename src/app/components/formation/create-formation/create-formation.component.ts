@@ -9,12 +9,17 @@ import { LiveCursorComponent } from '../live-cursor/live-cursor.component';
 import { environment } from '@env/environment';
 import { Formation } from '@app/interfaces/formation';
 import { FormsModule } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { User } from '@app/interfaces/user';
+import {MatTooltipModule} from '@angular/material/tooltip';
+
 const IP_API = environment.IP_API;
 
 @Component({
   selector: 'app-create-formation',
   standalone: true,
-  imports: [NgClass, CreateHeaderFormationComponent, CreateSummaryFormationComponent, SummaryEditComponent, LiveCursorComponent, FormsModule],
+  imports: [MatTooltipModule, NgClass, CreateHeaderFormationComponent, CreateSummaryFormationComponent, SummaryEditComponent, LiveCursorComponent, FormsModule],
   templateUrl: './create-formation.component.html',
   styleUrl: './create-formation.component.sass',
 })
@@ -25,6 +30,8 @@ export class CreateFormationComponent {
   @Input() id: number | undefined;
   isFormationCreated: boolean = false;
   collaboratorEmail: string = '';
+  contributeurList: Observable<any>[] = [];
+  collaborators: User[] = [];
 
   constructor(protected createFormationService: CreateFormationService, private router: Router) {
     this.activeStep = 1;
@@ -38,6 +45,7 @@ export class CreateFormationComponent {
       this.isFormationCreated = true;
       this.createFormationService.formation.id = this.id;
       this.createFormationService.loadFormation();
+      this.getCollaborators();
     }
   }
 
@@ -129,5 +137,18 @@ export class CreateFormationComponent {
       this.createFormationService.addCollaborator(this.collaboratorEmail);
       this.collaboratorEmail = '';
     }
+  }
+
+  
+  
+  getCollaborators() {
+    this.createFormationService.getCollaborators().subscribe((data) => {
+      this.collaborators = data;
+      console.log(this.collaborators)
+      return this.collaborators;
+    });
+  }
+  getCollaboratorUrl(collaborator: User) {
+    return `${IP_API}/file/users/${collaborator.id}`;
   }
 }
