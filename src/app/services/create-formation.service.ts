@@ -443,7 +443,7 @@ export class CreateFormationService {
     if (this.nbModif >= this.nbModifBeforeSave || ((new Date().getTime() - this.timeLastSave.getTime()) >= this.timeBetweenSave && this.nbModif > 0)) {
       console.log('Save');
       this.saveAllFormationInRemote();
-      this.wsSendAllFormation();
+      //this.wsSendAllFormation();
       this.nbModif = 0;
       this.timeLastSave = new Date();
     }
