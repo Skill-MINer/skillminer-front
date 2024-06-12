@@ -18,7 +18,7 @@
       <div class="grow">
         <div class="px-4 flex flex-col h-full">
           <div class="flex flex-wrap gap-x-3 gap-y-2 mb-2">
-            @for (tag of formationcard.tag; track $index) {
+            @for (tag of formationcard.tag?.slice(0, 3); track $index) {
               <p
                 class="inline-flex items-center gap-1.5 py-1.5 px-3 rounded-md text-xs font-medium 
                 {{

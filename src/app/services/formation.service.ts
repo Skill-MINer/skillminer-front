@@ -4,7 +4,6 @@ import { environment } from '../../environments/environment';
 const IP_API = environment.IP_API;
 import { Observable, of } from 'rxjs';
 import { Formation } from '../interfaces/formation';
-import { Form } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root',
@@ -16,17 +15,27 @@ export class FormationService {
   public getFormations(
     titre: string,
     limit: number,
-    offset: number
+    offset: number,
+    tags?: string
   ): Observable<Formation[]> {
-    const params = new HttpParams()
-      //.set('titre', 'angular')
-      .set('titre', titre) //.join pour stringifier objet tab
-      .set('limit', limit)
-      .set('offset', offset);
-    this.listFormation = this.http.get<Formation[]>(`${IP_API}/formations`, {
+    let params: HttpParams;
+    if (tags !== undefined && tags !== '') {
+      params = new HttpParams()
+        //.set('titre', 'angular')
+        .set('titre', titre) //.join pour stringifier objet tab
+        .set('limit', limit)
+        .set('offset', offset)
+        .set('tags', tags);
+    } else {
+      params = new HttpParams()
+        //.set('titre', 'angular')
+        .set('titre', titre) //.join pour stringifier objet tab
+        .set('limit', limit)
+        .set('offset', offset);
+    }
+    return this.http.get<Formation[]>(`${IP_API}/formations`, {
       params,
     });
-    return this.listFormation;
   }
   public getFormationById(id: number): Observable<Formation> {
     return this.http.get<Formation>(`${IP_API}/formations/${id}`);
