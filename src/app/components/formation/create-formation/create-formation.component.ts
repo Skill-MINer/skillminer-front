@@ -13,6 +13,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { User } from '@app/interfaces/user';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import { ToastrService } from 'ngx-toastr';
 
 const IP_API = environment.IP_API;
 
@@ -24,7 +25,7 @@ const IP_API = environment.IP_API;
   styleUrl: './create-formation.component.sass',
 })
 export class CreateFormationComponent {
-
+  private toastr: ToastrService = inject(ToastrService);
   activeStep: number;
   numberOfSteps: number = 3;
   @Input() id: number | undefined;
@@ -134,9 +135,11 @@ export class CreateFormationComponent {
 
   addCollaborator() {
     if (this.collaboratorEmail !== '') {
-      this.createFormationService.addCollaborator(this.collaboratorEmail);
+      this.createFormationService.addCollaborator(this.collaboratorEmail).subscribe((data) => {
+        this.toastr.success('Collaborateur ajouté avec succès', 'Succès');
+        this.getCollaborators();
+      });
       this.collaboratorEmail = '';
-      this.getCollaborators();
     }
   }
 
@@ -144,14 +147,13 @@ export class CreateFormationComponent {
   
   getCollaborators() {
     this.createFormationService.getCollaborators().subscribe((data) => {
-      this.collaborators.slice(0);
-      if (this.createFormationService.formation.user) {
-        this.collaborators.push(this.createFormationService.formation.user);
-      }
       for (let i = 0; i < data.length; i++) {
-        this.collaborators.push(data[i]);
+        if (this.collaborators.length > i) {
+          this.collaborators[i] = data[i];
+        } else {
+          this.collaborators.push(data[i]);
+        }
       }
-      console.log(this.collaborators);
     });
   }
 

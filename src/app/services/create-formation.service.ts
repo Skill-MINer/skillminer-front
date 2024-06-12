@@ -449,8 +449,8 @@ export class CreateFormationService {
     }
   }
 
-  addCollaborator(email: string) {
-    this.http.post(`${IP_API}/formations/${this.formation.id}/contributors`, { email: email })
+  addCollaborator(email: string): Observable<any> {
+    return this.http.post(`${IP_API}/formations/${this.formation.id}/contributors`, { email: email })
     .pipe(catchError( (error: HttpErrorResponse) => {
       if (error.status === 0) {
         this.toastr.error('Server is down', 'Something went wrong');
@@ -460,12 +460,9 @@ export class CreateFormationService {
       return throwError(() => new Error('Something bad happened; please try again later.'));
     }
     ))
-    .subscribe(() => {
-      this.toastr.success('Collaborator added', 'Success');
-    });
   }
 
   getCollaborators(): Observable<any> {
-    return this.http.get(`${IP_API}/formations/${this.formation.id}/contributors`);
+    return this.http.get(`${IP_API}/formations/${this.formation.id}/editors`);
   }
 }
