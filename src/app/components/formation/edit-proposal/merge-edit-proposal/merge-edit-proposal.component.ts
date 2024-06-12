@@ -89,4 +89,13 @@ export class MergeEditProposalComponent {
     }
     this.mergeEditProposalsService.deleteBlockProposal(this.actualPage.id, idBlock, idProposal);
   }
+
+  handleblocPorposalAccepted() {
+    if (!this.actualPage || !this.actualPage.id) {
+      return;
+    }
+    console.log('handleblocPorposalAccepted', this.fomrationMergeProposals)
+    console.log('handleblocPorposalAccepted, actual page', this.actualPage)
+    this.mergeEditProposalsService.updateBlockProposal(this.actualPage);
+  }
 }

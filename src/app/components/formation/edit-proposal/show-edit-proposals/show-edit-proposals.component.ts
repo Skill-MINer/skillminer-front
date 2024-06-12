@@ -27,11 +27,11 @@ export class ShowEditProposalsComponent {
 
   acceptBlockProposal(blockProposal: Markdown) {
     console.log('Accepting block proposal', blockProposal);
-    this.blocPorposalAccepted.emit(blockProposal);
     const index = this.blockProposals.indexOf(blockProposal);
     if (index > -1) {
       this.blockProposals.splice(index, 1);
     }
+    this.blocPorposalAccepted.emit(blockProposal);
   }
 
   rejectBlockProposal(blockProposal: Markdown) {

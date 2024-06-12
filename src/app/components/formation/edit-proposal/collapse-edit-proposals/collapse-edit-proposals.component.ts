@@ -39,6 +39,7 @@ export class CollapseEditProposalsComponent {
   public state: 'collapsed' | 'expanded' = 'expanded';
   blockProposals: BlocksProposals = {} as BlocksProposals;
   @Output() blocPorposalRejected = new EventEmitter<{idBlock: number, idProposal: number}>();
+  @Output() blocPorposalAccepted = new EventEmitter<void>();
 
   @Input()
   set setBlockProposals(blockProposals: BlocksProposals) {
@@ -53,7 +54,7 @@ export class CollapseEditProposalsComponent {
 
   handleblocPorposalAccepted(blockProposal: Markdown) {
     this.blockProposals.contenu = blockProposal;
-    this.mergeEditProposalsService.updateBlockProposal();
+    this.blocPorposalAccepted.emit();
   }
 
   handleblocPorposalRejected(blockProposal: Markdown) {

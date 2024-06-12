@@ -6,6 +6,8 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
 import { environment } from '../../environments/environment';
 import { catchError, throwError } from 'rxjs';
+import { Page } from '@app/interfaces/page';
+import { PagesProposals } from '@app/interfaces/pages-proposals';
 
 const IP_API = environment.IP_API;
 
@@ -46,10 +48,16 @@ export class MergeEditProposalsService {
       .subscribe();
   }
 
-  updateBlockProposal() {
-    this.http.put(`${IP_API}/formations/${this.fomrationMergeProposals.id}/contenu`, this.fomrationMergeProposals.body)
+  updateBlockProposal(actualPage: PagesProposals) {
+    console.log('updateBlockProposal', actualPage);
+    this.http.put(`${IP_API}/formations/${this.fomrationMergeProposals.id}/contenu/${actualPage.id}`, {contenu: actualPage.contenu})
       .pipe(catchError(this.handleError))
-      .subscribe();
+      .subscribe(
+        (res) => {
+          console.log('updateBlockProposal res', res);
+          this.toastr.success('Block proposal updated', 'Success');
+        }
+      );
   }
 
 }
