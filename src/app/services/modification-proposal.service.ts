@@ -2,6 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '@env/environment';
 import { Markdown } from '@app/interfaces/markdown';
+import { ToastrService } from 'ngx-toastr';
 const IP_API = environment.IP_API;
 
 @Injectable({
@@ -9,6 +10,7 @@ const IP_API = environment.IP_API;
 })
 export class ModificationProposalService {
   private readonly http = inject(HttpClient);
+  private toastr: ToastrService = inject(ToastrService);
   constructor() {}
   public postModificationProposal(
     id_formation: number,
@@ -22,7 +24,7 @@ export class ModificationProposalService {
         content
       )
       .subscribe(() => {
-        console.log('Modification proposal sent');
+        this.toastr.success('Proposition de modification envoyée', 'Succès');
       });
   }
 }

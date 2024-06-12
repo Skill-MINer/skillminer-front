@@ -108,12 +108,12 @@ export class SummaryViewOnlyComponent {
     if (page) {
       const block = page.contenu.find((block) => block.id === blockid);
       if (block && block.editContent) {
-        block.contenu = JSON.parse(JSON.stringify(block.editContent));
+        //block.contenu = JSON.parse(JSON.stringify(block.editContent));
         this.modificationProposalService.postModificationProposal(
           this.formationId,
           pageId,
           blockid,
-          block.contenu
+          block.editContent
         );
       }
       this.switchBlockToView(blockid, pageId);

@@ -28,26 +28,18 @@ export class ShowEditProposalsComponent {
   acceptBlockProposal(blockProposal: Markdown) {
     console.log('Accepting block proposal', blockProposal);
     this.blocPorposalAccepted.emit(blockProposal);
-    if (this.blockProposals.length === 1) {
-      this.blockProposals = [];
-    } else {
-      const index = this.blockProposals.indexOf(blockProposal);
-      if (index > -1) {
-        this.blockProposals.splice(index, 1);
-      }
+    const index = this.blockProposals.indexOf(blockProposal);
+    if (index > -1) {
+      this.blockProposals.splice(index, 1);
     }
   }
 
   rejectBlockProposal(blockProposal: Markdown) {
     console.log('Rejecting block proposal', blockProposal);
     this.blocPorposalRejected.emit(blockProposal);
-    if (this.blockProposals.length === 1) {
-      this.blockProposals = [];
-    } else {
-      const index = this.blockProposals.indexOf(blockProposal);
-      if (index > -1) {
-        this.blockProposals.splice(index, 1);
-      }
+    const index = this.blockProposals.indexOf(blockProposal);
+    if (index > -1) {
+      this.blockProposals.splice(index, 1);
     }
   }
 }
