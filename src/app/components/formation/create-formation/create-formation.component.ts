@@ -136,6 +136,7 @@ export class CreateFormationComponent {
     if (this.collaboratorEmail !== '') {
       this.createFormationService.addCollaborator(this.collaboratorEmail);
       this.collaboratorEmail = '';
+      this.getCollaborators();
     }
   }
 
@@ -143,11 +144,17 @@ export class CreateFormationComponent {
   
   getCollaborators() {
     this.createFormationService.getCollaborators().subscribe((data) => {
-      this.collaborators = data;
-      console.log(this.collaborators)
-      return this.collaborators;
+      this.collaborators.slice(0);
+      if (this.createFormationService.formation.user) {
+        this.collaborators.push(this.createFormationService.formation.user);
+      }
+      for (let i = 0; i < data.length; i++) {
+        this.collaborators.push(data[i]);
+      }
+      console.log(this.collaborators);
     });
   }
+
   getCollaboratorUrl(collaborator: User) {
     return `${IP_API}/file/users/${collaborator.id}`;
   }

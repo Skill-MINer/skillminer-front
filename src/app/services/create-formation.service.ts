@@ -12,6 +12,7 @@ import { AuthService } from '@services/auth.service';
 import { moveItemInArray } from '@angular/cdk/drag-drop';
 import { Markdown } from '@app/interfaces/markdown';
 import { pageContent } from '@app/interfaces/page-content';
+import { User } from '@app/interfaces/user';
 
 const IP_API = environment.IP_API;
 
@@ -76,8 +77,9 @@ export class CreateFormationService {
     this.headerIsValidated = false;
     this.imageFile = undefined;
     this.imageUrl = undefined;
-    this.http.post<{ id: number }>(`${IP_API}/formations`, {}).subscribe((rep) => {
+    this.http.post<{ id: number, user: User }>(`${IP_API}/formations`, {}).subscribe((rep) => {
       this.formation.id = rep.id;
+      this.formation.user = rep.user;
       this.router.navigate(['create-formation', this.formation.id])
     });
   }
