@@ -90,7 +90,7 @@ export class CreateFormationComponent {
     this.router.navigate([`summary/${this.createFormationService.formation.id}`]);
   }
 
-  @HostListener('window:beforeunload', ['$event'])
+  /*@HostListener('window:beforeunload', ['$event'])
   onBeforeUnload(event: Event): void {
     if (this.isFormationCreated && this.createFormationService.nbModif > 0) {
       this.createFormationService.wsSendAllFormation();
@@ -131,7 +131,7 @@ export class CreateFormationComponent {
       this.createFormationService.imageFile = undefined;
       this.createFormationService.imageUrl = undefined;
     }
-  }
+  }*/
 
   addCollaborator() {
     if (this.collaboratorEmail !== '') {
