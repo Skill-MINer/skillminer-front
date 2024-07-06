@@ -1,8 +1,8 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { Router } from '@angular/router';
-import { User } from '../interfaces/user';
-import { environment } from '../../environments/environment';
+import { User } from '@interfaces/user';
+import { environment } from '@env/environment';
 import { Observable } from 'rxjs';
 
 const IP_API = environment.IP_API;
@@ -17,7 +17,7 @@ export class UserService {
   public currentUser: User = { };
 
   getProfile() {
-    this.http.get<User>(`${IP_API}/token-info`).subscribe(user => {
+    this.http.get<User>(`${IP_API}/users/token-info`).subscribe(user => {
       this.currentUser = user;
       const timestamp = (new Date()).getTime();
       this.currentUser.imageUrl = `${IP_API}/file/users/${this.currentUser.id}.png?${timestamp}`;

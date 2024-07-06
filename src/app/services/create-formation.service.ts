@@ -1,10 +1,10 @@
-import { Formation } from './../interfaces/formation';
+import { Formation } from '@interfaces/formation';
 import { Injectable, inject } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Tag } from '../interfaces/tag';
+import { Tag } from '@interfaces/tag';
 import { FormationService } from './formation.service';
-import { environment } from '../../environments/environment';
+import { environment } from '@env/environment';
 import { Observable, catchError, throwError } from 'rxjs';
 import { Router } from '@angular/router';
 import * as io from 'socket.io-client';

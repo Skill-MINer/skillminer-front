@@ -1,12 +1,9 @@
 import { Injectable, inject } from '@angular/core';
-import { BlocksProposals } from '@app/interfaces/blocks-proposals';
 import { FormationMergeProposals } from '@app/interfaces/formation-merge-proposals';
-import { Markdown } from '@app/interfaces/markdown';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
-import { environment } from '../../environments/environment';
+import { environment } from '@env/environment';
 import { catchError, throwError } from 'rxjs';
-import { Page } from '@app/interfaces/page';
 import { PagesProposals } from '@app/interfaces/pages-proposals';
 
 const IP_API = environment.IP_API;
