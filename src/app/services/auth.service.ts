@@ -2,12 +2,12 @@ import { inject, Injectable, signal } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import moment from "moment";
 import { tap } from 'rxjs/internal/operators/tap';
-import { User } from '../interfaces/user';
+import { User } from '@interfaces/user';
 import { catchError, map, retry } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { throwError } from 'rxjs';
-import { environment } from '../../environments/environment';
+import { environment } from '@env/environment';
 
 const IP_API = environment.IP_API;
 
@@ -38,7 +38,7 @@ export class AuthService {
 	}
 
 	login(user: User) {
-		return this.http.post(`${IP_API}/login`, {
+		return this.http.post(`${IP_API}/users/login`, {
 			"email": user.email,
 			"password": user.password
 		}).pipe(
@@ -54,7 +54,7 @@ export class AuthService {
 	}
 
 	recoverAccount(email: string) {
-		return this.http.post(`${IP_API}/reset-request`, {
+		return this.http.post(`${IP_API}/users/reset-request`, {
 			"email": email
 		}).pipe(
 			catchError(this.handleError)
@@ -65,7 +65,7 @@ export class AuthService {
 	}
 
 	resetPassword(password: string, token: string) {
-		return this.http.post(`${IP_API}/reset-password`, {
+		return this.http.post(`${IP_API}/users/reset-password`, {
 			password,
 			token
 		}).pipe(

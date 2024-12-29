@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AddElementSummaryComponent } from './add-element-summary-view.component';
+import { AddElementSummaryComponent } from './add-element-summary.component';
 
 describe('AddElementSummaryComponent', () => {
   let component: AddElementSummaryComponent;
